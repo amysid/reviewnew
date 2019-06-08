@@ -4,17 +4,15 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users, id: :uuid do |t|
       ## Database authenticatable
-      t.string :name
-      t.string :c_code
-      t.string :mobile_no
-      t.string :fb_id
-      t.integer :role
-      t.boolean :status
-      t.boolean :confimed
+      t.string :name,              null: false, default: ""
       t.string :email,              null: false, default: ""
+      t.string :fb_id,              null: false, default: ""
+      t.boolean :status, default: true
+      t.string :c_code,null: false, default: ""
+      t.string :mobile_no,null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
-            
-
+      t.integer :role, null: false, default: 1
+      t.boolean :confirmed
 
       ## Recoverable
       t.string   :reset_password_token
@@ -23,7 +21,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       ## Rememberable
       t.datetime :remember_created_at
 
-      # Trackable
+      ## Trackable
       t.integer  :sign_in_count, default: 0, null: false
       t.datetime :current_sign_in_at
       t.datetime :last_sign_in_at
