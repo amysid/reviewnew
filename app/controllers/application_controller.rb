@@ -15,17 +15,13 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-      binding.pry
-       if(resource.role == "user")
-        return  web_users_index_path(current_user)
+      # binding.pry
+       if(resource.role == "admin")
+        return  admin_home_index_path(current_user)
        else  
         super
        end
     end
-
-    # def after_sign_in_path_for(resource)
-    #   return web_users_detail_path
-    # end
 
     def banned?
       if current_user.present? && !current_user.status?
