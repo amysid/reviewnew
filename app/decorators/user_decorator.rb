@@ -1,17 +1,9 @@
 class UserDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+ 
   def status_tag
     h.content_tag(:span,user.status? ? "Active" : "Blocked", class: "label "+ (user.status? ? "label-success" : "label-danger"))
-    # '<span class="label <%= user.status? ? "label-success" : "label-danger" %>"><%= user.status? ? "Active" : "Blocked" %></span>'.html_safe
   end
   def block_btn
     if user.status
