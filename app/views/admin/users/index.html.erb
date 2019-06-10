@@ -1,10 +1,15 @@
 <h1>User Management</h1>
 <div class="box box-info">
+<!-- <h2>Import Products</h2>
+ <%#= form_tag import_admin_users_path, multipart: true do %>
+  <%#= file_field_tag :file %>
+  <%#= submit_tag "Import" %>
+<%# end %> -->
 <%= form_with scope: :search, url: admin_users_path, method: :get,autocomplete: :off,local: true do |f| %>
     <div class="box-header">
       <div class="col-md-6"> 
-      <label>Select Account:</label>
-        <%= f.text_field :search, class:"form-control",placeholder:"Search", :autocomplete => :off %>
+       <label>Search by Email or Name:</label>
+           <%= f.text_field :search, class:"form-control",placeholder:"Search",value: (params.dig :search, :search), :autocomplete => :off %>
         </div>
         <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -34,7 +39,7 @@
                         <div class="input-group-addon">
                             <em class="fa fa-calendar"></em>
                         </div>
-                        <%= f.text_field :start,class: "form-control datetimepicker_start",placeholder:"Select Date",value: (params.dig :search, :start), autocomplete: :off,data: { provide: 'datepicker'} %>
+                       <%= f.text_field :start,class: "form-control datetimepicker_start",placeholder:"Select Date",value: (params.dig :search, :start), autocomplete: :off,data: { provide: 'datepicker'} %>
                     </div>
                 </div>
             </div>
@@ -46,7 +51,7 @@
                         <div class="input-group-addon">
                             <em class="fa fa-calendar"></em>
                         </div>
-                        <%= f.text_field :end,class: "form-control datetimepicker_end",placeholder:"Select Date",value: (params.dig :search, :end),data:{provide: 'datepicker'}, :autocomplete => :off %>
+                       <%= f.text_field :end,class: "form-control datetimepicker_end",placeholder:"Select Date",value: (params.dig :search, :end),data:{provide: 'datepicker'}, :autocomplete => :off %>
                     </div>
                 </div>
             </div>
@@ -91,7 +96,7 @@
                 </tr>
                 <%#= '<tr colspan="$(".table")[0].rows[0].cells.length" ><td>No user found</td></tr>'.html_safe  if @users.blank? %>
                 <%# index = get_sno %>
-                <% @users.each do |user| %>
+                <% @users&.each do |user| %>
                 <tr>
                     <td>
                         <%= @sr_no+=1 %>

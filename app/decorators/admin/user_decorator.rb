@@ -2,10 +2,10 @@ class Admin::UserDecorator < Draper::Decorator
   delegate_all
 
 
-def status_tag
-    h.content_tag(:span,user.status? ? "Active" : "Blocked", class: "label "+ (user.status? ? "label-success" : "label-danger"))
-    # '<span class="label <%= user.status? ? "label-success" : "label-danger" %>"><%= user.status? ? "Active" : "Blocked" %></span>'.html_safe
-  end
+# def status_tag
+#     h.content_tag(:span,user.status? ? "Active" : "Blocked", class: "label "+ (user.status? ? "label-success" : "label-danger"))
+#     # '<span class="label <%= user.status? ? "label-success" : "label-danger" %>"><%= user.status? ? "Active" : "Blocked" %></span>'.html_safe
+#   end
 
   # def block_btn
   #   if user.status

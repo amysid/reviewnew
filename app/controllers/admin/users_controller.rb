@@ -5,13 +5,17 @@ class Admin::UsersController < Admin::AdminApplicationController
   def index
   	# binding.pry
     @sr_no = 0
-    @users = User.where(role: "user")
+    # @users = User.where(role: "user")
+    @search = User.where(role: "user")
+    @users_count = @search.count
+    @users = user_search
     respond_to do |format|
     format.html
     format.csv { send_data @users.to_csv }
     end
      @users = @users.decorate
- end
+    # @users = user_search if params[:search].present?
+  end
 
   def show
   	# binding.pry
@@ -45,15 +49,17 @@ class Admin::UsersController < Admin::AdminApplicationController
     end
   end
 
- def status
-    # binding.pry
-    @user.status? ? @user.update(status: false) : @user.update(status: true)
-    flash[:notice] = "User status changed successfully."
-    redirect_back(fallback_location: admin_users_path)
-end
-
-
-
+   def status
+      # binding.pry
+      @user.status? ? @user.update(status: false) : @user.update(status: true)
+      flash[:notice] = "User status changed successfully."
+      redirect_back(fallback_location: admin_users_path)
+  end
+  # def import
+  #  User.import(params[:file])
+  #  redirect_to admin_users_path, notice: "Users imported."
+  # end
+ 
 
 
 
