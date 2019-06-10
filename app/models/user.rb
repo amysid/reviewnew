@@ -4,4 +4,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
           enum role: ["admin","user","expert"]
+  has_one :image,class_name: 'Image',as: :imageable,autosave: true,dependent: :destroy
 end
