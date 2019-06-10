@@ -6,11 +6,10 @@ class Admin::UsersController < Admin::AdminApplicationController
   	# binding.pry
     @sr_no = 0
     @users = User.where(role: "user")
-    # @users = @users.decorate
     respond_to do |format|
     format.html
     format.csv { send_data @users.to_csv }
-   end
+    end
   end
 
   def show
@@ -21,6 +20,12 @@ class Admin::UsersController < Admin::AdminApplicationController
   def edit
   end
    
+   def status
+    # binding.pry
+    @user.status? ? @user.update(status: false) : @user.update(status: true)
+    flash[:notice] = "User status changed successfully."
+    redirect_back(fallback_location: admin_users_path)
+  end
 
   def update
     # binding.pry

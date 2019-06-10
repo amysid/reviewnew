@@ -8,11 +8,12 @@ class Admin::StaticContentController < ApplicationController
     end
    
     def edit
-    	binding.pry
+    	# binding.pry
     end
      
     def update
-    	# @user = User.find_by(id: params[:id])
+    	binding.pry
+    	 @user = StaticContent.find_by(id: params[:id])
         if @user.update_attributes(user_params)
          redirect_to admin_static_content_index_path
         else
@@ -24,10 +25,11 @@ class Admin::StaticContentController < ApplicationController
 
     private
     def user_params
-    	params.require(:user).permit(:title, :description)
+    	params.require(:static_content).permit(:title, :description)
     end
     def find_content
-      @user = User.find_by(id: params[:id])
+    	# binding.pry
+      @user = StaticContent.find_by(id: params[:id])
       redirect_to admin_users_path unless @user
     end
 end

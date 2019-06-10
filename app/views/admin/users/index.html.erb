@@ -68,7 +68,7 @@
                 
                 <!-- /.form-group -->
             </div>
-              <%= link_to "CSV", admin_users_path(format: "csv") %> |
+              <%= link_to "CSV", admin_users_path(format: "csv"), class:"btn btn-success"%> |
 
             <!-- /.col -->
             <!-- /.row -->
@@ -113,6 +113,8 @@
                         <%= link_to '<em class="fa fa-eye" aria-hidden="true"></em>'.html_safe, admin_user_path(user), class:"btn btn-sm btn-success",title: "View"%>
                         <%= link_to '<em class="fa fa-edit" aria-hidden="true"></em>'.html_safe, edit_admin_user_path(user), class:"btn btn-sm btn-primary" ,title: "Edit" %>
                         <a><%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_user_path(user), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this user?' }%></a>
+                        
+
                         <%#= user.block_btn %>
                     </td>
                 </tr>
