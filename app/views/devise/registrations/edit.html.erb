@@ -3,6 +3,14 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
+ <label for="file-upload" class="custom-file-upload ">
+
+  <%= f.fields_for :image_attributes do |m| %>
+   <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+
+  <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+  <%end%>
+  </label>
 
  <div class="field">
     <%= f.label :name %><br />
@@ -46,3 +54,20 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+
+
+
+
+<script type="text/javascript">
+  function preview(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#user_pic')
+                       .attr('src', e.target.result);
+               };
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+</script>

@@ -10,24 +10,21 @@ class Admin::UsersController < Admin::AdminApplicationController
     format.html
     format.csv { send_data @users.to_csv }
     end
-  end
+     @users = @users.decorate
+ end
 
   def show
   	# binding.pry
-  	# @users = User.find_by(id: params[:id])
+    # @users = User.find_by(id: params[:id])
+  	@users = User.decorate
   end
 
   def edit
   end
    
-   def status
-    # binding.pry
-    @user.status? ? @user.update(status: false) : @user.update(status: true)
-    flash[:notice] = "User status changed successfully."
-    redirect_back(fallback_location: admin_users_path)
-  end
+  
 
-  def update
+ def update
     # binding.pry
     @user = User.find_by(id: params[:id])
     if @user.update_attributes(user_params)
@@ -48,6 +45,12 @@ class Admin::UsersController < Admin::AdminApplicationController
     end
   end
 
+ def status
+    # binding.pry
+    @user.status? ? @user.update(status: false) : @user.update(status: true)
+    flash[:notice] = "User status changed successfully."
+    redirect_back(fallback_location: admin_users_path)
+end
 
 
 
@@ -60,6 +63,9 @@ private
     redirect_to admin_users_path unless @user
   end
   def user_params
-    params.require(:user).permit(:name, :mobile_no)
+    params.require(:user).permit(:name, :mobile_no, image_attributes: [:id, :file, :_destroy])
   end
+
+  
+
 end

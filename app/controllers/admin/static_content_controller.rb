@@ -12,7 +12,7 @@ class Admin::StaticContentController < ApplicationController
     end
      
     def update
-    	binding.pry
+    	# binding.pry
     	 @user = StaticContent.find_by(id: params[:id])
         if @user.update_attributes(user_params)
          redirect_to admin_static_content_index_path

@@ -13,8 +13,15 @@
    <!-- <h3>User Detail</h3> -->
       <div class="box box">
          <div class="box-body box-profile">
-            <center> <img src='<%#= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=300px width=300px /><i style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
-                 </center>
+            <center>
+            <label for="file-upload" class="custom-file-upload ">
+              <%= f.fields_for :image_attributes do |m| %>
+               <img src='<%= @user&.image&.file&.present? ? @user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+
+              <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+              <%end%>
+              </label>
+            </center>
 
            <p class="box box-info"></p>
            <h3 class="profile-username text-center">
@@ -46,7 +53,7 @@
                <li class="list-group-item">
                    <b>Mobile No.</b>
                    <p class="pull-right">
-                   <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                   <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "mobile_no" %>
                       <%#= @transaction&.created_at.strftime("%d/%m/%Y")%>
                    </p>
                </li>
@@ -64,4 +71,16 @@
  </div>
  <%end%>
 </section>
+<script type="text/javascript">
+  function preview(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#user_pic')
+                       .attr('src', e.target.result);
+               };
 
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+</script>
