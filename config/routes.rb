@@ -11,7 +11,12 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :users
+    resources :users do
+      member do
+        post :status
+      end
+    end
+    resources :static_content
     # root "users#index"
     # get 'users/index'
     # get 'users/show'
