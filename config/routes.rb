@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
+    resources :static_content
     # root "users#index"
     # get 'users/index'
     # get 'users/show'
