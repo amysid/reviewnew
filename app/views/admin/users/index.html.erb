@@ -94,8 +94,6 @@
                     <th>Status</th>
                     <th>Actions</th>
                 </tr>
-                <%#= '<tr colspan="$(".table")[0].rows[0].cells.length" ><td>No user found</td></tr>'.html_safe  if @users.blank? %>
-                <%# index = get_sno %>
                 <% @users&.each do |user| %>
                 <tr>
                     <td>
