@@ -1,10 +1,10 @@
 <h1>User Management</h1>
 <div class="box box-info">
-<!-- <h2>Import Products</h2>
- <%#= form_tag import_admin_users_path, multipart: true do %>
-  <%#= file_field_tag :file %>
-  <%#= submit_tag "Import" %>
-<%# end %> -->
+<%= form_tag import_admin_users_path, multipart: true, id: "controls-form" do %>
+             <%= file_field_tag :file, id: "fileinput", accept: ".csv" %>
+             <%= submit_tag "Import" %>
+              <% end %>
+
 <%= form_with scope: :search, url: admin_users_path, method: :get,autocomplete: :off,local: true do |f| %>
     <div class="box-header">
       <div class="col-md-6"> 
@@ -74,7 +74,7 @@
                 <!-- /.form-group -->
             </div>
               <%= link_to "CSV", admin_users_path(format: "csv"), class:"btn btn-success"%> 
-              
+
 
             <!-- /.col -->
             <!-- /.row -->
@@ -138,3 +138,11 @@
     </div>
 </div>
 
+<!--js CSV file validation-->
+
+<script type="text/javascript">
+ 
+
+</script>
+
+<!--js csv validation-->

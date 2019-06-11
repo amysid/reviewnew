@@ -1,7 +1,10 @@
 require_relative 'boot'
 
-require 'rails/all'
 require 'csv'
+require  'roo-xls'
+require 'spreadsheet' 
+require 'rails/all'
+# require 'iconv'
 
 
 

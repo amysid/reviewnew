@@ -26,6 +26,10 @@ class Admin::UsersController < Admin::AdminApplicationController
   def edit
   end
    
+  def import
+       User.import(params[:file])
+       redirect_to admin_users_path, notice: "Succesfull Created."
+  end
   
 
  def update
