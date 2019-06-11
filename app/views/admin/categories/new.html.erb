@@ -1,0 +1,50 @@
+<section class="content-header">
+  <center>
+    <h1><b>Add Categories</b></h1>
+      <p class="box box-info"></p>
+   </center>
+</section>
+<section class="content">
+  <%= form_with(model: @category, url:  admin_categories_path, method: :post, local: true) do |f| %>
+  <div class="row">
+     <div class="col-md-3">
+     </div>
+     <div class="col-md-6">
+      <div class="box box">
+         <div class="box-body box-profile">
+          
+           <ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Category</b>
+                      <%= f.text_field :category_type, class: 'form-control', autofocus: true, placeholder: "category" %>
+               </li>
+               <%= f.nested_fields_for :sub_categories do |sub| %>
+               <li class="list-group-item">
+                   <b>Sub Category</b>
+                    <%= sub.text_field :sub_category_type, class: 'form-control', autofocus: true, placeholder: "sub_category" %>
+                    <%= sub.link_to '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>Add Description'.html_safe, :descriptions ,id: "add_product_descriptions"%>
+               </li>
+              <%end%>
+              <p><%#= f.link_to_add "Add a task", :sub_categories %></p>
+             
+            </ul>
+            <div class="form-group has-feedback">
+                      <%= f.submit "Submit" , class: "btn btn-success btn-block"%>
+                    </div>
+          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+        </div>
+      </div>
+   </div>
+  <div class="col-md-3">
+  </div>
+ </div>
+ <%end%>
+</section>
+<script type="text/javascript">
+	$('#add_product_media').on('click',function(){
+
+      // alert(!($('.media_contnt').length < 8));
+      // if (!($('input:hidden[name^="campaign[products_attributes][0][medias_attributes]["][id$="_destroy"][value="false"]').length < 7)){
+         $('#add_product_media').css('display','none');
+         // console.log($('.media_contnt').length)
+</script>>

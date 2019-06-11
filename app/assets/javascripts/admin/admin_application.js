@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require_tree ../common
+//= require jquery3
+//= require jquery_ujs
 //= require popper.min.js
 //= require app
 //= require jquery.slimscroll.js

@@ -60,7 +60,7 @@ gem 'rqrcode-with-patches', '~> 0.5.4'
 gem 'wicked_pdf', '~> 1.2', '>= 1.2.2'
 gem 'wkhtmltopdf-binary', '~> 0.12.4'
 gem 'mini_magick', '~> 4.9', '>= 4.9.3'
-
+gem 'nested_form_fields', '~> 0.8.2'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

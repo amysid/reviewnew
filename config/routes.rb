@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       end
     end
     resources :static_content
+    resources :categories
     # root "users#index"
     # get 'users/index'
     # get 'users/show'
