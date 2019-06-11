@@ -13,6 +13,7 @@
 //= require_tree ../common
 //= require jquery3
 //= require jquery_ujs
+//= require jquery_nested_form
 //= require popper.min.js
 //= require app
 //= require jquery.slimscroll.js
