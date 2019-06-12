@@ -20,7 +20,7 @@
                   <b>Category</b>
                       <%= f.text_field :category_type, class: 'form-control', autofocus: true, placeholder: "category" %>
                </li>
-               <%= f.nested_fields_for :sub_categories do |sub| %>
+               <%= f.fields_for :sub_categories do |sub| %>
                <li class="list-group-item">
                    <b>Sub Category</b>
                     <%= sub.text_field :sub_category_type, class: 'form-control', autofocus: true, placeholder: "sub_category" %>
