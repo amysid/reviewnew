@@ -4,9 +4,10 @@ class Admin::CategoriesController < ApplicationController
 
 	def new
       @category = Category.new
-       @category.sub_categories.build		
+      @category.sub_categories.build		
 	end
 	def create
+    binding.pry
        @category = Category.create(category_params)
         if @category.save
            redirect_to admin_categories_path, notice: 'Road Map created Successfully.'

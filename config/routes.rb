@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       end
     member do
         post :status
+        get :admin_profile
+        get :edit_admin_profile
+        patch :update_admin_profile
       end
     end
     resources :static_content

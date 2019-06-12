@@ -53,6 +53,27 @@ class Admin::UsersController < Admin::AdminApplicationController
     end
   end
 
+  def admin_profile
+    @user = User.find_by(id: params[:id])
+  end
+
+  def edit_admin_profile
+    @user = User.find_by(id: params[:id])
+  end
+
+  def update_admin_profile
+    @user = User.find_by(id: params[:id])
+     if @user.update_attributes(user_params)
+         redirect_to admin_profile_admin_user_path
+         flash[:notice] = "User status changed successfully"
+    else
+         flash[:notice] = "User status not changed successfully"
+         redirect_to admin_profile_admin_user_path
+    end
+  end
+    
+  
+
    def status
       # binding.pry
       @user.status? ? @user.update(status: false) : @user.update(status: true)
@@ -75,7 +96,4 @@ private
   def user_params
     params.require(:user).permit(:name, :mobile_no, image_attributes: [:id, :file, :_destroy])
   end
-
-  
-
 end

@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_one :image,class_name: 'Image',as: :imageable,autosave: true,dependent: :destroy
   accepts_nested_attributes_for :image
   # validates :mobile_no, uniqueness: true
+  validates :name, length: { minimum: 4, maximum: 20}
+  # validates :mobile_no, length: { minimum: 7, maximum: 14}
+
 
 
   def self.to_csv(options = {})

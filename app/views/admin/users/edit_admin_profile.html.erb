@@ -1,0 +1,86 @@
+<section class="content-header">
+  <center>
+    <h1><b>Update Admin Profile</b></h1>
+      <p class="box box-info"></p>
+   </center>
+</section>
+<section class="content">
+  <%= form_with(model: @user, url:  update_admin_profile_admin_user_path, method: :patch, local: true) do |f| %>
+  <div class="row">
+     <div class="col-md-3">
+     </div>
+     <div class="col-md-6">
+   <!-- <h3>User Detail</h3> -->
+      <div class="box box">
+         <div class="box-body box-profile">
+            <center>
+            <label for="file-upload" class="custom-file-upload ">
+              <%= f.fields_for :image_attributes do |m| %>
+               <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+
+              <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+              <%end%>
+              </label>
+            </center>
+
+           <p class="box box-info"></p>
+           <h3 class="profile-username text-center">
+               <%#= @user.name.capitalize %>
+           </h3>
+           <p class="text-muted text-center">
+                 <%#= @user.role.capitalize %>
+           </p>
+           <ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Name</b>
+                     <p class="pull-right">
+                      <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                     </p>
+               </li>
+               <li class="list-group-item">
+                   <b>Role</b>
+                   <p class="pull-right">
+                 <%= @user&.role%>
+                   </p>
+               </li>
+               <li class="list-group-item">
+                    <b>Email Id</b>
+                     <p class="pull-right">
+                       <%= @user&.email%>
+                     </p>
+               </li>
+               
+               <li class="list-group-item">
+                   <b>Mobile No.</b>
+                   <p class="pull-right">
+                   <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "mobile_no" %>
+                      <%#= @transaction&.created_at.strftime("%d/%m/%Y")%>
+                   </p>
+               </li>
+            </ul>
+            <div class="form-group has-feedback">
+                      <%= f.submit "Update Profile" , class: "btn btn-success btn-block"%>
+                    </div>
+          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+        </div>
+       <!-- /.box-body -->
+      </div>
+   </div>
+  <div class="col-md-3">
+  </div>
+ </div>
+ <%end%>
+</section>
+<script type="text/javascript">
+  function preview(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#user_pic')
+                       .attr('src', e.target.result);
+               };
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+</script>
