@@ -8,10 +8,10 @@ class Admin::CategoriesController < ApplicationController
 	end
 
 	def create
-    # binding.pry
-       @category = Category.create(category_params)
+    binding.pry
+        @category = Category.create(category_params)
         if @category.save
-           redirect_to admin_categories_path, notice: 'Road Map created Successfully.'
+           redirect_to admin_categories_path, notice: 'Category Created Successfully.'
         else
            flash[:notice] = @category.errors.full_messages.first
            render :new
@@ -23,8 +23,7 @@ class Admin::CategoriesController < ApplicationController
 	     @category = Category.find_by(id: params[:id])
 	     redirect_to admin_categories_path unless @category
   end
-
   def category_params
-	    params.require(:category).permit(:category_type, sub_category_attributes: [:id, :sub_category_type, :_destroy])
+	    params.require(:category).permit(:category_type, sub_categories_attributes: [:category_id, :sub_category_type, :_destroy])
   end
 end
