@@ -1,0 +1,4 @@
+<%= form_with (model: @detail, url: add_category_admin_user_path, method: post, local: true) do |f|%>
+<%= f.select("c_code", category, {:include_blank => "country code"}) %>
+
+<%end%>

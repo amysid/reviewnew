@@ -18,6 +18,9 @@ class Admin::CategoriesController < ApplicationController
         end
   end
 
+  def add_category
+  end
+
   private
   def find_category
 	     @category = Category.find_by(id: params[:id])

@@ -6,7 +6,7 @@ class Admin::UsersController < Admin::AdminApplicationController
   	# binding.pry
     @sr_no = 0
     # @users = User.where(role: "user")
-    @search = User.where(role: "user")
+    @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
     @users_count = @search.count
     @users = user_search
     respond_to do |format|

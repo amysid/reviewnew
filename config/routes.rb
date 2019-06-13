@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         get :admin_profile
         get :edit_admin_profile
         patch :update_admin_profile
+        post :add_category
       end
     end
     resources :static_content
