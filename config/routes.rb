@@ -21,11 +21,16 @@ Rails.application.routes.draw do
         get :admin_profile
         get :edit_admin_profile
         patch :update_admin_profile
-        post :add_category
+
       end
     end
     resources :static_content
-    resources :categories
+    resources :categories do
+      collection do
+        get :add_category
+        post :create_category_details
+      end
+    end
     # root "users#index"
     # get 'users/index'
     # get 'users/show'

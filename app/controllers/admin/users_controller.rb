@@ -62,6 +62,7 @@ class Admin::UsersController < Admin::AdminApplicationController
   end
 
   def update_admin_profile
+    binding.pry
     @user = User.find_by(id: params[:id])
      if @user.update_attributes(user_params)
          redirect_to admin_profile_admin_user_path
@@ -75,7 +76,7 @@ class Admin::UsersController < Admin::AdminApplicationController
   
 
    def status
-      # binding.pry
+      # binding.pry 
       @user.status? ? @user.update(status: false) : @user.update(status: true)
       flash[:notice] = "User status changed successfully."
       redirect_back(fallback_location: admin_users_path)

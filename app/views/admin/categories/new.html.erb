@@ -10,6 +10,7 @@
   <%= nested_form_for @category, url:  admin_categories_path, method: :post, local: true do |f| %>
   <div class="row">
      <div class="col-md-3">
+      <%= link_to "Add Details", add_category_admin_categories_path %>
      </div>
      <div class="col-md-6">
       <div class="box box">
@@ -25,6 +26,8 @@
                <li class="list-group-item">
                    <b>Sub Category</b>
                     <%= sub.text_field :sub_category_type, class: 'form-control', autofocus: true, placeholder: "sub_category" %>
+                        
+
 
                </li>
               <%end%>

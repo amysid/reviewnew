@@ -1,9 +1,10 @@
 module Admin::CategoriesHelper
 	def category
-		@category = Category.all
+		# binding.pry
+		Category.all.pluck("category_type")
 	end
 
 	def sub_category
-		@sub_category = SubCategory.all
+	SubCategory.all.pluck("sub_category_type")
 	end
 end
