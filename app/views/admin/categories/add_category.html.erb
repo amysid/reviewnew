@@ -5,7 +5,7 @@
    </center>
 </section>
 <section class="content">
-  <%= form_with(model: @detail, url:  create_category_details_admin_categories_path, method: :post, local: true) do |f| %>
+  <%= form_for :detail, url:  create_category_details_admin_categories_path, method: :post, local: true do |f| %>
   <div class="row">
      <div class="col-md-3">
      </div>
@@ -38,7 +38,12 @@
              <ul class="list-group list-group-unbordered">
                <li class="list-group-item">
                   <b>Image:</b>
-                      <%= f.file_field :image, class: 'form-control', autofocus: true, placeholder: "title" %>
+                    <label for="file-upload" class="custom-file-upload ">
+						<%= f.fields_for :image_attributes do |m| %>
+   							<img src='<%="/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+							<%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+  						<%end%>
+  					</label>
 				</li>
             </ul>
             
@@ -54,3 +59,16 @@
  </div>
  <%end%>
 </section>
+<script type="text/javascript">
+	function preview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                  reader.onload = function (e) {
+                    $('#user_pic')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>

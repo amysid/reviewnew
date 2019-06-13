@@ -8,7 +8,7 @@ class Admin::CategoriesController < ApplicationController
 	end
 
 	def create
-    binding.pry
+    # binding.pry
         @category = Category.create(category_params)
         if @category.save
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
@@ -18,10 +18,10 @@ class Admin::CategoriesController < ApplicationController
         end
   end
 
-  # def add_category
-  #    @category = Category.new
-  #     @category.sub_categories.build
-  # end
+  def add_category
+    # @detail = Detail.new
+    # @detail.image.build   
+  end
 
   def create_category_details
     binding.pry
@@ -45,6 +45,7 @@ class Admin::CategoriesController < ApplicationController
 	    params.require(:category).permit(:category_type, sub_categories_attributes: [:category_id, :sub_category_type, :_destroy])
   end
   def detail_params
-    params.require(:detail).permit(:title, :description, image_attributes: [:id, :file, :_destroy])
+    # detail_params[:detail] = detail_params[:image_attributes]["file"]
+    params.require(:detail).permit(:title, :description)
   end
 end
