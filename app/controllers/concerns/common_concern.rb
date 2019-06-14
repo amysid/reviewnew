@@ -1,4 +1,16 @@
 module CommonConcern
+
+  def convert_flash
+    #p "converting flash"
+    flash.map{|k,v| flash[k] = [v] if v.class == String  }
+    yield
+  end
+
+  def check_flash
+    flash.present?
+  end
+
+
  def user_search
     if params[:search]
       @search_params =  params.require(:search).permit(:search,:status,:start,:end).to_h

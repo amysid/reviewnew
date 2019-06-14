@@ -25,6 +25,10 @@ class Admin::UsersController < Admin::AdminApplicationController
 
   def edit
   end
+
+  def user_type
+    binding.pry
+  end
    
   def import
        User.import(params[:file])
@@ -66,9 +70,9 @@ class Admin::UsersController < Admin::AdminApplicationController
     @user = User.find_by(id: params[:id])
      if @user.update_attributes(user_params)
          redirect_to admin_profile_admin_user_path
-         flash[:notice] = "User status changed successfully"
+         flash[:notice] = "User status changed successfully."
     else
-         flash[:notice] = "User status not changed successfully"
+         flash[:notice] = "User status not changed successfully."
          redirect_to admin_profile_admin_user_path
     end
   end
@@ -81,14 +85,7 @@ class Admin::UsersController < Admin::AdminApplicationController
       flash[:notice] = "User status changed successfully."
       redirect_back(fallback_location: admin_users_path)
   end
-  # def import
-  #  User.import(params[:file])
-  #  redirect_to admin_users_path, notice: "Users imported."
-  # end
- 
-
-
-
+   
 private
   def find_content
     @user = User.find_by(id: params[:id])
