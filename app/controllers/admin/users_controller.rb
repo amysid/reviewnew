@@ -26,9 +26,9 @@ class Admin::UsersController < Admin::AdminApplicationController
     def edit
     end
 
-    def user_type
-      binding.pry
-      @user = User.find_by(id: params[:id])
+    def type_user
+      #binding.pry
+      @normal_user = User.update(user_type: "Normal User")
     end
    
     def import

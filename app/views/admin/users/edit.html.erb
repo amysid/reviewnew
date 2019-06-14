@@ -46,18 +46,17 @@
                        <%= @user&.email%>
                      </p>
                </li>
-               
                <li class="list-group-item">
-                   <b>Mobile No.</b>
-                   <p class="pull-right">
-                   <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "mobile_no" %>
-                      <%#= @transaction&.created_at.strftime("%d/%m/%Y")%>
-                   </p>
+                  <b>Name</b>
+                     <p class="pull-right">
+                      <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                     </p>
                </li>
+               
             </ul>
             <div class="form-group has-feedback">
                       <%= f.submit "Update Profile" , class: "btn btn-success btn-block"%>
-                    </div>
+            </div>
           <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
         </div>
        <!-- /.box-body -->

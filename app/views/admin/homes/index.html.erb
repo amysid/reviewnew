@@ -1,229 +1,81 @@
-
 <section class="content-header">
   <h1>
     Dashboard
   </h1>
 </section>
 <section class="content">
-<p class="box box-info">
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3><%#= @transactions.count%></h3>
-              <p>Total number of Users</p>
-              <b><%= @user.count %></b>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="/admin/tokens" class="small-box-footer"><!-- View Details --><i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><%#= @user.count%></h3>
-                <p>Total verified Users</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="admin/users" class="small-box-footer"><!-- View Detail --> <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><%#= total_revenue.round(2) %></h3>
-                   <p>Total Revenue($)</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href= "/admin/transaction_hashs" class="small-box-footer">View Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><%#= open_deliveries%></h3>
-                <p>Total open deliveries</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="/admin/deliveries" class="small-box-footer">View Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
- <!-- Small boxes (Stat box) -->
-      <div class="row">
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3><%#=total_gold%> grams</h3>
-                <p>Total Gold in Grams</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          </div>
-        </div>
-        <!-- ./col -->
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3><%#= total_fund_in_dollars %></h3>
-                 <p>Total fund in Dollars</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-          </div>
-        </div>
-        <!-- ./col -->
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3><%#=fund_on_way%></h3>
-                <p>Fund on the way</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="/admin/transactions?status=0" class="small-box-footer">View Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-          <!-- small box -->
-        <div class="col-lg-3 col-xs-6">
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3><%#= open_trades%></h3>
-                <p>Sum of Open Trades</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="/admin/transaction_hashs" class="small-box-footer">View Detail <i class="fa fa-arrow-circle-right"></i></a>
+     <!-- Info boxes -->
+     <p class="box box-info">
+     <div class="row">
+       <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+           <span class="info-box-icon bg-aqua"><i class="glyphicon glyphicon-user"></i></span>
 
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-      <!-- /.row -->
+           <div class="info-box-content">
+             <span class="info-box-text">Total Users</span>
+             <span class="info-box-number"><%=@user.count%></span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
+       </div>
+       <!-- /.col -->
+       <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+           <span class="info-box-icon bg-red"><i class="glyphicon glyphicon-user"></i></span>
 
-            <!-- Main row -->
-      <div class="row">
-        <!-- Left col -->
-        <section class="col-lg-6 connectedSortable">
-          <!-- Custom tabs (Charts with tabs)-->
-          <div class="nav-tabs-custom">
-            <!-- Tabs within a box -->
-            <!-- <ul class="nav nav-tabs pull-right">
-              <li class="pull-left header">
-                <i class="fa fa-inbox"></i> 
-                  Verified Users Vs Unverified Users
-              </li>
-            </ul> -->
-              <!-- Morris chart - Sales -->
-           <!--  <div class="tab-content no-padding">
-              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;">
-                <%#= line_chart users_chart, xtitle: "Time", ytitle: "Users", colors: ["#008000", " #ff3f33"]%>
-              </div>
-              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
-            </div> -->
-            <div class="table-responsive">
-              <h3 class="table-head">Top Transactions</h3>
+           <div class="info-box-content">
+             <span class="info-box-text">Block Users</span>
+             <span class="info-box-number"><%=@block_user.count%></span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
+       </div>
+       <!-- /.col -->
 
-              <table id="example2" class="table-width table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                   <th>Amount</th>
-                   <th>Date & Time</th>
-                  </tr>
-                </thead>
-               <%#top_transactions.each do |transaction|%>
-                   <tbody>
-                     <tr class="even">
-                       <td><%#=transaction.try(:user).try(:name)%></td>
-                       <td><%#=transaction.try(:amount)%></td>
-                       <td><%#=transaction.created_at%></td>
-                     </tr>
-                   </tbody>
-                   <%#end%>
-                </table>
-             </div>
-          </div>
-        </section>
-<!-- right col (We are only adding the ID to make the widgets sortable)-->
-        <section class="col-lg-6 connectedSortable">
-<!-- solid sales graph -->
-         <!--  <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-              <i class="fa fa-th"></i>
-                <h3 class="box-title">Purchased Tokens Vs Sold Tokens</h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;">
-                <%#= line_chart token_chart, xtitle: "Time", ytitle: "Tokens", colors: ["#008000", " #ff3f33"]%>
-              </div>
-            </div>
-          </div> -->
-           <!-- /.box-body -->
-            <!-- /.box-footer -->
-          <div class="table-responsive">
-              <h3 class="table-head">Top New Users</h3>
-          <table  class="table-width table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                   <th>Email</th>
-                   <th>Status</th>
-                  </tr>
-                </thead>
-               <%# @users.each do |user|%>
-                   <tbody>
-                     <tr>
-                       <td><%#=user.name%></td>
-                       <td><%#=user.try(:email)%></td>
-                       <td style="max-width: 100px;"><%# if user.status.eql?(0)%>
-                         <i class = "status_tag yes"> Pending </i>
-                          <%# elsif user.status.eql?(1)%>
-                            <i class = "status_tag no"> Active</i>
-                            <%#else%>
-                            <i class="status_tag no">Blocked</i>
-                          <%#end%>
-                       </td>
-                     </tr>
-                   </tbody>
-                <%#end%>
-              </table>
-          </div>
-          <!-- /.box -->
-        </section>
-     </div>      <!-- /.box -->
+     
+       <!-- fix for small devices only -->
+       <div class="clearfix visible-sm-block"></div>
+
+       <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+           <span class="info-box-icon bg-green"><i class="glyphicon glyphicon-user"></i></span>
+
+           <div class="info-box-content">
+             <span class="info-box-text">Active Users</span>
+             <span class="info-box-number"><%=@active_user.count%></span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
+       </div>
+       <!-- /.col -->
+       <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+           <span class="info-box-icon bg-yellow"><i class="glyphicon glyphicon-user"></i></span>
+
+           <div class="info-box-content">
+             <span class="info-box-text">Normal Users</span>
+             <span class="info-box-number"><%#=@user.count%></span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
+       </div>
+       <div class="col-md-3 col-sm-6 col-xs-12">
+         <div class="info-box">
+           <span class="info-box-icon bg-yellow"><i class="glyphicon glyphicon-user"></i></span>
+
+           <div class="info-box-content">
+             <span class="info-box-text">Expert Users</span>
+             <span class="info-box-number"><%#=@active_user%></span>
+           </div>
+           <!-- /.info-box-content -->
+         </div>
+         <!-- /.info-box -->
+       </div>
+       <!-- /.col -->
+     </div>
 </p>
 </section>
-

@@ -113,7 +113,7 @@
           <!-- Menu Toggle Button -->
           <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found"  height=25px width=25px /><i style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+            <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found"  height=20px width=20px /><i style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
 <!--             <img src="/assets/user2-160x160.jpg" class="user-image" alt="User Image"/>
  -->            <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <span class="hidden-xs"><%= current_user&.name %></span>

@@ -22,7 +22,6 @@ Rails.application.routes.draw do
         get :edit_admin_profile
         patch :update_admin_profile
         patch :type_user
-
       end
     end
     resources :static_content
