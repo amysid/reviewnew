@@ -16,9 +16,11 @@ class Admin::StaticContentController < ApplicationController
     	 @user = StaticContent.find_by(id: params[:id])
         if @user.update_attributes(user_params)
          redirect_to admin_static_content_index_path
+         flash[:notice] = "StaticContent Update Succesfully"
         else
          flash[:alert] = @user.errors.full_messages
          redirect_to admin_static_content_index_path
+         flash[:notice] = "StaticContent not update Succesfully"
         end
     end
 

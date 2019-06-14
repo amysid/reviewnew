@@ -1,80 +1,86 @@
 class Admin::UsersController < Admin::AdminApplicationController
- before_action :find_content, only: [:show,:edit,:update,:status,:destroy]
+ before_action :find_content, only: [:show,:edit,:update,:status,:destroy,:update_admin_profile]
  layout 'admin_lte_2'
  
-  def index
-  	# binding.pry
-    @sr_no = 0
-    # @users = User.where(role: "user")
-    @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
-    @users_count = @search.count
-    @users = user_search
-    respond_to do |format|
-    format.html
-    format.csv { send_data @users.to_csv }
+    def index
+  	   # binding.pry
+        @sr_no = 0
+        # @users = User.where(role: "user")
+        @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+        @users_count = @search.count
+        @users = user_search
+        respond_to do |format|
+           format.html
+           format.csv { send_data @users.to_csv }
+        end
+        @users = @users.decorate
+        # @users = user_search if params[:search].present?
     end
-     @users = @users.decorate
-    # @users = user_search if params[:search].present?
-  end
 
-  def show
-  	# binding.pry
-    # @users = User.find_by(id: params[:id])
-  	@users = User.decorate
-  end
+    def show
+  	   # binding.pry
+       # @users = User.find_by(id: params[:id])
+  	   @users = User.decorate
+    end
 
-  def edit
-  end
+    def edit
+    end
 
-  def user_type
-    binding.pry
-  end
+    def user_type
+      binding.pry
+      @user = User.find_by(id: params[:id])
+    end
    
-  def import
+    def import
        User.import(params[:file])
-       redirect_to admin_users_path, notice: "Succesfull Created."
-  end
+       redirect_to admin_users_path
+       flash[:notice] = "File Import Successfully"
+    end
   
 
- def update
+    def update
     # binding.pry
-    @user = User.find_by(id: params[:id])
-    if @user.update_attributes(user_params)
-       redirect_to admin_users_path
-      else
-        flash[:alert] = @user.errors.full_messages
-        redirect_to admin_users_path
+        @user = User.find_by(id: params[:id])
+        if @user.update_attributes(user_params)
+           @user.image.update(file: params[:user][:image])
+           redirect_to admin_users_path
+           flash[:notice] = "User Profile Update Successfully."
+        else
+           flash[:alert] = @user.errors.full_messages
+           redirect_to admin_users_path
+           flash[:notice] = "User Profile Not Update."
+        end
     end
-  end
   
    def destroy
     if @user.destroy
       redirect_to  admin_users_path
-      flash[:success] = 'succesfull destroy'
+      flash[:notice] = 'This User Delete Successfully'
     else
       flash[:error] = @user.errors.full_messages.first
       redirect_to  admin_users_path
+      flash[:notice] = 'This User Not Delete'
     end
-  end
+   end
 
-  def admin_profile
-    @user = User.find_by(id: params[:id])
-  end
+   def admin_profile
+      @user = User.find_by(id: params[:id])
+   end
 
   def edit_admin_profile
     @user = User.find_by(id: params[:id])
   end
 
   def update_admin_profile
-    binding.pry
-    @user = User.find_by(id: params[:id])
-     if @user.update_attributes(user_params)
+    # binding.pry
+      if @user.update_attributes(user_params)
+         @user.image.update(file: params[:user][:image])
          redirect_to admin_profile_admin_user_path
-         flash[:notice] = "User status changed successfully."
-    else
-         flash[:notice] = "User status not changed successfully."
+         flash[:notice] = "Admin profile update successfully."
+     else
+         flash[:notice] = "Admin profile not update."
          redirect_to admin_profile_admin_user_path
-    end
+     end
   end
     
   
@@ -92,6 +98,7 @@ private
     redirect_to admin_users_path unless @user
   end
   def user_params
-    params.require(:user).permit(:name, :mobile_no, image_attributes: [:id, :file, :_destroy])
+    params.require(:user).permit(:name, :mobile_no)
   end
+  
 end
