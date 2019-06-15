@@ -36,8 +36,8 @@
                </li>
                <li class="list-group-item">
                    <b>User Type</b>
-                   <p class="pull-right">
-                 <%#= @user&.user_type%>
+                   <p class="pull-right" style="margin-right: -152px;">
+                 <%= @user&.user_type%>
                    </p>
                </li>
                <li class="list-group-item">
@@ -47,9 +47,9 @@
                      </p>
                </li>
                <li class="list-group-item">
-                  <b>Name</b>
+                  <b>Mobile No.</b>
                      <p class="pull-right">
-                      <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                      <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "mobile_no" %>
                      </p>
                </li>
                
@@ -57,7 +57,7 @@
             <div class="form-group has-feedback">
                       <%= f.submit "Update Profile" , class: "btn btn-success btn-block"%>
             </div>
-          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+          <a href="<%=admin_user_path%>" class="btn btn-danger btn-block"><b>Back</b></a>
         </div>
        <!-- /.box-body -->
       </div>

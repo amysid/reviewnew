@@ -13,7 +13,7 @@
 
            <div class="info-box-content">
              <span class="info-box-text">Total Users</span>
-             <span class="info-box-number"><%=@user.count%></span>
+             <span class="info-box-number"><%=@user&.count%></span>
            </div>
            <!-- /.info-box-content -->
          </div>
@@ -26,7 +26,7 @@
 
            <div class="info-box-content">
              <span class="info-box-text">Block Users</span>
-             <span class="info-box-number"><%=@block_user.count%></span>
+             <span class="info-box-number"><%=@block_user&.count%></span>
            </div>
            <!-- /.info-box-content -->
          </div>
@@ -44,7 +44,7 @@
 
            <div class="info-box-content">
              <span class="info-box-text">Active Users</span>
-             <span class="info-box-number"><%=@active_user.count%></span>
+             <span class="info-box-number"><%=@active_user&.count%></span>
            </div>
            <!-- /.info-box-content -->
          </div>
@@ -57,7 +57,7 @@
 
            <div class="info-box-content">
              <span class="info-box-text">Normal Users</span>
-             <span class="info-box-number"><%#=@user.count%></span>
+             <span class="info-box-number"><%= @normal_user&.count%></span>
            </div>
            <!-- /.info-box-content -->
          </div>
@@ -69,7 +69,7 @@
 
            <div class="info-box-content">
              <span class="info-box-text">Expert Users</span>
-             <span class="info-box-number"><%#=@active_user%></span>
+             <span class="info-box-number"><%= @expert_user&.count%></span>
            </div>
            <!-- /.info-box-content -->
          </div>

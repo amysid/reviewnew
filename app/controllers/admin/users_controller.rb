@@ -5,7 +5,6 @@ class Admin::UsersController < Admin::AdminApplicationController
     def index
   	   # binding.pry
         @sr_no = 0
-        # @users = User.where(role: "user")
         @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
         @users_count = @search.count
         @users = user_search
@@ -14,7 +13,7 @@ class Admin::UsersController < Admin::AdminApplicationController
            format.csv { send_data @users.to_csv }
         end
         @users = @users.decorate
-        # @users = user_search if params[:search].present?
+        #@users = user_search if params[:search].present?
     end
 
     def show
@@ -27,8 +26,16 @@ class Admin::UsersController < Admin::AdminApplicationController
     end
 
     def type_user
-      #binding.pry
-      @normal_user = User.update(user_type: "Normal User")
+      #normal_user
+      @normal_user = User.find_by(id: params[:id]).update(user_type: "Normal User")
+      redirect_to admin_users_path
+      flash[:notice] = "User Type (Normal User) Change Succesfully"
+    end
+
+    def expert_user
+      @expert_user = User.find_by(id: params[:id]).update(user_type: "Expert User")
+      redirect_to admin_users_path
+      flash[:notice] = "User Type (Expert User) Change Successfully"
     end
    
     def import
@@ -39,10 +46,9 @@ class Admin::UsersController < Admin::AdminApplicationController
   
 
     def update
-    # binding.pry
         @user = User.find_by(id: params[:id])
         if @user.update_attributes(user_params)
-           @user.image.update(file: params[:user][:image])
+           @user&.image&.update(file: params[:user][:image])
            redirect_to admin_users_path
            flash[:notice] = "User Profile Update Successfully."
         else
@@ -72,9 +78,8 @@ class Admin::UsersController < Admin::AdminApplicationController
   end
 
   def update_admin_profile
-    # binding.pry
       if @user.update_attributes(user_params)
-         @user.image.update(file: params[:user][:image])
+         @user&.image&.update(file: params[:user][:image])
          redirect_to admin_profile_admin_user_path
          flash[:notice] = "Admin profile update successfully."
      else
@@ -83,10 +88,7 @@ class Admin::UsersController < Admin::AdminApplicationController
      end
   end
     
-  
-
-   def status
-      # binding.pry 
+ def status 
       @user.status? ? @user.update(status: false) : @user.update(status: true)
       flash[:notice] = "User status changed successfully."
       redirect_back(fallback_location: admin_users_path)

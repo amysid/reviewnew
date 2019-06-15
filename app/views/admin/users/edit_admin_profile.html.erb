@@ -61,7 +61,7 @@
             <div class="form-group has-feedback">
                       <%= f.submit "Update Profile" , class: "btn btn-success btn-block"%>
                     </div>
-          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+          <a href="/admin/users/<%= current_user&.id%>/admin_profile" class="btn btn-danger btn-block"><b>Back</b></a>
         </div>
        <!-- /.box-body -->
       </div>
