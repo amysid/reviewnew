@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
   enum role: ["admin","user","expert"]
-  has_one :image,class_name: 'Image',as: :imageable,autosave: true,dependent: :destroy
+  has_one :image,class_name: 'Image', as: :imageable, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :image
   # validates :mobile_no, uniqueness: true
   validates :name, length: { minimum: 4, maximum: 20}

@@ -46,11 +46,18 @@ class Admin::UsersController < Admin::AdminApplicationController
   
 
     def update
-        @user = User.find_by(id: params[:id])
+       binding.pry
+        # @user = User.find_by(id: params[:id])
         if @user.update_attributes(user_params)
-           @user&.image&.update(file: params[:user][:image])
-           redirect_to admin_users_path
-           flash[:notice] = "User Profile Update Successfully."
+          @user.image.update(file: params[:user][:image_attributes][:image])
+          # if params[:user][:image].present?
+          #  @user.image.update(file: params[:user][:image])
+          #  redirect_to admin_users_path
+          #  flash[:notice] = "User Profile Update Successfully."
+          # else
+            redirect_to admin_users_path
+            flash[:notice] = "User Profile not Update"
+        
         else
            flash[:alert] = @user.errors.full_messages
            redirect_to admin_users_path
@@ -78,8 +85,8 @@ class Admin::UsersController < Admin::AdminApplicationController
   end
 
   def update_admin_profile
-      if @user.update_attributes(user_params)
-         @user&.image&.update(file: params[:user][:image])
+      if @user.update_attributes(admin_params)
+         @user.image.update(file: params[:user][:image])
          redirect_to admin_profile_admin_user_path
          flash[:notice] = "Admin profile update successfully."
      else
@@ -100,6 +107,9 @@ private
     redirect_to admin_users_path unless @user
   end
   def user_params
+    params.require(:user).permit(:name, :mobile_no)
+  end
+  def admin_params
     params.require(:user).permit(:name, :mobile_no)
   end
   
