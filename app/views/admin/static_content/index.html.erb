@@ -33,15 +33,15 @@
                                 <td><%= static_page.updated_at.localtime.strftime("%d %B, %Y %I:%M %p") %></td> 
                                         
                                 <td>
-                                	<%if @s_no%2 == 0%>
+                                	<%#if @s_no%2 == 0%>
                                     <div class="action-btn">
                                         <a href="/admin/static_content/<%=static_page.id%>/edit" class="btn btn-sm btn-primary table-btn"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
                                     </div>
-                                    <%else%>
-                                    <div class="action-btn">
-                                        <a href="/admin/static_content/<%=static_page.id%>/edit" class="btn btn-sm btn-primary table-btn" disabled="true"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
-                                    </div>
-                                    <%end%>
+                                    <%#else%>
+                                        <!-- <div class="action-btn">
+                                            <a href="/admin/static_content/<%#=static_page.id%>/edit" class="btn btn-sm btn-primary table-btn" disabled="true"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                        </div>-->
+                                    <%#end%>
                                 </td>
                             </tr>
                         </tbody>

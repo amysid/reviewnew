@@ -16,15 +16,15 @@ class Admin::CategoriesController < ApplicationController
            flash[:notice] = @category.errors.full_messages.first
            render :new
         end
-  end
+  end   
 
   def add_category
-    # @detail = Detail.new
-    # @detail.image.build   
+     @sub_categories = SubCategory.new
+     @sub_categories.details.build           
   end
 
-  def create_category_details
-    binding.pry
+  def create_category_details 
+    # binding.pry
     @details = Detail.new(detail_params)
     if @details.save
        redirect_to admin_users_path
@@ -46,6 +46,6 @@ class Admin::CategoriesController < ApplicationController
   end
   def detail_params
     # detail_params[:detail] = detail_params[:image_attributes]["file"]
-    params.require(:detail).permit(:title, :description)
+    params.require(:detail).permit(:sub_category_type, details_attributes:[:sub_category_id, :title, :description]    )
   end
 end

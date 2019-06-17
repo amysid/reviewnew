@@ -66,7 +66,7 @@ class Admin::UsersController < Admin::AdminApplicationController
    def destroy
     if @user.destroy
       redirect_to  admin_users_path
-      flash[:notice] = 'This User Delete Successfully'
+      flash[:notice] = 'This User Deleted Successfully'
     else
       flash[:error] = @user.errors.full_messages.first
       redirect_to  admin_users_path

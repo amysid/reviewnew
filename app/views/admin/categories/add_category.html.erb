@@ -5,7 +5,7 @@
    </center>
 </section>
 <section class="content">
-  <%= form_for :detail, url:  create_category_details_admin_categories_path, method: :post, local: true do |f| %>
+  <%= nested_form_for @sub_category, url:  create_category_details_admin_categories_path, method: :post, local: true do |f| %>
   <div class="row">
      <div class="col-md-3">
      </div>
@@ -22,17 +22,17 @@
                       <%= f.select("sub_category_type", sub_category, {:include_blank => "sub_category_type"}) %>
                 </li>
             </ul>
-          
+          <%= f.fields_for :details do |d| %>
            <ul class="list-group list-group-unbordered">
                <li class="list-group-item">
                   <b>Title</b>
-                      <%= f.text_field :title, class: 'form-control', autofocus: true, placeholder: "title" %>
+                      <%= d.text_field :title, class: 'form-control', autofocus: true, placeholder: "title" %>
 				</li>
             </ul>
             <ul class="list-group list-group-unbordered">
                <li class="list-group-item">
                   <b>Description</b>
-                      <%= f.cktext_area :description, class: 'form-control', autofocus: true, placeholder: "title" %>
+                      <%= d.cktext_area :description, class: 'form-control', autofocus: true, placeholder: "title" %>
 				</li>
             </ul>
              <ul class="list-group list-group-unbordered">
@@ -45,8 +45,10 @@
   						<%end%>
   					</label>
 				</li>
+        <%end%>
             </ul>
             
+     <%= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :details ,id: "add_product_descriptions" %>
             <div class="form-group has-feedback">
                       <%= f.submit "Submit" , class: "btn btn-success btn-block"%>
                     </div>
