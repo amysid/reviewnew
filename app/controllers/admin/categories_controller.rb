@@ -3,6 +3,7 @@ class Admin::CategoriesController < ApplicationController
  layout 'admin_lte_2'
 
 	def new
+    # binding.pry
       @category = Category.new
       @category.sub_categories.build		
 	end
@@ -19,12 +20,13 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def add_category
-     @sub_categories = SubCategory.new
-     @sub_categories.details.build           
+    @category = Category.new
+    sub_category =  @category.sub_categories.build
+    sub_category.details.build           
   end
 
   def create_category_details 
-    # binding.pry
+    binding.pry
     @details = Detail.new(detail_params)
     if @details.save
        redirect_to admin_users_path
@@ -46,6 +48,6 @@ class Admin::CategoriesController < ApplicationController
   end
   def detail_params
     # detail_params[:detail] = detail_params[:image_attributes]["file"]
-    params.require(:detail).permit(:sub_category_type, details_attributes:[:sub_category_id, :title, :description]    )
+    params.require(:sub_category).permit(details_attributes:[:sub_category_id, :title, :description])
   end
 end
