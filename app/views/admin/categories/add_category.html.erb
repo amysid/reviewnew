@@ -7,7 +7,7 @@
    </center>
 </section>
 <section class="content">
-  <%= nested_form_for :sub_category, url:  create_category_details_admin_categories_path, method: :post, local: true do |f| %>
+  <%= nested_form_for :sub_category, url: create_category_details_admin_categories_path, method: :post, local: true do |f| %>
   <div class="row">
      <div class="col-md-3">
      </div>
@@ -41,16 +41,16 @@
                <li class="list-group-item">
                   <b>Image:</b>
                     <label for="file-upload" class="custom-file-upload ">
-						<%#= f.fields_for :image_attributes do |m| %>
+						<%= f.fields_for :image_attributes do |m| %>
    							<img src='<%="/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
-							<%= d.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-  						<%#end%>
+							<%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+  						<%end%>
   					</label>
 				</li>
         <%end%>
             </ul>
             
-     <%= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :details_attributes %>
+     <%#= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :details %>
             <div class="form-group has-feedback">
                       <%= f.submit "Submit" , class: "btn btn-success btn-block"%>
                     </div>

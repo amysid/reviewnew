@@ -20,14 +20,15 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def add_category
-    @category = Category.new
-    sub_category =  @category.sub_categories.build
-    sub_category.details.build           
+     #binding.pry
+     #@sub_categories = SubCategory.new
+     #@sub_categories.details.build           
   end
 
   def create_category_details 
     binding.pry
-    @details = Detail.new(detail_params)
+    @contact = Detail.new(detail_params)
+    @contact.details.build
     if @details.save
        redirect_to admin_users_path
        flash[:alert] = "Category Details Created Successfully"
