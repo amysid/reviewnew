@@ -20,15 +20,14 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def add_category
-     #binding.pry
-     #@sub_categories = SubCategory.new
-     #@sub_categories.details.build           
+     # binding.pry
+     @sub_categories = SubCategory.new
+     @sub_categories.details.build           
   end
 
   def create_category_details 
     binding.pry
-    @contact = Detail.new(detail_params)
-    @contact.details.build
+    @details = Detail.new(detail_params)
     if @details.save
        redirect_to admin_users_path
        flash[:alert] = "Category Details Created Successfully"
@@ -49,6 +48,6 @@ class Admin::CategoriesController < ApplicationController
   end
   def detail_params
     # detail_params[:detail] = detail_params[:image_attributes]["file"]
-    params.require(:sub_category).permit(details_attributes:[:sub_category_id, :title, :description])
+    params.require(:detail).permit(:title, :description, :image_attributes[:id, :file, :_destroy])
   end
 end
