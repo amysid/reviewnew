@@ -3,7 +3,12 @@ class Admin::UsersController < Admin::AdminApplicationController
  layout 'admin_lte_2'
  
     def index
-  	   # binding.pry
+  	   binding.pry
+       # if params[:search][:status].present?
+       #    @user = User.where(user_type: params[:search][:status])
+       #     redirect_to admin_users_path 
+       #     flash[:notice] = "User Type Search Successfull"
+       #  else
         @sr_no = 0
         @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
         @users_count = @search.count
@@ -12,8 +17,10 @@ class Admin::UsersController < Admin::AdminApplicationController
            format.html
            format.csv { send_data @users.to_csv }
         end
+
         @users = @users.decorate
         #@users = user_search if params[:search].present?
+      # end
     end
 
     def show
