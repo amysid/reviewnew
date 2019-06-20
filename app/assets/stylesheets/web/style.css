@@ -57,8 +57,17 @@ a, img {
 	color: #fff;
 }
 .btn-success {
-	background: #079f11;
+	background: #ff961b;
 	text-decoration: none !important;
+	border: none;
+	border-radius: 0px;
+	width: 100%;
+	text-transform: uppercase;
+	line-height: 65px;
+	font-size: 22px;
+	min-height: 65px;
+	padding: 0px;
+	font-weight: 500;
 }
 .text-success {
 	color: #079f11;
@@ -194,6 +203,8 @@ input[type=radio]:checked ~ .custom-check::before {
 .alert {
 	border-radius: 0px;
 	text-align: center;
+	padding: inherit;
+	margin-top: -21px;
 }
 .alert-danger {
     color: #ed1b33;
@@ -248,10 +259,8 @@ input[type=radio]:checked ~ .custom-check::before {
 	background: #d20906;	
 }
 .header {
-	position: fixed;
-	min-width: 100%;
-	top:0px;
 	background: #2866f1!important;
+	position: relative;
 }
 .header:before {
 	position: absolute;
@@ -320,7 +329,7 @@ input[type=radio]:checked ~ .custom-check::before {
 .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link.active {
 	background: #ff961b;
 	color: #fff;
-	border: #ff961b;
+	border: 1px solid #ff961b;
 }
 .navbar-light .navbar-nav .nav-link.btn.active, .navbar-light .navbar-nav .btn-outline-dark:not(:disabled):not(.disabled).active, .navbar-light .navbar-nav .btn-outline-dark:not(:disabled):not(.disabled):active, .navbar-light .navbar-nav .show>.btn-outline-dark.dropdown-toggle {
 	background: #d62725;
@@ -738,9 +747,9 @@ input[type=radio]:checked ~ .custom-check::before {
 .banner.inner-banner {
 	height: 65px !important;
 }
-.page-wrapper {
+/*.page-wrapper {
 	padding: 20px 0px 30px 0px;
-}
+}*/
 h5.page-title {
 	font-weight: bold;
 	font-size: 18px;
@@ -755,11 +764,12 @@ h5.page-title {
 	padding: 80px 30px;
 	position: relative;
 	color: #fff;
-	background: url(../images/login-content-bg.png);
+	background: url(/assets/login-content-bg.png);
 	height: 100%;
 	background-repeat: no-repeat;
 	background-position: bottom right;
 	background-size: cover;
+	/*margin-left: -300px;*/
 }
 /*.login-content-box:before {
 	content: '';
@@ -774,7 +784,7 @@ h5.page-title {
 	background-size: cover;
 }*/
 .register-content-box {
-	background-image: url(../images/register-content-bg.jpg);
+	background-image: url(/assets/register-content-bg.jpg);
 }
 .login-text {
 	position: relative;
@@ -799,15 +809,16 @@ h5.page-title {
 	border-bottom-right-radius: 8px!important;
 }
 .login-box .form-control {
-	height: 40px;
-	border-radius: 0px !important;
-	font-size: 13px;
+	padding: 0px 30px;
+	height: 60px;
+	border-radius: 15px !important;
+	font-size: 18px;
 	margin-bottom: 0px;
-	border-color: #d2d2d2;
-	color: #7c7979;
+	border: 2px solid #bbbbbb;
+	color: #969696;
 }
 .login-box .form-control:focus {
-	border-color: #151c6a
+	border-color: #bbb;
 }
 /* input.email {
 	background: url(../images/email.png);
@@ -889,7 +900,6 @@ input.phone {
 	border-radius: 0rem;
 }
 .login-form-box .btn {
-	width: 140px;
 }
 
 
@@ -2018,6 +2028,23 @@ body.after-login {
 	}
 }
 @media (max-width: 767.98px) {
+a.btn.btn-success.blue {
+	line-height: 0px!important;
+    padding-left: 5px!important;
+}
+.btn-success {
+	line-height: 44px!important;
+    padding: 10px 10px!important;
+    font-size: 16px!important;
+}
+	p.fotter-para {
+    text-align: justify;
+    padding: 0px 20px;
+    margin-bottom: 10px;
+}
+.form-group a.btn.btn-success.blue img {
+    margin-right: 8px!important;
+}
 	.leftbar-menu {
 		position: absolute;
 		height: 100%;
@@ -2206,7 +2233,6 @@ body.after-login {
 		font-size: 14px;
 	}
 	.footer {
-		padding: 15px 0px;
 	}
 	.footer, .footer-social {
 		text-align: center;
@@ -2410,14 +2436,11 @@ ul.navbar-nav.align-items-center li.nav-item input[type="search"] {
     margin: 0 auto;
 }
 a.nav-link.btn.btn-outline {
-    line-height: 35px;
-    padding: 0px 0px;
     color: #fff;
     font-weight: 400;
     border: 1px solid #fff;
     border-radius: 0px;
-    font-size: 15px;
-    max-height: 40px;
+        font-size: 15px;
 }
 a.nav-link.btn.btn-outline-dark {
     color: #ffffff;
@@ -2426,9 +2449,6 @@ a.nav-link.btn.btn-outline-dark {
     font-weight: 400;
     background: #ff961b;
     font-size: 15px;
-    max-height: 40px;
-    line-height: 5px;
-    min-height: 42px;
 }
 li.nav-item.btn-items a.nav-link.btn.btn-outline {
     margin-right: 20px;
@@ -2509,6 +2529,94 @@ footer.footer .container-1440 .row {
 .row.align-items-intial {
     align-items: initial!important;
 }
+
+
+
+/*****************New Css***********************************/
+.right-heading {
+    padding: 0px 0px 25px 0px;
+    position: relative;
+}
+.right-heading:after {
+    content: '';
+    border: 1px solid #e8e8e8;
+    position: absolute;
+    bottom: 0px;
+    width: 649px;
+    left: -30px;
+}
+form.login-form {
+    margin-top: 30px;
+}
+.btn-success:hover {
+    color: #fff;
+    background-color: #f58400;
+}
+a.btn.btn-success.blue {
+    background: #3a589b;
+}
+a.btn.btn-success.blue:hover {
+    background: #3558a6;
+}
+.form-group.mb-0.mt30 {
+    margin-top: 30px;
+}
+.form-group a.btn.btn-success.blue img {
+    margin-right: 20px;
+}
+a.btn.btn-success.blue {
+    text-align: left;
+    padding-left: 60px;
+}
+.orline {
+	    margin-top: 30px;
+    position: relative;
+}
+hr.horizontal-line {
+    border-top: 1px solid #929292;
+}
+.orline span {
+    position: absolute;
+    top: -19px;
+    color: #353535;
+    left: 50%;
+    background: #fff;
+    padding: 8px;
+    border-radius: 30px;
+    font-size: 17px;
+}
+p.text-center.mt20 {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #353535;
+}
+a.yellow-text {
+    color: #ff961b!important;
+    text-decoration: underline!important;
+}
+a.yellow-text:hover{
+	cursor: pointer;
+}
+.custom-design a {
+    color: #194cbe!important;
+    text-decoration: underline!important;
+    font-size: 16px!important;
+}
+.custom-design a:hover{
+	cursor: pointer;
+}
+.custom-design .check {
+    display: flex;
+    font-size: 16px;
+    color: #353535;
+    align-items: center;
+}
+.custom-design .check input[type="checkbox"] {
+    zoom: 1.5;
+}
+.custom-design {
+    margin: 28px 0px;
+}
 nav#main-nav{
-	margin-bottom: 0px;
+margin-bottom: -20px;
 }

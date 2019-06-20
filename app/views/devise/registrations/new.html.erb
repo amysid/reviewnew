@@ -6,17 +6,17 @@
 
   <div class="field">
     <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true %>
+    <%= f.text_field :name, autofocus: true, placeholder: "Username" %>
   </div>
   <div class="field">
     <%= f.label :monile_no%><br/>
     <%= f.select("c_code", all_iso_codes, {:include_blank => "country code"}) %>
-    <%= f.text_field :mobile_no%>
+    <%= f.text_field :mobile_no, placeholder: "Mobile Number" %>
   </div>
 
   <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Email Address" %>
   </div>
 
   <div class="field">
@@ -24,13 +24,16 @@
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password" %>
+  </div><br>
+  <div class="field">
+      <%= recaptcha_tags %>
+  </div><br>
 
   <div class="actions">
     <%= f.submit "Sign up" %>

@@ -3,7 +3,7 @@ class Admin::UsersController < Admin::AdminApplicationController
  layout 'admin_lte_2'
  
     def index
-  	   binding.pry
+  	   # binding.pry
        # if params[:search][:status].present?
        #    @user = User.where(user_type: params[:search][:status])
        #     redirect_to admin_users_path 

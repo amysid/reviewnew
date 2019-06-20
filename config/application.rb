@@ -4,6 +4,8 @@ require 'csv'
 require  'roo-xls'
 require 'spreadsheet' 
 require 'rails/all'
+require 'recaptcha/rails'
+
 # require 'iconv'
 
 

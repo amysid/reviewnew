@@ -32,6 +32,7 @@ gem 'mini_magick', '~> 4.9', '>= 4.9.3'
 gem 'roo-xls'
 gem 'spreadsheet'
 gem "font-awesome-rails"
+gem "recaptcha"
 
 
 
