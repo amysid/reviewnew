@@ -12,13 +12,10 @@
   </head>
 
   <body>
-     <p class="notice"><%= notice %></p>
+      <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-      <%if current_user%>
-      <%= render "layouts/after_loginuser"%>
-       <%else%>
-      <%= render "layouts/web_header" %>
-       <%end%>  
-         <%= yield %>
+      <%= render "layouts/web_header"%>
+       <%= yield %>
+       <%= render "layouts/web_footer" %>
   </body>
 </html>

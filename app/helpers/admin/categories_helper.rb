@@ -1,7 +1,7 @@
 module Admin::CategoriesHelper
 	def category
 		# binding.pry
-		Category.all.pluck("category_type")
+		Category.all.pluck("category_name")
 	end
 
 	def sub_category

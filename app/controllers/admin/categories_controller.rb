@@ -2,6 +2,15 @@ class Admin::CategoriesController < ApplicationController
  before_action :find_category, only: [:show,:edit,:update,:status,:destroy]
  layout 'admin_lte_2'
 
+
+
+
+
+  def index
+   @categories = Category.all
+  end
+  
+
 	def new
     # binding.pry
       @category = Category.new
