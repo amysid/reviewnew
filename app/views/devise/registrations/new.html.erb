@@ -1,43 +1,72 @@
-<h2>Sign up</h2>
+<%= render "layouts/web_header" %>
+   
+    <div class="page-wrapper">
+      <div class="login-page">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 col-lg-10 offset-lg-1">
+              <div class="login-box">
+                <div class="row no-gutters row-eq-height">
+                  <div class="col-md-5 col-xl-5">
+                    <div class="login-content-box">
+                      <div class="login-text">
+                        <h3>Welcome</h3>
+                        <h2>to website</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                          laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-7">
+                    <div class="login-form-box">
+                      <div class="right-heading">
+                        <h2>Join Us</h2>
+                      </div>
+                      <form name="" action="" class="login-form">
+                        <div class="form-group">
+                          <input type="text" class="form-control" id="" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                          <input type="email" class="form-control" id="" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                          <input type="Password" class="form-control" id="" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                          <input type="Password" class="form-control" id="" placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                          <div class="captcha">
+                            <img src="images/captcha.jpg" class="w-100" alt="">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <p class="mb-0">On Clicking Register, you indicate that you have read and understand our
+                            <a class="yellow-text" href="#">Privacy Policy</a> & <a class="yellow-text" href="#">Terms of
+                              Use</a> add represent that you are at least 13 year of age.</p>
+                        </div>
+                        <div class="form-group text-center mb-0">
+                          <a href="#" class="btn btn-success">Register</a>
+                        </div>
+                        <div class="orline">
+                          <hr class="horizontal-line"><span>OR</span>
+                        </div>
+                        <div class="form-group text-center1 mb-0 mt30">
+                          <a href="login.html" class="btn btn-success blue"><img src="images/facebook.png">continue with
+                            facebook</a>
+                        </div>
+                        <p class="text-center mt20"> Already a member? <a class="yellow-text">Login</a></p>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, placeholder: "Username" %>
-  </div>
-  <div class="field">
-    <%= f.label :monile_no%><br/>
-    <%= f.select("c_code", all_iso_codes, {:include_blank => "country code"}) %>
-    <%= f.text_field :mobile_no, placeholder: "Mobile Number" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email", placeholder: "Email Address" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "Password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "Confirm Password" %>
-  </div><br>
-  <div class="field">
-      <%= recaptcha_tags %>
-  </div><br>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+<%= render "layouts/web_footer" %>
+    
