@@ -117,7 +117,7 @@ body {
 	font-size: 15px;
 	font-family: 'Gotham';
 	background: #fefeff;
-    margin-top: -58px;
+    /*margin-top: -58px;*/
 }
 a, img {
 	-webkit-transition: all 0.4s ease-in-out;
@@ -645,3 +645,33 @@ a.yellow-text:hover{
 .bigtitle {
 	font-size: 18px;
 }
+/*flash*/
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f00f0f;
+    border-color: #eed3d7;
+    color: #f2eded;
+    text-align: left;
+    /*font-size: 20px;*/
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #2d8a07;
+    border-color: #d6e9c6;
+    color: #f2f7f2;
+    text-align: left;
+    /*font-size: 20px;*/
+ }

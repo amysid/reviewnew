@@ -1,4 +1,5 @@
-    <div class="page-wrapper">
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+   <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
           <div class="row">
@@ -21,7 +22,8 @@
                       <div class="right-heading">
                         <h2>Join Us</h2>
                       </div>
-                      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                      <%= form_for(resource, as: resource_name, url: registration_path(resource_name),:html => {:id => "registration_form"}) do |f| %>
+                      <%#= render "devise/shared/error_messages", resource: resource %>
                         <div class="form-group">
                           <!-- <input type="text" class="form-control" id="" placeholder="Username"> -->
                            <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Username" %>
@@ -70,3 +72,31 @@
         </div>
       </div>
     </div>
+<script type="text/javascript">
+$(document).ready(function(){
+$("#registration_form").validate({
+    rules: {
+      "user[name]":{
+        required: true,
+        minlength: 4,
+        maxlength: 28
+      },
+      "user[email]":{
+        required: true
+      },
+      "user[password]":{
+        required: true,
+        minlength: 8,
+        maxlength: 16
+      },
+      "user[password_confirmation]":{
+        required: true,
+        equalTo: "#user_password",
+        minlength: 8,
+        maxlength: 16
+      }
+    }   
+  });
+  });
+
+</script>

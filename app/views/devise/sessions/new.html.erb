@@ -25,7 +25,7 @@
 <%#= render "layouts/web_header" %>
 <%#= render "layouts/web_header" %>
 
-
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
@@ -47,10 +47,10 @@
                        <div class="right-heading">
                       <h2>Login</h2>
                     </div>
-                      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                      <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:id => "login_form"}) do |f| %>
                         <div class="form-group">
                           <!-- <input type="email" class="form-control email" id="l_emil" placeholder="Email"> -->
-                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control email", placeholder: "Email" %>
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control email", placeholder: "Email", required: "true" %>
                         </div>
                         <div class="form-group">
                           <!-- <input type="Password" class="form-control password" id="l_password" placeholder="Password"> -->
@@ -89,3 +89,22 @@
     </div>
 <%#= render "devise/shared/links" %>
 
+<script type="text/javascript">
+$(document).ready(function(){
+$("#login_form").validate({
+    rules: {
+      "user[email]":{
+        required: true,
+        minlength: 5,
+        maxlength: 50
+      },
+      "user[password]":{
+        required: true,
+        minlength: 8,
+        maxlength: 16
+      }
+    }   
+  });
+  });
+
+</script>
