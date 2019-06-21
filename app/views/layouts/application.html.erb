@@ -14,6 +14,8 @@
   <body>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
-         <%= yield %>
+      <%= render "layouts/web_header"%>
+       <%= yield %>
+       <%= render "layouts/web_footer" %>
   </body>
 </html>

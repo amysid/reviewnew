@@ -28,16 +28,23 @@ Rails.application.routes.draw do
     resources :static_content
     resources :categories do
       collection do
+        post :edit_sub_category
+        post :create_sub_category
+        post :update_sub_category
         get :add_category
         post :create_category_details
       end
     end
-    # root "users#index"
-    # get 'users/index'
-    # get 'users/show'
-  
-   get 'homes/index', as: "home_index"
+      get 'homes/index', as: "home_index"
   end
+   resources :homes do
+      collection do
+        get :about_us
+        get :faq
+        get :privacy_policy
+        get :term_condition
+      end
+    end
     root :to =>  "web/users#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

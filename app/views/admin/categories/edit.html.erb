@@ -1,0 +1,209 @@
+<div class="login-part">
+  <div class="clearfix">
+    <div class="global-heading user-head">Country Management</div>
+    <div class="aduser-btn"><a href="/admin/countries" class="btn btn-add"> << Back to list </a></div>
+  </div>
+  <div class="country-manage-tab">
+    <div class="tab-section">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#country">Country</a></li>
+        <li><a data-toggle="tab" href="#state" class="state-tab">State</a></li>
+      </ul>
+      <%= form_for :category, url: admin_category_path, method: :patch, html:  {id: "admin_edit_country"}  do |f| %>
+      <div class="tab-content">
+        <div id="country" class="tab-pane fade in active">
+          <div class="country-tab">
+            <div class="country_mng-form">
+                <div class="form-group">
+                  <label for="">Country Name<span class="required">*</span> </label>
+                  <%= f.text_field :category_name, :class => 'select-dropdown form-control' , :readonly => true %>
+                </div>
+         
+                <div class="form-group">
+                 
+                  <div class="form-add">
+                    <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <%end%>
+        <div id="state" class="tab-pane fade">
+          <div class="state-tab">
+            <div class="form-add">
+              <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#myModal" id="states">Add State</button>
+            </div>
+            <div class="table-responsive cus-table">
+              <table class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Sub Category</th>
+              
+                    <th colspan="3">Actions</th>
+                  </tr>
+                </thead>
+                <% @sub_category&.each do |m| %>
+                  <tbody>
+                    <tr>
+                      
+                      <td><%= m.try(:sub_category_name)%></td>
+                     
+
+                      <!-- <td></td> -->
+                  <td><div class="form-add" style="display:inline-block;">
+              <!-- <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#editModal" id="states1">Edit</button> -->
+
+            <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
+             
+             <div class="modal fade add-modal" id="editModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+        </div>
+        <div class="modal-body">
+          <div class="addbody text-left">
+           <%= form_for :sub_categories, url:  update_sub_category_admin_categories_path  do |f| %>
+
+
+                 <div class="form-group">
+                <label for="">Sub Category Name<span class="required">*</span> </label>
+                  <%= f.text_field :sub_category_name, class: "form-control custom-control",  placeholder: "Country Name"%>
+                 </div>
+         
+              <%= f.hidden_field :category_id, :value => params[:id] %>
+              <input type = "hidden" name = "state_id" value = "<%= m.id.to_i%>">
+              
+                </div>
+        </div>
+        <div class="modal-footer text-center">
+          <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+        </div>
+        <%end%>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+            </div> 
+           <%#= link_to 'Delete', destroy_state_admin_countries_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this state ?"},:class=>"btn btn-danger", method: :delete %>
+          </td>
+                    </tr>
+                  </tbody>
+                <%end%>
+              </table>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Modal -->
+  <div class="modal fade add-modal" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+        </div>
+        <div class="modal-body">
+          <div class="addbody">
+           <%= form_for :sub_categories, url:  create_sub_category_admin_categories_path  do |f| %>
+
+
+                 <div class="form-group">
+                <label for="">State Name<span class="required">*</span> </label>
+                   <%= f.text_field :sub_category_name, class: "form-control custom-control",  placeholder: "Sub Category Name"%>
+
+              </div>
+            
+              <%= f.hidden_field :category_id, :value => params[:id] %>
+           
+                </div>
+        </div>
+        <div class="modal-footer text-center">
+          <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+        </div>
+        <%end%>
+      </div>
+      
+    </div>
+  </div>
+
+  <script>
+$(document).ready(function() {
+     $("#admin_edit_country").validate({
+    rules: {
+      "country[country_name]": {
+        required: true,
+        maxlength: 35
+      },
+      "country[iso_code]": {
+        required: true,
+        minlength: 1,
+        maxlength: 3
+      },
+      
+      "country[tax_percentage]": {
+        required: true,
+        minlength: 1,
+        regxfloat: /^[+-]?\d+(\.\d+)?$/,
+        lessThanEqual: true
+      }
+    },
+    messages: {
+      "country[country_name]":{
+        required: "Please enter the country name.",
+        maxlength: "Maximum characters are 35."
+      },
+      "country[iso_code]": {
+        required: "Please enter the iso code.",
+        minlength: "Minimum character is 1.",
+        maxlength: "Maximum characters are 3."
+      },
+      
+      "country[tax_percentage]": {
+        required: "Please enter the tax percentage.",
+        minlength: "Minimum character is 1."
+      }
+    },
+    submitHandler: function(form) {
+      form.submit();
+    }
+   });
+$.validator.addMethod("regxfloat", function(value, element, regexpr) {          
+    return regexpr.test(value);
+}, "Invalid Format");
+   
+   $.validator.addMethod('lessThanEqual', function(value, element, param) {
+    if (this.optional(element)) return true;
+    var i = parseInt(value);
+    // var j = parseInt($(param).val());
+    return i <= 100;
+}, "The value must be less than or equal to {100}.");
+
+});
+
+</script>
+
+
+<!-- 
+<script>
+jQuery('#states1').click(function(){
+   var state1 = $(this).val();
+   alert(state1);
+});
+</script>
+
+
+ -->

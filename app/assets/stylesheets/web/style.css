@@ -117,6 +117,7 @@ body {
 	font-size: 15px;
 	font-family: 'Gotham';
 	background: #fefeff;
+    margin-top: -58px;
 }
 a, img {
 	-webkit-transition: all 0.4s ease-in-out;
@@ -333,7 +334,7 @@ a, img {
 	padding: 80px 30px;
 	position: relative;
 	color: #fff;
-	background: url(../images/login-content-bg.png);
+	background: url(/assets/login-content-bg.png);
 	height: 100%;
 	background-repeat: no-repeat;
 	background-position: bottom right;

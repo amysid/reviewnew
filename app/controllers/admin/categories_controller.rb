@@ -10,15 +10,18 @@ class Admin::CategoriesController < ApplicationController
    @categories = Category.all
   end
   
+  def destroy
+   @country = Country.find(params[:id])
+   @country.destroy
+   redirect_to admin_countries_path, notice: "Country  deleted successfully"
+  end
+
+
 
 	def new
-    # binding.pry
-      @category = Category.new
-      @category.sub_categories.build		
 	end
 
 	def create
-    # binding.pry
         @category = Category.create(category_params)
         if @category.save
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
@@ -28,35 +31,48 @@ class Admin::CategoriesController < ApplicationController
         end
   end   
 
-  def add_category
-     # binding.pry
-     @sub_categories = SubCategory.new
-     @sub_categories.details.build           
+  def edit
+    @sub_category = @category.sub_categories
   end
 
-  def create_category_details 
+  def update
     binding.pry
-    @details = Detail.new(detail_params)
-    if @details.save
-       redirect_to admin_users_path
-       flash[:alert] = "Category Details Created Successfully"
-    else
-      redirect_to admin_users_path
-      flash[:alert] = "Category Details Not Created Successfully"
-    end 
+  
+
+  end
+
+  def create_sub_category
+    binding.pry
+  end
+
+
+  def edit_sub_category
+    binding.pry
+  end
+
+  def update_sub_category
+   binding.pry
+  end
+  
+  def destroy_sub_category
+   binding.pry
+   
   end
 
 
   private
-  def find_category
-	     @category = Category.find_by(id: params[:id])
-	     redirect_to admin_categories_path unless @category
-  end
+
   def category_params
-	    params.require(:category).permit(:category_type, sub_categories_attributes: [:category_id, :sub_category_type, :_destroy])
+    params.require(:category).permit(:category_name)
   end
-  def detail_params
-    # detail_params[:detail] = detail_params[:image_attributes]["file"]
-    params.require(:detail).permit(:title, :description, :image_attributes[:id, :file, :_destroy])
+
+  def find_category
+	  @category = Category.find_by(id: params[:id])
+	  redirect_to admin_categories_path unless @category
   end
+
+  def sub_category_params
+   params.require(:sub_category).permit(:sub_category_name, :category_id)
+  end
+  
 end
