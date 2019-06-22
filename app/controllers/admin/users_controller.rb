@@ -1,4 +1,5 @@
 class Admin::UsersController < Admin::AdminApplicationController
+ before_action :authenticate_user!
  before_action :find_content, only: [:show,:edit,:update,:status,:destroy,:update_admin_profile]
  layout 'admin_lte_2'
  

@@ -1,4 +1,5 @@
 class Admin::StaticContentController < ApplicationController
+  before_action :authenticate_user!
 	before_action :find_content, only: [:show,:edit,:update,:status,:destroy]
     layout 'admin_lte_2'
 
