@@ -1,7 +1,7 @@
 <header class="header">
       <nav id="main-navbar" class="main-navbar navbar navbar-expand-lg bg-primary">
         <div class="headerTop">
-          <a class="navbar-brand" href="#"><img src="/assets/LOGO.png"></a>
+          <a class="navbar-brand" href="<%= root_path%>"><img src="/assets/LOGO.png"></a>
           <ul class="navbar-nav align-items-center">
             <li class="nav-item">
               <form class="header-search">
@@ -12,11 +12,11 @@
           </ul>
           <ul class="navbar-nav align-items-center">
             <%if current_user%>
-              <li class="nav-item user-item"><a class="" href="login.html"><span><%= current_user&.name%></span> <img src="<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>" alt=""> </a></li>
-            <li> <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link nav-link btn btn-outline-dark'  %>
+              <li class="nav-item user-item"><a class="" href="#"><span><%= current_user&.name%></span> <img src="<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>" alt=""> </a></li>
+            <li><a class="nav-link btn btn-theme" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>
               <!-- <a class="nav-link btn btn-outline-dark" href="<%=destroy_user_session_path(current_user)%>">Log Out</a> --></li>
             <%else%>
-            <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link nav-link btn btn-outline-dark mr-3'  %> 
+            <li><%= link_to "+ Join Us", new_user_registration_path, :class => 'navbar-link nav-link btn btn-outline-dark mr-3'  %> 
              </li>
             <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link nav-link btn btn-outline-dark'  %>
              </li>
@@ -42,6 +42,26 @@
           </ul>
         </div>
         <%end%>
+        <div class="modal logoutModal" id="logoutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content text-center">
+          <div class="modal-header">
+            <h5 class="modal-title">LOGOUT</h5>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button> -->
+          </div>
+          <div class="modal-body">
+            <p class="mt-4 bigtitle">Are you sure you want to Logout?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-light" data-dismiss="modal">No</button>
+            <button type="button" class="btn btn-theme"><%= link_to "Yes", destroy_user_session_path, method: :delete, :class => 'navbar-link', style: "color: white;"  %></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
       </nav>
 
     </header>

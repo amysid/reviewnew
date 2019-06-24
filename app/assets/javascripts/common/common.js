@@ -1,4 +1,4 @@
-//= require jquery
+// = require jquery3
 //= require rails-ujs
 //= require jquery-ui
 //= require ckeditor/init
