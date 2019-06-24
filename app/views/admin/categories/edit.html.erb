@@ -21,9 +21,11 @@
          
                 <div class="form-group">
                  
-                  <div class="form-add">
-                    <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
-                  </div>
+                 <!--  <div class="form-add">
+                    <%#= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+                  </div> -->
+              <div class=""><a href="/admin/categories" class="btn btn-add btn-primary btn-md "> << Back to list </a></div>
+                 
                 </div>
               </div>
             </div>
@@ -56,7 +58,7 @@
 
             <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
              
-             <div class="modal fade add-modal" id="editModal" role="dialog">
+             <div class="modal fade in add-modal" id="editModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
@@ -107,7 +109,7 @@
   </div>
 </div>
  <!-- Modal -->
-  <div class="modal fade add-modal" id="myModal" role="dialog">
+  <div class="modal fade in add-modal" id="myModal" role="dialog">
     <div class="modal-dialog">
      
       <!-- Modal content-->

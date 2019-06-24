@@ -12,9 +12,9 @@ class Admin::CategoriesController < ApplicationController
   end
   
   def destroy
-   @country = Country.find(params[:id])
-   @country.destroy
-   redirect_to admin_countries_path, notice: "Country  deleted successfully"
+   @category = Category.find(params[:id])
+   @category.destroy
+   redirect_to admin_categories_path, notice: "Category  deleted successfully"
   end
 
 
@@ -43,8 +43,26 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create_sub_category
-    binding.pry
+    sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
+    @category = Category.find( params[:sub_categories][:category_id])
+     
+    if sub_category.present?
+      flash[:notice] = "sub category already exists."
+      redirect_to admin_categories_path
+    else
+      if @category.sub_categories.create(sub_category_params)
+        flash[:notice] = "sub category created successfullly."
+        redirect_to admin_categories_path
+      else
+        flash[:notice] = "Unable to create sub category."
+        redirect_to new_admin_category_path
+      end
+    end
   end
+  
+   
+
+
 
 
   def edit_sub_category
@@ -56,8 +74,9 @@ class Admin::CategoriesController < ApplicationController
   end
   
   def destroy_sub_category
-   binding.pry
-   
+   @sub_category = SubCategory.find(params[:id])
+    @sub_category.destroy
+   redirect_to admin_categories_path, notice: "Sub Category  deleted successfully"
   end
 
 
@@ -68,12 +87,12 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def find_category
-	  @category = Category.find_by(id: params[:id])
+    @category = Category.find_by(id: params[:id])
 	  redirect_to admin_categories_path unless @category
   end
 
   def sub_category_params
-   params.require(:sub_category).permit(:sub_category_name, :category_id)
+   params.require(:sub_categories).permit(:sub_category_name, :category_id)
   end
   
 end
