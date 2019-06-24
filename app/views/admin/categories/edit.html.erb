@@ -1,21 +1,21 @@
 <div class="login-part">
   <div class="clearfix">
-    <div class="global-heading user-head">Country Management</div>
-    <div class="aduser-btn"><a href="/admin/countries" class="btn btn-add"> << Back to list </a></div>
+    <div class="global-heading user-head">Category Management</div>
+    <div class="aduser-btn"><a href="/admin/categories" class="btn btn-add"> << Back to list </a></div>
   </div>
   <div class="country-manage-tab">
     <div class="tab-section">
       <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#country">Country</a></li>
-        <li><a data-toggle="tab" href="#state" class="state-tab">State</a></li>
+        <li><a class="active" data-toggle="tab" href="#category">Category</a></li>
+        <li><a data-toggle="tab" href="#state" class="state-tab">Sub Category</a></li>
       </ul>
-      <%= form_for :category, url: admin_category_path, method: :patch, html:  {id: "admin_edit_country"}  do |f| %>
+      <%= form_for :category, url: admin_category_path, method: :patch, html:  {id: "admin_edit_category"}  do |f| %>
       <div class="tab-content">
-        <div id="country" class="tab-pane fade in active">
+        <div id="category" class="tab-pane fade in active">
           <div class="country-tab">
             <div class="country_mng-form">
                 <div class="form-group">
-                  <label for="">Country Name<span class="required">*</span> </label>
+                  <label for="">Category Name<span class="required">*</span> </label>
                   <%= f.text_field :category_name, :class => 'select-dropdown form-control' , :readonly => true %>
                 </div>
          
@@ -29,10 +29,10 @@
             </div>
           </div>
         <%end%>
-        <div id="state" class="tab-pane fade">
+        <div id="state" class="tab-pane in fade">
           <div class="state-tab">
             <div class="form-add">
-              <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#myModal" id="states">Add State</button>
+              <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#myModal" id="states">Add Sub Category</button>
             </div>
             <div class="table-responsive cus-table">
               <table class="table table-bordered table-striped">
@@ -72,7 +72,7 @@
 
                  <div class="form-group">
                 <label for="">Sub Category Name<span class="required">*</span> </label>
-                  <%= f.text_field :sub_category_name, class: "form-control custom-control",  placeholder: "Country Name"%>
+                  <%= f.text_field :sub_category_name, class: "form-control custom-control",  placeholder: "Category Name"%>
                  </div>
          
               <%= f.hidden_field :category_id, :value => params[:id] %>
@@ -109,7 +109,7 @@
  <!-- Modal -->
   <div class="modal fade add-modal" id="myModal" role="dialog">
     <div class="modal-dialog">
-    
+     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -122,7 +122,7 @@
 
 
                  <div class="form-group">
-                <label for="">State Name<span class="required">*</span> </label>
+                <label for="">Sub Category Name<span class="required">*</span> </label>
                    <%= f.text_field :sub_category_name, class: "form-control custom-control",  placeholder: "Sub Category Name"%>
 
               </div>
@@ -142,39 +142,16 @@
 
   <script>
 $(document).ready(function() {
-     $("#admin_edit_country").validate({
+     $("#admin_edit_category").validate({
     rules: {
       "country[country_name]": {
         required: true,
         maxlength: 35
-      },
-      "country[iso_code]": {
-        required: true,
-        minlength: 1,
-        maxlength: 3
-      },
-      
-      "country[tax_percentage]": {
-        required: true,
-        minlength: 1,
-        regxfloat: /^[+-]?\d+(\.\d+)?$/,
-        lessThanEqual: true
       }
-    },
     messages: {
       "country[country_name]":{
         required: "Please enter the country name.",
         maxlength: "Maximum characters are 35."
-      },
-      "country[iso_code]": {
-        required: "Please enter the iso code.",
-        minlength: "Minimum character is 1.",
-        maxlength: "Maximum characters are 3."
-      },
-      
-      "country[tax_percentage]": {
-        required: "Please enter the tax percentage.",
-        minlength: "Minimum character is 1."
       }
     },
     submitHandler: function(form) {
