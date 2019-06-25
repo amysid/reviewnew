@@ -8,6 +8,7 @@ class Admin::CategoriesController < ApplicationController
 
 
   def index
+    @s_no = 0
    @categories = Category.all
   end
   
@@ -23,6 +24,11 @@ class Admin::CategoriesController < ApplicationController
 	end
 
 	def create
+       category = Category.where(category_name: params[:category][:category_name])
+       if category.present?
+        flash[:notice] = "Category already exists"
+        redirect_to admin_categories_path
+       else
         @category = Category.create(category_params)
         if @category.save
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
@@ -30,6 +36,7 @@ class Admin::CategoriesController < ApplicationController
            flash[:notice] = @category.errors.full_messages.first
            render :new
         end
+      end
   end   
 
   def edit
@@ -37,7 +44,6 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def update
-    binding.pry
   
 
   end
