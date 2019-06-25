@@ -12,7 +12,7 @@
           </ul>
           <ul class="navbar-nav align-items-center">
             <%if current_user%>
-              <li class="nav-item user-item"><a class="" href="#"><span><%= current_user&.name%></span> <img src="<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>" alt=""> </a></li>
+              <li class="nav-item user-item"><a class="" href="/web/users/<%= current_user.id %>/user_profile"><span><%= current_user&.name%></span> <img src="<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_no_image.png" %>" alt=""> </a></li>
             <li><a class="nav-link btn btn-theme" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>
               <!-- <a class="nav-link btn btn-outline-dark" href="<%=destroy_user_session_path(current_user)%>">Log Out</a> --></li>
             <%else%>

@@ -3,6 +3,8 @@ class HomesController < ApplicationController
     end
 
     def faq
+    	# binding.pry
+    	@faqs = Faq.all
     end
 
     def privacy_policy

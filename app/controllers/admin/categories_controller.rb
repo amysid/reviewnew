@@ -8,9 +8,19 @@ class Admin::CategoriesController < ApplicationController
 
 
   def index
+    # binding.pry
     @s_no = 0
-   @categories = Category.all
+    if params[:search].present?
+       @categories = Category.where(category_name: params[:search])
+       redirect_to admin_categories_path
+       flash[:notice] = "Search Successfully"
+    else
+       @categories = Category.all
+       # flash[:notice] = "Search not successfullly"
+    end
   end
+
+  
   
   def destroy
    @category = Category.find(params[:id])

@@ -1,0 +1,118 @@
+<div class="page-wrapper">
+      <div class="container home-wrap">
+      	<%#= form_with model: :user, url:  local: true do |f|%>
+        <div class="feedback-row">
+          <h2 class="widget-title">GIVE US FEEDBACK</h2>
+          <div class="form form-feedback">
+            <div class="form-group">
+              <label>Please share your thoughts with us.</label>
+              <textarea class="form-control"></textarea>
+            </div>
+            <div class="form-group text-center">
+              <button class="btn btn-theme">SEND</button>
+            </div>
+          </div>
+        </div>
+        <%#end%>
+        <h2 class="titile-light">You may also like:</h2>
+        <div class="custom-slider">
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="/assets/slide1.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">Marta Kauffman</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="/assets/slide2.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">The Guardian</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="/assets/slide3.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">Business Inside</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>76%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="images/contact/slide1.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">ITTEFAQ</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+    $('.custom-slider').slick({
+      dots: false,
+      infinite: true,
+      autoplay: true,
+      speed: 300,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+    });
+
+  </script>

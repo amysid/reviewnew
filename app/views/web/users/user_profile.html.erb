@@ -1,0 +1,341 @@
+<div class="page-wrapper">
+      <div class="container home-wrap">
+        <div class="profil-row">
+          <div class="user-profile">
+            <div class="img-container"><img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /></div>
+            <h4><%=current_user.name %></h4>
+          </div>
+          <div class="user-detail">
+            <div class="ratings">
+              <h3 class="">57</h3>
+              <span>Ratings</span>
+            </div>
+            <div class="reviews">
+              <h3 class="">57</h3>
+              <span>Reviews</span>
+            </div>
+            <div class="profil-btn">
+              <%= link_to "Account Setting", edit_user_registration_path, class: "btn btn-theme" %>
+              <!-- <button class="btn btn-theme">Account Settings</button> -->
+            </div>
+          </div>
+        </div>
+        <div class="myscore-row">
+          <h2 class="main-title">My Score</h2>
+          <nav>
+            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
+              <a class="nav-item nav-link active" data-toggle="pill" href="#nav-movies" role="tab">Movies</a>
+              <a class="nav-item nav-link" data-toggle="pill" href="#nav-game" role="tab">Game</a>
+              <a class="nav-item nav-link" data-toggle="pill" href="#nav-tv" role="tab">TV</a>
+              <a class="nav-item nav-link" data-toggle="pill" href="#nav-music" role="tab">Music</a>
+            </div>
+          </nav>
+          <div class="tab-content" id="tabScore">
+            <div class="tab-pane fade show active" id="nav-movies" role="tabpanel">
+              <div class="row small">
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-game" role="tabpanel">
+              <div class="row small">
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-tv" role="tabpanel">
+              <div class="row small">
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="nav-music" role="tabpanel">
+              <div class="row small">
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>Boyhood</h4>
+                        <span>June 12, 2019</span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
+                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
+                        of type and scrambled it to make a type specimen book.</span></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

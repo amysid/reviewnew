@@ -30,6 +30,16 @@ class ApplicationController < ActionController::Base
        end
     end
 
+    def after_resetting_password_path_for(resource)
+   #super(resource)
+   new_user_session_path if is_navigational_format?
+ end
+
+ # The path used after sending reset password instructions
+  def after_sending_reset_password_instructions_path_for(resource_name)
+   super(resource_name)
+  end
+
     def banned?
       if current_user.present? && !current_user.status?
         sign_out current_user

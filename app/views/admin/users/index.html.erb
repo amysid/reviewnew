@@ -81,10 +81,12 @@
         </div>
     </div>
     <% end %>
-    <%= form_tag import_admin_users_path, multipart: true, id: "controls-form" do %>
-    <%= file_field_tag :file, id: "fileinput", accept: ".csv", class:"margin-top-60" %>
-    <%= submit_tag "Import", class:"btn btn-success margin-top-5" %>
-    <% end %>
+    <!--Export CSV-->
+    <%#= form_tag import_admin_users_path, multipart: true, id: "controls-form" do %>
+    <%#= file_field_tag :file, id: "fileinput", accept: ".csv", class:"margin-top-60" %>
+    <%#= submit_tag "Import", class:"btn btn-success margin-top-5" %>
+    <%# end %>
+    <!--Export CSV code finish-->
 
     <div class="box-body table-responsive no-padding">
         <table class="table table-hover">
@@ -94,7 +96,7 @@
                     <th>Name</th>
                     <th>User Type</th>
                     <th>Email-id</th>
-                    <th>Phone No.</th>
+                    <!-- <th>Phone No.</th> -->
                     <th>Registration date</th>
                     <th>Status</th>
                     <th>Actions</th>
@@ -114,9 +116,9 @@
                     <td>
                         <%= user&.email %>
                     </td>
-                    <td>
-                        <%=user&.c_code%> <%= user&.mobile_no %>
-                    </td>
+                    <!-- <td>
+                        <%#=user&.c_code%> <%#= user&.mobile_no %>
+                    </td> -->
                     <td>
                         <%= user&.created_at %>
                     </td>

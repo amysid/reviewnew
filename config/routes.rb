@@ -13,7 +13,11 @@ Rails.application.routes.draw do
       get :reset_password
       get :reset_password_confirmation
     end
-    end 
+    member do
+      get :user_profile
+    end
+  
+end 
    # root "users#index"
     # get 'users/detail'
   end
@@ -50,6 +54,8 @@ Rails.application.routes.draw do
         get :faq
         get :privacy_policy
         get :term_condition
+        get :feedback
+        get :contact_us
       end
     end
     root :to =>  "web/users#index"

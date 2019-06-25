@@ -27,7 +27,7 @@
            <ul class="list-group list-group-unbordered">
                <li class="list-group-item">
                   <b>Name</b>
-                     <p class="pull-right">
+                     <p class="pull-right hello">
                        <%= @user&.name&.capitalize%>
                      </p>
                </li>
@@ -46,8 +46,8 @@
                
                <li class="list-group-item">
                    <b>Mobile No.</b>
-                   <p class="pull-right">
-                   <%= @user&.mobile_no%>
+                   <p class="pull-right hello">
+                   <%= @user&.mobile_no, class: "hello"%>
                       <%#= @transaction&.created_at.strftime("%d/%m/%Y")%>
                    </p>
                </li>
@@ -62,4 +62,8 @@
  </div>
 </section>
 
-                    
+<style type="text/css">
+  .hello{
+    margin-top: -8px;
+  }
+</style>                    
