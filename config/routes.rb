@@ -35,6 +35,9 @@ Rails.application.routes.draw do
     resources :static_content
     resources :categories do
       collection do
+        post :edit_sub_category
+        post :create_sub_category
+        post :update_sub_category
         get :add_category
         post :create_category_details
       end

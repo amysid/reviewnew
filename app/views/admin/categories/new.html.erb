@@ -1,70 +1,104 @@
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<section class="content-header">
-  <center>
-    <h1><b>Add Categories</b></h1>
-      <p class="box box-info"></p>
-   </center>
-</section>
-<section class="content">
-  <%= nested_form_for @category, url:  admin_categories_path, method: :post, local: true do |f| %>
-  <div class="row">
-     <div class="col-md-3">
-      <%= link_to "Add Details", add_category_admin_categories_path %>
-     </div>
-     <div class="col-md-6">
-      <div class="box box">
-         <div class="box-body box-profile">
-          
-           <ul class="list-group list-group-unbordered">
-               <li class="list-group-item">
-                  <b>Category</b>
-                      <%= f.text_field :category_name, class: 'form-control', autofocus: true, placeholder: "category" %>
-
-               </li>
-               <%= f.fields_for :sub_categories do |sub| %>
-               <li class="list-group-item">
-                   <b>Sub Category</b>
-                    <%= sub.text_field :sub_category_type, class: 'form-control', autofocus: true, placeholder: "sub_category" %>
-                        
-
-
-               </li>
-              <%end%>
-                    <%#= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>Add Sub-Category'.html_safe, :sub_categories ,id: "add_sub_category"%> 
-
-                     <%= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :sub_categories ,id: "add_product_descriptions" %>
-                       
-                     <%#= f.link_to_remove '<i class="fa fa-times mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :sub_categories ,id: "add_product_descriptions" %>
-
-              <p><%#= f.link_to_add "Add a task", :sub_categories %></p>
-             
-            </ul>
-            <div class="form-group has-feedback">
-                      <%= f.submit "Submit" , class: "btn btn-success btn-block"%>
-                    </div>
-          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+<div class="login-part">
+	<div class="clearfix">
+	  <div class="global-heading user-head">Category Management</div>
+	  <div class="aduser-btn"><a href="/admin/categories" class="btn btn-add"> << Back to list </a></div>
+	 </div>
+  <div class="login-detail createpro-detail1">
+    <!-- <form class="form-common"> -->
+    <%= form_for :category, url: admin_categories_path, html:  {id: "admin_category"}  do |f| %>
+   
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="category_mng-form">
+            <div class="form-group">
+               <label for="">Category Name<span class="required">*</span> </label>
+               <%= f.text_field :category_name, class: "form-control custom-control",  placeholder: "Category Name"%>
+            </div>
+            
+            <div class="form-group">
+            	
+              <div class="form-add">
+                <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-   </div>
-  <div class="col-md-3">
+    <% end %>
+    <!-- </form> -->
   </div>
- </div>
- <%end%>
-</section>
- 
-<script type="text/javascript">
-  
-	//$('#add_sub_category').on('click',function(){
-       // alert(!($('.media_contnt').length < 8));
-      // if (!($('input:hidden[name^="campaign[products_attributes][0][medias_attributes]["][id$="_destroy"][value="false"]').length < 7)){
-         //$('#add_sub_category').css('display','none');
-       //});
-     
-         // console.log($('.media_contnt').length)    
-    $('form').on 'click', '.remove_fields', (event)
-    $(this).prev('input[type=hidden]').val('1')
-    $(this).closest('fieldset').hide()
-    event.preventDefault()
+</div>
 
-</script>>
+
+<script>
+$(document).ready(function() {
+     $("#admin_category").validate({
+    rules: {
+      "category[category_name]": {
+        required: true
+        
+      }
+ 
+
+
+    },
+    messages: {
+      "category[category_name]":{
+        required: "Please select the category name.",
+        maxlength: "Maximum characters are 35."
+      }
+    },
+    submitHandler: function(form) {
+      form.submit();
+    }
+   });
+   
+   $.validator.addMethod("regxfloat", function(value, element, regexpr) {          
+    return regexpr.test(value);
+}, "Invalid Format");
+
+   $.validator.addMethod('lessThanEqual', function(value, element, param) {
+    if (this.optional(element)) return true;
+    var i = parseInt(value);
+    // var j = parseInt($(param).val());
+    return i <= 100;
+}, "The value must be less than or equal to {100}.");
+
+});
+
+</script>
+
+<script>
+   // jQuery(document).change('#category_category_name', function(e){
+    
+  
+    $("#category_category_name").change(function(){
+   var input_state = $(this).val();
+     str = "";
+         $.ajax({
+              url: "/admin/categories/edit",
+               type: 'POST',
+               data: {
+                       input_state: input_state 
+                     },
+               dataType: "JSON",
+                success: function(response){
+                    console.log(response);  
+       
+                   $.each( response.state , function(i,l){
+                      str += '<option value="'+l+'">' + l+'</option>';
+                  });
+                     $('#state_state_name').empty().append('<option value="">Select State</option>');
+                     $('#state_state_name').append(str);
+                  }
+   
+         });
+   
+              
+   
+            
+      });
+   
+
+
+</script>
