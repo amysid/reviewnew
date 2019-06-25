@@ -1,0 +1,13 @@
+<h1>Verify otp</h1>
+<%= form_tag(otp_verification_web_users_path, method: :get) do -%>
+  <% if @response %>
+    <% @response.errors.each do |key, message| %>
+      <p><%= message %></p>
+    <% end %>
+  <% end %>
+  <div>
+    <%= label_tag "code", "Enter the code you were sent:" %>
+    <%= text_field_tag "code" %>
+  </div>
+  <%= button_tag "Verify" %>
+<% end %>

@@ -6,7 +6,14 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :web do
-    resources :users
+    resources :users do
+    collection do
+      post :otp
+      get :otp_verification
+      get :reset_password
+      get :reset_password_confirmation
+    end
+    end 
    # root "users#index"
     # get 'users/detail'
   end

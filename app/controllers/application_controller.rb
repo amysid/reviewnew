@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
          return new_user_session_path
     end 
 
+    def after_resetting_password_path_for(resource)
+      return new_user_session_path
+    end
+
     def after_sign_in_path_for(resource)
       # binding.pry
        if(resource.role == "admin")

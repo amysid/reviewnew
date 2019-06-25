@@ -15,7 +15,7 @@
   </div>
 <%# end %> -->
 
-
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
@@ -39,7 +39,7 @@
                       <div class="right-heading">
                         <h2>Forgot Password</h2>
                       </div>
-                      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+                      <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, :id => "forgot_password" }) do |f| %>
                       <%= render "devise/shared/error_messages", resource: resource %>
                         <div class="form-group text-center">
                           <img src="/assets/forgot-icon.png" alt="">
@@ -68,6 +68,19 @@
       </div>
     </div>
 
+<script type="text/javascript">
+$(document).ready(function(){
+$("#forgot_password").validate({
+    rules: {
+      "user[email]":{
+        required: true,
+        
+      }
+    }   
+  });
+  });
+
+</script>
 
 
 <%#= render "devise/shared/links" %>
