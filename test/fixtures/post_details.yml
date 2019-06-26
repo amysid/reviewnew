@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rate_count: 1
+  review_count: 1
+  title: MyString
+  description: MyString
+  comment: MyString
+
+two:
+  rate_count: 1
+  review_count: 1
+  title: MyString
+  description: MyString
+  comment: MyString

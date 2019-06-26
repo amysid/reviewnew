@@ -6,7 +6,7 @@ class Web::UsersController < ApplicationController
   end
 
   def profile
-    binding.pry
+    # binding.pry
   end
   
 end

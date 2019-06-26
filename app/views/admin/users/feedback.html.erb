@@ -1,0 +1,91 @@
+
+<div class="content-wrapper2">
+   <section class="content-header">
+     <h1>Filters</h1>
+   </section>
+   <!-- Main content -->
+   <section>
+    <div class="box box-info" style=" ">
+    <br>
+    <div class="row">
+            <%= form_with url: feedback_admin_users_path, method: :get  , local: true do |f| %>
+            <div class="col-sm-3">
+            <div class="form-group">
+                  <!-- <label style="margin-left: 30px;">By Type</label> -->
+                  <!-- <select class="form-control" , disabled=""> -->
+                   <%#= f.select :by_type , ['Buy'], class: "form-control", disabled: ""%>
+                  <!-- </select> -->
+                </div>
+              </div>
+                <!-- <div class="row"> -->
+            <div class="col-sm-3 filter-field">
+                  <div class="form-group serach-date">    
+                     <%= f.search_field :created_at, data:{ provide:'datepicker' }, class: "form-control fa fa-calendar", placeholder: "Search by feedback Date", id: 'datetimepicker', value: @date %>                        
+                  </div>
+            </div>
+            <div class="col-sm-3">
+                  <div class="search-inner  user-label">
+                     <div class="input-group d-block">
+                        <%=  f.search_field :tx_id, placeholder: "Search by feedback Id", class:"form-control custom-control1", id: 'search' %>
+                     </div>
+                  </div>
+               </div>
+            <div class="col-sm-1">  
+               <button class="btn btn-primary">Search</button>
+            </div>
+            <div class="col-sm-1">
+                             <a href="/admin/users/feedback" class="btn btn-danger">Cancle</a>
+            </div>
+         <!-- </div> -->
+      <% end %>
+    </div>
+  </div>
+  </div>
+</section>
+
+    <section class="content">
+      <h1>feedback List</h1>
+     <div class="box box-info">
+    <!--   <div class="text-right attendee-cent-s form-group">
+      </div> -->
+           <div class="box-body">
+           <div class="table-responsive">
+             <table id="example2" class="table table-bordered table-hover">
+               <thead>
+                 <tr>
+                  <th>Sr No.</th>
+                  <th>feedback ID</th>
+                  <th>User Feedback</th>
+                  <!-- <th>Method</th> -->
+                  <!-- <th>Tokens</th> -->
+                  <th>Date</th>
+           				<!-- <th>Action</th> -->
+           			</tr>
+               </thead>
+                <% @feedbacks.each do |feedback| %>
+               <% unless feedback.eql?(nil) %>
+                
+                  <tbody>
+                    <tr class="even">
+                      <td><%= @s_no += 1 %></td>
+                      <td><%= feedback.id%></td>
+                      <td><%= feedback.user_feedback %></td>
+                     <td><%= feedback.created_at.strftime("%d/%m/%Y")%></td>
+                     <td>
+                        <div class="action-btn">
+                        <%#= link_to '<em class="fa fa-eye" aria-hidden="true"></em>'.html_safe, admin_feedback_path( feedback), class:"btn btn-sm btn-success",title: "View"%>
+                        </div>
+                     </td>
+           					</tr>
+           				</tbody>
+                 <%end%>
+                <%end%>
+           	</table>
+            </div>
+            <!--  <div class="digg_pagination pull-right">
+           <%#= will_paginate @feedbacks %>
+            </div> -->    
+   </section>
+
+ 
+      

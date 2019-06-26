@@ -8,12 +8,11 @@ class Admin::CategoriesController < ApplicationController
 
 
   def index
-    # binding.pry
     @s_no = 0
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
-       redirect_to admin_categories_path
-       flash[:notice] = "Search Successfully"
+       # redirect_to admin_categories_path
+       # flash[:notice] = "Search Successfully"
     else
        @categories = Category.all
        # flash[:notice] = "Search not successfullly"
@@ -82,11 +81,11 @@ class Admin::CategoriesController < ApplicationController
 
 
   def edit_sub_category
-    binding.pry
+    # binding.pry
   end
 
   def update_sub_category
-   binding.pry
+   # binding.pry
   end
   
   def destroy_sub_category
