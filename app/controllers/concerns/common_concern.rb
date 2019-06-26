@@ -29,9 +29,9 @@ module CommonConcern
     # @search_params[:status] = (@search_params[:status] == "true") if @search_params[:status]
     @search_params.map{|k,v|
       query << "(name ILIKE :#{k} OR email ILIKE :#{k})" if k == :search
-      # if k == :status && @search_params[:status].present?
-      #    query << "(status ILIKE :#{k})"
-      # end
+      if k == :status && @search_params[:status].present?
+         query << "(user_type ILIKE :#{k})"
+      end
     #  query << "status = :#{k}" if k == :status
       if k == :start && @search_params[:start].present? && @search_params[:end].present?
         query << "Date(created_at) BETWEEN :#{k} AND :end"

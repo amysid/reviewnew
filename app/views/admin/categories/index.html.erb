@@ -9,7 +9,7 @@
         <legend>Filter</legend>
         <div class="filter-form">
         <!-- <form action="/admin/users" method="get" accept-charset="UTF-8" enctype="multipart/form-data" id="web-user-val" class="form-common clearfix"> -->
-         <%= form_tag "/admin/categories", method: :get,  class:"form-common clearfix", remote: true do  %>
+         <%= form_tag "/admin/categories", method: :get,  class:"form-common clearfix" do  %>
           <div class="col-sm-3">
             <div class="form-group">
               <label>NAME</label>
@@ -39,7 +39,7 @@
               <thead>
                 <tr>
                   <th>S.NO</th>
-                  <th>ID</th>
+                  <!-- <th>ID</th> -->
                   <th>Category name</th>
                   
                   <th colspan="3">Actions</th>
@@ -49,7 +49,7 @@
               <% @categories.each do |m| %>
                 <tr>
                   <td><%= @s_no += 1 %></td>
-                  <td><%= m.try(:id)%></td>
+                  <!-- <td><%#= m.try(:id)%></td> -->
                   <td><%= m.try(:category_name)%></td>
                   
 

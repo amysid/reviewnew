@@ -12,8 +12,8 @@ class Admin::CategoriesController < ApplicationController
     @s_no = 0
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
-       redirect_to admin_categories_path
-       flash[:notice] = "Search Successfully"
+       # redirect_to admin_categories_path
+       # flash[:notice] = "Search Successfully"
     else
        @categories = Category.all
        # flash[:notice] = "Search not successfullly"
