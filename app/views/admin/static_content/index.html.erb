@@ -1,0 +1,53 @@
+<section class="content-header">
+    <h1>STATIC CONTENT MANAGEMENT</h1>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- <h1 class="heading">STATIC CONTENT MANAGEMENT</h1> -->
+            <div class="box box-primary">
+                <div class="box-header">
+                    <div class="col-xs-6">
+                       
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sr_no.</th>
+                                <th>Page Name</th>
+                                <th>Update_on </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <% @static_contents.each do |static_page| %>
+                        <% unless static_page.eql?(nil) %>
+                        <tbody>
+                            <tr>
+                                <td><%= @s_no += 1%></td>
+                                <td>
+                                    <%= truncate(static_page.title, omision: "...", length: ADMIN_PANEL_TRUNCATE_LONG_TEXT).html_safe%>
+                                </td>
+                                <td><%= static_page.updated_at.localtime.strftime("%d %B, %Y %I:%M %p") %></td> 
+                                        
+                                <td>
+                                	<%#if @s_no%2 == 0%>
+                                    <div class="action-btn">
+                                        <a href="/admin/static_content/<%=static_page.id%>/edit" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                    </div>
+                                    <%#else%>
+                                        <!-- <div class="action-btn">
+                                            <a href="/admin/static_content/<%#=static_page.id%>/edit" class="btn btn-sm btn-primary table-btn" disabled="true"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                        </div>-->
+                                    <%#end%>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <%end%>
+                        <%end%>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>

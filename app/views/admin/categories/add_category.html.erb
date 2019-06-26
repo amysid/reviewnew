@@ -1,0 +1,78 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<section class="content-header">
+  <center>
+    <h1><b>Add Categories Details</b></h1>
+      <p class="box box-info"></p>
+   </center>
+</section>
+<section class="content">
+  <%= nested_form_for :sub_category, url: create_category_details_admin_categories_path, method: :post, local: true do |f| %>
+  <div class="row">
+     <div class="col-md-3">
+     </div>
+     <div class="col-md-6">
+      <div class="box box">
+         <div class="box-body box-profile">
+
+         	<ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Category Types</b>
+                      <%= f.select("category_type", category, {:include_blank => "category_type"}) %>
+
+                   <b>Sub Category Types</b>
+                      <%= f.select("sub_category_type", sub_category, {:include_blank => "sub_category_type"}) %>
+                </li>
+            </ul>
+          <%= f.fields_for :details do |d| %>
+           <ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Title</b>
+                      <%= d.text_field :title, class: 'form-control', autofocus: true, placeholder: "title" %>
+				</li>
+            </ul>
+            <ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Description</b>
+                      <%= d.cktext_area :description, class: 'form-control', autofocus: true, placeholder: "title" %>
+				</li>
+            </ul>
+             <ul class="list-group list-group-unbordered">
+               <li class="list-group-item">
+                  <b>Image:</b>
+                    <label for="file-upload" class="custom-file-upload ">
+						<%= f.fields_for :image_attributes do |m| %>
+   							<img src='<%="/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+							<%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+  						<%end%>
+  					</label>
+				</li>
+        <%end%>
+            </ul>
+            
+     <%#= f.link_to_add '<i class="fa fa-plus mt-10 fa-2x" aria-hidden="true"></i>'.html_safe, :details %>
+            <div class="form-group has-feedback">
+                      <%= f.submit "Submit" , class: "btn btn-success btn-block"%>
+                    </div>
+          <a href="/admin/users" class="btn btn-danger btn-block"><b>Back</b></a>
+        </div>
+      </div>
+   </div>
+  <div class="col-md-3">
+  </div>
+ </div>
+ <%end%>
+</section>
+<script type="text/javascript">
+	function preview(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                  reader.onload = function (e) {
+                    $('#user_pic')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>

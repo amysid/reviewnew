@@ -1,0 +1,181 @@
+<h1>User Management</h1>
+<div class="box box-info">
+<%#= form_tag import_admin_users_path, multipart: true, id: "controls-form", class: "shubham" do %>
+             <%#= file_field_tag :file, id: "fileinput", accept: ".csv" %>
+             <%#= submit_tag "Import" %>
+              <%# end %>
+
+<%= form_with scope: :search, url: admin_users_path, method: :get,autocomplete: :off,local: true do |f| %>
+    <div class="box-header">
+      <div class="form-group"> 
+       <label>Search by Email or Name:</label>
+           <%= f.text_field :search, class: "form-control", placeholder:"Search",value: (params.dig :search, :search), :autocomplete => :off %>
+        </div>
+        <!-- <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+            </div> -->
+    </div>
+    <!-- /.box-header -->
+    
+    <div class="box-body">
+        <div class="row">
+            <!-- /.col -->
+           
+            <!-- /.col -->
+            <div class="col-md-2">
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>Select status:</label>
+                    <%= f.select(:status, options_for_select(["Normal User" ,"Expert User"],(params.dig :search, :search)) , {:include_blank => "Select User Type"}, {:class => "form-control"} ) %>
+                </div>
+            </div>
+            <!-- /.form-group -->
+            <div class="col-md-2">
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>From date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <em class="fa fa-calendar"></em>
+                        </div>
+                       <%= f.text_field :start,class: "form-control datetimepicker_start",placeholder:"Select Date",value: (params.dig :search, :start), autocomplete: :off,data: { provide: 'datepicker'} %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <!-- /.form-group -->
+                <div class="form-group">
+                    <label>To date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <em class="fa fa-calendar"></em>
+                        </div>
+                       <%= f.text_field :end,class: "form-control datetimepicker_end",placeholder:"Select Date",value: (params.dig :search, :end),data:{provide: 'datepicker'}, :autocomplete => :off %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <!-- /.form-group -->
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <%= f.submit "Search", class: "btn btn-block btn-primary" %>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <%= link_to '<button class="btn btn-block btn-danger" type="button">Cancel</button>'.html_safe ,admin_users_path %>
+                    </div>
+                </div>
+                
+                <!-- /.form-group -->
+            </div>
+              <%= link_to "CSV", admin_users_path(format: "csv"), class:"btn btn-success margin-top-25"%> 
+            
+
+            <!-- /.col -->
+            <!-- /.row -->
+        </div>
+    </div>
+    <% end %>
+    <!--Export CSV-->
+    <%#= form_tag import_admin_users_path, multipart: true, id: "controls-form" do %>
+    <%#= file_field_tag :file, id: "fileinput", accept: ".csv", class:"margin-top-60" %>
+    <%#= submit_tag "Import", class:"btn btn-success margin-top-5" %>
+    <%# end %>
+    <!--Export CSV code finish-->
+
+    <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+            <tbody>
+                <tr style="background-color: #B3B2B2;">
+                    <th>Sno.</th>
+                    <th>Name</th>
+                    <th>User Type</th>
+                    <th>Email-id</th>
+                    <!-- <th>Phone No.</th> -->
+                    <th>Registration date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+                <br/>
+                <% @users&.each do |user| %>
+                <tr>
+                    <td>
+                        <%= @sr_no+=1 %>
+                    </td>
+                    <td>
+                        <%= user&.name %>
+                    </td>
+                    <td>
+                       <%= user&.user_type%>
+                    </td>
+                    <td>
+                        <%= user&.email %>
+                    </td>
+                    <!-- <td>
+                        <%#=user&.c_code%> <%#= user&.mobile_no %>
+                    </td> -->
+                    <td>
+                        <%= user&.created_at %>
+                    </td>
+                    <td>
+                        <%= user&.status_tag %>
+                    </td>
+                    <td>
+                        <%= link_to '<em class="fa fa-eye" aria-hidden="true"></em>'.html_safe, admin_user_path(user), class:"btn btn-sm btn-success",title: "View"%>
+                        <%= link_to '<em class="fa fa-edit" aria-hidden="true"></em>'.html_safe, edit_admin_user_path(user), class:"btn btn-sm btn-primary" ,title: "Edit" %>
+                        
+                        <%= user.block_btn %>
+                        <% if user&.user_type == "" || user&.user_type == "Expert User"%>
+                        <%= link_to '<em class="fa fa-users" aria-hidden="true"></em>'.html_safe, type_user_admin_user_path(user), method: :patch, class: "btn btn-success", title: "Normal Users", data: {confirm: "Are you sure change the user type to Normal User"} %>
+                        <%else%>
+                        <%= link_to '<em class="fa fa-user" aria-hidden="true"></em>'.html_safe, expert_user_admin_user_path(user), method: :patch, class: "btn btn-warning", id: 'btnsubmit', title: "Expert Users", data: {confirm: "Are you sure chnage the User type to Expert User"} %>
+                        <%end%>
+                    </td>
+                </tr>
+                <%end%>
+            </tbody>
+        </table>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <div class="digg_pagination pull-right">
+                <%= will_paginate @search %>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+   .margin-top-25 {
+    margin-top: 25px;
+    }
+    .margin-top-60{
+    margin-top: -60px;
+    margin-left: 1050px;
+    }
+    .margin-top-5{
+        margin-left: 1060px;
+        margin-top: 5px;
+    }
+</style>
+
+<!--js CSV file validation-->
+
+<script type="text/javascript">
+ $(function()
+{
+  $('#btnsubmit').on('click',function()
+  {
+    $(this).val('Please wait ...')
+      .attr('disabled','disabled');
+    $('#theform').submit();
+  });
+  
+});
+
+</script>
+
+<!--js csv validation-->

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MetacriticLike</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_include_tag :defaults, "nested_form" %>
+    <%= javascript_include_tag Ckeditor.cdn_url %>
+
+
+  </head>
+
+  <body>
+      <!-- <p class="notice"><%#= notice %></p> -->
+      <!-- <p class="alert"><%#= alert %></p> -->
+       <%= render "layouts/web_header"%>
+       <br>
+       <div class="container">
+       <%= render 'layouts/messages' %>
+       </div>
+       <%= yield %>
+       <%= render "layouts/web_footer" %>
+  </body>
+</html>

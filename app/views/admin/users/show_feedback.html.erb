@@ -1,0 +1,42 @@
+<section class="content-header">
+  <h1>Feedback</h1>
+</section>
+<section class="content">
+<div class="box box-info">
+  <div class="box-body box-profile">
+    <div class="profile-box">
+      <div class="profile-inner clearfix">
+        <div class="user-detail-block">
+          <!-- <div class="p-blocks">
+            <label class="view-a left-a">Title: </label>
+            <span class="view-a right-a"><%#= @static.title %></span>
+          </div> -->
+          <div class="p-blocks">
+            <label class="view-a left-a">User Feedback: </label>
+            <br>
+            <span class="view-a right-a"><textarea rows="15" cols="170"><%=sanitize (@feedback.user_feedback)%></textarea></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a"> </label>
+            <span class="view-a right-a"><%#=sanitize (@maps.description)%></span>
+          </div>
+         <!--  <div class="p-blocks">
+            <label class="view-a left-a">Image: </label>
+            <span class="view-a right-a"> <%#=image_tag(@news.try(:image).try(:thumb).try(:url))%></span>
+          </div> -->
+          <div class="p-blocks">
+            <label class="view-a left-a"></label>
+            <span class="view-a right-a"><%#= @maps.created_at.strftime("%d-%m-%Y")%></span>
+          </div>
+        </div>
+      </div>
+      </div>
+      <!-- <div class="col-sm-1"> -->
+                             <center><a href="/admin/users/feedback" class="btn btn-danger">Back</a></center>
+            <!-- </div> -->
+       <!-- <center><a href="/admin/users/feedback" class="btn btn-default btn-green" >Back</a></center> -->
+       <!-- <a href="/admin/static_content_managment/<%#= @static.id%>/edit" class="btn btn-default btn-green"> Edit</a> -->
+  </div>
+</div>
+</section>
+

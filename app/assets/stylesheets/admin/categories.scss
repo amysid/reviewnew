@@ -1,0 +1,138 @@
+// Place all the styles related to the admin/categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.global-fieldset {
+    border: 1px solid #d7d7d7!important;
+    margin: 0 0 15px;
+    padding: 10px;
+    position: relative;
+    background-color: transparent!important;
+    padding-left: 10px;
+    min-height: 100%;
+    margin-top: 0px!important;
+}
+fieldset.global-fieldset {
+    border: 1px solid #000;
+    margin: 0 0 15px;
+    padding: 10px;
+    position: relative;
+    background-color: #f5f5f5;
+    padding-left: 10px;
+    min-height: 100%;
+    margin-top: 20px;
+}
+fieldset.global-fieldset {
+    border: 1px solid #000;
+    margin: 0 0 15px;
+    padding: 10px;
+    position: relative;
+    background-color: #f5f5f5;
+    padding-left: 10px;
+    min-height: 100%;
+    margin-top: 20px;
+}
+.global-fieldset legend {
+    margin-bottom: 0px;
+    padding: 0px 4px;
+    display: inline-block;
+    width: auto;
+    border: none;
+}
+.filter-btn {
+    padding-top: 30px;
+}
+.form-common label {
+    font-weight: normal;
+    font-size: 16px;
+}
+.form-control.custom-control {
+    height: 37px;
+    box-shadow: 0 0 5px #ccc;
+    border-radius: 2px;
+    border: 1px solid #a2a2a2;
+}
+.user-head {
+    float: left;
+    font-size: 26px;
+}
+.global-heading {
+    font-size: 22px;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.aduser-btn {
+    float: right;
+}
+.aduser-btn a.btn.btn-add {
+    font-size: 17px;
+    color: #fff;
+    background: #3c8dbc;
+}
+.cus-table .table-bordered {
+    border: 1px solid #000;
+}
+.cus-table table thead {
+    background: #337ab7;
+    color: #fff;
+}
+
+.cus-table .table-bordered > tbody > tr > td, .cus-table .table-bordered > tbody > tr > th, .cus-table .table-bordered > tfoot > tr > td, .cus-table .table-bordered > tfoot > tr > th, .cus-table .table-bordered > thead > tr > td, .cus-table .table-bordered > thead > tr > th {
+    border: 1px solid #000;
+}
+
+.nav > li > a.active {
+    color: #444 !important;
+    background: #f7f7f7;
+    border-color: #000;
+    border-bottom-color: transparent;
+}
+
+.nav > li > a:hover, .nav > li > a:active, .nav > li > a:focus {
+    color: #444 !important;
+    background: #f7f7f7 !important;
+    border-color: #000 !important;
+    border-bottom-color: transparent !important;
+}
+
+#admin_edit_country {
+    background: #f5f5f5;
+}
+
+.state-tab, .country-tab {
+    padding: 30px;
+}
+.country-manage-tab .tab-content {
+    margin-top: -1px;
+}
+.country-manage-tab .tab-content {
+    border: 1px solid #000;
+}
+.country_mng-form {
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+#admin_edit_category {
+    background: #f5f5f5;
+}
+.tab-section ul li:first-child {
+    padding-left: 30px;
+}
+
+btn.btn-md {
+    font-size: 14px!important;
+    padding: 6px 12px!important;
+    height: auto!important;
+    min-height: auto!important;
+}
+
+.state-tab .form-add, .state-tab .table-responsive {
+	max-width: 700px;
+	width: 100%;
+	margin: 0 auto;
+}
+.state-tab .form-add {
+    margin-bottom: 20px;
+    margin-top: 0;text-align: right;
+}
