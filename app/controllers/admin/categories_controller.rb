@@ -82,11 +82,11 @@ class Admin::CategoriesController < ApplicationController
 
 
   def edit_sub_category
-    binding.pry
+    # binding.pry
   end
 
   def update_sub_category
-   binding.pry
+   # binding.pry
   end
   
   def destroy_sub_category

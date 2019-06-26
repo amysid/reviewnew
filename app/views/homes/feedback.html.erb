@@ -1,19 +1,20 @@
 <div class="page-wrapper">
       <div class="container home-wrap">
-      	<%#= form_with model: :user, url:  local: true do |f|%>
+      	<%= form_with scope: :contact, url: homes_path, method: :post,  local: true do |f|%>
         <div class="feedback-row">
           <h2 class="widget-title">GIVE US FEEDBACK</h2>
           <div class="form form-feedback">
             <div class="form-group">
               <label>Please share your thoughts with us.</label>
-              <textarea class="form-control"></textarea>
+              <!-- <textarea class="form-control"></textarea> -->
+              <%= f.text_area :user_feedback, class: "form-control" %>
             </div>
             <div class="form-group text-center">
               <button class="btn btn-theme">SEND</button>
             </div>
+            <%end%>
           </div>
         </div>
-        <%#end%>
         <h2 class="titile-light">You may also like:</h2>
         <div class="custom-slider">
           <div class="custom-post custom-slide">

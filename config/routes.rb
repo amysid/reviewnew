@@ -26,6 +26,7 @@ end
     resources :users do
       collection do
         post :import
+        get :feedback
       end
     member do
         post :status

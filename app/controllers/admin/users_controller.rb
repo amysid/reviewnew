@@ -24,6 +24,22 @@ class Admin::UsersController < Admin::AdminApplicationController
       # end
     end
 
+    def feedback
+      # binding.pry
+      if params[:tx_id].present? #|| params[:created_at].present?
+            params[:tx_id].delete!("\t")
+            @feedbacks = Contact.where(id: params[:tx_id])
+     elsif params[:created_at].present?
+           x=params[:created_at][0,2]
+           params[:created_at][0,2]=params[:created_at][3,2]
+           params[:created_at][3,2]=x
+           @feedbacks = Contact.where(created_at: params[:created_at].to_date.beginning_of_day..params[:created_at].to_date.end_of_day)
+      else
+         @feedbacks = Contact.all
+     end
+   @s_no=0
+    end
+
     def show
   	   # binding.pry
        # @users = User.find_by(id: params[:id])

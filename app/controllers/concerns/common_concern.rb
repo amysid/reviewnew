@@ -21,6 +21,7 @@ module CommonConcern
   end
 
  def get_query
+  # binding.pry
     query= Set.new
      # binding.pry
     @search_params = @search_params.collect{|k,v| [k.to_sym,v.strip] if v.present? }.compact.to_h
@@ -28,6 +29,9 @@ module CommonConcern
     # @search_params[:status] = (@search_params[:status] == "true") if @search_params[:status]
     @search_params.map{|k,v|
       query << "(name ILIKE :#{k} OR email ILIKE :#{k})" if k == :search
+      # if k == :status && @search_params[:status].present?
+      #    query << "(status ILIKE :#{k})"
+      # end
     #  query << "status = :#{k}" if k == :status
       if k == :start && @search_params[:start].present? && @search_params[:end].present?
         query << "Date(created_at) BETWEEN :#{k} AND :end"
