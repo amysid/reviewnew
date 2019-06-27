@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
          return new_user_session_path
     end 
 
+
+
     def after_update_path_for(resource)
       return new_user_session_path       
     end
