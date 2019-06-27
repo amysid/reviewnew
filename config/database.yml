@@ -12,8 +12,8 @@ development:
 
 production:
   <<: *default
-  database: metacritic_development
-  # username: postgres
-  # password: postgres
-  username: <%= Rails.application.credentials.production[:DATABASE_USER] %>
-  password: <%= Rails.application.credentials.production[:DATABASE_PASSWORD] %>
+  database: metacritic_production
+  username: postgres
+  password: postgres
+  #username: <%= Rails.application.credentials.production[:DATABASE_USER] %>
+  #password: <%= Rails.application.credentials.production[:DATABASE_PASSWORD] %>
