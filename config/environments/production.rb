@@ -8,7 +8,7 @@ Rails.application.configure do
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
-  config.require_master_key = true
+  # config.require_master_key = true
   config.eager_load = true
   config.secret_key_base = Rails.application.credentials.secret_key_base
 
