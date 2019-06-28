@@ -41,6 +41,7 @@ end
         patch :update_admin_profile
         patch :type_user
         patch :expert_user
+        get :show_feedback
       end
     end
     resources :static_content

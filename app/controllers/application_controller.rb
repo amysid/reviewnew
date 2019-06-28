@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
          return new_user_session_path
     end 
 
+
+
     def after_update_path_for(resource)
       return new_user_session_path       
     end
@@ -24,7 +26,7 @@ class ApplicationController < ActionController::Base
     def after_sign_in_path_for(resource)
       # binding.pry
        if(resource.role == "admin")
-        return  admin_home_index_path(current_user)
+        return  admin_homes_index_path
        else  
         super
        end
