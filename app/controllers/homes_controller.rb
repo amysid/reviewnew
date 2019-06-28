@@ -1,16 +1,24 @@
 class HomesController < ApplicationController
 	def about_us
+        @about = StaticContent.find_by(title: "About us")
     end
 
     def faq
     	# binding.pry
     	@faqs = Faq.all
     end
-
-    def privacy_policy
+    def contact_us
+        # binding.pry
+         @contact = StaticContent.find_by(title: "Contact us")
     end
 
+    def privacy_policy
+        # binding.pry
+        @privacy = StaticContent.find_by(title: "Privacy Policy")
+     end
+
     def term_condition
+        @term_condition = StaticContent.find_by(title: "Terms & Conditions")
     end
 
     def create

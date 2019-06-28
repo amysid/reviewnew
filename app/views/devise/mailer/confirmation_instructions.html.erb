@@ -26,14 +26,14 @@
            <tr>
                <td style="padding: 20px; background: #fff;">
                    <h3>Please confirm your email address </h3>
-                   <p>Hi </p>
+                   <p>Hi <%= @resource.name %></p>
                    <ul>
                        <li>Thanks for signing up for Metacritic.</li>
                        <li> You're almost done.
                         Please click the button below to verify your email address:  </li>
                    </ul>
                    
-                   <a href="#" style="background:#FFC300; color: #080808; padding: 12px 20px; display:inline-block; text-decoration: none;"><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></a>
+                   <a href="#" style="padding: 12px 20px; display:inline-block; text-decoration: none;"><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></a>
                    <p>
                        Thanks <br>
                        -The Metacritic Team
