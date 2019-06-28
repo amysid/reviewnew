@@ -1,8 +1,8 @@
 <div class="page-wrapper">
       <div class="about-page">
         <div class="container">
-          <h1 class="page-title"><%= sanitize(@term_condition.title)%></h1>
-          <p><%= sanitize(@term_condition.description)%></p>
+          <h1 class="page-title"><%= sanitize(@term_condition&.title)%></h1>
+          <p><%= sanitize(@term_condition&.description)%></p>
         </div>
       </div>
     </div>
