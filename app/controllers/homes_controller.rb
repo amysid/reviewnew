@@ -13,12 +13,11 @@ class HomesController < ApplicationController
     end
 
     def privacy_policy
-        # binding.pry
         @privacy = StaticContent.find_by(title: "Privacy Policy")
      end
 
     def term_condition
-        @term_condition = StaticContent.find_by(title: "Terms & Conditions")
+        @term_condition = StaticContent.find_by(title: "Terms & Condition")
     end
 
     def create
