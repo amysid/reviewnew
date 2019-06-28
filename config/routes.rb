@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'homes/index'
   end
-  devise_for :users
+  #devise_for :users
+     devise_for :users, controllers: {
+        sessions: 'users/sessions',
+        passwords: 'users/passwords',
+        registrations: 'users/registrations'
+      }
+
 
   namespace :web do
     resources :users do
