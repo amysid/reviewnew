@@ -570,6 +570,7 @@ a.yellow-text:hover{
 }
 .custom-design .check input[type="checkbox"] {
     zoom: 1.5;
+    margin-top: -5px;
 }
 .custom-design {
     margin: 28px 0px;

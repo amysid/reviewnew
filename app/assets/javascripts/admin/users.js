@@ -10,8 +10,6 @@ const readSingleFile = () => {
  } 
 };
 // Some sweet event listeners!
-document
- .getElementById("fileinput")
- .addEventListener("change", readSingleFile, false);
+document.getElementById("fileinput").addEventListener("change", readSingleFile, false);
 });
 // csv file validations end..

@@ -1,10 +1,9 @@
 <div class="page-wrapper">
       <div class="container home-wrap">
         <div class="contact-row">
-          <h2 class="widget-title">Contact Us</h2>
+          <h2 class="widget-title"><%= sanitize(@contact.title)%></h2>
           <div class="contact-info text-center">
-            <p>We would love to hear from our family, Please feel free to contact <br>
-              us through any of these avenues.</p>
+            <p><%= sanitize(@contact.description)%></p>
             <div class="max-content">
               <div class="contact-address text-left">
                 <address class="phone"><i class="fa fa-phone"></i> +91-124-4698400</address>
