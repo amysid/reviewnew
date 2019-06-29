@@ -1,5 +1,7 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-   <div class="page-wrapper">
+
+
+ <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
           <div class="row">
@@ -27,30 +29,36 @@
                         <div class="form-group">
                           <br>
                           <!-- <input type="text" class="form-control" id="" placeholder="Username"> -->
-                           <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Username" %>
+                           <%= f.text_field :name, autofocus: true, class: "form-control", id: "user_name", placeholder: "Username" %>
+                           <span class="msg-error1 error"></span>
                         </div>
                         <div class="form-group">
                           <!-- <input type="email" class="form-control" id="" placeholder="Email Address"> -->
-                          <%= f.email_field :email, autocomplete: "email", class: "form-control", placeholder: "Email Address" %>
+                          <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "user_email", placeholder: "Email Address" %>
+                          <span class="msg-error2 error"></span>
                         </div>
                         <div class="form-group">
                           <!-- <input type="Password" class="form-control" id="" placeholder="Password"> -->
-                         <%= f.password_field :password, autocomplete: "new-password",class: "form-control", placeholder: "Password" %>
+                         <%= f.password_field :password, autocomplete: "new-password",class: "form-control", id: "user_pass", placeholder: "Password" %>
+                           <span class="msg-error3 error"></span>
+
                         </div>
                         <div class="form-group">
                           <!-- <input type="Password" class="form-control" id="" placeholder="Confirm Password"> -->
-                          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Confirm Password" %>
+                          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control",id: "user_conf_pass", placeholder: "Confirm Password" %>
+                          <span class="msg-error4 error"></span>
+
                         </div>
                         <div class="form-group">
                           <div class="captcha">
                             <center><%= recaptcha_tags id:"g-recaptcha-response" %></center>
-                          <span class="msg-error error"></span>
+                          <span class="msg-error5 error"></span>
                           </div>
                         </div>
                         <div class="form-group">
                           <p class="mb-0">On Clicking Register, you indicate that you have read and understand our
                             <a class="yellow-text" href="/homes/privacy_policy">Privacy Policy</a> & <a class="yellow-text" href="/homes/term_condition">Terms of
-                              Use</a> add represent that you are at least 13 year of age.</p>
+                              Use</a> and represent that you are at least 13 year of age.</p>
                         </div>
                         <div class="form-group text-center mb-0">
                            <%= f.submit "Register", class: "btn btn-success" %>
@@ -77,11 +85,32 @@
 
 <script type="text/javascript">
 $("form").submit(function(event) {
+  var name = $("#user_name").val();
+  var email = $("#user_email").val();
+  var pass = $("#user_pass").val();
+  var conf_pass = $("#user_conf_pass").val();
    var recaptcha = $("#g-recaptcha-response").val();
    //alert(recaptcha);
+    if (name === "") {
+     // alert('name');
+      event.preventDefault();
+       $( '.msg-error1').text( "User Name Is Required*" );
+   }
+    if (email === "") {
+      event.preventDefault();
+       $( '.msg-error2').text( "Email Id Is Required* " );
+   }
+    if (pass === "") {
+      event.preventDefault();
+       $( '.msg-error3').text( "Password Is Required*" );
+   } 
+   if (conf_pass === "") {
+      event.preventDefault();
+       $( '.msg-error4').text( "Confirm Password Is Required*" );
+   }
    if (recaptcha === "") {
       event.preventDefault();
-       $( '.msg-error').text( "Fill the recaptcha ." );
+       $( '.msg-error5').text( "Recaptcha Is Required*" );
    }
 });
 </script>
@@ -91,21 +120,23 @@ $(document).ready(function(){
 $("#registration_form").validate({
     rules: {
       "user[name]":{
-        required: true,
+        //required: true,
+        user_nospace_regex: true,
+        userRegex: true,
         minlength: 2,
         maxlength: 28
       },
       "user[email]":{
-        required: true
+       // required: true
       },
       "user[password]":{
-        required: true,
+       // required: true,
         minlength: 8,
         maxlength: 16
       },
       "user[password_confirmation]":{
-        required: true,
-        equalTo: "#user_password",
+        //required: true,
+        //equalTo: "#user_password",
         minlength: 8,
         maxlength: 16
       }
@@ -113,5 +144,21 @@ $("#registration_form").validate({
   });
   });
 
+  $.validator.addMethod("userRegex", function(value, element) {
+    return this.optional(element) || /^(?=[^@]*[A-Za-z])([a-zA-Z -])+$/i.test(value);
+  }, "Please enter a valid characters, accepts only alphabets.");
+
+  $.validator.addMethod("user_nospace_regex", function(value, element) {
+    return this.optional(element) || /^[^-\s][a-zA-Z0-9_\s-]+$/i.test(value);
+  }, "No space Required.");
 </script>
+
+<style type="text/css">
+  .msg-error{
+        color: #e80b0b;
+  }
+  .error{
+            color: #e80b0b;
+  }
+</style>
 

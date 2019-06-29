@@ -54,9 +54,16 @@
               <% end %>
               </tbody>
             </table>
+            
              <%#= will_paginate @categories,  renderer: BootstrapPagination::Rails %>
+              <%#= will_paginate @categories %>
           </div>
         </div>
      </div>
     </section>
+    <div class="box-footer">
+        <div class="digg_pagination pull-right">
+                <%= will_paginate @categories %>
+        </div>
+    </div>
 

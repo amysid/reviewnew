@@ -29,7 +29,7 @@ class Users::PasswordsController < Devise::PasswordsController
       flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
       set_flash_message(:notice, flash_message) if is_navigational_format?
 
-       redirect_to root_path
+       redirect_to new_user_session_path
     else
       return after_resetting_password_path_for(resource)
     end
@@ -41,7 +41,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   def after_resetting_password_path_for(resource)
     #binding.pry
-     redirect_to root_path
+     redirect_to new_user_session_path
   end
 
   #The path used after sending reset password instructions

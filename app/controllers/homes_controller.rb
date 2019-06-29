@@ -17,7 +17,7 @@ class HomesController < ApplicationController
      end
 
     def term_condition
-        @term_condition = StaticContent.find_by(title: "Terms & Condition")
+        @term_condition = StaticContent.find_by(title: "Terms & Conditions")
     end
 
     def create

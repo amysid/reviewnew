@@ -51,11 +51,15 @@
                         <div class="form-group">
                           <br>  
                           <!-- <input type="email" class="form-control email" id="l_emil" placeholder="Email"> -->
-                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  email", placeholder: "Email", required: "true" %>
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  email",id:"user_email_id", placeholder: "Email", required: "true" %>
+                           <span class="msg-error1 error"></span>
+
                         </div>
                         <div class="form-group">
                           <!-- <input type="Password" class="form-control password" id="l_password" placeholder="Password"> -->
-                          <%= f.password_field :password, autocomplete: "current-password", class: "form-control password", placeholder: "Password" %>
+                          <%= f.password_field :password, autocomplete: "current-password", class: "form-control password", id: "user_passwrd", placeholder: "Password" %>
+                           <span class="msg-error2 error"></span>
+
                         </div>
                         <div class="d-flex align-items-center justify-content-between custom-design">
                           <% if devise_mapping.rememberable? %>
@@ -95,11 +99,9 @@ $(document).ready(function(){
 $("#login_form").validate({
     rules: {
       "user[email]":{
-        required: true
-        
       },
       "user[password]":{
-        required: true,
+       // required: true,
         minlength: 8,
         maxlength: 16
       }
@@ -108,6 +110,38 @@ $("#login_form").validate({
   });
 
 </script>
+<script type="text/javascript">
+$("form").submit(function(event) {
+  var email = $("#user_email_id").val();
+  var pass = $("#user_passwrd").val();
+
+    if (email === "") {
+      event.preventDefault();
+       $( '.msg-error1').text( "Email Id Is Required* " );
+   }
+    if (pass === "") {
+      event.preventDefault();
+       $( '.msg-error2').text( "Password Is Required*" );
+   } 
+  
+});
+</script>
+
+
+<style type="text/css">
+
+  .msg-error{
+        color: #e80b0b;
+  }
+  .error{
+            color: #e80b0b;
+
+  }
+</style>
+
+
+
+
 
 <!--Login with facebook-->
 
@@ -134,7 +168,7 @@ $("#login_form").validate({
  
 </script> -->
 
-
+<!-- 
 <script>
   window.fbAsyncInit = function() {
     FB.init({
@@ -188,5 +222,5 @@ function checkLoginState() {
   });
 }
 </script>
-
+ -->
 <!--Login with facebook-->

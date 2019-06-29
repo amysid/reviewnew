@@ -48,6 +48,7 @@ end
     resources :categories do
       collection do
         post :edit_sub_category
+       delete :destroy_sub_category
         post :create_sub_category
         post :update_sub_category
         get :add_category

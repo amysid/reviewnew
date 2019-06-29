@@ -11,12 +11,17 @@ class Admin::CategoriesController < ApplicationController
     @s_no = 0
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
+      @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+
        # redirect_to admin_categories_path
        # flash[:notice] = "Search Successfully"
     else
        @categories = Category.all
+        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+
        # flash[:notice] = "Search not successfullly"
     end
+
   end
 
   
@@ -49,6 +54,7 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def edit
+    @s_no = 0
     @sub_category = @category.sub_categories
   end
 
@@ -58,6 +64,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create_sub_category
+    #binding.pry
     sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
     @category = Category.find( params[:sub_categories][:category_id])
      
@@ -74,21 +81,36 @@ class Admin::CategoriesController < ApplicationController
       end
     end
   end
-  
-   
-
-
 
 
   def edit_sub_category
-    # binding.pry
+     # binding.pry
+     @sub = SubCategory.find_by(id: params[:id])
+
   end
 
   def update_sub_category
-   # binding.pry
+    #binding.pry
+    sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
+    @category = Category.find( params[:sub_categories][:category_id])
+     @sub = SubCategory.find_by(id: params[:subcat_id])
+     if sub_category.present?
+      flash[:notice] = "sub category already exists."
+      redirect_to admin_categories_path
+    else
+    if @sub.update(sub_category_params)
+       flash[:notice] = "sub category update successfullly."
+        redirect_to admin_categories_path
+      else
+        flash[:notice] = "Unable to create sub category."
+        redirect_to new_admin_category_path
+      end
+
   end
+end
   
   def destroy_sub_category
+    binding.pry
    @sub_category = SubCategory.find(params[:id])
     @sub_category.destroy
    redirect_to admin_categories_path, notice: "Sub Category  deleted successfully"
