@@ -1,6 +1,4 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-
-
  <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
@@ -82,7 +80,6 @@
         </div>
       </div>
     </div>
-
 <script type="text/javascript">
 $("form").submit(function(event) {
   var name = $("#user_name").val();
@@ -93,7 +90,7 @@ $("form").submit(function(event) {
    //alert(recaptcha);
     if (name === "") {
      // alert('name');
-      event.preventDefault();
+     event.preventDefault();
        $( '.msg-error1').text( "User Name Is Required*" );
    }
     if (email === "") {
@@ -113,6 +110,26 @@ $("form").submit(function(event) {
        $( '.msg-error5').text( "Recaptcha Is Required*" );
    }
 });
+$("#user_name").change(function(event) {
+    $( '.msg-error1').text( "" );
+  });
+
+
+$("#user_email").change(function(event) {
+    $( '.msg-error2').text( "" );
+  });
+  $("#user_pass").change(function(event) {
+    $( '.msg-error1').text( "" );
+  });
+
+
+$("#user_conf_pass").change(function(event) {
+    $( '.msg-error2').text( "" );
+  });
+$("#g-recaptcha-response").change(function(event) {
+    $( '.msg-error2').text( "" );
+  });
+
 </script>
 
 <script type="text/javascript">

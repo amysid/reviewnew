@@ -51,7 +51,7 @@
                         <div class="form-group">
                           <br>  
                           <!-- <input type="email" class="form-control email" id="l_emil" placeholder="Email"> -->
-                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  email",id:"user_email_id", placeholder: "Email", required: "true" %>
+                          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control  email",id:"user_email_id", placeholder: "Email"%>
                            <span class="msg-error1 error"></span>
 
                         </div>
@@ -120,11 +120,20 @@ $("form").submit(function(event) {
        $( '.msg-error1').text( "Email Id Is Required* " );
    }
     if (pass === "") {
-      event.preventDefault();
        $( '.msg-error2').text( "Password Is Required*" );
+      event.preventDefault();
    } 
   
 });
+
+$("#user_email_id").change(function(event) {
+    $( '.msg-error1').text( "" );
+  });
+
+
+$("#user_passwrd").change(function(event) {
+    $( '.msg-error2').text( "" );
+  });
 </script>
 
 
