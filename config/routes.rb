@@ -17,6 +17,8 @@ Rails.application.routes.draw do
       post :otp
       get :otp_verification
       get :reset_password
+      get :check_email
+      get :check_email_login
       get :reset_password_confirmation
     end
     member do

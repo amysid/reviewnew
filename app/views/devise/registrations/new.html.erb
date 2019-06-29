@@ -103,7 +103,7 @@ $("form").submit(function(event) {
    } 
    if (conf_pass === "") {
       event.preventDefault();
-       $( '.msg-error4').text( "Confirm Password Is Required*" );
+      //  $( '.msg-error4').text( "Confirm Password Is Required*" );
    }
    if (recaptcha === "") {
       event.preventDefault();
@@ -144,7 +144,8 @@ $("#registration_form").validate({
         maxlength: 28
       },
       "user[email]":{
-       // required: true
+       required: true,
+       remote: "/web/users/check_email"
       },
       "user[password]":{
        // required: true,
@@ -153,11 +154,23 @@ $("#registration_form").validate({
       },
       "user[password_confirmation]":{
         //required: true,
-        //equalTo: "#user_password",
+        equalTo: "#user_pass",
         minlength: 8,
         maxlength: 16
       }
-    }   
+    }, 
+    messages: {
+            "user[email]": {
+              remote: "Email has already been taken."
+            },
+            "user[password_confirmation]": {
+              equalTo: "Confirm password didn't match."
+            }
+        },
+		
+		submitHandler: function(form) {
+	      form.submit();
+	    }
   });
   });
 

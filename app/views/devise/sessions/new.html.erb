@@ -99,12 +99,22 @@ $(document).ready(function(){
 $("#login_form").validate({
     rules: {
       "user[email]":{
+        remote: "/web/users/check_email_login"  
       },
       "user[password]":{
        // required: true,
         minlength: 8,
         maxlength: 16
-      }
+      }, 
+    messages: {
+            "user[email]": {
+              remote: "Email is not registered."
+            }
+        },
+		
+		submitHandler: function(form) {
+	      form.submit();
+	    }
     }   
   });
   });
