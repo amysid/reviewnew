@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                           <!-- <input type="Password" class="form-control" id="" placeholder="Password"> -->
-                         <%= f.password_field :password, autocomplete: "new-password",class: "form-control", id: "user_pass", placeholder: "Password" %>
+                         <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "user_pass", placeholder: "Password" %>
                            <span class="msg-error3 error"></span>
 
                         </div>
@@ -84,50 +84,46 @@
 $("form").submit(function(event) {
   var name = $("#user_name").val();
   var email = $("#user_email").val();
-  var pass = $("#user_pass").val();
+  var password = $("#user_pass").val();
   var conf_pass = $("#user_conf_pass").val();
    var recaptcha = $("#g-recaptcha-response").val();
    //alert(recaptcha);
     if (name === "") {
      // alert('name');
      event.preventDefault();
-       $( '.msg-error1').text( "User Name Is Required*" );
+       $( '.msg-error1').text("User Name Is Required* ");
    }
     if (email === "") {
       event.preventDefault();
-       $( '.msg-error2').text( "Email Id Is Required* " );
+       $( '.msg-error2').text( "Email Id Is Required* ");
    }
-    if (pass === "") {
+    if (password === "") {
       event.preventDefault();
-       $( '.msg-error3').text( "Password Is Required*" );
+       $( '.msg-error3').text( "Password Is Required* ");
    } 
    if (conf_pass === "") {
       event.preventDefault();
-      //  $( '.msg-error4').text( "Confirm Password Is Required*" );
+       $( '.msg-error4').text( "Confirm Password Is Required* ");
    }
    if (recaptcha === "") {
       event.preventDefault();
-       $( '.msg-error5').text( "Recaptcha Is Required*" );
+       $( '.msg-error5').text("Recaptcha Is Required* ");
    }
 });
 $("#user_name").change(function(event) {
     $( '.msg-error1').text( "" );
   });
-
-
 $("#user_email").change(function(event) {
     $( '.msg-error2').text( "" );
   });
   $("#user_pass").change(function(event) {
-    $( '.msg-error1').text( "" );
+    $( '.msg-error3').text( "" );
   });
-
-
 $("#user_conf_pass").change(function(event) {
-    $( '.msg-error2').text( "" );
+    $( '.msg-error4').text( "" );
   });
 $("#g-recaptcha-response").change(function(event) {
-    $( '.msg-error2').text( "" );
+    $( '.msg-error5').text( "" );
   });
 
 </script>
@@ -159,7 +155,7 @@ $("#registration_form").validate({
         maxlength: 16
       }
     }, 
-    messages: {
+    messages: { 
             "user[email]": {
               remote: "Email has already been taken."
             },
