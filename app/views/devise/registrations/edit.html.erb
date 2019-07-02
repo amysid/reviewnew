@@ -76,22 +76,14 @@
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
  <div class="page-wrapper">
       <div class="container home-wrap">
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => "update_form" }) do |f| %>
+        <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => "update_form" }) do |f| %>
+        <%= form_with url: image_update_web_users_path, html: {:id => "update_form" } do |f| %>
         <div class="profil-row">
           <div class="user-profile">
             <div class="img-container">
               <label for="file-upload" class="custom-file-upload ">
-               <% if current_user&.image&.file&.present? %> 
-                <%= f.fields_for :image do |m| %>
                    <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 30px; margin-left: -25px; font-size: 24px;" ></i>
-                 <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-                 <%end%>
-                <%else%>
-                       <%= f.fields_for :image_attributes do |m| %>
-                   <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 30px; margin-left: -20px; font-size: 24px;" ></i>
-                 <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-                 <%end%>
-                <%end%>
+                 <%= f.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
               </label>
             </div>
             <h4><%#= current_user.name   %></h4>
@@ -157,22 +149,30 @@
 $(document).ready(function(){
 $("#update_form").validate({
     rules: {
-      "user[current_password]":{
+      "current_password":{
         //required: true,
-        minlength: 8,
-        maxlength: 16
+        // minlength: 8,
+        // maxlength: 16
       },
-      "user[password]":{
-        //required: true,
-        minlength: 8,
-        maxlength: 16
+      "password":{
+        // required: true,
+        // minlength: 8,
+        // maxlength: 16
       },
-      "user[password_confirmation]":{
+      "password_confirmation":{
         //required: true,
-        equalTo: "#user_password",
-        minlength: 8,
-        maxlength: 16
-      }
+        // equalTo: "#user_password",
+        // minlength: 8,
+        // maxlength: 16
+      }, 
+    messages: { 
+            "password": {
+              required: "Please enter a new Password*"
+            },
+            "password_confirmation": {
+              equalTo: "Confirm password didn't match."
+            }
+        }
     }   
   });
   });

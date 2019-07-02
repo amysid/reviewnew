@@ -3,42 +3,21 @@
         <div class="container">
           <h1 class="page-title">FAQ</h1>
           <%#binding.pry%>
-          <% @faqs&.each_with_index do |faq,index| %>
-
+          <%show = "show"%>
           <div class="accordion" id="accordionExample">
-            <%if index == 0 %>
+            <% @faqs&.each_with_index do |faq,index| %>
             <div class="card">
               <div class="card-header accordion-card" id="headingOne" data-toggle="collapse"
-                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> <%= faq&.question %>
+                data-target="#aa<%= faq.id%>" aria-expanded="true" aria-controls="aa<%= faq.id%>"> <%= faq&.question %>
               </div>
-              <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div id="aa<%= faq.id%>" class="collapse <%= show%>" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                   <%= faq&.answer%>
                 </div>
               </div>
             </div>
-            <%elsif index==1%>
-            <div class="card">
-              <div class="card-header accordion-card" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo"
-              aria-expanded="false" aria-controls="collapseTwo"><%= faq&.question %></div>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                <div class="card-body">
-                  <%= faq&.answer %>
-                </div>
-              </div>
-            </div>
-            <%elsif index == 2
-              %>
-            <div class="card">
-              <div class="card-header accordion-card" id="headingThree" data-toggle="collapse"
-              data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree"><%= faq&.question %> </div>
-              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                <div class="card-body">
-                  <%= faq&.answer %>
-                </div>
-              </div>
-            </div>
-            <%end%>
+            
+           <% show = nil%>
             <%end%>
           </div>
         </div>

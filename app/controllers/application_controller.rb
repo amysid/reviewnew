@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
     
     protected
     def configure_permitted_parameters
-          	# binding.pry
          devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation)}
          devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :password_confirmation, image_attributes: [:id, :file, :_destroy])}
          # redirect_to user_profile_web_user_path(current_user.id)

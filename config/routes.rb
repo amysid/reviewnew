@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       get :reset_password
       get :check_email
       get :check_email_login
+      post :image_update
       get :reset_password_confirmation
     end
     member do
