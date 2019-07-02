@@ -47,6 +47,7 @@ end
         get :show_feedback
       end
     end
+    resources :faqs
     resources :static_content
     resources :categories do
       collection do
