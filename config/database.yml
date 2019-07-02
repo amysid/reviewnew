@@ -12,7 +12,7 @@ development:
 
 production:
   <<: *default
-  database: metacritic_development_heroku
+  database: metacritic_development
   username: postgres
   password: postgres
   #username: <%= Rails.application.credentials.production[:DATABASE_USER] %>
