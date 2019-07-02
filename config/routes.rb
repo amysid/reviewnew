@@ -38,7 +38,7 @@ end
         get :feedback
       end
     member do
-        post :status
+        get :status
         get :admin_profile
         get :edit_admin_profile
         patch :update_admin_profile

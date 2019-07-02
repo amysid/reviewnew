@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.2]
       t.string :name,               null: false, default: ""
       t.string :email,              null: false, default: ""
       t.string :fb_id,              null: false, default: ""
-      t.string :user_type,          null: false, default: ""
+      t.string :user_type,          null: false, default: "Normal User"
       t.boolean :status, default: true
       t.string :c_code,null: false, default: ""
       t.string :mobile_no,null: false, default: ""

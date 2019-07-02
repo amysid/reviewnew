@@ -77,10 +77,12 @@ class Admin::UsersController < Admin::AdminApplicationController
         if @user.update_attributes(user_params)
           if @user.image.present?
                  @user.image.update(file: params[:user][:image])
+                 @user.update(user_type: params[:user][:user_type])
                  redirect_to admin_users_path
                  flash[:notice] = "User Profile Update Successfully"
              else
                  @user.create_image(file: params[:user][:image])
+                 @user.update(user_type: params[:user][:user_type])
                  redirect_to admin_users_path
                  flash[:notice] = "User Profile Update Succesfully"
           end

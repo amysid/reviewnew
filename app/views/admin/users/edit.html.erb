@@ -37,7 +37,8 @@
                <li class="list-group-item">
                    <b>User Type</b>
                    <p class="pull-right" style="margin-right: -152px;">
-                 <%= @user&.user_type%>
+                 <%#= @user&.user_type%>
+                 <%= f.select :user_type, ['Normal User', 'Expert User']%>
                    </p>
                </li>
                <li class="list-group-item">

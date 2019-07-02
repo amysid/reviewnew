@@ -26,7 +26,11 @@ class Web::UsersController < ApplicationController
 
   def image_update
     if params[:file].present?
-      current_user.image.update(file: params[:file])
+      if current_user.image.present?   
+        current_user.image.update(file: params[:file])
+      else
+        current_user.create_image(file: params[:file])
+      end
       redirect_to user_profile_web_user_path(id: current_user.id)
       flash[:notice] = "Profile updated successfully."
     end
@@ -37,8 +41,8 @@ class Web::UsersController < ApplicationController
         flash[:notice] = "Password didn't match with the confirmation password."
         end
         current_user.update(password: params[:password])
-        redirect_to user_profile_web_user_path(id: current_user.id)
-        flash[:notice] = "Password updated successfully."
+        redirect_to new_user_session_path
+        flash[:notice] = "Password updated successfully, please sign in to continue."
       else
         redirect_to request.referer
         flash[:notice] = "Please enter new password." 
