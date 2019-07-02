@@ -1,0 +1,47 @@
+<div class="content-wrapper2">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+     <h1>Faqs</h1>
+   </section>
+   <!-- Main content -->
+   <section class="content">
+    <div class="box box-info">
+      <div class="text-right attendee-cent-s form-group">
+      	<%= link_to "Add Faqs", new_admin_faq_path, :class => "btn btn-default btn-green" %>
+      </div>
+           <div class="box-body">
+           <div class="table-responsive">
+             <table id="example2" class="table table-bordered table-hover">
+               <thead>
+                 <tr>
+                <th>Sr No.</th>
+           		  <th>Question</th>
+                <th>Answer</th>
+           		  <th>Action</th>
+           			</tr>
+               </thead>
+               <% @faqs.each do |faqs| %>
+           			<% unless @faqs.eql?(nil) %>
+           				<tbody>
+           					<tr class="even">
+                      <td><%= @s_no += 1 %></td>
+           						<td style="max-width: 150px;word-break: break-all;"><%= truncate(faqs.question, omision: "...", length: 20) %> </td>
+           						<td style="max-width: 150px;word-break: break-all;"><%= truncate(faqs.answer, omision: "...", length: 20) %> </td>
+           						<td class="cell-action-btn">
+                         <a href="/admin/faqs/<%= faqs.id%>" class="btn btn-default btn-green"><em class="fa fa-eye" aria-hidden="true"></em></a> 
+           							<a href="/admin/faqs/<%= faqs.id%>/edit" class="btn btn-default btn-green"><em class="fa fa-edit" aria-hidden="true"></em></a>
+           							<a>
+           							<%= link_to '<em class="fa fa-delete" aria-hidden="true"></em>'.html_safe,  admin_faq_path(faqs.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a></td>
+           					</tr>
+           				</tbody>
+           			<%end%>
+           		<%end%>
+           	</table>
+            </div>
+             <div class="digg_pagination pull-right">
+                    <%#= will_paginate @faqs %>
+            </div>
+           </div>
+         </div>
+   </section>
+ </div>

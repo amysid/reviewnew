@@ -1,0 +1,44 @@
+<section class="content-header">
+    <h1>Add Faqs</h1>
+</section>
+  <section class="content">
+    <div class="box box-info">
+    <div class="box-body">
+      <div class="tab-content">
+  				<div class="tab-pane fade active in" id="default-tab-1">
+  					<div class="tab-pane">
+  							<%= form_for :faqs, url: admin_faqs_path, method: :post, html:  {id: "admin_faq"}  do |f| %>
+  								<div class="detail-form m-t-40 m-b-40">
+                    <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Question</label>
+  											<div class="col-sm-8 col-md-8">
+                          <%= f.text_field :question, class: "form-control", placeholder: "" %>
+  											</div>
+  										</div>
+  									</div>
+                    <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Answer</label>
+  											<div class="col-sm-8 col-md-8">
+  											 <%= f.cktext_area :answer, class: "form-control", placeholder: "" %>
+  											</div>
+  										</div>
+  									</div>
+                    <div class="form-group">
+  										<div class="text-center attendee-cent-s">
+  											<button class="btn btn-default btn-green" type="submit">Submit</button>
+                        <a href="/admin/faqs" class="btn btn-danger">Cancle</a>
+                      </div>
+									</div>
+								</div>
+							<%end%>
+						</div>
+  				</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
