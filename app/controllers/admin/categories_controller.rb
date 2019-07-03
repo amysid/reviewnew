@@ -1,22 +1,17 @@
-class Admin::CategoriesController < ApplicationController
+  class Admin::CategoriesController < ApplicationController
  before_action :authenticate_user!
  before_action :find_category, only: [:show,:edit,:update,:status,:destroy]
  layout 'admin_lte_2'
 
-
-
-
-
-  def index
+ def index
     @s_no = 0
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
-      @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
-
+       @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
        # redirect_to admin_categories_path
        # flash[:notice] = "Search Successfully"
     else
-       @categories = Category.all
+        @categories = Category.all
         @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
 
        # flash[:notice] = "Search not successfullly"
@@ -54,13 +49,19 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def edit
+    # binding.pry
+    # @category = Category.find_by(id: params[:id])
     @s_no = 0
     @sub_category = @category.sub_categories
   end
 
   def update
-  
-
+    if @category.update_attributes(category_params)
+       redirect_to admin_categories_path, notice: 'Category updated Successfully.'
+    else
+       flash[:notice] = @faqs.errors.full_messages
+       render 'edit'
+    end
   end
 
   def create_sub_category

@@ -1,6 +1,6 @@
 <section class="content-header">
   <center>
-    <h1><b>View User</b></h1>
+    <h1><b>Update User</b></h1>
       <p class="box box-info"></p>
    </center>
 </section>
@@ -15,7 +15,7 @@
          <div class="box-body box-profile">
             <center>
             <label for="file-upload" class="custom-file-upload ">
-               <img src='<%= @user&.image&.file&.present? ? @user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
+               <img src='<%= @user&.image&.file&.present? ? @user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -25px; font-size: 24px;" ></i>
                <%= f.file_field :image, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
               </label>
             </center>
@@ -36,7 +36,7 @@
                </li>
                <li class="list-group-item">
                    <b>User Type</b>
-                   <p class="pull-right" style="margin-right: -152px;">
+                   <p class="pull-right" style="margin-right: -198px;">
                  <%#= @user&.user_type%>
                  <%= f.select :user_type, ['Normal User', 'Expert User']%>
                    </p>
@@ -81,3 +81,12 @@
            }
        }
 </script>
+<style type="text/css">
+  input,
+button,
+select,
+textarea {
+  
+  width: 198px;
+}
+</style>
