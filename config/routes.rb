@@ -45,6 +45,7 @@ end
         patch :type_user
         patch :expert_user
         get :show_feedback
+        delete :destroy_feedback
       end
     end
     resources :faqs

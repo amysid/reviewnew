@@ -5,7 +5,7 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
 
         def index
         	@s_no = 0
-        	@faqs = Faq.all
+        	@faqs = Faq.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
         end
 
         def create
@@ -28,7 +28,8 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
        	 end
         
          def update
-  			if @faqs.update_attributes(faqs_params)
+          # binding.pry
+  			if @faqs.update_attributes(faq_params)
         		redirect_to admin_faqs_path, notice: 'faqs updated Successfully.'
       		else
         	     flash[:notice] = @faqs.errors.full_messages

@@ -26,14 +26,14 @@ class Admin::UsersController < Admin::AdminApplicationController
 
     def feedback
       # binding.pry
-      if params[:tx_id].present? #|| params[:created_at].present?
-            params[:tx_id].delete!("\t")
-            @feedbacks = Contact.where(id: params[:tx_id])
-     elsif params[:created_at].present?
+      # if params[:tx_id].present? #|| params[:created_at].present?
+      #       params[:tx_id].delete!("\t")
+      #       @feedbacks = Contact.where(id: params[:tx_id])
+     if params[:created_at].present?
            x=params[:created_at][0,2]
            params[:created_at][0,2]=params[:created_at][3,2]
            params[:created_at][3,2]=x
-           @feedbacks = Contact.where(created_at: params[:created_at].to_date.beginning_of_day..params[:created_at].to_date.end_of_day)
+           @feedbacks = Contact.where(created_at: params[:created_at].to_date.beginning_of_day..params[:created_at].to_date.end_of_day).order("created_at desc").paginate(:page => params[:page], :per_page => 100)
       else
 
          @feedbacks = Contact.all.order("created_at desc").paginate(:page => params[:page], :per_page => 4)
@@ -48,6 +48,18 @@ class Admin::UsersController < Admin::AdminApplicationController
   	   # binding.pry
        # @users = User.find_by(id: params[:id])
   	   @users = User.decorate
+    end
+
+    def destroy_feedback
+      @feedback = Contact.find_by(id: params[:id])
+      if @feedback.destroy
+      redirect_to  feedback_admin_users_path
+      flash[:notice] = 'Delete feedback succesfully'
+    else
+      flash[:error] = @user.errors.full_messages.first
+      redirect_to  feedback_admin_users_path
+      flash[:notice] = 'feedback is not delete'
+    end
     end
 
     def edit

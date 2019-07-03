@@ -41,9 +41,9 @@
     </div>
   </div>
   </div>
-</section>
+<!-- </section> -->
 
-    <section class="content">
+    <!-- <section class="content"> -->
       <h1>feedback List</h1>
      <div class="box box-info">
     <!--   <div class="text-right attendee-cent-s form-group">
@@ -52,7 +52,7 @@
            <div class="table-responsive">
              <table id="example2" class="table table-bordered table-hover">
                <thead>
-                 <tr>
+                 <tr style="background-color: #D9D7D7;">
                   <th>Sr No.</th>
                   <th>Feedback </th>
                   <!-- <th>User Feedback</th> -->
@@ -73,7 +73,8 @@
                      <td>
                         <div class="action-btn">
                           <a href="/admin/users/<%= feedback.id %>/show_feedback" ><em class="fa fa-eye btn btn-success" aria-hidden="true"></em></a>
-                        <%#= link_to '<em class="fa fa-eye" aria-hidden="true"></em>'.html_safe, admin_feedback_path( feedback), class:"btn btn-sm btn-success",title: "View"%>
+                        <a>
+                        <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  destroy_feedback_admin_user_path(feedback.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a>
                         </div>
                      </td>
            					</tr>
@@ -83,7 +84,7 @@
            	</table>
             </div>
             <div class="digg_pagination pull-right">
-                <%#= will_paginate @feedbacks %>
+                <%= will_paginate @feedbacks %>
            </div>  
    </section>
 

@@ -1,5 +1,5 @@
 <section class="content-header">
-    <h1>STATIC CONTENT MANAGEMENT</h1>
+    <h1>Static Content Management</h1>
 </section>
 <section class="content">
     <div class="row">
@@ -15,7 +15,7 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr style="background-color: #D9D7D7;">
                                 <th>Sr_no.</th>
                                 <th>Page Name</th>
                                 <th>Update_on </th>
@@ -35,7 +35,7 @@
                                 <td>
                                 	<%#if @s_no%2 == 0%>
                                     <div class="action-btn">
-                                        <a href="/admin/static_content/<%=static_page.id%>/edit" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                                        <a href="/admin/static_content/<%=static_page.id%>/edit" class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i></a>
                                     </div>
                                     <%#else%>
                                         <!-- <div class="action-btn">

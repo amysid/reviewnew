@@ -9,18 +9,18 @@
         <div class="user-detail-block">
           <div class="p-blocks">
             <label class="view-a left-a">Question: </label>
-            <span class="view-a right-a"><%= @faqs.question%></span>
+            <span class="view-a right-a"><%= sanitize(@faqs.question)%></span>
           </div>
           <div class="p-blocks">
             <label class="view-a left-a">Answer: </label>
-            <span class="view-a right-a"><%= @faqs.answer%></span>
+            <span class="view-a right-a"><%= sanitize(@faqs.answer)%></span>
           </div>
         </div>
       </div>
       </div>
       <br>
       <br>
-      <a href="/admin/faqs" class="btn btn-default btn-green"style="margin-left: 550px;">Back</a>
+      <a href="/admin/faqs" class="btn btn-danger"style="margin-left: 550px;">Back</a>
   </div>
 </div>
 </section>
