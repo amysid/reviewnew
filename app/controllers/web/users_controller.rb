@@ -53,6 +53,9 @@ class Web::UsersController < ApplicationController
 
   def show
   end
+  
+  def report
+  end
 
   def profile
     # binding.pry

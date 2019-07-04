@@ -12,23 +12,26 @@ Rails.application.routes.draw do
 
 
   namespace :web do
+    resources :categories do
+    collection do
+      get :review_system
+    end
+    end
     resources :users do
     collection do
-      post :otp
-      get :otp_verification
-      get :reset_password
+      # post :otp
+      # get :otp_verification
+      # get :reset_password
+      # get :reset_password_confirmation
       get :check_email
       get :check_email_login
       post :image_update
-      get :reset_password_confirmation
+      get :report
     end
     member do
       get :user_profile
     end
-  
-end 
-   # root "users#index"
-    # get 'users/detail'
+   end 
   end
 
   namespace :admin do
