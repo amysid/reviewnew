@@ -7,12 +7,12 @@
     @s_no = 0
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
-       @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+       @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 100)
        # redirect_to admin_categories_path
        # flash[:notice] = "Search Successfully"
     else
         @categories = Category.all
-        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 2)
 
        # flash[:notice] = "Search not successfullly"
     end
@@ -52,21 +52,28 @@
     # binding.pry
     # @category = Category.find_by(id: params[:id])
     @s_no = 0
-    @sub_category = @category.sub_categories
+
+     if params[:search].present?
+       @search = @category.sub_categories.where(sub_category_name: params[:search]).order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+     else
+        @search = @category.sub_categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+       # flash[:notice] = "Search not successfullly"
+    end
+    @sub_category = @search 
   end
 
-  def search_sub_categories
-    binding.pry
-    if params[:search].present?
-     @sub_category = SubCategory.where(sub_category_name: params[:search])
-     
-     # redirect_to edit_admin_category_path(@sub_category)
-   else
-      @sub_category = @category.sub_categories
-           # redirect_to edit_admin_category_path
+  # def search_sub_categories
+  #   # binding.pry
+  #   if params[:search].present?
+  #    @sub_category = SubCategory.where(sub_category_name: params[:search])
 
-   end
-  end
+  #    # redirect_to edit_admin_category_path(@sub_category)
+  #  else
+  #     @sub_category = @category.sub_categories
+  #          # redirect_to edit_admin_category_path
+
+  #  end
+  # end
 
   def update
     if @category.update_attributes(category_params)
@@ -99,12 +106,12 @@
 
   def edit_sub_category
      # binding.pry
-     @sub = SubCategory.find_by(id: params[:id])
+     @sub_categories = SubCategory.find_by(id: params[:id])
 
   end
 
   def update_sub_category
-    #binding.pry
+    # binding.pry
     sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
     @category = Category.find( params[:sub_categories][:category_id])
      @sub = SubCategory.find_by(id: params[:subcat_id])
@@ -124,7 +131,7 @@
 end
   
   def destroy_sub_category
-    binding.pry
+    # binding.pry
    @sub_category = SubCategory.find(params[:id])
     @sub_category.destroy
    redirect_to admin_categories_path, notice: "Sub Category  deleted successfully"

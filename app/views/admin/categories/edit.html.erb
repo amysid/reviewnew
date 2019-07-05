@@ -33,7 +33,7 @@
           </div>
         <%end%>
         <div id="state" class="tab-pane in fade">
-          <button class="btn btn-primary btn-md pull-right" type="button" data-toggle="modal" data-target="#myModal" id="states" style="margin-right: 1px;">Add Sub Category</button>
+          <button class="btn btn-primary btn-md pull-right" type="button" data-toggle="modal" data-target="#myModal" id="states" style="margin-right: 1px;"><i class="fa fa-plus"></i>Add Sub Category</button>
           <br>
           <div class="state-tab">
 
@@ -42,7 +42,8 @@
         <legend>Filter</legend>
         <div class="filter-form">
         <!-- <form action="/admin/users" method="get" accept-charset="UTF-8" enctype="multipart/form-data" id="web-user-val" class="form-common clearfix"> -->
-         <%= form_tag "/admin/categories/search_sub_categories", method: :get,  class:"form-common clearfix" do  %>
+          <%#binding.pry%>
+         <%= form_tag edit_admin_category_path(id: @category.id), method: :get,  class:"form-common clearfix" do  %>
           <div class="col-sm-3">
             <div class="form-group">
               <label>NAME</label>
@@ -84,8 +85,8 @@
 
                       <!-- <td></td> -->
                   <td><div class="form-add" style="display:inline-block;">
-             <button class="btn btn-primary btn-md state11" type="button" data-toggle="modal" data-target="#editModal" id="<%=m.id%>">Edit</button> 
-              <%= link_to 'Delete', destroy_sub_category_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this country ?"},:class=>"btn btn-danger", method: :delete %></td>
+             <button class="btn btn-primary btn-md state11" type="button" data-toggle="modal" data-target="#editModal" id="<%=m.id%>"><em class="fa fa-edit" aria-hidden="true"></em></button> 
+              <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, destroy_sub_category_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this country ?"},:class=>"btn btn-danger", method: :delete %></td>
 
             <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
              
@@ -103,7 +104,7 @@
                     </tr>
                   </tbody>
                 <%end%>
-              </table>
+              </table>  
             </div>
           </div>
         </div>  
@@ -111,6 +112,7 @@
     </div>
   </div>
 </div>
+
  <!-- Modal -->
   <div class="modal fade in add-modal" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -153,6 +155,8 @@
     </div>
   </div>
 
+
+
   <script>
 $(document).ready(function() {
      $("#admin_edit_category").validate({
@@ -194,7 +198,7 @@ $('.state11').click(function(){
    //alert(state1);
     $.ajax({
                 type: "post",
-                url: "/admin/categories/edit_sub_category",
+                url: "/admin/categories/edit_sub_category"  ,
                 datascript: "js",
                 data: {
                   id: state1

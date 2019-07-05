@@ -10,15 +10,15 @@
 
                  <div class="form-group">
                 <label for="">Sub Category Name<span class="required">*</span> </label>
-                  <%= f.text_field :sub_category_name,  class: "form-control custom-control",  placeholder: "subub Categories Name"%>
+                  <%= f.text_field :sub_category_name,  class: "form-control custom-control",  placeholder: "Sub Categories Name"%>
                  </div>
                <%#= f.hidden_field :id, :value => '@sub.id'  %>
-         <%= f.hidden_field :category_id, :value =>  @sub.category_id %>
-              <input type = "hidden" name = "subcat_id" value = "<%=@sub.id%>">
+         <%= f.hidden_field :category_id, :value =>  @sub_categories.category_id %>
+              <input type = "hidden" name = "subcat_id" value = "<%=@sub_categories.id%>">
                
        
         <div class="modal-footer text-center">
-          <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+          <%= submit_tag 'Update', :class => "btn btn-primary btn-md"%>
         </div>
          </div>
         <%end%>
