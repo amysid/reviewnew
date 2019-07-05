@@ -55,6 +55,19 @@
     @sub_category = @category.sub_categories
   end
 
+  def search_sub_categories
+    binding.pry
+    if params[:search].present?
+     @sub_category = SubCategory.where(sub_category_name: params[:search])
+     
+     # redirect_to edit_admin_category_path(@sub_category)
+   else
+      @sub_category = @category.sub_categories
+           # redirect_to edit_admin_category_path
+
+   end
+  end
+
   def update
     if @category.update_attributes(category_params)
        redirect_to admin_categories_path, notice: 'Category updated Successfully.'

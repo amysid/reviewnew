@@ -35,8 +35,6 @@ gem 'spreadsheet'
 gem "font-awesome-rails"
 gem "recaptcha"
 
-
-
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 gem 'devise', '~> 4.6', '>= 4.6.2'

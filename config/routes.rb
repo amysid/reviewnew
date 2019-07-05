@@ -61,6 +61,7 @@ Rails.application.routes.draw do
         post :update_sub_category
         get :add_category
         post :create_category_details
+        get :search_sub_categories
       end
     end
       get 'homes/index', as: "home_index"
