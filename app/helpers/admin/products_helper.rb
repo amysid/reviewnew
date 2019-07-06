@@ -5,4 +5,6 @@ module Admin::ProductsHelper
 	def all_sub_category
 		SubCategory.all.pluck("sub_category_name")
 	end
+
+	 
 end

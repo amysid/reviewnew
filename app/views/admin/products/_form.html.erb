@@ -13,15 +13,18 @@
   										<div class="row">
   											<label class="col-sm-2 col-md-2 control-label">Category</label>
   											<div class="col-sm-8 col-md-8">
-                          <%= f.select("person_id", Category.all.collect {|p| [ p.category_name, p.id ] }, {:include_blank => "All Category Name" },{:class => "form-control shubham"}) %>
+                             <%#= hidden_field_tag @id = user.id %>
+                          <%= f.select("category_name", Category.all.collect {|p| [p.category_name] }, {:include_blank => "All Category Name" },{:class => "form-control shubham"}) %>
   											</div>
   										</div>
   									</div>
                     <div class="form-group">
+                    	                   <%# @sub_category.each do |faqs| %>
   										<div class="row">
+  											<%#=sub_categories_by_category%>
   											<label class="col-sm-2 col-md-2 control-label">Sub_category</label>
   											<div class="col-sm-8 col-md-8">
-  											<%= f.select("sub_category", all_sub_category, {:include_blank => "All SubCategory Name"}, {:class => "form-control"}) %>
+  											<%= f.select("sub_category", all_sub_category, {:include_blank => "All SubCategory Name"}, {:class => "form-control select-dropdown"}) %>
   											</div>
   										</div>
   									</div>
@@ -119,8 +122,8 @@
   $('#1').click();
 
  
-  $('.shubham').click(function(){
-    var id=$(this).attr("id");
+  $('.shubham').change(function(){
+    var id=this.value;
     $.ajax({
          url: '/admin/products/sub_categories_by_category',
          type: 'get',
