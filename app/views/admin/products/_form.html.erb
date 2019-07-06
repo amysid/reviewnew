@@ -1,0 +1,140 @@
+<section class="content-header">
+    <h1>Add Product</h1>
+</section>
+  <section class="content">
+    <div class="box box-info">
+    <div class="box-body">
+      <div class="tab-content">
+  				<div class="tab-pane fade active in" id="default-tab-1">
+  					<div class="tab-pane">
+  							<%= form_for :products, url: admin_products_path, method: :post, html:  {id: "admin_product"}  do |f| %>
+  								<div class="detail-form m-t-40 m-b-40">
+                    <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Category</label>
+  											<div class="col-sm-8 col-md-8">
+                          <%= f.select("person_id", Category.all.collect {|p| [ p.category_name, p.id ] }, {:include_blank => "All Category Name" },{:class => "form-control shubham"}) %>
+  											</div>
+  										</div>
+  									</div>
+                    <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Sub_category</label>
+  											<div class="col-sm-8 col-md-8">
+  											<%= f.select("sub_category", all_sub_category, {:include_blank => "All SubCategory Name"}, {:class => "form-control"}) %>
+  											</div>
+  										</div>
+  									</div>
+  									 <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Product Name</label>
+  											<div class="col-sm-8 col-md-8">
+  											<%= f.text_field :product_name, class: "form-control", placeholder: "Product Name" %>
+  											</div>
+  										</div>
+  									</div>
+  									 <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Image</label>
+  											<div class="col-sm-8 col-md-8">
+  											 <label for="file-upload" class="custom-file-upload col-sm-2 col-md-2 control-label">
+                                            <img src="/assets/photo_gallery.webp" alt="Image Not Found" id="user_pic"  onchange = "preview_image(this)" height=100px width=200px />
+                                           <%= f.file_field :image, onchange: "preview_image(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+                                           </label>
+  											</div>
+  										</div>
+  									</div>
+  									 <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Video</label>
+  											<div class="col-sm-8 col-md-8">
+  											  <label for="file-upload" class="custom-file-upload col-sm-2 col-md-2 control-label">
+                                            <video src="/assets/video.webm" class="" alt="Image Not Found" id="user_video"  onchange = "preview_video(this)" height=100px width=200px autoplay="autoplay" />
+                                           <%= f.file_field :video, onchange: "preview_video(this)" , style: "display:none" , id: "file-upload" %>
+                                           </label>
+  											</div>
+  										</div>
+  									</div>
+  									 <div class="form-group">
+  										<div class="row">
+  										   <label class="col-sm-2 col-md-2 control-label">Launching/Release Date</label>
+  											<div class="col-sm-8 col-md-8">
+  											<div class="input-group date">
+                                            <div class="input-group-addon">
+                                           <em class="fa fa-calendar"></em>
+                                       </div>
+                                      <%= f.text_field :start,class: "form-control datetimepicker_start",placeholder:"Select Date",value: (params.dig :search, :start), autocomplete: :off,data: { provide: 'datepicker'} %>
+                                   </div>
+  											</div>
+  										</div>
+  									</div>
+  									 <div class="form-group">
+  										<div class="row">
+  											<label class="col-sm-2 col-md-2 control-label">Description</label>
+  											<div class="col-sm-8 col-md-8">
+  											 <%= f.cktext_area :answer, class: "form-control", placeholder: "" %>
+  											</div>
+  										</div>
+  									</div>
+                    <div class="form-group">
+  										<div class="text-center attendee-cent-s">
+  											<button class="btn btn-success" type="submit">Submit</button>
+                        <a href="/admin/products" class="btn btn-danger">Cancle</a>
+                      </div>
+									</div>
+								</div>
+							<%end%>
+						</div>
+  				</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script type="text/javascript">
+  function preview_image(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#user_pic')
+                       .attr('src', e.target.result);
+               };
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       function preview(input) {
+           if (input.files && input.files[0]) {
+               var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#user_video')
+                       .attr('src', e.target.result);
+               };
+
+               reader.readAsDataURL(input.files[0]);
+           }
+       }
+       $(document).ready(function(){
+  //alert("hello bhai");
+  $('#1').click();
+
+ 
+  $('.shubham').click(function(){
+    var id=$(this).attr("id");
+    $.ajax({
+         url: '/admin/products/sub_categories_by_category',
+         type: 'get',
+         data: {
+          id: id
+         }
+        
+      });
+    });
+ });
+
+</script>
+<style type="text/css">
+	select {
+    width: 795px;
+}
+</style>

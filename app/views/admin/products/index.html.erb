@@ -1,0 +1,77 @@
+<div class="content-wrapper2">
+   <!-- Content Header (Page header) -->
+   <section class="content-header">
+      <div class="clearfix">
+        <div class="global-heading user-head">Product Management</div>
+        <div class="aduser-btn"><a href="/admin/products/new" class="btn btn-add"><i class="fa fa-plus"></i>Add Product</a></div>
+      </div>
+      <div class="clearfix box box-primary">
+        <fieldset class="global-fieldset">
+        <legend>Filter</legend>
+        <div class="filter-form">
+        <!-- <form action="/admin/users" method="get" accept-charset="UTF-8" enctype="multipart/form-data" id="web-user-val" class="form-common clearfix"> -->
+         <%= form_tag "/admin/products", method: :get,  class:"form-common clearfix" do  %>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>NAME</label>
+              <!-- <input type="text" class="form-control custom-control " name="user_name"> -->
+              <input type="text" name="search" class="form-control custom-control" placeholder="SEARCH BY PRODUCTS NAME" id="country_serch">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="filter-btn">
+              <button class="btn btn-primary"> <i class="fa fa-search"></i> Filter </button>
+              <a href="/admin/products" class="btn btn-danger">Cancle</a>
+            </div>
+          </div>
+        <!-- </form> -->
+        <%end%>
+      </div>
+    </fieldset>
+      </div>
+   </section>
+   <!-- Main content -->
+
+   <section class="content">
+    <div class="box box-info">
+           <div class="box-body">
+           <div class="table-responsive ">
+             <table id="example2" class="table table-bordered table-hover ">
+               <thead>
+                 <tr style="background-color: #D9D7D7;">
+                <th>Sr No.</th>
+           		  <th>Product Name</th>
+                <th>Category Name</th>
+           		  <th>SubCategory Name</th>
+           		  <th>Trending</th>
+           		  <th>Action</th>
+           			</tr>
+               </thead>
+               <%# @faqs.each do |faqs| %>
+           			<%# unless @faqs.eql?(nil) %>
+           				<tbody>
+           					<tr class="even">
+                      <td><%#= @s_no += 1 %></td>
+           						<td style="max-width: 150px;word-break: break-all;"><%#=truncate(strip_tags(faqs&.question), omision: "...", length: 20).html_safe %> </td>
+           						<td style="max-width: 150px;word-break: break-all;"><%#= truncate(strip_tags(faqs&.answer), omision: "...", length: 20) %> </td>
+           						<td></td>
+           						<td></td>
+           						<td class="cell-action-btn">
+                         <a href="/admin/faqs/<%#= faqs.id%>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true"></em></a> 
+           							<a href="/admin/faqs/<%#= faqs.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true"></em></a>
+           							<a>
+           							<%#= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_faq_path(faqs.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a></td>
+           					</tr>
+           				</tbody>
+           			<%#end%>
+           		<%#end%>
+           	</table>
+            </div>
+             <div class="digg_pagination pull-right">
+                    <%#= will_paginate @faqs %>
+            </div>
+           </div>
+         </div>
+   </section>
+ </div>
+ 

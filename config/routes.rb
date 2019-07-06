@@ -64,6 +64,11 @@ Rails.application.routes.draw do
         get :search_sub_categories
       end
     end
+    resources :products do
+      collection do
+        get :sub_categories_by_category
+      end
+    end
       get 'homes/index', as: "home_index"
   end
    resources :homes do
