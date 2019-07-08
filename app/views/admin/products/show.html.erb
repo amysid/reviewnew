@@ -1,0 +1,47 @@
+<section class="content-header">
+  <h1>Show Product Details</h1>
+</section>
+<section class="content">
+<div class="box box-info">
+  <div class="box-body box-profile">
+    <div class="profile-box">
+      <div class="profile-inner clearfix">
+        <div class="user-detail-block">
+          <div class="p-blocks">
+            <label class="view-a left-a">Product Name: </label>
+            <span class="view-a right-a"><%=@products.product_name%></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Category: </label>
+            <span class="view-a right-a"><%= @products.category%></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Sub-Category: </label>
+            <span class="view-a right-a"><%= @products.sub_category%></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Images: </label>
+            <span class="view-a right-a"><%= @products&.image %></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Videos: </label>
+            <br>
+            <span class="view-a right-a"><%= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Date: </label>
+            <span class="view-a right-a"><%#= @products&.date.strftime("%m/%d/%Y")%></span>
+          </div>
+          <div class="p-blocks">
+            <label class="view-a left-a">Description: </label>
+            <span class="view-a right-a"><%= sanitize(@products&.description)%></span>
+          </div>
+        </div>
+      </div>
+      </div>
+      <br>
+      <br>
+      <a href="/admin/products" class="btn btn-danger"style="margin-left: 550px;">Back</a>
+  </div>
+</div>
+</section>
