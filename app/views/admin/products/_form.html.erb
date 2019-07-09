@@ -7,7 +7,7 @@
       <div class="tab-content">
   				<div class="tab-pane fade active in" id="default-tab-1">
   					<div class="tab-pane">
-  							<%= form_for :products, url: admin_products_path, method: :post, html:  {id: "admin_product"}  do |f| %>
+  							<%= nested_form_for @products, url: admin_products_path, method: :post, html:  {id: "admin_product"}  do |f| %>
   								<div class="detail-form m-t-40 m-b-40">
                     <div class="form-group">
   										<div class="row">
@@ -25,7 +25,7 @@
   											<label class="col-sm-2 col-md-2 control-label">Sub_category</label>
   											<div class="col-sm-8 col-md-8">
                           <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
-  											<%= f.select :sub_category, options_for_select([], @product&.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "idiot_shubham"} %>
+  											<%= f.select :sub_category, options_for_select([]), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "idiot_shubham"} %>
   											</div>
   										</div>
   									</div>
@@ -39,15 +39,17 @@
   									</div>
   									 <div class="form-group">
   										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Image</label>
+  											<label class="col-sm-2 col-m d-2 control-label">Image</label>
   											<div class="col-sm-8 col-md-8">
   											<label for="file-upload" class="custom-file-upload ">
-                            <%= f.fields_for :image_attributes do |m| %>
-                            <img src="/assets/user_no_image.png" class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
-                            <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+                            <%= f.fields_for :image do |m| %>
+                          <img src="/assets/photo_gallery.webp"  alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=200px /><!-- <i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i> -->
+                            <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*", id: "file-upload"%>
+                             <%= m.link_to_remove "Remove", class: "btn btn-danger margin"  %>
                           <%end%>
                        </label>
-  											</div>
+                       <p><%= f.link_to_add "Add Image", :image, class: "btn btn-primary" %></p>
+                        </div>
   										</div>
   									</div>
   									 <div class="form-group">
@@ -55,8 +57,7 @@
   											<label class="col-sm-2 col-md-2 control-label">Video</label>
   											<div class="col-sm-8 col-md-8">
   											  <%= f.file_field :video, id: "file-upload" %>
-                                          
-  											</div>
+                        </div>
   										</div>
   									</div>
   									 <div class="form-group">
@@ -83,7 +84,7 @@
                     <div class="form-group">
   										<div class="text-center attendee-cent-s">
   											<button class="btn btn-success" type="submit">Submit</button>
-                        <a href="/admin/products" class="btn btn-danger">Cancle</a>
+                        <a href="/admin/products" class="btn btn-danger">Cancel</a>
                       </div>
 									</div>
 								</div>
@@ -96,10 +97,12 @@
   </section>
 
 <script type="text/javascript">
+  debugger;
   function preview(input) {
            if (input.files && input.files[0]) {
                var reader = new FileReader();
                  reader.onload = function (e) {
+                  debugger;
                    $('#user_pic')
                        .attr('src', e.target.result);
                };

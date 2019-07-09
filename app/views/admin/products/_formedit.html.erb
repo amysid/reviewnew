@@ -7,7 +7,7 @@
       <div class="tab-content">
   				<div class="tab-pane fade active in" id="default-tab-1">
   					<div class="tab-pane">
-  							<%= form_for :products, url: admin_products_path, method: :post, html:  {id: "admin_product"}  do |f| %>
+  							<%= form_for :products, url: admin_product_path, method: :patch, html:  {id: "admin_product"}  do |f| %>
   								<div class="detail-form m-t-40 m-b-40">
                     <div class="form-group">
   										<div class="row">
@@ -40,9 +40,12 @@
   										<div class="row">
   											<label class="col-sm-2 col-md-2 control-label">Image</label>
   											<div class="col-sm-8 col-md-8">
-  											<label for="file-upload" class="custom-file-upload ">
-                   <img src='/assets/photo_gallery.webp' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=250px />
+  											 <label for="file-upload" class="custom-file-upload ">
+                          <% @images.each do |image|%>
+                              <%= image_tag image.file_url, width: "200px;", height: "100px;" %>
+                          <%end%>
                  <%= f.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+              </label>
               </label>
   											</div>
   										</div>
@@ -51,7 +54,10 @@
   										<div class="row">
   											<label class="col-sm-2 col-md-2 control-label">Video</label>
   											<div class="col-sm-8 col-md-8">
-  											  <%= f.file_field :video, id: "file-upload" %>
+                          <label for="file-upload" class="custom-file-upload ">
+                        <%= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%>
+                        <%= f.file_field :video, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+                         </label>
                                           
   											</div>
   										</div>
