@@ -13,37 +13,50 @@ class Admin::ProductsController < ApplicationController
     end
 
     def new
+       @products = Product.new
+        @products.image&.build
     end
 
     def show
-      #@products = Product.find_by(id: params[:id])
+     @images = @products.image.all
+      # binding.pry
     end
      
-     def edit
-      binding.pry
-     #@products = Product.find_by(id: params[:id]) 
-     end
+    def edit
+      @images = @products.image.all
+      # binding.pry
+    end
+
     def create
       binding.pry
       @products = Product.new(product_params)
       if @products.save
-         redirect_to admin_products_path
+         redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"
        else
        	  redirect_to new_admin_product_path
        	  flash[:notice] = "product not created" 
        end
-
-    end
+     end
  
    def destroy
-      # @products = Product.find_by(id: params[:id])
+    # binding.pry
       if @products.destroy
              redirect_to admin_products_path
           else
              redirect_to admin_products_path
-           end
+      end
    end
+
+    def update
+          binding.pry
+        if @products.update_attributes(update_product)
+            redirect_to admin_products_path, notice: 'Products Updated Successfully.'
+          else
+               flash[:notice] = @products.errors.full_messages
+               render 'edit'
+            end
+         end
 
     def sub_categories_by_category
      product =Category.find_by(category_name: params[:id]).sub_categories
@@ -52,7 +65,10 @@ class Admin::ProductsController < ApplicationController
  
  private
  def product_params 
- 	params.require(:products).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
+ 	params.require(:product).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
+ end
+ def update_product 
+  params.require(:products).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
  end
  def find_products
     @products = Product.find_by(id: params[:id])
