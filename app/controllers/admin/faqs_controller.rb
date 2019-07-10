@@ -32,15 +32,18 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
   			if @faqs.update_attributes(faq_params)
         		redirect_to admin_faqs_path, notice: 'faqs updated Successfully.'
       		else
-        	     flash[:notice] = @faqs.errors.full_messages
+        	     flash[:alert] = @faqs.errors.full_messages
         	     render 'edit'
+               flash[:notice] = "faq is not update"
       	    end
          end
 
         def destroy
   	       if @faqs.destroy
+             flash[:notice] = "Faq delete succesfully"
   		       redirect_to admin_faqs_path
   	      else
+            flash[:alert] = @faqs.errors.full_messages
   		       redirect_to admin_faqs_path
   	       end
         end

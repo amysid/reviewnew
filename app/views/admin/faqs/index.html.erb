@@ -29,10 +29,10 @@
            						<td style="max-width: 150px;word-break: break-all;"><%=truncate(strip_tags(faqs&.question), omision: "...", length: 20).html_safe %> </td>
            						<td style="max-width: 150px;word-break: break-all;"><%= truncate(strip_tags(faqs&.answer), omision: "...", length: 20) %> </td>
            						<td class="cell-action-btn">
-                         <a href="/admin/faqs/<%= faqs.id%>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true"></em></a> 
-           							<a href="/admin/faqs/<%= faqs.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true"></em></a>
+                         <a href="/admin/faqs/<%= faqs.id%>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
+           							<a href="/admin/faqs/<%= faqs.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></a>
            							<a>
-           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_faq_path(faqs.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a></td>
+           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_faq_path(faqs.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Faq?' }%></a></td>
            					</tr>
            				</tbody>
            			<%end%>

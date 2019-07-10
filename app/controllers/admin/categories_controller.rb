@@ -42,8 +42,9 @@
         if @category.save
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
         else
-           flash[:notice] = @category.errors.full_messages.first
+           flash[:alert] = @category.errors.full_messages
            render :new
+           flash[:notice] = "Category is not Create"
         end
       end
   end   
@@ -81,8 +82,9 @@
     if @category.update_attributes(category_params)
        redirect_to admin_categories_path, notice: 'Category updated Successfully.'
     else
-       flash[:notice] = @faqs.errors.full_messages
+       flash[:alert] = @category.errors.full_messages
        render 'edit'
+       flash[:notice] = "Category is not update."
     end
   end
 
@@ -99,8 +101,9 @@
         flash[:notice] = "sub category created successfullly."
         redirect_to admin_categories_path
       else
-        flash[:notice] = "Unable to create sub category."
+        flash[:alert] = @category.errors.full_messages
         redirect_to new_admin_category_path
+        flash[:notice] = "Unable to create sub category."
       end
     end
   end
@@ -125,8 +128,9 @@
        flash[:notice] = "sub category update successfullly."
         redirect_to admin_categories_path
       else
-        flash[:notice] = "Unable to create sub category."
+        flash[:alert] = @sub.errors.full_messages
         redirect_to new_admin_category_path
+        flash[:notice] = "sub category is not update"
       end
 
   end

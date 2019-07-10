@@ -38,7 +38,7 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         post :import
-        get :feedback
+        # get :feedback
       end
     member do
         get :status
@@ -47,11 +47,12 @@ Rails.application.routes.draw do
         patch :update_admin_profile
         patch :type_user
         patch :expert_user
-        get :show_feedback
-        delete :destroy_feedback
+        # get :show_feedback
+        # delete :destroy_feedback
       end
     end
     resources :faqs
+    resources :feedbacks
     resources :static_content
     resources :categories do
       collection do
@@ -67,6 +68,11 @@ Rails.application.routes.draw do
     resources :products do
       collection do
         get :sub_categories_by_category
+      end
+      member do 
+        patch :publish
+        patch :unpublish
+        patch :trending
       end
     end
       get 'homes/index', as: "home_index"

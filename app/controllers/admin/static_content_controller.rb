@@ -20,7 +20,7 @@ class Admin::StaticContentController < ApplicationController
          flash[:notice] = "StaticContent Update Succesfully"
         else
          flash[:alert] = @user.errors.full_messages
-         redirect_to admin_static_content_index_path
+         render 'edit'
          flash[:notice] = "StaticContent not update Succesfully"
         end
     end

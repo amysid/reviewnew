@@ -12,6 +12,8 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :description,  null: false, default: ""
       t.string :comment,      null: false, default: ""
       t.boolean :trending,    null: false, default: "Yes"
+      t.string :current,      null: false, default: "unpublish"
+
       # t.references :sub_category, foreign_key: true, type: :uuid
       # t.references :category, froegin_key: true, type: :uuid
       t.timestamps

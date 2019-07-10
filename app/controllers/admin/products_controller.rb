@@ -6,9 +6,9 @@ class Admin::ProductsController < ApplicationController
     def index
       @s_no = 0
       if params[:search].present?
-          @products = Product.where(product_name: params[:search])
+        @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
       else
-      @products = Product.all
+      @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
       end
     end
 
@@ -34,6 +34,7 @@ class Admin::ProductsController < ApplicationController
          redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"
        else
+          flash[:alert] = @products.errors.full_messages
        	  redirect_to new_admin_product_path
        	  flash[:notice] = "product not created" 
        end
@@ -63,6 +64,22 @@ class Admin::ProductsController < ApplicationController
      render json: product
     end
  
+   def publish
+    # binding.pry
+    Product.find_by(id: params[:id]).update(current: "unpublish")
+    redirect_to admin_products_path
+      flash[:notice] = "Unpublish mode Successfully"
+   end
+
+   def unpublish
+    Product.find_by(id: params[:id]).update(current: "publish")
+    redirect_to admin_products_path
+    flash[:notice] = "Publish mode Successfully"
+   end
+
+   def trending
+    binding.pry
+   end
  private
  def product_params 
  	params.require(:product).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])

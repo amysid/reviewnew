@@ -15,7 +15,7 @@
             <div class="form-group">
               <label>NAME</label>
               <!-- <input type="text" class="form-control custom-control " name="user_name"> -->
-              <input type="text" name="search" class="form-control custom-control" placeholder="SEARCH BY PRODUCTS NAME" id="country_serch">
+              <input type="text" name="search" class="form-control custom-control" placeholder="Search by Product Name,Category,SubCategory" id="country_serch">
             </div>
           </div>
           <div class="col-sm-3">
@@ -57,10 +57,16 @@
                       <td><%= product&.sub_category %></td>
            						<td><%= product&.trending %></td>
            						<td class="cell-action-btn">
-                         <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true"></em></a> 
-           							<a href="/admin/products/<%= product.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true"></em></a>
+                         <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
+           							<a href="/admin/products/<%= product.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></a>
            							<a>
-           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a></td>
+           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Faq?' }%></a>
+                        <% if product.current == "publish" %>
+                       <%= link_to 'Publish'.html_safe, publish_admin_product_path(product), method: :patch, class: "btn btn-warning", title: "Publish Mode", data: {confirm: "Are you sure want to be change the Unpublish mode"} %>
+                       <%else%>
+                        <%= link_to "Unpublish".html_safe, unpublish_admin_product_path(product), method: :patch, class: "btn btn-success", id: 'btnsubmit', title: "Unpublish Mode", data: {confirm: "Are you sure want to be change the publish mode"} %>
+                         <%end%>
+                       
            					</tr>
            				</tbody>
            			<%end%>
@@ -68,7 +74,7 @@
            	</table>
             </div>
              <div class="digg_pagination pull-right">
-                    <%#= will_paginate @faqs %>
+                    <%= will_paginate @products %>
             </div>
            </div>
          </div>

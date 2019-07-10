@@ -7,7 +7,7 @@
     <div class="box box-info" style=" ">
     <br>
     <div class="row">
-            <%= form_with url: feedback_admin_users_path, method: :get  , local: true do |f| %>
+            <%= form_with url:admin_feedbacks_path, method: :get  , local: true do |f| %>
             <div class="col-sm-3">
             <div class="form-group">
               <label>Search by date:</label>
@@ -34,7 +34,7 @@
                <button class="btn btn-primary">Search</button>
             </div>
             <div class="col-sm-1">
-                             <a href="/admin/users/feedback" class="btn btn-danger">Cancel</a>
+                             <a href="/admin/feedbacks" class="btn btn-danger">Cancel</a>
             </div>
          <!-- </div> -->
       <% end %>
@@ -55,9 +55,6 @@
                  <tr style="background-color: #D9D7D7;">
                   <th>Sr No.</th>
                   <th>Feedback </th>
-                  <!-- <th>User Feedback</th> -->
-                  <!-- <th>Method</th> -->
-                  <!-- <th>Tokens</th> -->
                   <th>Date</th>
            				<th>Action</th>
            			</tr>
@@ -72,9 +69,9 @@
                      <td><%= feedback.created_at.strftime("%d/%m/%Y")%></td>
                      <td>
                         <div class="action-btn">
-                          <a href="/admin/users/<%= feedback.id %>/show_feedback" ><em class="fa fa-eye btn btn-success" aria-hidden="true"></em></a>
+                        <a href="/admin/feedbacks/<%= feedback.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
                         <a>
-                        <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  destroy_feedback_admin_user_path(feedback.id), method: :delete,:class=>"btn btn-danger", data: {confirm: 'Are you sure to delete this Faq?' }%></a>
+                        <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_feedback_path(feedback.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Feedback?' }%></a>
                         </div>
                      </td>
            					</tr>
