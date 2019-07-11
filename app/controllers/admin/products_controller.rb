@@ -4,9 +4,11 @@ class Admin::ProductsController < ApplicationController
   layout 'admin_lte_2'
 
     def index
+      # binding.pry
       @s_no = 0
       if params[:search].present?
-        @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
+        # @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
+         @products = Product.where(product_name: params[:search])
       else
       @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
       end
@@ -50,7 +52,7 @@ class Admin::ProductsController < ApplicationController
    end
 
     def update
-          binding.pry
+          # binding.pry
         if @products.update_attributes(update_product)
             redirect_to admin_products_path, notice: 'Products Updated Successfully.'
           else
@@ -82,10 +84,10 @@ class Admin::ProductsController < ApplicationController
    end
  private
  def product_params 
- 	params.require(:product).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
+ 	params.require(:product).permit(:category, :sub_category, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])
  end
  def update_product 
-  params.require(:products).permit(:category, :sub_category, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
+  params.require(:products).permit(:category, :sub_category, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])
  end
  def find_products
     @products = Product.find_by(id: params[:id])

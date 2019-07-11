@@ -3,9 +3,10 @@ class Web::UsersController < ApplicationController
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end
+    @category = Category.all
   end
   
-    
+
     def check_email
         @user = User.pluck(:email)
         if @user.include?(params[:user][:email])

@@ -781,7 +781,6 @@ a.yellow-text:hover{
 @media (min-width: 1200px) {
     .home-slider {
         height: 700px;
-        margin-top: -22px;
     }
     .home-wrap {
         max-width: 1200px;

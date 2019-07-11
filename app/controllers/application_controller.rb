@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
     around_action :convert_flash, if: :check_flash
 
 
-
+     
     
-    protected
+    protected 
     def configure_permitted_parameters
          devise_parameter_sanitizer.permit(:sign_up) { |u| u.permit(:name, :email, :password, :password_confirmation)}
          devise_parameter_sanitizer.permit(:account_update) { |u| u.permit(:name, :email, :password, :current_password, :password_confirmation, image_attributes: [:id, :file, :_destroy])}
