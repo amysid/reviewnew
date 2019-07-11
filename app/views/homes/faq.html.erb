@@ -12,7 +12,7 @@
               </div>
               <div id="aa<%= faq.id%>" class="collapse <%= show%>" aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                  <%= faq&.answer%>
+                  <%= sanitize(faq&.answer)%>
                 </div>
               </div>
             </div>

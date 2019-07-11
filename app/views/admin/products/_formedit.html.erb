@@ -55,7 +55,7 @@
   											<label class="col-sm-2 col-md-2 control-label">Video</label>
   											<div class="col-sm-8 col-md-8">
                           <label for="file-upload" class="custom-file-upload ">
-                        <%= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%>
+                        <%#= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%>
                         <%= f.file_field :video, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
                          </label>
                                           

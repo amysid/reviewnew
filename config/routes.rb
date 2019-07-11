@@ -38,6 +38,7 @@ Rails.application.routes.draw do
     resources :users do
       collection do
         post :import
+        get :change_admin_password
         # get :feedback
       end
     member do

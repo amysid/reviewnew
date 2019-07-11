@@ -32,11 +32,11 @@
           <div class="p-blocks">
             <label class="view-a left-a">Videos: </label>
             <br>
-            <span class="view-a right-a"><%= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%></span>
+            <span class="view-a right-a"><%#= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%></span>
           </div><br>
           <div class="p-blocks">
             <label class="view-a left-a">Launching Date: </label>
-            <span class="view-a right-a"><%= @products&.created_at&.strftime("%d/%m/%Y")%></span>
+            <span class="view-a right-a"><%= @products&.updated_at&.strftime("%d/%m/%Y")%></span>
           </div><br>
           <div class="p-blocks">
             <label class="view-a left-a">Description: </label>
