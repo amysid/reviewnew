@@ -3,6 +3,8 @@ class CreateProducts < ActiveRecord::Migration[5.2]
     create_table :products, id: :uuid do |t|
      t.integer :rate_count
       t.integer :review_count
+      t.string :category_name, null: false, default: ""
+      t.string :sub_category_name, null: false, default: ""
       t.string :product_name, null: false, default: ""
       t.string :video,        null: false, default: ""
       t.string :description,  null: false, default: ""

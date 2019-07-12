@@ -14,8 +14,9 @@
   											<label class="col-sm-2 col-md-2 control-label">Category</label>
   											<div class="col-sm-8 col-md-8">
                              <%#= hidden_field_tag @id = user.id %>
-                          <%= f.select :category_id, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham" , id: "category_name_ajax"} %>
+                          <%= f.select :category_name, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham" , id: "category_name_ajax"} %>
   											</div>
+                          <%#= f.hidden_field :category_id, :value =>  @category.id %>
   										</div>
   									</div>
                     <div class="form-group">
@@ -25,7 +26,7 @@
   											<label class="col-sm-2 col-md-2 control-label">Sub_category</label>
   											<div class="col-sm-8 col-md-8">
                           <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
-  											<%= f.select :sub_category_id, options_for_select([]), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "idiot_shubham"} %>
+  											<%= f.select :sub_category_name, options_for_select([]), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham"} %>
   											</div>
   										</div>
   									</div>
@@ -43,8 +44,14 @@
   											<div class="col-sm-8 col-md-8">
   											<label for="file-upload" class="custom-file-upload ">
                             <%= f.fields_for :image do |m| %>
-                          <img src="/assets/photo_gallery.webp"  alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=200px /><i class="" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
-                            <%= m.file_field :file, onchange: "preview(this)" , accept: "image/*", id: "file-upload"%>
+                          <!-- <img src="/assets/photo_gallery.webp"  alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=200px /><i class="" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i> -->
+                            <%#= m.file_field :file, onchange: "preview(this)" , accept: "image/*", id: "file-upload"%>
+                            <div id="file1">
+                               <img class="img_prev" src="/assets/photo_gallery.webp" height=100px width=200px alt="your image" />
+                              <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>
+                                 <!-- <input type='file' onchange="readURL(this);" />  -->
+                          
+                               </div>
                              <%= m.link_to_remove "Remove", class: "btn btn-danger margin"  %>
                           <%end%>
                        </label>
@@ -55,9 +62,10 @@
   									 <div class="form-group">
   										<div class="row">
   											<label class="col-sm-2 col-md-2 control-label">Video</label>
-  											<div class="col-sm-8 col-md-8">
+                       
+  											 <div class="col-sm-8 col-md-8">
   											  <%= f.file_field :video, id: "file-upload" %>
-                        </div>
+                        </div> 
   										</div>
   									</div>
   									 <!-- <div class="form-group">
@@ -98,6 +106,17 @@
 
 <script type="text/javascript">
   debugger;
+  function readURL(input) {
+ if (input.files && input.files[0]) {
+ var reader = new FileReader();
+ reader.onload = function (e) {
+ $(input).parent().find('.img_prev') //finds the parent div and gets the img_prev contained inside 
+.attr('src', e.target.result) 
+.width(150) 
+.height(200);
+ }; 
+reader.readAsDataURL(input.files[0]); } 
+} 
   function preview(input) {
            if (input.files && input.files[0]) {
                var reader = new FileReader();
@@ -128,10 +147,10 @@
 
          success: function(result){
           var newOptions = result;
-          $('#idiot_shubham').empty();
-          var sub_category = $('#idiot_shubham');
+          $('#ror_shubham').empty();
+          var sub_category = $('#ror_shubham');
           $.each(newOptions, function(key,value) {
-              sub_category.append($("<option></option>").attr("value", value.category_id).text(value.sub_category_name));
+              sub_category.append($("<option></option>").attr("value", value.sub_category_id).text(value.sub_category_name));
           });
         }
         

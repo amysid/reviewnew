@@ -53,8 +53,8 @@
            					<tr class="even">
                       <td><%= @s_no += 1 %></td>
            						<td><%= product.product_name %></td>
-                      <td><%= product&.category %></td>
-                      <td><%= product&.sub_category %></td>
+                      <td><%= product&.category_name %></td>
+                      <td><%= product&.sub_category_name %></td>
            						<td><%= product&.trending %></td>
            						<td class="cell-action-btn">
                          <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 

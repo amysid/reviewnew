@@ -5,100 +5,135 @@
     <div class="box box-info">
     <div class="box-body">
       <div class="tab-content">
-  				<div class="tab-pane fade active in" id="default-tab-1">
-  					<div class="tab-pane">
-  							<%= form_for :products, url: admin_product_path, method: :patch, html:  {id: "admin_product"}  do |f| %>
-  								<div class="detail-form m-t-40 m-b-40">
+          <div class="tab-pane fade active in" id="default-tab-1">
+            <div class="tab-pane">
+                <%= nested_form_for @products, url: admin_product_path, method: :patch, html:  {id: "admin_product"}  do |f| %>
+                  <div class="detail-form m-t-40 m-b-40">
                     <div class="form-group">
-  										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Category</label>
-  											<div class="col-sm-8 col-md-8">
+                      <div class="row">
+                        <label class="col-sm-2 col-md-2 control-label">Category</label>
+                        <div class="col-sm-8 col-md-8">
                              <%#= hidden_field_tag @id = user.id %>
-                          <%= f.select :category, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham"} %>
-  											</div>
-  										</div>
-  									</div>
+                          <%= f.select :category_name, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham" , id: "category_name_ajax"} %>
+                        </div>
+                          <%#= f.hidden_field :category_id, :value =>  @category.id %>
+                      </div>
+                    </div>
                     <div class="form-group">
-                    	                   
-  										<div class="row">
-  											
-  											<label class="col-sm-2 col-md-2 control-label">Sub_category</label>
-  											<div class="col-sm-8 col-md-8">
-  											<%= f.select :sub_category, options_for_select([], @product&.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown"} %>
-  											</div>
-  										</div>
-  									</div>
-  									 <div class="form-group">
-  										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Product Name</label>
-  											<div class="col-sm-8 col-md-8">
-  											<%= f.text_field :product_name, class: "form-control", placeholder: "Product Name" %>
-  											</div>
-  										</div>
-  									</div>
-  									 <div class="form-group">
-  										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Image</label>
-  											<div class="col-sm-8 col-md-8">
-  											 <label for="file-upload" class="custom-file-upload ">
-                          <% @images.each do |image|%>
-                              <%= image_tag image.file_url, width: "200px;", height: "100px;" %>
+                                         <%# @sub_category.each do |faqs| %>
+                      <div class="row">
+                        <%#=sub_categories_by_category%>
+                        <label class="col-sm-2 col-md-2 control-label">Sub_category</label>
+                        <div class="col-sm-8 col-md-8">
+                          <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
+                        <%= f.select :sub_category_name, options_for_select([]), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham"} %>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <div class="row">
+                        <label class="col-sm-2 col-md-2 control-label">Product Name</label>
+                        <div class="col-sm-8 col-md-8">
+                        <%= f.text_field :product_name, class: "form-control", placeholder: "Product Name" %>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <div class="row">
+                        <label class="col-sm-2 col-m d-2 control-label">Image</label>
+                        <div class="col-sm-8 col-md-8">
+                        <label for="file-upload" class="custom-file-upload ">
+                            <%= f.fields_for :image do |m| %>
+                          <!-- <img src="/assets/photo_gallery.webp"  alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=200px /><i class="" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i> -->
+                            <%#= m.file_field :file, onchange: "preview(this)" , accept: "image/*", id: "file-upload"%>
+                            <div id="file1">
+                              <%#binding.pry%>
+                               <%#= image_tag ((m.object.image.present? && m.object.image_url.present?) ? m.object.image_url : "/assets/photo_gallery.webp" ) %>
+                               <img class="img_prev" src="/assets/photo_gallery.webp" height=100px width=200px alt="your image"/>
+                              <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>
+                                 <!-- <input type='file' onchange="readURL(this);" />  -->
+                          
+                               </div>
+                             <%= m.link_to_remove "Remove", class: "btn btn-danger margin"  %>
                           <%end%>
-                 <%= f.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-              </label>
-              </label>
-  											</div>
-  										</div>
-  									</div>
-  									 <div class="form-group">
-  										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Video</label>
-  											<div class="col-sm-8 col-md-8">
-                          <label for="file-upload" class="custom-file-upload ">
-                        <%#= video_tag @products&.video_url, controls: true, autoplay: false, width: "300px", height: "200px"%>
-                        <%= f.file_field :video, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-                         </label>
-                                          
-  											</div>
-  										</div>
-  									</div>
-  									 <!-- <div class="form-group">
-  										<div class="row">
-  										   <label class="col-sm-2 col-md-2 control-label">Launching/Release Date</label>
-  											<div class="col-sm-8 col-md-8">
-  											<div class="input-group date">
+                       </label>
+                       <p><%= f.link_to_add "Add Image", :image, class: "btn btn-primary" %></p>
+                        </div>
+                      </div>
+                    </div>
+                     <div class="form-group">
+                      <div class="row">
+                        <label class="col-sm-2 col-md-2 control-label">Video</label>
+                        <div class="col-sm-8 col-md-8">
+                        <%= video_tag  @products.video_url, controls: true, autoplay: false, width: "300px", height: "200px" %>
+                          <%= f.file_field :video, id: "file-upload" %>
+                        </div>
+                      </div>
+                    </div>
+                     <!-- <div class="form-group">
+                      <div class="row">
+                         <label class="col-sm-2 col-md-2 control-label">Launching/Release Date</label>
+                        <div class="col-sm-8 col-md-8">
+                        <div class="input-group date">
                         <div class="input-group-addon">
                         <em class="fa fa-calendar"></em>
                         </div>
                       <%#= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date",value: (params.dig :search, :start), autocomplete: :off,data: { provide: 'datepicker'} %>
                         </div>
-  											</div>
-  										</div>
-  									</div> -->
-  									 <div class="form-group">
-  										<div class="row">
-  											<label class="col-sm-2 col-md-2 control-label">Description</label>
-  											<div class="col-sm-8 col-md-8">
-  											 <%= f.cktext_area :description, class: "form-control", placeholder: "" %>
-  											</div>
-  										</div>
-  									</div>
-                    <div class="form-group">
-  										<div class="text-center attendee-cent-s">
-  											<button class="btn btn-success" type="submit">Submit</button>
-                        <a href="/admin/products" class="btn btn-danger">Cancle</a>
+                        </div>
                       </div>
-									</div>
-								</div>
-							<%end%>
-						</div>
-  				</div>
+                    </div> -->
+                     <div class="form-group">
+                      <div class="row">
+                        <label class="col-sm-2 col-md-2 control-label">Description</label>
+                        <div class="col-sm-8 col-md-8">
+                         <%= f.cktext_area :description, class: "form-control", placeholder: "" %>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="text-center attendee-cent-s">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                        <a href="/admin/products" class="btn btn-danger">Cancel</a>
+                      </div>
+                  </div>
+                </div>
+              <%end%>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <script type="text/javascript">
-  	$(document).ready(function(){
+
+<script type="text/javascript">
+  debugger;
+  function readURL(input) {
+ if (input.files && input.files[0]) {
+ var reader = new FileReader();
+ reader.onload = function (e) {
+ $(input).parent().find('.img_prev') //finds the parent div and gets the img_prev contained inside 
+.attr('src', e.target.result) 
+.width(150) 
+.height(200);
+ }; 
+reader.readAsDataURL(input.files[0]); } 
+} 
+  // function preview(input) {
+  //          if (input.files && input.files[0]) {
+  //              var reader = new FileReader();
+  //                reader.onload = function (e) {
+  //                 debugger;
+  //                  $('#user_pic')
+  //                      .attr('src', e.target.result);
+  //              };
+
+  //              reader.readAsDataURL(input.files[0]);
+  //          }
+  //      }
+       
+       $(document).ready(function(){
+  //alert("hello bhai");
   $('#1').click();
 
  
@@ -114,14 +149,20 @@
 
          success: function(result){
           var newOptions = result;
-          $('#idiot_shubham').empty();
-          var sub_category = $('#idiot_shubham');
+          $('#ror_shubham').empty();
+          var sub_category = $('#ror_shubham');
           $.each(newOptions, function(key,value) {
-              sub_category.append($("<option></option>").attr("value", value.sub_category_name).text(value.sub_category_name));
+              sub_category.append($("<option></option>").attr("value", value.sub_category_id).text(value.sub_category_name));
           });
         }
         
       });
     });
  });
-  </script>
+
+</script>
+<style type="text/css">
+  select {
+    width: 795px;
+}
+</style>
