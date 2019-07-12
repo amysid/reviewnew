@@ -12,11 +12,9 @@
        # flash[:notice] = "Search Successfully"
     else
         @categories = Category.all
-        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 2)
-
-       # flash[:notice] = "Search not successfullly"
+        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 8)
+        #flash[:notice] = "Search not successfullly"
     end
-
   end
 
   
@@ -89,7 +87,7 @@
   end
 
   def create_sub_category
-    #binding.pry
+    # binding.pry
     sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
     @category = Category.find( params[:sub_categories][:category_id])
      
