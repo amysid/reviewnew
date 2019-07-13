@@ -59,6 +59,9 @@
            				<th>Action</th>
            			</tr>
                </thead>
+                <% if @feedbacks.blank? %>
+                      <div class="global-heading user-head">No Record Found. </div>
+                   <% else %>
                 <% @feedbacks.each do |feedback| %>
                <% unless feedback.eql?(nil) %>
                 
@@ -76,6 +79,7 @@
                      </td>
            					</tr>
            				</tbody>
+                 <%end%>
                  <%end%>
                 <%end%>
            	</table>
