@@ -47,6 +47,9 @@
            		  <th>Action</th>
            			</tr>
                </thead>
+                <% if @products.blank? %>
+                      <div class="global-heading user-head">No Record Found. </div>
+                   <% else %>
                <% @products.each do |product| %>
            			<% unless product.eql?(nil) %>
            				<tbody>
@@ -55,7 +58,12 @@
            						<td><%= product.product_name %></td>
                       <td><%= product&.category_name %></td>
                       <td><%= product&.sub_category_name %></td>
-           						<td><%= product&.trending %></td>
+           						<td><% if product.trending == true %>
+                      <%= link_to 'Yes'.html_safe,trending_admin_product_path(product.id), method: :patch, class: "btn btn-success", title: "Trending", data: {confirm: "Are you sure want this product is trending"} %>
+                        <%else%>
+                        <%= link_to 'NO'.html_safe,trending_admin_product_path(product.id), method: :patch, class: "btn btn-danger", title: "Not a Trending", data: {confirm: "Are you sure want to this product is not trending"} %>
+                      <%end%>
+                      </td>
            						<td class="cell-action-btn">
                          <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
            							<a href="/admin/products/<%= product.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></a>
@@ -70,6 +78,7 @@
            					</tr>
            				</tbody>
            			<%end%>
+                <%end%>
            		<%end%>
            	</table>
             </div>

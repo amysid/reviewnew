@@ -1,5 +1,5 @@
 <section class="content-header">
-    <h1>Edit Product</h1>
+    <h1>Edit Products</h1>
 </section>
   <section class="content">
     <div class="box box-info">
@@ -25,8 +25,9 @@
                         <%#=sub_categories_by_category%>
                         <label class="col-sm-2 col-md-2 control-label">Sub_category</label>
                         <div class="col-sm-8 col-md-8">
+                          <%#binding.pry%>
                           <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
-                        <%= f.select :sub_category_name, options_for_select([]), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham"} %>
+                        <%= f.select :sub_category_name, options_for_select( @sub_categories,@products.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham"} %>
                         </div>
                       </div>
                     </div>
@@ -49,15 +50,17 @@
                             <div id="file1">
                               <%#binding.pry%>
                                <%#= image_tag ((m.object.image.present? && m.object.image_url.present?) ? m.object.image_url : "/assets/photo_gallery.webp" ) %>
-                               <img class="img_prev" src="/assets/photo_gallery.webp" height=100px width=200px alt="your image"/>
+                               <img src='<%= m.object.file.present? ? m.object.file_url : "/assets/photo_gallery.webp" %>' height=100px width=200px alt="your image" class="img_prev"/>
                               <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>
                                  <!-- <input type='file' onchange="readURL(this);" />  -->
                           
                                </div>
-                             <%= m.link_to_remove "Remove", class: "btn btn-danger margin"  %>
+                               <p style="margin-left: -25px;">
+                             <%= m.link_to_remove "Remove", class: "btn btn-danger margin"%>
+                             </p>
                           <%end%>
                        </label>
-                       <p><%= f.link_to_add "Add Image", :image, class: "btn btn-primary" %></p>
+                       <p><%= f.link_to_add "Add More Image", :image, class: "btn btn-primary" %></p>
                         </div>
                       </div>
                     </div>
@@ -65,8 +68,13 @@
                       <div class="row">
                         <label class="col-sm-2 col-md-2 control-label">Video</label>
                         <div class="col-sm-8 col-md-8">
-                        <%= video_tag  @products.video_url, controls: true, autoplay: false, width: "300px", height: "200px" %>
-                          <%= f.file_field :video, id: "file-upload" %>
+                          <%if @products.video_url.present? %>
+                        <%= video_tag  @products.video_url, controls: true, autoplay: false, width: "400px", height: "200px", id: "video_player" %>
+                        <%= f.file_field :video, id:"video_file", type:"file", accept:"video/*" %>
+                        <%else%>
+                        <video id="video_player" width="400" controls></video>
+                          <%= f.file_field :video, id:"video_file", type:"file", accept:"video/*" %>
+                         <%end%>
                         </div>
                       </div>
                     </div>
@@ -165,4 +173,22 @@ reader.readAsDataURL(input.files[0]); }
   select {
     width: 795px;
 }
+.margin {
+  margin: 10px;
+  margin-left: 235px;
+  margin-top: -150px;
+}
+input[type="file"] {
+  display: block;
+  margin-top: 10px;
+}
+
 </style>
+<script type="text/javascript">
+  video_file.onchange = function(){
+    var files = this.files;
+    var file = URL.createObjectURL(files[0]); 
+    video_player.src = file; 
+    video_player.play();
+};
+</script>

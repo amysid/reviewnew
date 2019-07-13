@@ -102,6 +102,9 @@
                     <th>Actions</th>
                 </tr>
                 <br/>
+                 <% if @search.blank? %>
+                      <div class="global-heading user-head">No Record Found. </div>
+                   <% else %>
                 <% @users&.each do |user| %>
                 <tr>
                     <td>
@@ -141,6 +144,7 @@
                         <%#end%>
                     </td>
                 </tr>
+                <%end%>
                 <%end%>
             </tbody>
         </table>
