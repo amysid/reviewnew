@@ -4,13 +4,12 @@ class Admin::ProductsController < ApplicationController
   layout 'admin_lte_2'
 
     def index
-      # binding.pry
       @s_no = 0
       if params[:search].present?
         # @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
          @products = Product.where(product_name: params[:search])
       else
-      @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+      @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 3)
       @category=Category.all
       end
     end
@@ -27,7 +26,6 @@ class Admin::ProductsController < ApplicationController
     end
      
     def edit
-      # binding.pry
     @images = @products.image.all
     @sub_categories =@products.category.sub_categories.pluck("sub_category_name")
     end
