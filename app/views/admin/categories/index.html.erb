@@ -42,6 +42,9 @@
                 </tr>
               </thead>
               <tbody>
+                 <% if @categories.blank? %>
+                      <div class="global-heading user-head">No Record Found. </div>
+                   <% else %>
               <% @categories.each do |m| %>
               <%#binding.pry%>
                 <tr>
@@ -52,6 +55,7 @@
                   <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, admin_category_path(id: m.id),title: "Edit",:data => {:confirm => "Are you sure you want to delete this country ?"},:class=>"btn btn-danger", method: :delete %></td>
                 </tr>
               <% end %>
+              <%end%>
               </tbody>
             </table>
             

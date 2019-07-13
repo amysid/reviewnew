@@ -11,6 +11,7 @@ class Admin::ProductsController < ApplicationController
          @products = Product.where(product_name: params[:search])
       else
       @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+      @category=Category.all
       end
     end
 
@@ -21,11 +22,14 @@ class Admin::ProductsController < ApplicationController
 
     def show
      @images = @products.image.all
+      @category=Category.find(@products.category_id)
+    @sub_category=SubCategory.find(@products.sub_category_id)
     end
      
     def edit
       # binding.pry
-      @images = @products.image.all
+    @images = @products.image.all
+    @sub_categories =@products.category.sub_categories.pluck("sub_category_name")
     end
 
     def create
@@ -82,8 +86,19 @@ class Admin::ProductsController < ApplicationController
    end
 
    def trending
-    # binding.pry
+   # binding.pry
+   @trending=Product.find_by(id: params[:id]).trending
+   if @trending == true
+     Product.find_by(id: params[:id]).update(trending: false)
+      redirect_to admin_products_path
+     flash[:notice] = "Product is not trending Successfully"
+    else
+     Product.find_by(id: params[:id]).update(trending: true)
+      redirect_to admin_products_path
+     flash[:notice] = "Product is trending Successfully"
    end
+ end
+
  private
  def product_params 
  	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])
