@@ -1,11 +1,27 @@
 class Web::UsersController < ApplicationController
   def index
+     # binding.pry
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end
     @category = Category.all
+    @sub_category = Category.find_by(id: params[:id])&.sub_categories
+    @trending = Product.where(trending: true)
+    @products = Product.all
+    @users = User.where(user_type: "Normal User")
+       # @trending_image = @trending.image.all
   end
   
+  def user_profile
+    # binding.pry
+    @categorys = Category.all
+    @products = Product.all
+  end
+
+  def abc
+    # binding.pry
+    @products = Product.where(category_id: params[:id])
+  end
 
     def check_email
         @user = User.pluck(:email)
