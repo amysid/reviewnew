@@ -24,16 +24,45 @@
           <h2 class="main-title">My Score</h2>
           <nav>
             <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
-              <a class="nav-item nav-link active" data-toggle="pill" href="#nav-movies" role="tab">Movies</a>
-              <a class="nav-item nav-link" data-toggle="pill" href="#nav-game" role="tab">Game</a>
-              <a class="nav-item nav-link" data-toggle="pill" href="#nav-tv" role="tab">TV</a>
-              <a class="nav-item nav-link" data-toggle="pill" href="#nav-music" role="tab">Music</a>
+              <% @categorys.each_with_index do |category, index|%>
+              <%#binding.pry%>
+              <%if index == 0 %>
+              <a class="nav-item nav-link shubham active" data-toggle="pill" href="javascript:void(0);" role="tab" id="<%= category.id%>"><%= category.category_name%></a>
+              <%else%>
+              <a class="nav-item nav-link shubham" data-toggle="pill" href="javascript:void(0);" role="tab" id="<%= category.id%>"><%= category.category_name%></a>
+              <%end%>
+              <%end%>
+              <!-- <a class="nav-item nav-link" data-toggle="pill" href="#nav-tv" role="tab">TV</a>
+              <a class="nav-item nav-link" data-toggle="pill" href="#nav-music" role="tab">Music</a> -->
             </div>
           </nav>
           <div class="tab-content" id="tabScore">
-            <div class="tab-pane fade show active" id="nav-movies" role="tabpanel">
+            <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
               <div class="row small">
+                <% @products.each do |product|%>
+                <% if product.category_name == "Movies"%>
                 <div class="col-md-4">
+                  <div class="score-card">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4><%= product.product_name%></h4>
+                        <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
+                      </div>
+                      <div class="score-rating">08/10</div>
+                    </div>
+                    <p><%= sanitize(product&.description)%></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                      </div>
+                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                    </div>
+                  </div>
+                </div>
+                <%end%>
+                <%end%>
+               <!--  <div class="col-md-4">
                   <div class="score-card">
                     <div class="score-card-top">
                       <div class="name-date">
@@ -56,8 +85,8 @@
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-4">
+                </div> -->
+                <!-- <div class="col-md-4">
                   <div class="score-card">
                     <div class="score-card-top">
                       <div class="name-date">
@@ -80,31 +109,7 @@
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="score-card">
-                    <div class="score-card-top">
-                      <div class="name-date">
-                        <h4>Boyhood</h4>
-                        <span>June 12, 2019</span>
-                      </div>
-                      <div class="score-rating">08/10</div>
-                    </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book. <span class="more_text">Lorem Ipsum is simply
-                        dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                        the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                        of type and scrambled it to make a type specimen book.</span></p>
-                    <div class="d-flex justify-content-between">
-                      <div class="like-dislike">
-                        <span><img style="width:25px" src="images/Facebook_like_thumb.png" alt=""> 07</span>
-                        <span><img style="width:25px" src="images/facebook_not_like_thumbs_down.png" alt=""> 07</span>
-                      </div>
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                    </div>
-                  </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="tab-pane fade" id="nav-game" role="tabpanel">
@@ -339,3 +344,20 @@
         </div>
       </div>
     </div>
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+      debugger;
+      $('#1').click();
+      $('.shubham').click(function(){
+        var id=$(this).attr("id");
+      $.ajax({
+         url: '/web/users/abc',
+         type: 'get',
+         data: {
+          id: id
+          }
+       });
+    });
+ });
+</script>

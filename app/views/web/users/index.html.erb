@@ -6,7 +6,7 @@
           <ul class="navbar-nav align-items-center main-nav">
             <% @category.each do |category|%>
             <li class="nav-item dropdown mega-dropdown">
-              <a class="nav-link" href="#"><%= category.category_name%></a>
+              <a class="nav-link shubham" href="javascript:void(0);" id="<%= category.id%>"><%= category.category_name%></a>
               <div class="dropdown-menu mega-menu">
                 <div class="row">
                   <div class="col-md-3">
@@ -19,6 +19,7 @@
                       </div>
                     </div>
                   </div>
+                  <%#%>
                   <div class="col-md-3">
                     <ul class="mega-menu-list">
                       <li>
@@ -508,7 +509,25 @@
                                               </header>
                                               <%end%>
 <div class="home-slider">
+  <% @trending.each do |trend|%>
+  <%#binding.pry%>
       <div class="slide">
+        <div class="slide-img setimg cover" style="background-image: url(<%= trend.image.take.file_url%>)"></div>
+        <div class="slide-content container">
+          <div class="slide-text">
+            <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.updated_at&.strftime("%d/%m/%Y")%></p>
+            <h1><%= trend.product_name%>: <span>Reviews</span></h1>
+            <div class="release-name">
+              <h4><%= trend.product_name%> (<%= trend.category_name%>,<%= trend&.updated_at&.strftime("%Y")%> )</h4>
+              <h5><%= trend.sub_category_name%></h5>
+            </div>
+            <p><%= sanitize(trend&.description)%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <%end%>
+      <!-- <div class="slide">
         <div class="slide-img setimg cover" style="background-image: url(/assets/banner.jpg)"></div>
         <div class="slide-content container">
           <div class="slide-text">
@@ -524,24 +543,7 @@
             </p>
           </div>
         </div>
-      </div>
-      <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url(/assets/banner.jpg)"></div>
-        <div class="slide-content container">
-          <div class="slide-text">
-            <p class="release-date"><span>Release latest movie : Review</span> <i class="fa fa-clock-o"></i> AUGUST 22,
-              2019</p>
-            <h1>Avengers: <span>Reviews</span></h1>
-            <div class="release-name">
-              <h4>Endgame (Movie, 2019)</h4>
-              <h5>Release Date, Tickets, Trailers...</h5>
-            </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br> tempor incididunt ut labore
-              et dolore magna aliqua.
-            </p>
-          </div>
-        </div>
-      </div>
+      </div> -->
     </div>
     <!-- Home Slider Close -->
 
@@ -552,30 +554,32 @@
             <div class="left-side">
               <h3 class="widget-title">AVAILABLE NOW</h3>
               <div class="posts">
-
                 <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
+                    <% @products.each do |product|%>
+                    <%#binding.pry%>
+                    <% if product.sub_category_name != "Comeing Soon"%>
                     <div class="col-md-4">
                       <div class="post-img">
-                        <img src="/assets/post-img.jpg" alt="">
+                        <img src="<%= product.image.take.file_url%>" alt="">
                       </div>
                     </div>
                     <div class="col-md-8">
                       <div class="post-details">
-                        <p class="tag"><span>Movie : Review</span></p>
-                        <h4 class="post-title">Bharat : Journey of A Man & A Nation Together</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                          galley of type and scrambled it to make a type specimen book.</p>
+                        <p class="tag"><span><%= product.category_name%> : Review</span></p>
+                        <h4 class="post-title"><%= product.product_name%> : <%#= product.sub_category_name%></h4>
+                        <p><%= sanitize(product.description)%></p>
                         <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
+                          <span><i class="fa fa-clock-o"></i> <%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                           <a href="JavaScript:Void(0);" class="readmore">Read More></a>
                         </div>
                       </div>
                     </div>
+                    <%end%>
+                    <%end%>
                   </div>
                 </div>
-                <div class="post-item">
+                <!-- <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
                     <div class="col-md-4">
                       <div class="post-img">
@@ -596,8 +600,8 @@
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="post-item">
+                </div> -->
+               <!--  <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
                     <div class="col-md-4">
                       <div class="post-img">
@@ -618,7 +622,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="custom-post big-post">
                   <div class="custom-img">
                     <img src="/assets/big-banner.jpg" class="img-fluid" alt="">
@@ -640,7 +644,21 @@
 
               <div class="widget">
                 <h3 class="widget-title">UPCOMING RELEASES</h3>
+                <% @products.each do |product|%>
+                <%if product.sub_category_name == "Comeing Soon"%>
                 <div class="custom-post">
+                  <div class="custom-img">
+                    <img src="<%= product.image.take.file_url%>" class="img-fluid" alt="">
+                  </div>
+                  <div class="custom-content">
+                    <h4 class="custom-title"><%= product.product_name%>: <%= product.category_name%></h4>
+                    <p><%= sanitize (product.description)%></p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.updated_at&.strftime("%d/%m/%Y")%></p>
+                  </div>
+                </div>
+                <%end%>
+                <%end%>
+                <!-- <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
                   </div>
@@ -651,8 +669,8 @@
                       type and scrambled it to make a type specimen book.</p>
                     <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
                   </div>
-                </div>
-                <div class="custom-post">
+                </div> -->
+                <!-- <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
                   </div>
@@ -663,8 +681,8 @@
                       type and scrambled it to make a type specimen book.</p>
                     <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
                   </div>
-                </div>
-                <div class="custom-post">
+                </div> -->
+               <!--  <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
                   </div>
@@ -675,19 +693,7 @@
                       type and scrambled it to make a type specimen book.</p>
                     <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
                   </div>
-                </div>
-                <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div>
+                </div> -->
               </div>
 
               <div class="widget reviewe-widget">
@@ -1009,8 +1015,8 @@
 </div>
 <div class="row">
 <div class="col-md-12">
-        <button type="button" class="user">Users score</button>
-        <button type="button" class="meta">Meta score</button>
+        <button type="button" class="user user_type" id="Normal User">Users score</button>
+        <button type="button" class="meta user_type" id="Expert User">Meta score</button>
         <select class="category">
             <option value="category">Category</option>
             <option value="saab">Saab</option>
@@ -1025,7 +1031,33 @@
 
   <!-- Home Slider Start -->
     <div class="home-slider1">
+      <% @users.each do |user|%>
+      <%#binding.pry%>
       <div class="slide-item">
+             <div class="row profile">
+            <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
+            <img src="<%= user.image.file_url%>">
+            </div>
+           <div class="col-md-7 col-sm-7 col-lg-7">
+           <span class="johny"><%= user.name%></span>
+           <br>
+           <span><%= user&.updated_at&.strftime("%d/%m/%Y")%></span>
+          <br>
+           <span class="date1">08/10</span>
+         </div>
+          <p class="user-view">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
+          Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales
+          pulvinar tempor. Cum sociis natoque penatibus et magnis dis</p>
+
+         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
+         <div class="thumb-img">
+                  <img src="/assets/Facebook_like_thumb.png" alt="">
+                  <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
+                </div>
+        </div>
+      </div>
+      <%end%>
+      <!-- <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1047,8 +1079,8 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div>
-      <div class="slide-item">
+      </div> -->
+      <!-- <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1070,31 +1102,8 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div>
-      <div class="slide-item">
-             <div class="row profile">
-            <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-            <img src="/assets/user-icon.jpg">
-            </div>
-           <div class="col-md-7 col-sm-7 col-lg-7">
-           <span class="johny">Johny Qubert</span>
-           <br>
-           <span> June 12, 2019</span>
-          <br>
-           <span class="date1">08/10</span>
-         </div>
-          <p class="user-view">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet.
-          Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales
-          pulvinar tempor. Cum sociis natoque penatibus et magnis dis</p>
-
-         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
-         <div class="thumb-img">
-                  <img src="/assets/Facebook_like_thumb.png" alt="">
-                  <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
-                </div>
-        </div>
-      </div>
-      <div class="slide-item">
+      </div> -->
+     <!--  <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1116,7 +1125,7 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- Home Slider Close -->
           
@@ -1192,3 +1201,19 @@
 			});
     	});
     </script>
+<script type="text/javascript">
+      $(document).ready(function(){
+      debugger;
+      $('#1').click();
+      $('.user_type').click(function(){
+        var id=$(this).attr("id");
+      $.ajax({
+         url: '/web/users',
+         type: 'get',
+         data: {
+          id: id
+          }
+       });
+    });
+ });
+</script>

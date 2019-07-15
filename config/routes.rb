@@ -19,14 +19,12 @@ Rails.application.routes.draw do
     end
     resources :users do
     collection do
-      # post :otp
-      # get :otp_verification
-      # get :reset_password
-      # get :reset_password_confirmation
       get :check_email
       get :check_email_login
       post :image_update
       get :report
+      get :abc
+      get :user_type
     end
     member do
       get :user_profile
