@@ -5,8 +5,8 @@ class Web::UsersController < ApplicationController
         redirect_to admin_home_index_path(current_user)
   	end
     @category = Category.all
-    @sub_category = Category.find_by(id: params[:id])&.sub_categories
-    @sub_categories = Product.where(category_id: params[:id])
+    # @sub_category = Category.find_by(id: params[:id])&.sub_categories
+    # @sub_categories = Product.where(category_id: params[:id])
     @trending = Product.where(trending: true)
     @products = Product.all
     @users = User.where(user_type: "Normal User")

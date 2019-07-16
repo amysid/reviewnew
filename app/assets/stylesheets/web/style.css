@@ -729,10 +729,11 @@ a.yellow-text:hover{
     position: relative;
     overflow: hidden;
 }
-.home-slider.slick-initialized .slick-slide {
-    display: flex;
-    align-items: center;
-    outline: none !important;
+.home-slider.slick-initialized .slick-slide{
+display: flex;
+align-items: center;
+outline: none !important;
+position: relative;
 }
 .slick-slider .slick-track, .slick-slider .slick-list, .slick-slide {
     height: 100%;
@@ -1340,12 +1341,12 @@ address i {
     height: 40px;
 }
 .custom-slider .slick-prev{
-    background: url(../images/arrow-left.png) left no-repeat;
+    background: url(/assets/arrow-left.png) left no-repeat;
     left: -40px;
     text-align: left;
 }
 .custom-slider .slick-next {
-    background: url(../images/arrow-right.png) right no-repeat;
+    background: url(/assets/arrow-right.png) right no-repeat;
     right: -40px;
     text-align: right;
 }
@@ -2131,7 +2132,7 @@ figure.para-Margin-top {
     margin-bottom: 20px;
     height: 190px;
     width: 100%;
-    background-image: url(../images/Layer10.png);
+    background-image: url(/assets/Layer10.png);
     background-size: cover;
     background-position: center center;
 }
