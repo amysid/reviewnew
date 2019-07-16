@@ -4,11 +4,11 @@ class User < ApplicationRecord
   enum role: ["admin","user","expert"]
   has_one :image,class_name: 'Image', as: :imageable, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :image
- validates :mobile_no, uniqueness: true
+ validates :mobile_no, uniqueness: true,  on: :update
  validates :name, length: { minimum: 2, maximum: 20}
  validates :name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
- validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" }
- validates :mobile_no, length: { minimum: 7, maximum: 14}
+ validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
+ validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
 
 
   def self.to_csv(options = {})

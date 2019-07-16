@@ -60,20 +60,20 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>&nbsp;</label>
-                        <%= f.submit "Search", class: "btn btn-block btn-primary" %>
+                        <%= f.submit "Search", class: "btn btn-block btn-primary", title: "Search"%>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>&nbsp;</label>
-                        <%= link_to '<button class="btn btn-block btn-danger" type="button">Cancel</button>'.html_safe ,admin_users_path %>
+                        <%= link_to '<button class="btn btn-block btn-danger" type="button">Cancel</button>'.html_safe ,admin_users_path, title: "Cancel" %>
                     </div>
                 </div>
                 
                 <!-- /.form-group -->
             </div>
-              <%= link_to "CSV", admin_users_path(format: "csv"), class:"btn btn-success margin-top-25"%> 
+              <%= link_to "CSV", admin_users_path(format: "csv"), class:"btn btn-success margin-top-25", title: "Download CSV"%> 
             
 
             <!-- /.col -->

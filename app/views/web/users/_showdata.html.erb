@@ -3,7 +3,26 @@
               <div class="row small">
 
               	<%if @products.blank?%>
-              	     <h3>No Record Founds</h3>
+              	     <!-- <h3>No Record Founds</h3> -->
+                      <div class="col-md-4">
+                  <div class="score-card" id="tab1">
+                    <div class="score-card-top">
+                      <div class="name-date">
+                        <h4>No Record Founds</h4>
+                        <span><%#= product&.updated_at&.strftime("%d/%m/%Y")%></span>
+                      </div>
+                      <!-- <div class="score-rating">08/10</div> -->
+                    </div>
+                    <p><%#= sanitize(product&.description)%></p>
+                    <div class="d-flex justify-content-between">
+                      <div class="like-dislike">
+                        <!-- <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span> -->
+                        <!-- <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span> -->
+                      </div>
+                      <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
+                    </div>
+                  </div>
+                </div>
               	 <%else%>
                 <% @products.each do |product|%>
                 

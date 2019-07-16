@@ -4,10 +4,10 @@
       <nav id="main-navbar" class="main-navbar navbar navbar-expand-lg bg-primary">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center main-nav">
-            <% @category.each do |category|%>
+            <% @category.each do |category| %>
             <li class="nav-item dropdown mega-dropdown">
-              <a class="nav-link shubham" href="javascript:void(0);" id="<%= category.id%>"><%= category.category_name%></a>
-              <div class="dropdown-menu mega-menu">
+              <a class="nav-link user_type" href="javascript:void(0);" id="<%= category.id%>"><%= category.category_name%></a>
+              <div class="dropdown-menu mega-menu" style="display: none;">
                 <div class="row">
                   <div class="col-md-3">
                     <div class="custom-post m-0">
@@ -512,7 +512,7 @@
   <% @trending.each do |trend|%>
   <%#binding.pry%>
       <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url(<%= trend.image.take.file_url%>)"></div>
+        <div class="slide-img setimg cover" style="background-image: url(<%= trend.image.first.file_url%>)"></div>
         <div class="slide-content container">
           <div class="slide-text">
             <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.updated_at&.strftime("%d/%m/%Y")%></p>
@@ -1031,17 +1031,17 @@
 
   <!-- Home Slider Start -->
     <div class="home-slider1">
-      <% @users.each do |user|%>
+      <%# @users.each do |user|%>
       <%#binding.pry%>
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-            <img src="<%= user.image.file_url%>">
+            <img src="/assets/user-icon.jpg">
             </div>
            <div class="col-md-7 col-sm-7 col-lg-7">
-           <span class="johny"><%= user.name%></span>
+           <span class="johny">John</span>
            <br>
-           <span><%= user&.updated_at&.strftime("%d/%m/%Y")%></span>
+           <span>June 10, 2019</span>
           <br>
            <span class="date1">08/10</span>
          </div>
@@ -1056,8 +1056,8 @@
                 </div>
         </div>
       </div>
-      <%end%>
-      <!-- <div class="slide-item">
+      <%#end%>
+      <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1079,8 +1079,8 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div> -->
-      <!-- <div class="slide-item">
+      </div>
+      <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1102,8 +1102,8 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div> -->
-     <!--  <div class="slide-item">
+      </div>
+      <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="/assets/user-icon.jpg">
@@ -1125,7 +1125,7 @@
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
                 </div>
         </div>
-      </div> -->
+      </div>
     </div>
     <!-- Home Slider Close -->
           
