@@ -22,7 +22,7 @@
 
                     <% category&.sub_categories.each_with_index do |sub, index| %>
                     <!-- <div class="row"> -->
-                    <% if index <= 2%>
+                    <% if index <= 2 && index %>
                      <div class="col-md-3">
                       <ul class="mega-menu-list">
                       <li>
@@ -563,13 +563,14 @@
         <div class="row">
           <div class="col-md-8">
             <div class="left-side">
-              <h3 class="widget-title">AVAILABLE NOW</h3>
+              <h3 class="widget-title">TRENDING NOW</h3>
               <div class="posts">
                 <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
-                    <% @products.each do |product|%>
+                    <% @products.each_with_index do |product, index|%>
                     <%#binding.pry%>
-                    <% if product.sub_category_name != "Comeing Soon"%>
+                    <% if index <= 3%>
+                    <% if product.trending == true %>
                     <div class="col-md-4">
                       <div class="post-img">
                         <img src="<%= product.image.take.file_url%>" alt="">
@@ -581,14 +582,16 @@
                         <h4 class="post-title"><%= product.product_name%> : <%#= product.sub_category_name%></h4>
                         <p><%= truncate(strip_tags(product.description), omision: "...", length: 100).html_safe%></p>
                         <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> <%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
-                          <a href="JavaScript:Void(0);" class="readmore">Read More></a>
+                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%d/%m/%Y")%></span>
+                          <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
                         </div>
                       </div>
                     </div>
                     <%end%>
                     <%end%>
+                    <%end%>
                   </div>
+                  <a href="/web/users/trending" class="readmore pull-right">Read More></a>
                 </div>
                 <!-- <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
@@ -634,6 +637,7 @@
                     </div>
                   </div>
                 </div> -->
+
                 <div class="custom-post big-post">
                   <div class="custom-img">
                     <img src="/assets/big-banner.jpg" class="img-fluid" alt="">
@@ -655,8 +659,11 @@
 
               <div class="widget">
                 <h3 class="widget-title">UPCOMING RELEASES</h3>
-                <% @products.each do |product|%>
-                <%if product.sub_category_name == "Comeing Soon"%>
+                <% @products.each_with_index do |product, index|%>
+
+                <% if product.date.present? %>
+                <%if product&.date&.strftime("%m/%Y") > Time.now&.strftime("%m/%Y")%>
+                <% if index <= 4 %>
                 <div class="custom-post">
                   <div class="custom-img">
                     <img src="<%= product.image.take.file_url%>" class="img-fluid" alt="">
@@ -665,11 +672,14 @@
                     <h4 class="custom-title"><%= product.product_name%>: <%= product.category_name%></h4>
                       <h5><%#= product.sub_category_name%></h5>
                     <p><%= sanitize (product.description)%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.updated_at&.strftime("%d/%m/%Y")%></p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%d/%m/%Y")%></p>
                   </div>
                 </div>
                 <%end%>
                 <%end%>
+                <%end%>
+                <%end%>
+                 <a href="/web/users/comeing" class="readmore pull-right">Read More></a>
                 <!-- <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">

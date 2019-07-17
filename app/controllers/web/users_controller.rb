@@ -18,7 +18,15 @@ class Web::UsersController < ApplicationController
     @categorys = Category.all
     @products = Product.all
   end
+ 
+ def trending
+ @products = Product.all
+ end
 
+ def upcomeing
+  binding.pry
+ end
+ 
   def abc
     # binding.pry
     @products = Product.where(category_id: params[:id])

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
       get :report
       get :abc
       get :user_type
+      get :trending
+      get :upcomeing
     end
     member do
       get :user_profile

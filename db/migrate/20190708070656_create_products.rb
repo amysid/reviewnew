@@ -9,6 +9,7 @@ class CreateProducts < ActiveRecord::Migration[5.2]
       t.string :video,        null: false, default: ""
       t.string :description,  null: false, default: ""
       t.string :comment,      null: false, default: ""
+      t.datetime :date
       t.boolean :trending,    null: false, default: true
       t.string :current,      null: false, default: "unpublish"
 

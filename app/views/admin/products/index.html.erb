@@ -68,7 +68,7 @@
                          <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
            							<a href="/admin/products/<%= product.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></a>
            							<a>
-           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Faq?' }%></a>
+           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Product?' }%></a>
                         <% if product.current == "publish" %>
                        <%= link_to 'Publish'.html_safe, publish_admin_product_path(product), method: :patch, class: "btn btn-warning", title: "Publish Mode", data: {confirm: "Are you sure want to be change the Unpublish mode"} %>
                        <%else%>

@@ -31,6 +31,7 @@ class Admin::ProductsController < ApplicationController
     end
 
     def create
+      # binding.pry
       @products = Product.new(product_params)
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
@@ -99,7 +100,8 @@ class Admin::ProductsController < ApplicationController
 
  private
  def product_params 
- 	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])
+  params[:product][:date] = params[:product][:date]
+ 	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
  end
  # def update_product 
  #  params.require(:products).permit(:category, :sub_category, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])

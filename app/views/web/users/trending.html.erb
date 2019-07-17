@@ -1,0 +1,93 @@
+<div class="col-md-8">
+            <div class="left-side">
+              <h3 class="widget-title">All TRENDING </h3>
+              <div class="posts">
+                <div class="post-item">
+                  <div class="row no-gutters align-items-stretch">
+                    <% @products.each_with_index do |product, index|%>
+                    <%#binding.pry%>
+                    
+                    <% if product.trending == true %>
+                    <div class="col-md-4">
+                      <div class="post-img">
+                        <img src="<%= product.image.take.file_url%>" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="post-details">
+                        <p class="tag"><span><%= product.category_name%> : Review</span></p>
+                        <h4 class="post-title"><%= product.product_name%> : <%#= product.sub_category_name%></h4>
+                        <p><%= truncate(strip_tags(product.description), omision: "...", length: 100).html_safe%></p>
+                        <div class="post-meta">
+                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%d/%m/%Y")%></span>
+                          <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
+                        </div>
+                      </div>
+                    </div>
+                    <%#end%>
+                    <%end%>
+                    <%end%>
+                  </div>
+                  <!-- <a href="/web/users/trending" class="readmore pull-right">Read More></a> -->
+                </div>
+                <!-- <div class="post-item">
+                  <div class="row no-gutters align-items-stretch">
+                    <div class="col-md-4">
+                      <div class="post-img">
+                        <img src="/assets/post-img.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="post-details">
+                        <p class="tag"><span>Gaming : Review</span></p>
+                        <h4 class="post-title">Mass Effect Andromeda</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                          galley of type and scrambled it to make a type specimen book.</p>
+                        <div class="post-meta">
+                          <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
+                          <a href="JavaScript:Void(0);" class="readmore">Read More></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+                <!-- <div class="post-item">
+                  <div class="row no-gutters align-items-stretch">
+                    <div class="col-md-4">
+                      <div class="post-img">
+                        <img src="/assets/post-img.jpg" alt="">
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="post-details">
+                        <p class="tag"><span>Movie : Review</span></p>
+                        <h4 class="post-title">Bharat : Journey of A Man & A Nation Together</h4>
+                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                          galley of type and scrambled it to make a type specimen book.</p>
+                        <div class="post-meta">
+                          <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
+                          <a href="JavaScript:Void(0);" class="readmore">Read More></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+
+               <!--  <div class="custom-post big-post">
+                  <div class="custom-img">
+                    <img src="/assets/big-banner.jpg" class="img-fluid" alt="">
+                  </div>
+                  <div class="custom-content align-center">
+                    <p class="custom-tag"><span>Movie : Review</span></p>
+                    <h4 class="custom-title">Junglee Movie Review</h4>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                      type and scrambled it to make a type specimen book.</p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+          </div>
