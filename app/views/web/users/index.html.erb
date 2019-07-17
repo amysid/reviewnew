@@ -5,6 +5,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav align-items-center main-nav">
             <% @category.each do |category|%>
+            <%#binding.pry%>
             <li class="nav-item dropdown mega-dropdown">
               <a class="nav-link user_type active" href="javascript:void(0);" id="<%= category.id%>"><%= category.category_name%></a>
               <div class="dropdown-menu mega-menu">
@@ -520,7 +521,8 @@
                                               </header>
                                               <%end%>
 <div class="home-slider">
-  <% @trending.each do |trend|%>
+  <% @movies.each_with_index do |trend,index|%>
+  <%# if trend.category_name == "Movies"%>
   <%#binding.pry%>
       <div class="slide">
         <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
@@ -529,32 +531,49 @@
             <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.updated_at&.strftime("%d/%m/%Y")%></p>
             <h1><%= trend.product_name%>: <span>Reviews</span></h1>
             <div class="release-name">
-              <h4><%= trend.product_name%> (<%= trend.category_name%>,<%= trend&.updated_at&.strftime("%Y")%> )</h4>
+              <h4><%= trend.product_name%> (<%= trend.category_name%>: <%= trend&.date&.strftime("%B %d, %Y")%> )</h4>
               <h5><%= trend.sub_category_name%></h5>
             </div>
-            <p><%= sanitize(trend&.description)%>
+            <p><%= truncate(strip_tags(trend.description), omision: "...", length: 100).html_safe%>
             </p>
           </div>
         </div>
       </div>
       <%end%>
-      <!-- <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url(/assets/banner.jpg)"></div>
+      <% @games.each do |game|%>
+      <div class="slide">
+        <div class="slide-img setimg cover" style="background-image: url('<%= game.image.last.file_url%>')"></div>
         <div class="slide-content container">
           <div class="slide-text">
-            <p class="release-date"><span>Release latest movie : Review</span> <i class="fa fa-clock-o"></i> AUGUST 22,
-              2019</p>
-            <h1>Avengers: <span>Reviews</span></h1>
+            <p class="release-date"><span>Release latest movie : Review</span> <i class="fa fa-clock-o"></i> <%= game&.updated_at&.strftime("%d/%m/%Y")%></p>
+            <h1><%= game.product_name%>: <span>Reviews</span></h1>
             <div class="release-name">
-              <h4>Endgame (Movie, 2019)</h4>
-              <h5>Release Date, Tickets, Trailers...</h5>
+              <h4><%= game.product_name%> (<%= game.category_name%>: <%= game&.date&.strftime("%B %d, %Y")%></h4>
+              <h5><%= game.sub_category_name%></h5>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br> tempor incididunt ut labore
-              et dolore magna aliqua.
+            <p><%= truncate(strip_tags(game.description), omision: "...", length: 100).html_safe%>
             </p>
           </div>
         </div>
-      </div> -->
+      </div>
+    <%end%>
+    <% @tvs.each do |tv|%>
+     <div class="slide">
+        <div class="slide-img setimg cover" style="background-image: url('<%= tv.image.last.file_url %>')"></div>
+        <div class="slide-content container">
+          <div class="slide-text">
+            <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= tv&.updated_at&.strftime("%d/%m/%Y")%></p>
+            <h1><%= tv.product_name%>: <span>Reviews</span></h1>
+            <div class="release-name">
+              <h4><%= tv.product_name%> (<%= tv.category_name%>: <%= tv&.date&.strftime("%B %d, %Y")%> )</h4>
+              <h5><%= tv.sub_category_name%></h5>
+            </div>
+            <p><%= truncate(strip_tags(tv.description), omision: "...", length: 100).html_safe%>
+            </p>
+          </div>
+        </div>
+      </div>
+      <%end%>
     </div>
     <!-- Home Slider Close -->
 
@@ -580,9 +599,9 @@
                       <div class="post-details">
                         <p class="tag"><span><%= product.category_name%> : Review</span></p>
                         <h4 class="post-title"><%= product.product_name%> : <%#= product.sub_category_name%></h4>
-                        <p><%= truncate(strip_tags(product.description), omision: "...", length: 100).html_safe%></p>
+                        <p><%= truncate(strip_tags(product.description), omision: "...", length: 50).html_safe%></p>
                         <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%d/%m/%Y")%></span>
+                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></span>
                           <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
                         </div>
                       </div>
@@ -660,10 +679,10 @@
               <div class="widget">
                 <h3 class="widget-title">UPCOMING RELEASES</h3>
                 <% @products.each_with_index do |product, index|%>
-
+                   <%#binding.pry%>
                 <% if product.date.present? %>
-                <%if product&.date&.strftime("%m/%Y") > Time.now&.strftime("%m/%Y")%>
-                <% if index <= 4 %>
+                <%if product.date.strftime("%d") > Time.now.strftime("%d") || product.date.strftime("%m") >= Time.now.strftime("%m") || product.date.strftime("%Y") > Time.now.strftime("%Y")%>
+                <% if index <= 3 %>
                 <div class="custom-post">
                   <div class="custom-img">
                     <img src="<%= product.image.take.file_url%>" class="img-fluid" alt="">
@@ -671,15 +690,15 @@
                   <div class="custom-content">
                     <h4 class="custom-title"><%= product.product_name%>: <%= product.category_name%></h4>
                       <h5><%#= product.sub_category_name%></h5>
-                    <p><%= sanitize (product.description)%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%d/%m/%Y")%></p>
+                    <p><%= truncate(strip_tags(product.description), omision: "...", length: 50).html_safe%></p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></p>
                   </div>
                 </div>
                 <%end%>
                 <%end%>
                 <%end%>
                 <%end%>
-                 <a href="/web/users/comeing" class="readmore pull-right">Read More></a>
+                 <a href="/web/users/upcomeing" class="readmore pull-right">Read More></a>
                 <!-- <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
@@ -849,17 +868,19 @@
             <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
           </div>
           <div class="row">
+            <%@category.each do |category|%>
             <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
                   <img src="/assets/category-img.jpg" class="img-fluid" alt="">
                 </div>
                 <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Movies</h4>
+                  <h4 class="custom-title"><%= category.category_name%></h4>
                 </div>
               </div>
             </div>
-            <div class="col-md-3">
+            <%end%>
+            <!-- <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
                   <img src="/assets/category-img.jpg" class="img-fluid" alt="">
@@ -917,7 +938,7 @@
                 <div class="custom-content align-center align-items-center">
                   <h4 class="custom-title">Mobile Phone</h4>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-3">
               <div class="custom-post">

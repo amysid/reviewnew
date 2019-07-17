@@ -35,6 +35,10 @@ class Admin::ProductsController < ApplicationController
       @products = Product.new(product_params)
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
+      x=params[:product][:date][0,2]
+      params[:product][:date][0,2]= params[:product][:date][3,2]
+      params[:product][:date][3,2]=x
+       @products.date = params[:product][:date]
       if @products.save
          redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"
@@ -58,6 +62,10 @@ class Admin::ProductsController < ApplicationController
       # binding.pry
       @products.update(category_id: Category.find_by(category_name: params[:product][:category_name]).id)
       @products.update(sub_category_id: SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id)
+      x=params[:product][:date][0,2]
+      params[:product][:date][0,2]= params[:product][:date][3,2]
+      params[:product][:date][3,2]=x
+      @products.date = params[:product][:date]
         if @products.update_attributes(product_params)
             redirect_to admin_products_path, notice: 'Products Updated Successfully.'
           else
@@ -90,17 +98,17 @@ class Admin::ProductsController < ApplicationController
    if @trending == true
      Product.find_by(id: params[:id]).update(trending: false)
       redirect_to admin_products_path
-     flash[:notice] = "Product is not trending Successfully"
+     flash[:notice] = "Product is not trending"
     else
      Product.find_by(id: params[:id]).update(trending: true)
       redirect_to admin_products_path
-     flash[:notice] = "Product is trending Successfully"
+     flash[:notice] = "Product is trending"
    end
  end
 
  private
  def product_params 
-  params[:product][:date] = params[:product][:date]
+  # params[:product][:date] = params[:product][:date]
  	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
  end
  # def update_product 

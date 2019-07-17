@@ -7,7 +7,10 @@ class Web::UsersController < ApplicationController
     @category = Category.all
     # @sub_category = Category.find_by(id: params[:id])&.sub_categories
     # @sub_categories = Product.where(category_id: params[:id])
-    @trending = Product.where(trending: true)
+    # @trending = Product.all
+    @movies = Product.where(category_name: "Movies").first(2)
+    @games = Product.where(category_name: "Games").first(2)
+    @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
     @users = User.where(user_type: "Normal User")
        # @trending_image = @trending.image.all
@@ -24,9 +27,10 @@ class Web::UsersController < ApplicationController
  end
 
  def upcomeing
-  binding.pry
+  # binding.pry
+  @products = Product.all
  end
- 
+
   def abc
     # binding.pry
     @products = Product.where(category_id: params[:id])
