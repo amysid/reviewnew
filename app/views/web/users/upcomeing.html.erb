@@ -1,3 +1,8 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+
+<%= render partial: 'web/users/trending'%>
 <div class="col-md-4">
             <div class="right-side">
 

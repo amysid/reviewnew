@@ -15,6 +15,18 @@ class Web::UsersController < ApplicationController
     @users = User.where(user_type: "Normal User")
        # @trending_image = @trending.image.all
   end
+
+  def movie_category
+    # @category = Category.all
+    # @trending = Product.where(trending: true)
+    @sub_category = SubCategory.find_by(id: params[:id])
+    @products = @sub_category.products
+  end
+
+  def movie_category_detail
+    @sub_category = SubCategory.find_by(id: params[:id])
+    @products = @sub_category.products
+  end
   
   def user_profile
     # binding.pry

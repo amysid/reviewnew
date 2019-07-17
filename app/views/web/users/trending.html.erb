@@ -1,3 +1,8 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+
+<%= render partial: 'web/users/trending'%>
 <div class="col-md-8">
             <div class="left-side">
               <h3 class="widget-title">All TRENDING </h3>
@@ -27,7 +32,7 @@
 				                    </div>
 		                    <%end%>
 	                    <%end%>
-                    
+
                   </div>
                 </div>
                
