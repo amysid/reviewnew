@@ -1,0 +1,300 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+<%= render partial: 'web/users/trending'%>
+
+      <div class="container home-wrap">
+          <div class="row theatres-row">
+            <div class="col-md-9">
+          <h2 class="widget-title"><%= @sub_category&.sub_category_name%> <%=@products.count%></h2>
+          <nav>
+            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
+              <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">By Name </a>
+              <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-date" role="tab">By Date</a>
+              <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">By Metascore</a>
+              <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-mostshared" role="tab">By Most Shared</a>
+            </div>
+          </nav>
+
+          <div class="tab-content theatres-content" id="tabScore">
+
+            <div class="tab-pane fade show active" id="nav-name" role="tabpanel">
+              <div class="row">
+
+              	<%@products.order("product_name ASC").each do |product|%>
+	                <div class="col-md-6">
+		                  <div class="imgshadow">
+				                  <div class="images1">
+				                  	<%if product.image.present?%>
+				                     <img src="<%=product&.image&.first&.file&.url%>">
+				                    <%else%>
+				                     <img src="images/Layer46.jpg">
+				                    <%end%>
+				                      <div class="percent-section1">
+				                       <p class="paramusic">90%</p>
+				                      </div>
+				                  </div>
+
+				                  <div class="content">
+				                    <h3><%=product&.product_name%></h3> 
+				                    <P class="para">
+				                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+				                    </P>
+				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+				                  </div>
+		                </div>
+	                </div>
+                <%end%>
+
+
+
+
+              </div>
+            </div>
+
+
+
+            <div class="tab-pane fade" id="nav-date" role="tabpanel">
+                  <div class="row">
+
+                <%@products.order("date DESC").each do |product|%>
+	                <div class="col-md-6">
+		                  <div class="imgshadow">
+				                  <div class="images1">
+				                  	<%if product.image.present?%>
+				                     <img src="<%=product&.image&.first&.file&.url%>">
+				                    <%else%>
+				                     <img src="images/Layer46.jpg">
+				                    <%end%>
+				                      <div class="percent-section1">
+				                       <p class="paramusic">90%</p>
+				                      </div>
+				                  </div>
+				                  
+				                  <div class="content">
+				                    <h3><%=product&.product_name%></h3> 
+				                    <P class="para">
+				                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+				                    </P>
+				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+				                  </div>
+		                </div>
+	                </div>
+                <%end%>
+
+      
+
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
+                <div class="row">
+
+
+                <%@products.each do |product|%>
+	                <div class="col-md-6">
+		                  <div class="imgshadow">
+				                  <div class="images1">
+				                  	<%if product.image.present?%>
+				                     <img src="<%=product&.image&.first&.file&.url%>">
+				                    <%else%>
+				                     <img src="images/Layer46.jpg">
+				                    <%end%>
+				                      <div class="percent-section1">
+				                       <p class="paramusic">90%</p>
+				                      </div>
+				                  </div>
+				                  
+				                  <div class="content">
+				                    <h3><%=product&.product_name%></h3> 
+				                    <P class="para">
+				                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+				                    </P>
+				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+				                  </div>
+		                </div>
+	                </div>
+                <%end%>
+
+
+              </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="nav-mostshared" role="tabpanel">
+                <div class="row">
+
+
+              	<%@products.each do |product|%>
+	                <div class="col-md-6">
+		                  <div class="imgshadow">
+				                  <div class="images1">
+				                  	<%if product.image.present?%>
+				                     <img src="<%=product&.image&.first&.file&.url%>">
+				                    <%else%>
+				                     <img src="images/Layer46.jpg">
+				                    <%end%>
+				                      <div class="percent-section1">
+				                       <p class="paramusic">90%</p>
+				                      </div>
+				                  </div>
+				                  
+				                  <div class="content">
+				                    <h3><%=product&.product_name%></h3> 
+				                    <P class="para">
+				                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+				                    </P>
+				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+				                  </div>
+		                </div>
+	                </div>
+                <%end%>
+            
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        
+        <div class="col-md-3" >
+        <div class="white-box Game-deatils">
+          <p class="centerpara">Choose Genre</p>
+          <ul class="custom-list">
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Action</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Adventure</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Amination</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Biography</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Comedy</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Fantacy</span></li>
+           <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Horror</span></li>
+            <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Reality</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Romance</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Action</span></li>
+               <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Adventure</span></li>
+            <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Amination</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Biography</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Comedy</span></li>
+                 <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Fantacy</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Horror</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Reality</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Romance</span></li>
+        </ul>
+        </div>
+
+      </div>
+      </div>
+     
+
+        <div class="heading">
+          <h2 class="titile-light">You may also like:</h2>
+        </div>
+        
+        <div style="padding-bottom: 10px;">
+        	
+        <div class="custom-slider slidw">
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">Marta Kauffman</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">The Guardian</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">Business Inside</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>76%</p>
+            </div>
+          </div>
+          <div class="custom-post custom-slide">
+            <div class="custom-img">
+              <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+            </div>
+            <div class="custom-content justify-content-end">
+              <h4 class="custom-title">ITTEFAQ</h4>
+              <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+              <a href="#" class="view-more align-self-end">View More</a>
+            </div>
+            <div class="prcnt-section">
+              <p>90%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <script src="/assets/web/custom.js"></script>
+  <script>
+    $('.custom-slider').slick({
+      dots: false,
+      infinite: true,
+      autoplay: true,
+      speed: 300,
+      slidesToShow: 3,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 991,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1,
+            infinite: true,
+          }
+        },
+        {
+          breakpoint: 767,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          }
+        }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+      ]
+    });
+
+  </script>

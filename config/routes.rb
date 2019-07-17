@@ -30,6 +30,8 @@ Rails.application.routes.draw do
     end
     member do
       get :user_profile
+      get :movie_category
+      get :movie_category_detail
     end
    end 
   end
