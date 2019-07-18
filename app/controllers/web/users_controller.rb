@@ -5,11 +5,15 @@ class Web::UsersController < ApplicationController
         redirect_to admin_home_index_path(current_user)
   	end
     @category = Category.all
+    # @sub_category = Category.find_by(id: params[:id])&.sub_categories
+    # @sub_categories = Product.where(category_id: params[:id])
+    # @trending = Product.all
     @movies = Product.where(category_name: "Movies").first(2)
     @games = Product.where(category_name: "Games").first(2)
     @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
-    #@users = User.where(user_type: "Normal User")
+    @users = User.where(user_type: "Normal User")
+       # @trending_image = @trending.image.all
   end
 
   def movie_category
@@ -30,6 +34,11 @@ class Web::UsersController < ApplicationController
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
   end
+
+  def movie_review
+    @product = Product.find_by(id: params[:id])
+    @all_sub_category = @product&.category&.sub_categories
+  end
   
   def user_profile
     # binding.pry
@@ -44,16 +53,6 @@ class Web::UsersController < ApplicationController
  def upcomeing
   # binding.pry
   @products = Product.all
- end
-
- def  holl_of_fame_details
- @products = Product.all
- @categorys = Category.all
- end
-
- def hollframe
-  @products = Product.where(category_id: params[:id])
-  # binding.pry
  end
 
   def abc
