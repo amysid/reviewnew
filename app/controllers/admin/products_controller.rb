@@ -7,10 +7,11 @@ class Admin::ProductsController < ApplicationController
       @s_no = 0
       if params[:search].present?
         # @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
-         @products = Product.where(product_name: params[:search])
+         @products = Product.where(["product_name = ? OR category_name = ? OR sub_category_name = ?", params[:search], params[:search], params[:search]])
+         @products = @products.order("created_at desc").paginate(:page => params[:page], :per_page => 100)
       else
       @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
-      @category=Category.all
+      @category = Category.all
       end
     end
 

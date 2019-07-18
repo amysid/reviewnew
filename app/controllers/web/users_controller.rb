@@ -9,7 +9,7 @@ class Web::UsersController < ApplicationController
     @games = Product.where(category_name: "Games").first(2)
     @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
-    # @users = User.where(user_type: "Normal User")
+    #@users = User.where(user_type: "Normal User")
   end
 
   def movie_category
