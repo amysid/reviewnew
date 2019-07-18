@@ -16,12 +16,19 @@ class Web::UsersController < ApplicationController
     # @category = Category.all
     # @trending = Product.where(trending: true)
     @sub_category = SubCategory.find_by(id: params[:id])
+    @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
   end
 
   def movie_category_detail
     @sub_category = SubCategory.find_by(id: params[:id])
+    @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
+  end
+
+  def movie_detail    
+    @product = Product.find_by(id: params[:id])
+    @all_sub_category = @product&.category&.sub_categories
   end
   
   def user_profile

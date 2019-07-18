@@ -26,6 +26,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+
+# User Authentication with Facebook
+gem 'omniauth-facebook'
+# Development ENV Variables
+gem 'figaro'
+
 gem 'pry'
 gem 'ckeditor', '~> 5.0'
 gem 'paperclip', '~> 6.1'

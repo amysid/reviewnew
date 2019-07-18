@@ -13,6 +13,13 @@ class Users::SessionsController < Devise::SessionsController
     super
   end
 
+  def create_user
+   @user = User.find_or_create_from_auth_hash(request.env["omniauth.auth"])
+      # session[:user_id] = @user.id
+      # WelcomeJob.perform_later
+      redirect_to root_path#(id: @user.id)
+  end
+
   # DELETE /resource/sign_out
   def destroy
     super

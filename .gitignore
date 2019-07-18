@@ -33,3 +33,6 @@ public/uploads
 config/secrets.yml
 Capfile
 db/schema.rb
+
+# Ignore application configuration
+/config/application.yml
