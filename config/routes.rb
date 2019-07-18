@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get :movie_category
       get :movie_category_detail
       get :movie_detail
+      get :movie_review
     end
    end 
   end

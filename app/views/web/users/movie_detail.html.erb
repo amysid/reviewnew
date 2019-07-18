@@ -49,7 +49,7 @@
                <h4 class="topheading"><%=@product&.product_name%></h4>
                <!-- <p class="paradetail1 line1">Dark Side Of The Moon</p> -->
                <p class="paradetail2 line1">Wide Release Date : <%=@product&.date&.strftime("%b %d, %Y")%></p>
-               <button class="reviews">Reviews</button>
+               <button class="reviews"><a href="/web/users/<%=@product.id%>/movie_review">Reviews</a></button>
              </div>
              <div class=" col-md-6 rightsec">
               <div class="buttons">
