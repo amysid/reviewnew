@@ -2,106 +2,47 @@
 <%= render partial: 'web/users/head'%>
 <%end%>
 
-<%= render partial: 'web/users/trending'%>
-<div class="col-md-4">
-            <div class="right-side">
-
-              <div class="widget">
-                <h3 class="widget-title">UPCOMING RELEASES</h3>
-                <% @products.each_with_index do |product, index|%>
-
-                <% if product.date.present? %>
-                <%if product.date.strftime("%d") > Time.now.strftime("%d") || product.date.strftime("%m") >= Time.now.strftime("%m") || product.date.strftime("%Y") > Time.now.strftime("%Y")%>
-                <% if index <= 4 %>
-                <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="<%= product.image.take.file_url%>" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title"><%= product.product_name%>: <%= product.category_name%></h4>
-                      <h5><%#= product.sub_category_name%></h5>
-                    <p><%= truncate(strip_tags(product.description), omision: "...", length: 50).html_safe%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></p>
-                  </div>
-                </div>
-                <%end%>
-                <%end%>
-                <%end%>
-                <%end%>
-                 <!-- <a href="/web/users/upcomeing" class="readmore pull-right">Read More></a> -->
-                <!-- <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-                <!-- <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-               <!--  <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-              </div>
-
-              <div class="widget reviewe-widget">
-                <h3 class="widget-title">Reviewed Today</h3>
-                <!-- <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div> -->
-<!--                 <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div> -->
-                <!-- <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div> -->
-               <!--  <div class="d-flex align-items-start reviewe-widget-item">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div> -->
-              </div>
-
+<%#= render partial: 'web/users/trending'%>
+<div class="page-wrapper">
+  <div class="container home-wrap">
+    <div class="row theatres-row">
+      <div class="col-md-12">
+        <h2 class="widget-title">All UPCOMING RELEASES  </h2>
+         <!--  <nav>
+            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
+              <a class="nav-item nav-link active fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab">Movie </a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-game" role="tab">Game</a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-tv" role="tab">Tv</a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-music" role="tab">Music</a>
             </div>
+          </nav>
+   -->
+        <div class="tab-content theatres-content" id="tabScore">
+          <div class="tab-pane fade show active id="nav-movie" role="tabpanel">
+            <div class="row">
+              <% @products.each_with_index do |product, index|%>
+              <%#binding.pry%>
+               <% if product.date.present? %>
+                <%if product.date > DateTime.now.utc %>
+              <div class="col-md-6">
+                <div class="youtube-image2">
+                  <iframe width="560" height="315" src="<%= product.image.take.file_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div class="col-md-6 youtube-content ">
+                <figure class="para-Margin-top"> 
+                  <h4><%= product.product_name%>: <%= product.category_name%></h4>
+                  <p><%= truncate(strip_tags(product.description), omision: "...", length: 400).html_safe%></p>
+                  <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
+                </figure>
+              </div>
+              <%end%>
+              <%end%>
+             <%end%>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

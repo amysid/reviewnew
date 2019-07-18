@@ -1,3 +1,7 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+
 <div class="page-wrapper crousel-page">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">

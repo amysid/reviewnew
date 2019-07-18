@@ -24,9 +24,11 @@ Rails.application.routes.draw do
       post :image_update
       get :report
       get :abc
+      get :hollframe
       get :user_type
       get :trending
       get :upcomeing
+      get :holl_of_fame_details
     end
     member do
       get :user_profile

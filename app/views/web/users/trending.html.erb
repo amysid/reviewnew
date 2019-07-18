@@ -2,40 +2,44 @@
 <%= render partial: 'web/users/head'%>
 <%end%>
 
-<%= render partial: 'web/users/trending'%>
-<div class="col-md-8">
-            <div class="left-side">
-              <h3 class="widget-title">All TRENDING </h3>
-              <div class="posts">
-                <div class="post-item">
-                  <div class="row no-gutters align-items-stretch">
-	                    <% @products.each_with_index do |product, index|%>
-	                    <%#binding.pry%>
-	                    
-		                    <% if product.trending == true %>
-				                    
-				                    <div class="col-md-4">
-				                      <div class="post-img">
-				                        <img src="<%= product.image.take.file_url%>" alt="">
-				                      </div>
-				                    </div>
-
-				                    <div class="col-md-8">
-					                      <div class="post-details">
-					                        <p class="tag"><span><%= product.category_name%> : Review</span></p>
-					                        <h4 class="post-title"><%= product.product_name%> : <%#= product.sub_category_name%></h4>
-					                        <p><%= truncate(strip_tags(product.description), omision: "...", length: 100).html_safe%></p>
-						                        <div class="post-meta">
-						                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></span>
-						                        </div>
-					                      </div>
-				                    </div>
-		                    <%end%>
-	                    <%end%>
-
-                  </div>
-                </div>
-               
-              </div>
+<div class="page-wrapper">
+  <div class="container home-wrap">
+    <div class="row theatres-row">
+      <div class="col-md-12">
+        <h2 class="widget-title">All TRENDING NOW</h2>
+         <!--  <nav>
+            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
+              <a class="nav-item nav-link active fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab">Movie </a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-game" role="tab">Game</a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-tv" role="tab">Tv</a>
+              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-music" role="tab">Music</a>
             </div>
+          </nav>
+   -->
+        <div class="tab-content theatres-content" id="tabScore">
+          <div class="tab-pane fade show active id="nav-movie" role="tabpanel">
+            <div class="row">
+             <% @products.each_with_index do |product, index|%>
+                <% if product.trending == true %>
+              <div class="col-md-6">
+                <div class="youtube-image2">
+                  <iframe width="560" height="315" src="<%= product.image.take.file_url%>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div class="col-md-6 youtube-content ">
+                <figure class="para-Margin-top"> 
+                  <h4><%= product.product_name%>: <%= product.category_name%></h4>
+                  <p><%= truncate(strip_tags(product.description), omision: "...", length: 400).html_safe%></p>
+                  <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
+                </figure>
+              </div>
+              
+              <%end%>
+             <%end%>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

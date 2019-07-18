@@ -1,0 +1,195 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+<html lang="en">
+
+
+<body>
+
+  <div class="wrapper">
+    <div class="page-wrapper">
+     <div class="container home-wrap">
+      <div class="row hall-heading">
+        <h2 class="widget-title">HALL OF FAME</h2>
+      </div>
+      <div class="row">
+        <% @products.each_with_index do |product, index|%>
+        <% if index == 0 %>
+        <div class="col-md-4 image-col">
+          <div class="image1">
+           <!--  <img src="images/Layer 10.png"> -->
+            <div class="percent-section2">
+              <p class="pheading">Junglee Movie Review</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's standard dummy text ever since the </p>
+            </div>
+          </div>
+          <!-- <div class="image1">
+            <img src="images/Layer 10.png">
+            <div class="percent-section2">
+             <p class="paramusic">New Movies Releasing</p>
+           </div>
+         </div> -->
+         <!-- <div class="image1">
+          <img src="images/Layer 10.png">
+          <div class="percent-section2">
+           <p class="paramusic">New Game</p>
+         </div>
+       </div> -->
+     </div>
+     <div class="col-md-8 iframe-col">
+      <% if product.video.present? %>
+                  <%= video_tag product&.video_url, controls: true, autoplay: false, width: "660",height: "315"%> 
+                  <%else%>
+                   <iframe class="youtube-icon" src="https://www.youtube.com/embed/Q19apeXtGXE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                  <%end%>
+    </div>
+    <%end%>
+    <%end%>
+  </div>
+</div>
+
+<div class="page-wrapper">
+  <div class="container home-wrap">
+    <div class="row theatres-row">
+      <div class="col-md-12">
+        <h2 class="widget-title">TRAILOR</h2>
+        <nav>
+          <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
+          	<% @categorys.each_with_index do |category, index|%>
+          	<% if index == 0 %>
+            <a class="nav-item nav-link active fonts trailer-nav show_data" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab" id="<%= category.id %>"><%= category.category_name%> </a>
+            <%else%>
+            <a class="nav-item nav-link fonts trailer-nav show_data" data-toggle="pill" class="tab-width" href="#nav-game" role="tab" id="<%= category.id%>"><%= category.category_name%></a>
+            <%end%>
+            <%end%>
+            <!-- <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-tv" role="tab">Tv</a> -->
+            <!-- <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-music" role="tab">Music</a> -->
+          </div>
+        </nav>
+
+        <div class="tab-content theatres-content" id="tabScore">
+
+          <div class="tab-pane fade show active" id="tab-2" role="tabpanel">
+            <div class="row">
+            	<% @products.each do |product| %>
+            	 <% if product.category_name == "Movies"%>
+              <div class="col-md-6">
+                <div class="youtube-image2">
+                	<% if product.video.present? %>
+                  <%= video_tag product&.video_url, controls: true, autoplay: false, width: "560",height: "315"%> 
+                  <%else%>
+                   <iframe class="youtube-icon" src="https://www.youtube.com/embed/Q19apeXtGXE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                  <%end%>
+                </div>
+              </div>
+              <div class="col-md-6 youtube-content ">
+                <figure class="para-Margin-top"> 
+                  <h4><%= product.product_name %>: <%= product.category_name %></h4>
+                  <p><%= truncate(strip_tags(product.description), omision: "...", length: 400).html_safe%></p>
+                  <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
+                </figure>
+              </div>
+              
+            <%end%>
+            <%end%>
+          </div>
+        </div>
+
+
+
+        
+
+
+</div>
+</div>
+
+
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+  </div>
+
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/custom.js"></script>
+<script>
+  $('.custom-slider').slick({
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 300,
+    slidesToShow: 3,
+    responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+      });
+
+    </script>
+  </body>
+
+  </html>
+
+  <script type="text/javascript">
+      $(document).ready(function(){
+      debugger;
+      $('#1').click();
+      $('.show_data').click(function(){
+        var id=$(this).attr("id");
+      $.ajax({
+         url: '/web/users/hollframe',
+         type: 'get',
+         data: {
+          id: id
+          }
+       });
+    });
+ });
+</script>

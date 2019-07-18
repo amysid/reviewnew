@@ -14,10 +14,11 @@
               <div class="posts">
                 <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
+                    <% @count_trending = 0 %>
                     <% @products.each_with_index do |product, index|%>
                     <%#binding.pry%>
-                    <% if index <= 3%>
-                    <% if product.trending == true %>
+                   <% if @count_trending < 4%>
+                    
                     <div class="col-md-4">
                       <div class="post-img">
                         <img src="<%= product.image.take.file_url%>" alt="">
@@ -34,11 +35,11 @@
                         </div>
                       </div>
                     </div>
-                    <%end%>
+                    <% @count_trending += 1 %>
                     <%end%>
                     <%end%>
                   </div>
-                  <a href="/web/users/trending" class="readmore pull-right">Read More></a>
+                  <a href="/web/users/trending" class="readmore pull-right" class= "btn btn-theme">Read More></a>
                 </div>
                 <!-- <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
@@ -106,11 +107,13 @@
 
               <div class="widget">
                 <h3 class="widget-title">UPCOMING RELEASES</h3>
+                <% @count_upcomeing = 0%>
                 <% @products.each_with_index do |product, index|%>
                    <%#binding.pry%>
-                <% if product.date.present? %>
-                <%if product.date.strftime("%d") > Time.now.strftime("%d") || product.date.strftime("%m") >= Time.now.strftime("%m") || product.date.strftime("%Y") > Time.now.strftime("%Y")%>
-                <% if index <= 3 %>
+                   
+                <% if product.date.present? %>  
+                <%if product.date > DateTime.now.utc %>
+                <% if @count_upcomeing  <  4 %>
                 <div class="custom-post">
                   <div class="custom-img">
                     <img src="<%= product.image.take.file_url%>" class="img-fluid" alt="">
@@ -122,6 +125,7 @@
                     <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></p>
                   </div>
                 </div>
+                <% @count_upcomeing += 1 %>
                 <%end%>
                 <%end%>
                 <%end%>
@@ -296,17 +300,27 @@
             <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
           </div>
           <div class="row">
+            <% @count_category_reviews = 0%>
             <%@category.each do |category|%>
+            <%#binding.pry%>
+            <% if @count_category_reviews < 8 %>
             <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
+                  <%if category&.product&.first&.image&.first.present? %>
+                 <img src="<%=category&.product&.first&.image&.first&.file_url%>" class="img-fluid" alt="">
+                 
+                  <%else%>
+                    <img src="/assets/category-img.jpg" class="img-fluid" alt="">
+                  <%end%>
                 </div>
                 <div class="custom-content align-center align-items-center">
                   <h4 class="custom-title"><%= category.category_name%></h4>
                 </div>
               </div>
             </div>
+            <% @count_category_reviews +=1  %>
+            <%end%>
             <%end%>
             <!-- <div class="col-md-3">
               <div class="custom-post">
@@ -368,7 +382,7 @@
                 </div>
               </div> -->
             </div>
-            <div class="col-md-3">
+            <!-- <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
                   <img src="/assets/category-img.jpg" class="img-fluid" alt="">
@@ -378,7 +392,7 @@
                 </div>
 
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="row">
@@ -386,8 +400,9 @@
             <h2 class="main-title">2019 HALL OF FAME</h2>
           </div>
           <div class="row small">
+            <% @count_hall_frame = 0 %>
             <% @products.each_with_index do |product, index|%>
-                   <%if index <= 5 %>
+                   <%if@count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
                 <div class="custom-img">
@@ -395,7 +410,7 @@
                 </div>
                 <div class="custom-content justify-content-end">
                   <h4 class="custom-title"><%= product.product_name%></h4>
-                  <p class="mb-2"><%= sanitize(product.description)%></p>
+                  <p class="mb-2"><%=truncate(strip_tags(product.description), omision: "...", length: 600).html_safe%></p>
                   <a href="#" class="view-more align-self-end">View More</a>
                 </div>
                 <div class="prcnt-section">
@@ -403,6 +418,7 @@
                 </div>
               </div>
             </div>
+            <% @count_hall_frame += 1%>
             <%end%>
 
             <%end%>
@@ -483,6 +499,7 @@
             </div> -->
           </div>
         </div>
+        <a href="/web/users/holl_of_fame_details" class="readmore pull-right">Read More></a>
 
  <div class="row">
           <div class="col-md-12">

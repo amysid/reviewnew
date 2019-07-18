@@ -11,7 +11,7 @@
                         <h4><%= trend.product_name%> (<%= trend.category_name%>,<%= trend&.updated_at&.strftime("%Y")%> )</h4>
                         <h5><%= trend.sub_category_name%></h5>
                       </div>
-                    <p><%= sanitize(trend&.description)%>
+                    <p><%= truncate(strip_tags(trend.description), omision: "...", length: 600).html_safe%>
                     </p>
                   </div>
               </div>
