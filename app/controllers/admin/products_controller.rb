@@ -77,7 +77,7 @@ class Admin::ProductsController < ApplicationController
           end
         end
 
-    def sub_categories_by_category
+    def sub_categories_by_category 
      product =Category.find_by(category_name: params[:id]).sub_categories
      render json: product
     end
