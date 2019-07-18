@@ -35,10 +35,12 @@ class Admin::ProductsController < ApplicationController
       @products = Product.new(product_params)
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
+      if params[:product][:date].present?
       x=params[:product][:date][0,2]
       params[:product][:date][0,2]= params[:product][:date][3,2]
       params[:product][:date][3,2]=x
-       @products.date = params[:product][:date]
+      @products.date = params[:product][:date]
+      end
       if @products.save
          redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"

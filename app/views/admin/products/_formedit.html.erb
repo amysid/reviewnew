@@ -14,7 +14,7 @@
                         <label class="col-sm-2 col-md-2 control-label">Category</label>
                         <div class="col-sm-8 col-md-8">
                              <%#= hidden_field_tag @id = user.id %>
-                          <%= f.select :category_name, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham" , id: "category_name_ajax"} %>
+                          <%= f.select :category_name, Category.all.collect {|p| [p.category_name] }, {:include_blank => "Select Category Name" },{:class => "form-control shubham" , id: "category_name_ajax",:required => true} %>
                         </div>
                           <%#= f.hidden_field :category_id, :value =>  @category.id %>
                       </div>
@@ -27,7 +27,7 @@
                         <div class="col-sm-8 col-md-8">
                           <%#binding.pry%>
                           <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
-                        <%= f.select :sub_category_name, options_for_select( @sub_categories,@products.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham"} %>
+                        <%= f.select :sub_category_name, options_for_select( @sub_categories,@products.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham",:required => true} %>
                         </div>
                       </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="input-group-addon">
                         <em class="fa fa-calendar"></em>
                         </div>
-                      <%= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date",data: { provide: 'datepicker'} %>
+                      <%= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date",data: { provide: 'datepicker',:required => true} %>
                         </div>
                         </div>
                       </div>
