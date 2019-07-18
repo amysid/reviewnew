@@ -16,3 +16,6 @@
  *= require_self
  * require_tree .
  */
+	.active{
+		color: #000000;
+	}

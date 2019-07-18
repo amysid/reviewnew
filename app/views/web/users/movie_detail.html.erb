@@ -1,0 +1,222 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+  <div class="page-wrapper page-Nav2">
+      <div class="row navtop">
+        <ul class="nav1">
+        	<%@all_sub_category.each do |sub|%>
+         		<li class="nav2"><a class='<%= params[:id] == sub.id ? "active" : "" %>' href="/web/users/<%=sub.id%>/movie_category"><%=sub&.sub_category_name%></a></li>
+       	  <%end%>
+       </ul>
+     </div>
+
+<%#= render partial: 'web/users/trending'%>
+<%arr = @product.image { |i| i&.file&.url}%>
+<%arr = arr[0..3]%>
+
+     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+      	<%arr.each_with_index do |img,index|%>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class='<%= index == 0 ? "active" : "" %>'></li>
+        <%end%>
+       <!--  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li> -->
+      </ol>
+      <div class="carousel-inner">
+        
+      	<%arr.each_with_index do |img,index|%>
+        <div class='carousel-item <%= index == 0 ? "active" : "" %>'>
+          <img class="d-block w-100" src="<%=img&.file&.url%>" alt="First slide">
+        </div>
+        <%end%>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+
+      </a>
+    </div>
+
+
+        <div class="container home-wrap">
+        <div class="row theatres-row">
+          <div class="col-md-9">
+
+            <div class="row">
+              <div class="col-md-6 leftsec">
+               <h4 class="topheading"><%=@product&.product_name%></h4>
+               <!-- <p class="paradetail1 line1">Dark Side Of The Moon</p> -->
+               <p class="paradetail2 line1">Wide Release Date : <%=@product&.date&.strftime("%b %d, %Y")%></p>
+               <button class="reviews">Reviews</button>
+             </div>
+             <div class=" col-md-6 rightsec">
+              <div class="buttons">
+                <p class="button12"><span class="button1" id="button65">65</span>userscore</p>
+                <p class="button12"><span class="button1" id="button87">87</span>metascor</p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <p class="mainpara">
+              <%=ActionView::Base.full_sanitizer.sanitize(@product&.description)%>
+            </p>
+          </div>
+          <div>
+            <%if @product.video.present?%>
+            <video controls="controls" width="400px" height="200px" id="video_player" src="<%=@product&.video&.url%>" autoplay="true" muted="false" class="video_product"></video>
+            <%else%>
+            <img src="/assets/video-youtube-icon-png-1.jpg" class="youtubeimage">
+            <%end%>
+          </div>
+
+
+
+        </div>
+        <div class="col-md-3" >
+        <div class="white-box Game-deatils">
+          <p class="centerpara">Choose Genre</p>
+          <ul class="custom-list">
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Action</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Adventure</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Amination</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Biography</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Comedy</span></li>
+          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Fantacy</span></li>
+           <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Horror</span></li>
+            <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Reality</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Romance</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Action</span></li>
+               <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Adventure</span></li>
+            <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Amination</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Biography</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Comedy</span></li>
+                 <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Fantacy</span></li>
+             <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Horror</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Reality</span></li>
+              <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Romance</span></li>
+        </ul>
+        </div>
+  
+
+       </div>
+     </div>
+     
+
+     <div class="heading">
+      <h2 class="titile-light">You may also like:</h2>
+    </div>
+
+    <div class="custom-slider slidw">
+      <div class="custom-post custom-slide">
+        <div class="custom-img">
+          <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="custom-content justify-content-end">
+          <h4 class="custom-title">Marta Kauffman</h4>
+          <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <a href="#" class="view-more align-self-end">View More</a>
+        </div>
+        <div class="prcnt-section">
+          <p>90%</p>
+        </div>
+      </div>
+      <div class="custom-post custom-slide">
+        <div class="custom-img">
+          <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="custom-content justify-content-end">
+          <h4 class="custom-title">The Guardian</h4>
+          <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <a href="#" class="view-more align-self-end">View More</a>
+        </div>
+        <div class="prcnt-section">
+          <p>90%</p>
+        </div>
+      </div>
+      <div class="custom-post custom-slide">
+        <div class="custom-img">
+          <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="custom-content justify-content-end">
+          <h4 class="custom-title">Business Inside</h4>
+          <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <a href="#" class="view-more align-self-end">View More</a>
+        </div>
+        <div class="prcnt-section">
+          <p>76%</p>
+        </div>
+      </div>
+      <div class="custom-post custom-slide">
+        <div class="custom-img">
+          <img src="http://res.cloudinary.com/dckbxjtbv/image/upload/v1563339323/afa1kfx2gkwtlymzdoo7.jpg" class="img-fluid" alt="">
+        </div>
+        <div class="custom-content justify-content-end">
+          <h4 class="custom-title">ITTEFAQ</h4>
+          <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+          <a href="#" class="view-more align-self-end">View More</a>
+        </div>
+        <div class="prcnt-section">
+          <p>90%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+  $('.custom-slider').slick({
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    speed: 300,
+    slidesToShow: 3,
+    responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+      }
+    },
+    {
+      breakpoint: 991,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        infinite: true,
+      }
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+      }
+    }
+        // You can unslick at a given breakpoint now by adding:
+        // settings: "unslick"
+        // instead of a settings object
+        ]
+      });
+
+    </script>
+
+    <style type="text/css">
+      .video_product{
+        height: 100%;
+        max-height: 359px;
+        width: 100%;
+        max-width: 976px;
+      }
+    </style>

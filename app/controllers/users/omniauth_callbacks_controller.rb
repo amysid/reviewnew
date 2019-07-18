@@ -7,7 +7,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should also create an action method in this controller like this:
   # def twitter
   # end
-
+   def facebook
+   @user = User.find_or_create_from_auth_hash(request.env["omniauth.auth"])
+      session[:user_id] = @user.id
+      # WelcomeJob.perform_later
+      sign_in_and_redirect @user
+      # redirect_to root_path#(id: @user.id)
+  end
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
 

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable
+         :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :omniauthable, omniauth_providers: [:facebook]
   enum role: ["admin","user","expert"]
   has_one :image,class_name: 'Image', as: :imageable, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :image
@@ -48,6 +48,26 @@ class User < ApplicationRecord
         next if index.eql?(0)
         User.create! a
       end
+    end
+  end
+
+  def self.find_or_create_from_auth_hash(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+  
+       user.provider = auth.provider
+      user.uid = auth.uid
+      user.name = auth.info.first_name || auth.info.name 
+      # user.last_name = auth.info.last_name
+       user.email = auth.info.email
+      # user.remote_avatar_url = auth.info.image
+      # user.user_role.name = "User"
+       user.password = SecureRandom.urlsafe_base64
+       user.skip_confirmation!
+      user.save(validate: false)
+      binding.pry
+      image = Image.new(imageable_id: user.id,imageable_type: "User")
+      image.remote_file_url = "https://www.jewelinfo4u.com/images/Gallery/ruby.jpg"
+      image.save
     end
   end
 

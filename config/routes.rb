@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/auth/facebook/callback' , to: 'users/sessions#create_user'
+
   mount Ckeditor::Engine => '/ckeditor'
   namespace :admin do
     get 'homes/index'
@@ -6,7 +8,8 @@ Rails.application.routes.draw do
   #devise_for :users
      devise_for :users, controllers: {
         sessions: 'users/sessions',
-        passwords: 'users/passwords'
+        passwords: 'users/passwords',
+        omniauth_callbacks: "users/omniauth_callbacks" 
         #registrations: 'users/registrations'
       }
 
@@ -32,6 +35,7 @@ Rails.application.routes.draw do
       get :user_profile
       get :movie_category
       get :movie_category_detail
+      get :movie_detail
     end
    end 
   end

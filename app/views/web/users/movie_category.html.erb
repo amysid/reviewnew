@@ -4,15 +4,42 @@
   <div class="page-wrapper page-Nav2">
       <div class="row navtop">
         <ul class="nav1">
-         <li class="nav2"><a class="active" href="#home">In Theatres</a></li>
-         <li class="nav2"><a href="#news">Coming Soon</a></li>
-         <li class="nav2"><a href="#contact">Best Movies</a></li>
-         <li class="nav2"><a href="#about">Critics</a></li>
-         <li class="nav2"><a href="#about">Trailer</a></li>
+        	<%@all_sub_category.each do |sub|%>
+         		<li class="nav2"><a class='<%= params[:id] == sub.id ? "active" : "" %>' href="/web/users/<%=sub.id%>/movie_category"><%=sub&.sub_category_name%></a></li>
+       	  <%end%>
        </ul>
      </div>
 
-<%= render partial: 'web/users/trending'%>
+<%#= render partial: 'web/users/trending'%>
+<%arr = @sub_category.products.map { |p| p&.image&.first&.file&.url}%>
+<%arr = arr[0..3]%>
+
+     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+      	<%arr.each_with_index do |img,index|%>
+        <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class='<%= index == 0 ? "active" : "" %>'></li>
+        <%end%>
+       <!--  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="3"></li> -->
+      </ol>
+      <div class="carousel-inner">
+        
+      	<%arr.each_with_index do |img,index|%>
+        <div class='carousel-item <%= index == 0 ? "active" : "" %>'>
+          <img class="d-block w-100" src="<%=img%>" alt="First slide">
+        </div>
+        <%end%>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+
+      </a>
+    </div>
+
+
 
       <div class="container home-wrap">
                <h2 class="widget-title"><%= @sub_category&.sub_category_name%></h2>
@@ -32,13 +59,13 @@
             <div class="tab-pane fade show active" id="nav-name" role="tabpanel">
               <div class="row">
 
-		      <%@products.order("product_name ASC").each do |product|%>
+		      <%@products.order("product_name ASC").limit(4).each do |product|%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">
 
 		                    <%if product.image.present?%>
-				                <img src="<%=product&.image&.first&.file&.url%>">
+				                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
@@ -52,7 +79,7 @@
 		                    <P class="para">
 		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
 		                  </div>
                     </div>
                 </div>
@@ -69,13 +96,13 @@
 
 
                
-		      <%@products.order("date DESC").each do |product|%>
+		      <%@products.order("date DESC").limit(4).each do |product|%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">
 
 		                    <%if product.image.present?%>
-				                <img src="<%=product&.image&.first&.file&.url%>">
+				                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
@@ -89,7 +116,7 @@
 		                    <P class="para">
 		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
 		                  </div>
                     </div>
                 </div>
@@ -103,13 +130,13 @@
 
 
              
-		      <%@products.order("product_name ASC").each do |product|%>
+		      <%@products.order("product_name ASC").limit(4).each do |product|%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">
 
 		                    <%if product.image.present?%>
-				                <img src="<%=product&.image&.first&.file&.url%>">
+				                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
@@ -123,7 +150,7 @@
 		                    <P class="para">
 		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
 		                  </div>
                     </div>
                 </div>
@@ -138,13 +165,13 @@
 
 
               
-		      <%@products.order("product_name ASC").each do |product|%>
+		      <%@products.order("product_name ASC").limit(4).each do |product|%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">
 
 		                    <%if product.image.present?%>
-				                <img src="<%=product&.image&.first&.file&.url%>">
+				                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
@@ -158,7 +185,7 @@
 		                    <P class="para">
 		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
 		                  </div>
                     </div>
                 </div>
@@ -168,9 +195,11 @@
 
               </div>
             </div>
+            <%if @products.present?%>
             <div class="pull-right">
             	<span class="expand"><a href="/web/users/<%=@sub_category.id%>/movie_category_detail">Read More</a></span>
             </div>
+            <%end%>
           </div>
 
 
