@@ -65,10 +65,14 @@ class Admin::ProductsController < ApplicationController
       # binding.pry
       @products.update(category_id: Category.find_by(category_name: params[:product][:category_name]).id)
       @products.update(sub_category_id: SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id)
+      if params[:product][:date].size == 10
       x=params[:product][:date][0,2]
       params[:product][:date][0,2]= params[:product][:date][3,2]
       params[:product][:date][3,2]=x
       @products.date = params[:product][:date]
+    else
+      @products.date = params[:product][:date]
+    end
         if @products.update_attributes(product_params)
             redirect_to admin_products_path, notice: 'Products Updated Successfully.'
           else
