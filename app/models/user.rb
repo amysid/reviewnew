@@ -64,8 +64,9 @@ class User < ApplicationRecord
        user.password = SecureRandom.urlsafe_base64
        user.skip_confirmation!
       user.save(validate: false)
-      image = Image.new(imageable_id: user.id,imageable_type: "User")
-      image.remote_file_url = "https://www.jewelinfo4u.com/images/Gallery/ruby.jpg"
+      user&.image&.destroy if user.image.present?
+      image = user.create_image#Image.new(imageable_id: user.id,imageable_type: "User")
+      image.remote_file_url = auth.info.image
       image.save
     end
   end
