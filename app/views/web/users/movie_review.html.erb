@@ -314,38 +314,24 @@
 
               <div class="widget reviewe-widget">
                 <h3 class="widget-title">Reviewed Today</h3>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
+
+               	<%@todays_review.each do |review|%>
+	                
+	                <div class="d-flex align-items-start reviewe-widget-item mb-4">
+	                  <img src="/assets/review-img.png">
+	                  <div class="reviewe-widget-content">
+	                    <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
+	                    <p><%=truncate(review&.comment, :length => 72)%> </p>
+	                    <span><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+	                  </div>
+	                </div>
+
+                <%end%>
+
+
                 </div>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start reviewe-widget-item">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
+
+
               </div>
         </div>
         </div>
