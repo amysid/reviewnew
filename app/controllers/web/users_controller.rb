@@ -39,7 +39,8 @@ class Web::UsersController < ApplicationController
   def movie_review
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
-    @review_parts = Product.find_by(id: params[:id]).review_parts
+    @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
+    @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
   end
   
   def user_profile

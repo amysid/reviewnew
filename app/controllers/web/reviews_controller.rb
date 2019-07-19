@@ -8,8 +8,8 @@ class Web::ReviewsController < ApplicationController
 		params_data_data = params[:rating][0]
         spoiler = params[:spoiler].present? ? true : false
 		criteria = {}
-		
-		criteria_arr = @product.review_parts.pluck(:criteria)
+
+		criteria_arr = @product&.category&.review_parts.pluck(:criteria)
 		criteria_arr.each do |c|
 			criteria[c.to_sym] = params_data_data[c.to_sym].present? ? params_data_data[c.to_sym].to_i : 0 
 		end
