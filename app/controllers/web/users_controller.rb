@@ -56,6 +56,7 @@ class Web::UsersController < ApplicationController
   end
  
  def trending
+  # binding.pry
  @products = Product.all
  end
 
