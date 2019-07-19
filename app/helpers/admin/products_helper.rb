@@ -7,7 +7,7 @@ module Admin::ProductsHelper
 	end
 
 	 def sub_categories_by_category
-	 	binding.pry
+	 	#binding.pry
 	 	product =Category.find_by(category_name: params[:id]).sub_categories
 	 end
 end
