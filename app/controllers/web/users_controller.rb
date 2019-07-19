@@ -9,7 +9,7 @@ class Web::UsersController < ApplicationController
     # @sub_categories = Product.where(category_id: params[:id])
     # @trending = Product.all
     @movies = Product.where(category_name: "Movies").first(2)
-    @games = Product.where(category_name: "Games").first(2)
+    @games = Product.where(category_name: "Games").first(2) 
     @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
     @users = User.where(user_type: "Normal User")
@@ -57,6 +57,7 @@ class Web::UsersController < ApplicationController
   end
  
  def trending
+  # binding.pry
  @products = Product.all
  end
 
@@ -112,7 +113,6 @@ class Web::UsersController < ApplicationController
         flash[:notice] = "Please enter new password." 
       end
     end
-    
   end
 
   def show
