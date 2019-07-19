@@ -13,21 +13,27 @@
         <h2 class="widget-title">HALL OF FAME</h2>
       </div>
       <div class="row">
-        <% @products&.each_with_index do |product, index|%>
-        <% if index == 0 %>
         <div class="col-md-4 image-col">
-          <div class="image1">
+          <% @count_image = 0 %>
+        <% @products&.each do |product|%>
+        <%#binding.pry%>
+        <% if @count_image <= 2 %>
+          <div class="image1" style="background-image: url('<%= product.image.first.file_url%>');">
            <!--  <img src="images/Layer 10.png"> -->
             <div class="percent-section2">
-              <p class="pheading">Junglee Movie Review</p>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-              Lorem Ipsum has been the industry's standard dummy text ever since the </p>
+              <p class="pheading"><%= product&.product_name%></p>
+              <p><%= truncate(strip_tags(product.description), omision: "...", length: 300).html_safe %></p>
             </div>
           </div>
+          <% @count_image += 1 %>
+      <%end%>
+      <%end%>
           <!-- <div class="image1">
             <img src="images/Layer 10.png">
             <div class="percent-section2">
              <p class="paramusic">New Movies Releasing</p>
+              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+              Lorem Ipsum has been the industry's standard dummy text ever since the </p>
            </div>
          </div> -->
          <!-- <div class="image1">
@@ -37,15 +43,21 @@
          </div>
        </div> -->
      </div>
+    
      <div class="col-md-8 iframe-col">
+      <% @count_video = 0 %>
+      <% @products&.each_with_index do |product, index| %>
+      <% if index == 0%>
       <% if product.video.present? %>
-                  <%= video_tag product&.video_url, controls: true, autoplay: false, width: "660",height: "315"%> 
+                  <%= video_tag product&.video_url, controls: true, autoplay: false, width: "660",height: "515"%> 
                   <%else%>
                    <iframe class="youtube-icon" src="https://www.youtube.com/embed/Q19apeXtGXE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> 
+                  <%# @count_video += 1%>
                   <%end%>
+                  <%end%>
+    <%end%>
     </div>
-    <%end%>
-    <%end%>
+    
   </div>
 </div>
 

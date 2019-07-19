@@ -1,4 +1,5 @@
 class Web::UsersController < ApplicationController
+  before_action :authenticate_user!, only: [:holl_of_fame_details, :movie_category, :movie_category_detail, :movie_detail, :movie_review,:user_profile, :hollframe, :trending, :upcomeing]
   def index
      # binding.pry
   	if (current_user.present? && current_user.role == "admin")

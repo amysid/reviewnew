@@ -2263,7 +2263,7 @@ figure.para-Margin-top {
     margin-bottom: 20px;
     height: 190px;
     width: 100%;
-    background-image: url(/assets/Layer10.png);
+    /*background-image: url(/assets/Layer10.png);*/
     background-size: cover;
     background-position: center center;
 }
