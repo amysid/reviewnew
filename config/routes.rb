@@ -20,6 +20,12 @@ Rails.application.routes.draw do
       get :review_system
     end
     end
+
+    resources :reviews do
+      collection do
+        post :get_reviews
+      end
+    end
     resources :users do
     collection do
       get :check_email

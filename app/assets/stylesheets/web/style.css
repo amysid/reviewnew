@@ -1412,7 +1412,7 @@ address i {
     margin: auto;
 }
 .rating-wrap {
-    width: 50%;
+    /*width: 50%;*/
     max-width: 250px;
     display: flex;
     align-items: center;
