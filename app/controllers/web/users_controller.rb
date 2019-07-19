@@ -45,6 +45,15 @@ class Web::UsersController < ApplicationController
     @categorys = Category.all
     @products = Product.all
   end
+
+  def holl_of_fame_details
+    @products = Product.all
+    @categorys = Category.all
+  end
+
+  def hollframe
+     @products = Product.where(category_id: params[:id])
+  end
  
  def trending
  @products = Product.all

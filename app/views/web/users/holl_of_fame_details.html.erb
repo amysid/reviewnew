@@ -13,7 +13,7 @@
         <h2 class="widget-title">HALL OF FAME</h2>
       </div>
       <div class="row">
-        <% @products.each_with_index do |product, index|%>
+        <% @products&.each_with_index do |product, index|%>
         <% if index == 0 %>
         <div class="col-md-4 image-col">
           <div class="image1">
@@ -56,7 +56,7 @@
         <h2 class="widget-title">TRAILOR</h2>
         <nav>
           <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
-          	<% @categorys.each_with_index do |category, index|%>
+          	<% @categorys&.each_with_index do |category, index|%>
           	<% if index == 0 %>
             <a class="nav-item nav-link active fonts trailer-nav show_data" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab" id="<%= category.id %>"><%= category.category_name%> </a>
             <%else%>
@@ -72,7 +72,7 @@
 
           <div class="tab-pane fade show active" id="tab-2" role="tabpanel">
             <div class="row">
-            	<% @products.each do |product| %>
+            	<% @products&.each do |product| %>
             	 <% if product.category_name == "Movies"%>
               <div class="col-md-6">
                 <div class="youtube-image2">
