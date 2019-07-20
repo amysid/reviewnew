@@ -91,12 +91,10 @@
                     <img src="/assets/big-banner.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="custom-content align-center">
-                    <p class="custom-tag"><span>Movie : Review</span></p>
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
+                    <p class="custom-tag"><span><%=@latest_review&.product&.category&.category_name%> : Review</span></p>
+                    <h4 class="custom-title"><%=@latest_review&.product&.product_name%> Review</h4>
+                    <p><%=truncate(@latest_review&.comment, :length => 300)%></p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= @latest_review&.created_at&.strftime("%B %d, %Y")%></p>
                   </div>
                 </div>
               </div>
@@ -171,38 +169,21 @@
 
               <div class="widget reviewe-widget">
                 <h3 class="widget-title">Reviewed Today</h3>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
+
+             <%@recent_reviews.each do |review|%>
+                  
+                  <div class="d-flex align-items-start reviewe-widget-item mb-4">
+                    <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
+                    <div class="reviewe-widget-content">
+                      <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
+                      <p><%=truncate(review&.comment, :length => 72)%> </p>
+                      <span><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+                    </div>
                   </div>
-                </div>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
-                <div class="d-flex align-items-start reviewe-widget-item">
-                  <img src="/assets/review-img.png">
-                  <div class="reviewe-widget-content">
-                    <h6>Movie Reviews | Tamil Cinema Reviews</h6>
-                    <p>Lorem Ipsum is simply dummy text of the dummy text ever since the 1500s, </p>
-                    <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                  </div>
-                </div>
+
+                <%end%>
+
+
               </div>
 
             </div>
@@ -394,7 +375,7 @@
               </div>
             </div> -->
           </div>
-        </div>
+        
         <div class="row">
           <div class="col-md-12">
             <h2 class="main-title">2019 HALL OF FAME</h2>
@@ -506,6 +487,7 @@
             <h2 class="main-title">LATEST REVIEWS</h2>
           </div>
 </div>
+
 <div class="row">
 <div class="col-md-12">
         <button type="button" class="user user_type" id="Normal User">Users score</button>
@@ -528,6 +510,8 @@
     <div class="home-slider1">
       <%# @users.each do |user|%>
       <%#binding.pry%>
+
+
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
@@ -552,6 +536,8 @@
         </div>
       </div>
       <%#end%>
+
+
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
@@ -575,6 +561,9 @@
                 </div>
         </div>
       </div>
+
+
+
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
@@ -598,6 +587,8 @@
                 </div>
         </div>
       </div>
+
+
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
@@ -621,6 +612,8 @@
                 </div>
         </div>
       </div>
+
+      
     </div>
     <!-- Home Slider Close -->
           
@@ -675,7 +668,7 @@
 
       </div>
     </div>
-
+    </div>
   
 <script type="text/javascript">
       $(document).ready(function(){

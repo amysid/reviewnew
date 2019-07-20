@@ -130,7 +130,8 @@
 
 
              
-		      <%@products.order("product_name ASC").limit(4).each do |product|%>
+		      <%@products.each do |product|%>
+		      		<%next unless meta_review(product)%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">

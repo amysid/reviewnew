@@ -67,7 +67,7 @@
         <div class=" col-md-6 ">
           <div class="col-md-3 buttonsreviews">
             <p class="button12"><span class="blueuser">Userscore</span><br>
-              <span class="button1" id="button65reviews">65</span></p>
+              <span class="button1" id="button65reviews"><%=@user_reviews.count%></span></p>
             </div>
             <div class="col-md-9 buttonsreviews">
               <img src="/assets/review.jpg" class="reviewimg1">
@@ -77,7 +77,7 @@
           <div class=" col-md-6 ">
             <div class="col-md-3 buttonsreviews">
               <p class="button12"><span class="blueuser">Metascore</span><br>
-                <span class="button1" id="button65reviews">87</span></p>
+                <span class="button1" id="button65reviews"><%=@meta_reviews.count%></span></p>
               </div>
               <div class="col-md-9 buttonsreviews">
                 <img src="/assets/review.jpg" class="reviewimg1">
@@ -123,18 +123,20 @@
          <div class="tab-content theatres-content" id="tabScore">
             <div class="tab-pane fade in show active" id="nav-name" role="tabpanel">
               <div class="row">
+
+              <%@user_reviews[0..3].each do |review|%>
                 <div class="col-md-6">
                   <div class="imgshadow">
                    <div class="imagecontent">
                     <div class="d-flex image-text">
-                      <img src="/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg" class="imgcircle">
+                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 151px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
                       <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
+                        <h4 class="topheading12"><%=user_name(review&.user_id)%></h4>
+                        <p class="paradetail1 line1"><%= review&.created_at&.strftime("%B %d, %Y")%></p>
+                        <p class="paradetail2 line10"><%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
                       </div>
                     </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
+                    <div class="pa"><p class="paracircle"><%=truncate(review&.comment, :length => 245)%></p></div>
                   </div>
                   <div class="d-flex justify-content-between">
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
@@ -145,111 +147,28 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/Hadie-profile-pic-circle-1.png" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Teena John</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/Hadie-profile-pic-circle-1.png" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Teena John</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
+              <%end%>
+
+
               </div>
             </div>
       
             <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
                 <div class="row">
+
+              <%@meta_reviews[0..3].each do |review|%>
                 <div class="col-md-6">
                   <div class="imgshadow">
                    <div class="imagecontent">
                     <div class="d-flex image-text">
-                      <img src="/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg" class="imgcircle">
+                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 151px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
                       <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
+                        <h4 class="topheading12"><%=user_name(review&.user_id)%></h4>
+                        <p class="paradetail1 line1"><%= review&.created_at&.strftime("%B %d, %Y")%></p>
+                        <p class="paradetail2 line10"><%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
                       </div>
                     </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline"><span>Read Full Review</span></a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/Hadie-profile-pic-circle-1.png" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
+                    <div class="pa"><p class="paracircle"><%=truncate(review&.comment, :length => 245)%></p></div>
                   </div>
                   <div class="d-flex justify-content-between">
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
@@ -260,55 +179,15 @@
                     </div>
                 </div>
                 </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="imgshadow">
-                   <div class="imagecontent">
-                    <div class="d-flex image-text">
-                      <img src="/assets/Hadie-profile-pic-circle-1.png" class="imgcircle">
-                      <div class="margintxt">
-                        <h4 class="topheading12">Johny Qubert</h4>
-                        <p class="paradetail1 line1">June 12, 2019</p>
-                        <p class="paradetail2 line10">08/10</p>
-                      </div>
-                    </div>
-                    <div class="pa"><p class="paracircle">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p></div>
-                  </div>
-                  <div class="d-flex justify-content-between">
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
-                       <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
-                      </div>
-                    </div>
-                </div>
-                </div>
+              <%end%>
+
+
               </div>
             </div>
         
           </div>
-                  </div>
+        </div>
+
           <div class="col-md-12 col-lg-4" >
          
 
@@ -318,7 +197,7 @@
                	<%@todays_review.each do |review|%>
 	                
 	                <div class="d-flex align-items-start reviewe-widget-item mb-4">
-	                  <img src="/assets/review-img.png">
+	                  <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
 	                  <div class="reviewe-widget-content">
 	                    <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
 	                    <p><%=truncate(review&.comment, :length => 72)%> </p>
@@ -443,15 +322,15 @@
 
           <div class="form-group" id="holidays">
             <div class="overallRating">
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating1" name="numeric_rating" value="1" class="ten-rate" /><span class="sib_span">1</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating2" name="numeric_rating" value="2" class="ten-rate" /><span class="sib_span">2</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating3" name="numeric_rating" value="3" class="ten-rate" /><span class="sib_span">3</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating4" name="numeric_rating" value="4" class="ten-rate" /><span class="sib_span">4</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating5" name="numeric_rating" value="5" class="ten-rate" /><span class="sib_span">5</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating6" name="numeric_rating" value="6" class="ten-rate" /><span class="sib_span">6</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating7" name="numeric_rating" value="7" class="ten-rate" /><span class="sib_span">7</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating8" name="numeric_rating" value="8" class="ten-rate" /><span class="sib_span">8</span></label>
-              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="9" class="ten-rate" /><span class="sib_span">9</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating1" name="numeric_rating" value="01" class="ten-rate" /><span class="sib_span">1</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating2" name="numeric_rating" value="02" class="ten-rate" /><span class="sib_span">2</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating3" name="numeric_rating" value="03" class="ten-rate" /><span class="sib_span">3</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating4" name="numeric_rating" value="04" class="ten-rate" /><span class="sib_span">4</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating5" name="numeric_rating" value="05" class="ten-rate" /><span class="sib_span">5</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating6" name="numeric_rating" value="06" class="ten-rate" /><span class="sib_span">6</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating7" name="numeric_rating" value="07" class="ten-rate" /><span class="sib_span">7</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating8" name="numeric_rating" value="08" class="ten-rate" /><span class="sib_span">8</span></label>
+              <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="09" class="ten-rate" /><span class="sib_span">9</span></label>
               <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating10" name="numeric_rating" value="10" class="ten-rate" /><span class="sib_span">10</span></label> 
             </div>
           </div>
