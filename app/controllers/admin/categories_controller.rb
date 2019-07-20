@@ -1,4 +1,4 @@
-  class Admin::CategoriesController < ApplicationController
+class Admin::CategoriesController < ApplicationController
  before_action :authenticate_user!
  before_action :find_category, only: [:show,:edit,:update,:status,:destroy]
  layout 'admin_lte_2'
