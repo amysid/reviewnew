@@ -73,9 +73,13 @@ Rails.application.routes.draw do
     resources :categories do
       collection do
         post :edit_sub_category
+        post :edit_review_part
        delete :destroy_sub_category
+       delete :destroy_review_part
         post :create_sub_category
+        post :create_post_review
         post :update_sub_category
+        post :update_review_part
         get :add_category
         post :create_category_details
         get :search_sub_categories

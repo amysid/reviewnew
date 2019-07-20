@@ -8,6 +8,7 @@
       <ul class="nav nav-tabs">
         <li><a class="active" data-toggle="tab" href="#category">Category</a></li>
         <li><a data-toggle="tab" href="#state" class="state-tab">Sub Category</a></li>
+        <li><a data-toggle="tab" href="#parts" class="">Review Part</a></li>
       </ul>
       <%= form_for :category, url: admin_category_path, method: :patch, html:  {id: "admin_edit_category"}  do |f| %>
       <div class="tab-content">
@@ -32,12 +33,87 @@
             </div>
           </div>
         <%end%>
+
+
+        <div id="parts" class="tab-pane in fade">
+          <button class="btn btn-primary btn-md pull-right" type="button" data-toggle="modal" data-target="#myModal1" id="states" style="margin-right: 1px;"><i class="fa fa-plus"></i>Add Review Part</button>
+          <br>
+          <br>
+          <div class="clearfix box box-primary">
+        <fieldset class="global-fieldset">
+        <legend>Filter</legend>
+        <div class="filter-form">
+        <!-- <form action="/admin/users" method="get" accept-charset="UTF-8" enctype="multipart/form-data" id="web-user-val" class="form-common clearfix"> -->
+          <%#binding.pry%>
+         <%= form_tag edit_admin_category_path(id: @category.id), method: :get,  class:"form-common clearfix" do  %>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label>NAME</label>
+              <!-- <input type="text" class="form-control custom-control " name="user_name"> -->
+              <input type="text" name="search" class="form-control custom-control" placeholder="SEARCH CRITERIA" id="country_serch">
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="filter-btn">
+              <button class="btn btn-primary" title="Search"> <i class="fa fa-search"></i> Filter </button>
+              <a href="<%=edit_admin_category_path(id: @category.id)%>" class="btn btn-danger" title="Cancle">Cancle</a>
+              
+            </div>
+          </div>
+        <!-- </form> -->
+        <%end%>
+      </div>
+    </fieldset>
+      </div>
+        <div class="table-responsive cus-table">
+              <table class="table table-bordered table">
+                <thead>
+                <%#binding.pry%>
+                  <tr>
+                    <th>S.No.</th>
+                    <th>Sub Category</th>
+                    <th colspan="3">Actions</th>
+                  </tr>
+                </thead>
+                <% @review_parts1&.each do |m| %>
+                  <tbody>
+                    <tr>
+                      <td><%= @s_no += 1 %></td>
+                      <td><%= m.try(:criteria)%></td>
+                     
+
+                      <!-- <td></td> -->
+                  <td><div class="form-add" style="display:inline-block;">
+             <button class="btn btn-primary btn-md state111" type="button" data-toggle="modal" data-target="#editModal1" id="<%=m.id%>"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></button> 
+              <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, destroy_review_part_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this criteria name ?"},:class=>"btn btn-danger", method: :delete, title: "Delete"%></td>
+
+            <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
+             
+      <!-- <div class="modal fade in add-modal" id="editModal" role="dialog">
+    <div class="modal-dialog">
+     -->
+      <!-- Modal content-->
+
+      
+ <!--    </div>
+  </div> -->
+            </div> 
+           <%#= link_to 'Delete', destroy_state_admin_countries_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this state ?"},:class=>"btn btn-danger", method: :delete %>
+          </td>
+                    </tr>
+                  </tbody>
+                <%end%>
+              </table>  
+            </div>
+          
+        </div>
+
         <div id="state" class="tab-pane in fade">
           <button class="btn btn-primary btn-md pull-right" type="button" data-toggle="modal" data-target="#myModal" id="states" style="margin-right: 1px;"><i class="fa fa-plus"></i>Add Sub Category</button>
           <br>
           <div class="state-tab">
 
-             <div class="clearfix box box-primary">
+        <div class="clearfix box box-primary">
         <fieldset class="global-fieldset">
         <legend>Filter</legend>
         <div class="filter-form">
@@ -76,10 +152,11 @@
                     <th colspan="3">Actions</th>
                   </tr>
                 </thead>
+                <% @s_number = 0 %>
                 <% @sub_category&.each do |m| %>
                   <tbody>
                     <tr>
-                      <td><%= @s_no += 1 %></td>
+                      <td><%= @s_number += 1 %></td>
                       <td><%= m.try(:sub_category_name)%></td>
                      
 
@@ -87,6 +164,7 @@
                   <td><div class="form-add" style="display:inline-block;">
              <button class="btn btn-primary btn-md state11" type="button" data-toggle="modal" data-target="#editModal" id="<%=m.id%>"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></button> 
               <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, destroy_sub_category_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this country ?"},:class=>"btn btn-danger", method: :delete, title: "Delete"%></td>
+            
 
             <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
              
@@ -147,9 +225,50 @@
     </div>
   </div>
 
+  <div class="modal fade in add-modal" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+     
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+       
+        </div>
+        <div class="modal-body">
+          <div class="addbody">
+           <%= form_for :review_parts, url:  create_post_review_admin_categories_path  do |f| %>
+
+
+                 <div class="form-group">
+                <label for="">Criteria Name<span class="required">*</span> </label>
+                   <%= f.text_field :criteria, class: "form-control custom-control",  placeholder: "criteria name"%>
+
+              </div>
+            
+              <%= f.hidden_field :category_id, :value => params[:id] %>
+           
+                </div>
+        </div>
+        <div class="modal-footer text-center">
+          <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+        </div>
+        <%end%>
+      </div>
+      
+    </div>
+  </div>
+
    <div class="modal fade in add-modal" id="editModal" role="dialog">
     <div class="modal-dialog">
     <div id="sub_modal_view">
+    </div>
+      <!-- Modal content-->
+    </div>
+  </div>
+
+<div class="modal fade in add-modal" id="editModal1" role="dialog">
+    <div class="modal-dialog">
+    <div id="sub_modal_view1">
     </div>
       <!-- Modal content-->
     </div>
@@ -199,6 +318,21 @@ $('.state11').click(function(){
     $.ajax({
                 type: "post",
                 url: "/admin/categories/edit_sub_category"  ,
+                datascript: "js",
+                data: {
+                  id: state1
+
+                }
+
+              });
+});
+
+$('.state111').click(function(){
+   var state1 = this.id;
+   //alert(state1);
+    $.ajax({
+                type: "post",
+                url: "/admin/categories/edit_review_part"  ,
                 datascript: "js",
                 data: {
                   id: state1
