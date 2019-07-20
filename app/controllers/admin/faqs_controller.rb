@@ -5,7 +5,7 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
 
         def index
         	@s_no = 0
-        	@faqs = Faq.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+        	@faqs = Faq.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
         end
 
         def create

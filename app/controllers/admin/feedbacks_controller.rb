@@ -11,7 +11,7 @@ class Admin::FeedbacksController < ApplicationController
            @feedbacks = Contact.where(created_at: params[:created_at].to_date.beginning_of_day..params[:created_at].to_date.end_of_day).order("created_at desc").paginate(:page => params[:page], :per_page => 100)
       else
 
-         @feedbacks = Contact.all.order("created_at desc").paginate(:page => params[:page], :per_page => 4)
+         @feedbacks = Contact.all.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
      end
    @s_no=0
     end
