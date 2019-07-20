@@ -88,7 +88,8 @@
 
                 <div class="custom-post big-post">
                   <div class="custom-img">
-                    <img src="/assets/big-banner.jpg" class="img-fluid" alt="">
+                    <!-- <img src="/assets/big-banner.jpg" class="img-fluid" alt=""> -->
+                    <img src='<%= @latest_review&.product&.image.present? ? @latest_review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>' style='<%= @latest_review&.product&.image.present? ? "width: 100%;height: 100%;" : "" %>'>
                   </div>
                   <div class="custom-content align-center">
                     <p class="custom-tag"><span><%=@latest_review&.product&.category&.category_name%> : Review</span></p>
@@ -173,6 +174,7 @@
              <%@recent_reviews.each do |review|%>
                   
                   <div class="d-flex align-items-start reviewe-widget-item mb-4">
+
                     <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
                     <div class="reviewe-widget-content">
                       <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
@@ -395,7 +397,7 @@
                   <a href="#" class="view-more align-self-end">View More</a>
                 </div>
                 <div class="prcnt-section">
-                 <!-- <p>90%</p> -->
+                 <p>90%</p>
                 </div>
               </div>
             </div>
@@ -613,7 +615,7 @@
         </div>
       </div>
 
-      
+
     </div>
     <!-- Home Slider Close -->
           
