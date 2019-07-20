@@ -15,6 +15,10 @@ class Web::UsersController < ApplicationController
     @products = Product.all
     @users = User.where(user_type: "Normal User")
        # @trending_image = @trending.image.all
+    @recent_reviews = Review.all.order("created_at DESC").limit(4)
+    
+    @latest_review = Review.last
+
   end
 
   def movie_category
@@ -34,6 +38,8 @@ class Web::UsersController < ApplicationController
   def movie_detail    
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
+    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
   end
 
   def movie_review
@@ -41,6 +47,8 @@ class Web::UsersController < ApplicationController
     @all_sub_category = @product&.category&.sub_categories
     @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
     @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
+    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
   end
   
   def user_profile
