@@ -6,6 +6,8 @@ class Web::UsersController < ApplicationController
         redirect_to admin_home_index_path(current_user)
   	end
     @category = Category.all
+    
+
     # @sub_category = Category.find_by(id: params[:id])&.sub_categories
     # @sub_categories = Product.where(category_id: params[:id])
     # @trending = Product.all
@@ -13,11 +15,33 @@ class Web::UsersController < ApplicationController
     @games = Product.where(category_name: "Games").first(2) 
     @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
+
     @users = User.where(user_type: "Normal User")
        # @trending_image = @trending.image.all
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
+
+    @rec = {}
+    Category.all.each do |cat|
+      cat.product.each do |pro|
+       if pro.reviews.present?
+        @rec[cat&.category_name] = pro&.image&.first&.file&.url
+        break
+       end
+      end
+    end
+  # @percentage = []
+  # Review.all.each do |review|
+  # part = eval review&.criteria
+  # sum = part.values.map {|k| k.to_i}.sum
+  # total = part.values.count * 5
+  # @per = (sum*100)/total
+  # @percentage.push(@per)
+  #  # p @per
+  #  end
+
+
 
   end
 

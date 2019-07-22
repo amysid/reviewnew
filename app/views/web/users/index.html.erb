@@ -292,27 +292,27 @@
           </div>
           <div class="row">
             <% @count_category_reviews = 0%>
-            <%@category&.each do |category|%>
+            <%@rec&.each do |category|%>
             <%#binding.pry%>
-            <% if @count_category_reviews < 8 %>
+            <%# if @count_category_reviews < 8 %>
             <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
-                  <%if category&.product&.first&.image&.first.present? %>
-                 <img src="<%=category&.product&.first&.image&.first&.file_url%>" class="img-fluid" alt="">
+                  <%if category[1].present? %>
+                 <img src="<%=category[1]%>" class="img-fluid" alt="">
                  
                   <%else%>
                     <img src="/assets/category-img.jpg" class="img-fluid" alt="">
                   <%end%>
                 </div>
                 <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title"><%= category&.category_name%></h4>
+                  <h4 class="custom-title"><%= category[0]%></h4>
                 </div>
               </div>
             </div>
             <% @count_category_reviews +=1  %>
             <%end%>
-            <%end%>
+            <%#end%>
             <!-- <div class="col-md-3">
               <div class="custom-post">
                 <div class="custom-img">
@@ -393,6 +393,7 @@
           <div class="row small">
             <% @count_hall_frame = 0 %>
             <% @products&.each_with_index do |product, index|%>
+            <%#binding.pry%>
                    <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
