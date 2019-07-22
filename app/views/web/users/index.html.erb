@@ -534,12 +534,13 @@
 
 <div class="row">
 <div class="col-md-12">
-        <button type="button" class="user user_type" id="Normal User">User score</button>
+        <button type="button" class="user user_type1" id="Normal User">User score</button>
         <button type="button" class="meta user_type" id="Expert User">Meta score</button>
+        <!-- <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a> -->
         <select class="category data_category">
             <option value="category">Select Category</option>
             <% @category&.each do |category|%>
-            <option class="category_wise" id="<%= category.id %>"><%= category&.category_name%></option>
+            <option class="category_wise" value="<%= category.id %>"><%= category&.category_name%></option>
             <!-- <option value="opel">Opel</option> -->
             <%end%>
            </select>
@@ -551,7 +552,7 @@
 
 
   <!-- Home Slider Start -->
-    <div class="home-slider1">
+    <div class="home-slider1" id="tab-3">
       <% @category_wise_review = 0 %>
       <% @reviews.each  do |user_reviews|%>
       <% if user_reviews.present?%>
@@ -585,6 +586,7 @@
       <%end%>
       <%end%>
       <%end%>
+
 
 
      <!--  <div class="slide-item">
@@ -723,10 +725,11 @@
       $(document).ready(function(){
       // debugger;
       $('#1').click();
-      $('.user_type').click(function(){
-        var id=$(this).attr("id");
+      $('.user_type1').click(function(){
+        debugger;
+        var id=this.value;
       $.ajax({
-         url: '/web/users',
+         url: '/web/users/index',
          type: 'get',
          data: {
           id: id
@@ -738,12 +741,11 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
-      // debugger;
       $('#1').click();
       $('.data_category').change(function(){
-        var id=$(this).attr("id");
+        var id=this.value;
       $.ajax({
-         url: '/web/users/category_wise_data',
+         url: '/web/users/categorywise',
          type: 'get',
          data: {
           id: id

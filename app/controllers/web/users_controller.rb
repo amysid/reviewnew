@@ -16,6 +16,7 @@ class Web::UsersController < ApplicationController
     @latest_review = Review.last
     @reviews = Review.all
 
+
     @rec = {}
     Category.all.each do |cat|
       cat.product.each do |pro|
@@ -91,8 +92,9 @@ class Web::UsersController < ApplicationController
     @products = Product.all
   end
   
-  def category_wise_data
+  def categorywise
      # binding.pry
+     @reviews = Category.find(params[:id]).product.first.reviews
   end
 
   def abc
