@@ -70,7 +70,6 @@ class Web::UsersController < ApplicationController
   end
   
   def user_profile
-    # binding.pry
     @categorys = Category.all
     @products = Product.all
   end
@@ -84,37 +83,38 @@ class Web::UsersController < ApplicationController
      @products = Product.where(category_id: params[:id])
   end
  
- def trending
-  # binding.pry
- @products = Product.all
- end
+  def trending
+     @products = Product.all
+  end
 
- def upcomeing
-  # binding.pry
-  @products = Product.all
- end
+  def upcomeing
+    @products = Product.all
+  end
+  
+  def category_wise_data
+     # binding.pry
+  end
 
   def abc
-    # binding.pry
     @products = Product.where(category_id: params[:id])
   end
 
-    def check_email
-        @user = User.pluck(:email)
-        if @user.include?(params[:user][:email])
-          render json: false
-        else
-          render json: true
-        end
-    end
-
-  def check_email_login
+  def check_email
       @user = User.pluck(:email)
       if @user.include?(params[:user][:email])
-        render json: true
-      else
         render json: false
+      else
+        render json: true
       end
+  end
+
+  def check_email_login
+    @user = User.pluck(:email)
+    if @user.include?(params[:user][:email])
+        render json: true
+    else
+        render json: false
+    end
   end
 
   def image_update

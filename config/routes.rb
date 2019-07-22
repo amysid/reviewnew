@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get :trending
       get :upcomeing
       get :holl_of_fame_details
+      get :category_wise_data
     end
     member do
       get :user_profile
