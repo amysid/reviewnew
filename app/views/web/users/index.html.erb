@@ -87,16 +87,23 @@
                 </div> -->
 
                 <div class="custom-post big-post">
+                  <% @count_todays_review = 0%>
+                    <% @todays_review.each do |review|%>
+                    <% if @count_todays_review == 0 %>
                   <div class="custom-img">
+                    <%#binding.pry%>
                     <!-- <img src="/assets/big-banner.jpg" class="img-fluid" alt=""> -->
-                    <img src='<%= @latest_review&.product&.image.present? ? @latest_review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>' style='<%= @latest_review&.product&.image.present? ? "width: 100%;height: 100%;" : "" %>'>
+                    <img src='<%= review&.product&.image.present? ? review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>' style='<%= review&.product&.image.present? ? "width: 100%;height: 100%;" : "" %>'>
                   </div>
                   <div class="custom-content align-center">
-                    <p class="custom-tag"><span><%=@latest_review&.product&.category&.category_name%> : Review</span></p>
-                    <h4 class="custom-title"><%=@latest_review&.product&.product_name%> Review</h4>
-                    <p><%=truncate(@latest_review&.comment, :length => 300)%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= @latest_review&.created_at&.strftime("%B %d, %Y")%></p>
+                    <p class="custom-tag"><span><%=review&.product&.category&.category_name%> : Review</span></p>
+                    <h4 class="custom-title"><%=review&.product&.product_name%> Review</h4>
+                    <p><%=truncate(review&.comment, :length => 300)%></p>
+                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></p>
                   </div>
+                  <% if @count_todays_review += 1 %>
+                  <%end%>
+                  <%end%>
                 </div>
               </div>
             </div>
