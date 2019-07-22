@@ -101,7 +101,7 @@
                     <p><%=truncate(review&.comment, :length => 300)%></p>
                     <p class="custom-date"><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></p>
                   </div>
-                  <% if @count_todays_review += 1 %>
+                  <%  @count_todays_review += 1 %>
                   <%end%>
                   <%end%>
                 </div>
