@@ -171,8 +171,9 @@
               <div class="widget reviewe-widget">
                 <h3 class="widget-title">Reviewed Today</h3>
 
-             <%@recent_reviews.each do |review|%>
-                  
+             <% @todays_review.each do |review|%>
+             <%#binding.pry%>
+                  <%# if review.created_at == DateTime.now%>
                   <div class="d-flex align-items-start reviewe-widget-item mb-4">
 
                     <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
@@ -183,8 +184,8 @@
                     </div>
                   </div>
 
+                <%#end%>
                 <%end%>
-
 
               </div>
 
