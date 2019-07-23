@@ -425,6 +425,11 @@
             <% @count_hall_frame = 0 %>
             <% @products&.each_with_index do |product, index|%>
             <%#binding.pry%>
+            <% if product.reviews.present? %>
+             <% @a=product.reviews.map {|x| x.rating  }.sum %>
+                  <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+                  <% if @a.present? %>
+                  <% if (@a*100)/(@b*10) >= 70 %>
                    <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
@@ -437,23 +442,20 @@
                   <!-- <a href="#" class="view-more align-self-end">View More</a> -->
                 </div>
                 <div class="prcnt-section">
-                  <% if product.reviews.present? %>
-                 <% @a=product.reviews.map {|x| x.rating  }.sum %>
-                  <% @b=product.reviews.map.with_index {|x,index|  }.count %>
-                  <% if @a.present? %>
-                   <% if @b.present? %>
+                  <%# if product.reviews.present? %>
+                
+                   
                  <p><%=(@a*100)/(@b*10)%>%</p>
-                 <%end%>
-                 <%end%>
-                 <%else%>
-                   <p>0%</p>
-                   <%end%>
+                 <%#end%>
+      
                 </div>
               </div>
             </div>
             <% @count_hall_frame += 1%>
             <%end%>
-
+            <%end%>
+            <%end%>
+              <%end%>
             <%end%>
             <!-- <div class="col-md-4">
               <div class="custom-post">
