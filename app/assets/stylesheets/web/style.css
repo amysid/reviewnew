@@ -2566,3 +2566,21 @@ a.nav-item.nav-link.fonts.trailer-nav {
     text-align: left;
     /*font-size: 20px;*/
  }
+ .hall-row .custom-post img {
+    min-height: 250px;
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+.review-row .custom-post img {
+    min-height: 200px;
+    max-height: 250px;
+    width: 100%;
+    object-fit: cover;
+}
+.latest-row .custom-post img {
+    min-height: 200px;
+    max-height: 244px;
+    width: 100%;
+    object-fit: cover;
+}

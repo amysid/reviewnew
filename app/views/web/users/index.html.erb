@@ -200,7 +200,7 @@
           </div>
         </div>
 
-        <div class="row">
+        <div class="row latest-row">
           <div class="col-md-12">
             <h2 class="main-title">LATEST STORIES</h2>
           </div>
@@ -211,7 +211,7 @@
             <% @a=product.reviews.map {|x| x.rating  }.sum %>
             <% @b=product.reviews.map.with_index {|x,index|  }.count %>
             <% if @a.present? %>
-            <% if (@a*100)/(@b*10) >= 75%>
+            <%# if (@a*100)/(@b*10) >= 75%>
                    <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
@@ -229,7 +229,7 @@
               </div>
             </div>
             <% @count_hall_frame += 1%>
-            <%end%>
+            <%#end%>
             <%end%>
             <%end%>
              <%end%>
@@ -317,7 +317,7 @@
         </div>
 
 
-        <div class="row">
+        <div class="row review-row">
           <div class="col-md-12">
             <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
           </div>
@@ -417,7 +417,7 @@
             </div> -->
           </div>
         
-        <div class="row">
+        <div class="row hall-row">
           <div class="col-md-12">
             <h2 class="main-title">2019 HALL OF FAME</h2>
           </div>
