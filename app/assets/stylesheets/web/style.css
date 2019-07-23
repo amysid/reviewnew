@@ -2579,8 +2579,8 @@ a.nav-item.nav-link.fonts.trailer-nav {
     object-fit: cover;
 }
 .latest-row .custom-post img {
-    min-height: 200px;
-    max-height: 244px;
+    min-height: 265px;
+    max-height: 265px;
     width: 100%;
     object-fit: cover;
 }
