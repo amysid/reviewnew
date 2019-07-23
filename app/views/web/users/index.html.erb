@@ -1,7 +1,6 @@
 <%if current_user.present? %>
 <%= render partial: 'web/users/head'%>
 <%end%>
-
 <%= render partial: 'web/users/trending'%>
     <!-- Home Slider Close -->
 
@@ -125,7 +124,7 @@
                    
                 <% if product&.date&.present? %>  
                 <%if product&.date > DateTime.now.utc %>
-                <% if @count_upcomeing  <  4 %>
+                <% if @count_upcomeing  <=  4 %>
                 <div class="custom-post">
                   <div class="custom-img">
                     <img src="<%= product&.image&.take&.file_url%>" class="img-fluid" alt="">
@@ -550,12 +549,16 @@
 
 <div class="row">
 <div class="col-md-12">
-        <button type="button" class="user user_type1" id="Normal User">User score</button>
-        <button type="button" class="meta user_type" id="Expert User">Meta score</button>
+       <nav>
+            <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
+              <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
+              <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
+            </div>
+          </nav>
         <!-- <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a> -->
         <select class="category data_category">
             <option value="category">Select Category</option>
-            <% @category&.each do |category|%>
+            <% @category&.each do |category| %>
             <option class="category_wise" value="<%= category.id %>"><%= category&.category_name%></option>
             <!-- <option value="opel">Opel</option> -->
             <%end%>
