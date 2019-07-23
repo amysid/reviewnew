@@ -2244,8 +2244,8 @@ iframe.youtube-icon {
     margin-bottom: 10px;
 }
 .youtube-content {
-    margin-bottom: 15px;
-    margin-left: -25px;
+    margin-bottom: 10px;
+    margin-left: -15px;
     background-color: #dbd6d6;
 }
 figure.para-Margin-top {
@@ -2581,6 +2581,18 @@ a.nav-item.nav-link.fonts.trailer-nav {
 .latest-row .custom-post img {
     min-height: 265px;
     max-height: 265px;
+    width: 100%;
+    object-fit: cover;
+}
+.trending-row .youtube-image2 img {
+    min-height: 292px;
+    max-height: 294px;
+    width: 100%;
+    object-fit: cover;
+}
+.upcomeing-row .youtube-image2 img {
+    min-height: 292px;
+    max-height: 294px;
     width: 100%;
     object-fit: cover;
 }

@@ -1,29 +1,16 @@
 <%if current_user.present? %>
 <%= render partial: 'web/users/head'%>
 <%end%>
-
-<%#= render partial: 'web/users/trending'%>
 <div class="page-wrapper">
   <div class="container home-wrap">
-    <div class="row theatres-row">
+    <div class="row theatres-row upcomeing-row">
       <div class="col-md-12">
         <h2 class="widget-title">All UPCOMING RELEASES  </h2>
-         <!--  <nav>
-            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
-              <a class="nav-item nav-link active fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab">Movie </a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-game" role="tab">Game</a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-tv" role="tab">Tv</a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-music" role="tab">Music</a>
-            </div>
-          </nav>
-   -->
         <div class="tab-content theatres-content" id="tabScore">
-          <div class="tab-pane fade show active id="nav-movie" role="tabpanel">
+          <div class="tab-pane fade show active" id="nav-movie" role="tabpanel">
             <div class="row">
-              <% @products&.each_with_index do |product, index|%>
-              <%#binding.pry%>
+              <% @upcomeing_products&.each_with_index do |product, index|%>
                <% if product&.date&.present? %>
-                <%if product&.date > DateTime.now.utc %>
               <div class="col-md-6">
                 <div class="youtube-image2">
                   <img width="560" height="315" src="<%= product.image.take.file_url%>" />
@@ -32,11 +19,10 @@
               <div class="col-md-6 youtube-content ">
                 <figure class="para-Margin-top"> 
                   <h4><%= product&.product_name%>: <%= product&.category_name%></h4>
-                  <p><%= truncate(strip_tags(product&.description), omision: "...", length: 500).html_safe%></p>
+                  <p><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
                   <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
                 </figure>
               </div>
-              <%end%>
               <%end%>
              <%end%>
           </div>
@@ -45,4 +31,9 @@
     </div>
   </div>
 </div>
+</div>
+<div class="box-footer">
+        <div class="digg_pagination pull-right">
+                <%= will_paginate @upcomeing_products %>
+        </div>
 </div>

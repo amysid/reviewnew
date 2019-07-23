@@ -1,27 +1,15 @@
 <%if current_user.present? %>
 <%= render partial: 'web/users/head'%>
 <%end%>
-
 <div class="page-wrapper">
   <div class="container home-wrap">
-    <div class="row theatres-row">
+    <div class="row theatres-row trending-row">
       <div class="col-md-12">
         <h2 class="widget-title">All TRENDING NOW</h2>
-         <!--  <nav>
-            <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
-              <a class="nav-item nav-link active fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-movie" role="tab">Movie </a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-game" role="tab">Game</a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-tv" role="tab">Tv</a>
-              <a class="nav-item nav-link fonts trailer-nav" data-toggle="pill" class="tab-width" href="#nav-music" role="tab">Music</a>
-            </div>
-          </nav>
-   -->
-        <div class="tab-content theatres-content" id="tabScore">
+         <div class="tab-content theatres-content" id="tabScore">
           <div class="tab-pane fade show active" id="nav-movie" role="tabpanel">
             <div class="row">
-             <% @products&.each_with_index do |product, index|%>
-             <%#binding.pry%>
-                <% if product&.trending == true %>
+             <% @trending_products&.each_with_index do |product, index|%>
               <div class="col-md-6">
                 <div class="youtube-image2">
                   <img width="560" height="315" src="<%= product.image.take.file_url%>"/>
@@ -34,8 +22,6 @@
                   <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
                 </figure>
               </div>
-              
-              <%end%>
              <%end%>
           </div>
         </div>
@@ -44,3 +30,8 @@
   </div>
 </div>
 </div>
+ <div class="box-footer">
+        <div class="digg_pagination pull-right">
+                <%= will_paginate @trending_products%>
+        </div>
+ </div>

@@ -12,12 +12,14 @@
             <div class="left-side">
               <h3 class="widget-title">TRENDING NOW</h3>
               <div class="posts">
+                <% @count_trending = 0 %>
+                <% @products&.each_with_index do |product, index|%>
+                 <% if @count_trending < 4%>
                 <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
-                    <% @count_trending = 0 %>
-                    <% @products&.each_with_index do |product, index|%>
+                    
                     <%#binding.pry%>
-                   <% if @count_trending < 4%>
+                  
                     
                     <div class="col-md-4">
                       <div class="post-img">
@@ -28,19 +30,23 @@
                       <div class="post-details">
                         <p class="tag"><span><%= product&.category_name%> : </span></p>
                         <h4 class="post-title"><%= product&.product_name%> : <%#= product.sub_category_name%></h4>
-                        <p><%= truncate(strip_tags(product&.description), omision: "...", length: 50).html_safe%></p>
+                        <p><%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%></p>
                         <div class="post-meta">
                           <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></span>
                           <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
                         </div>
                       </div>
                     </div>
-                    <% @count_trending += 1 %>
-                    <%end%>
-                    <%end%>
+                   
                   </div>
-                  <a href="/web/users/trending" class="readmore pull-right" class= "btn btn-theme">Read More></a>
+                 
+                <% if @count_trending == 3 %>
+                <a href="/web/users/trending" class="readmore pull-right" class= "btn btn-theme">Read More></a>
+                 <%end%>
                 </div>
+                 <% @count_trending += 1 %>
+                    <%end%>
+                    <%end%>
                 <!-- <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
                     <div class="col-md-4">
@@ -127,7 +133,7 @@
                   <div class="custom-content">
                     <h4 class="custom-title"><%= product&.product_name%>: <%= product&.category_name%></h4>
                       <h5><%#= product.sub_category_name%></h5>
-                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 50).html_safe%></p>
+                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%></p>
                     <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></p>
                   </div>
                 </div>

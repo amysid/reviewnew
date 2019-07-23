@@ -85,11 +85,12 @@ class Web::UsersController < ApplicationController
   end
  
   def trending
-     @products = Product.all
+    # binding.pry
+     @trending_products = Product.where(trending: true).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
   end
 
   def upcomeing
-    @products = Product.all
+    @upcomeing_products = Product.where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
   end
   
   def categorywise
