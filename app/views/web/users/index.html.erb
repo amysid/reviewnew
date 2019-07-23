@@ -26,7 +26,7 @@
                     </div>
                     <div class="col-md-8">
                       <div class="post-details">
-                        <p class="tag"><span><%= product&.category_name%> : Review</span></p>
+                        <p class="tag"><span><%= product&.category_name%> : </span></p>
                         <h4 class="post-title"><%= product&.product_name%> : <%#= product.sub_category_name%></h4>
                         <p><%= truncate(strip_tags(product&.description), omision: "...", length: 50).html_safe%></p>
                         <div class="post-meta">
@@ -207,10 +207,11 @@
           <div class="row small">
             <% @count_hall_frame = 0 %>
             <% @products&.each_with_index do |product, index|%>
-            <%#binding.pry%>
-            <%#binding.pry%>
             <% if product.reviews.present?%>
-            <% if (product&.reviews&.first&.rating*100)/10 >= 80%>
+            <% @a=product.reviews.map {|x| x.rating  }.sum %>
+            <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+            <% if @a.present? %>
+            <% if (@a*100)/(@b*10) >= 75%>
                    <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
@@ -223,11 +224,12 @@
                   <!-- <a href="#" class="view-more align-self-end">View More</a> -->
                 </div>
                 <div class="prcnt-section">
-                 <p><%= (product&.reviews&.first&.rating*100)/10 %>%</p>
+                 <p><%= (@a*100)/(@b*10)  %>%</p>
                 </div>
               </div>
             </div>
             <% @count_hall_frame += 1%>
+            <%end%>
             <%end%>
             <%end%>
              <%end%>
@@ -436,7 +438,13 @@
                 </div>
                 <div class="prcnt-section">
                   <% if product.reviews.present? %>
-                 <p><%=  (product&.reviews&.first&.rating*100)/10%>%</p>
+                 <% @a=product.reviews.map {|x| x.rating  }.sum %>
+                  <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+                  <% if @a.present? %>
+                   <% if @b.present? %>
+                 <p><%=(@a*100)/(@b*10)%>%</p>
+                 <%end%>
+                 <%end%>
                  <%else%>
                    <p>0%</p>
                    <%end%>
