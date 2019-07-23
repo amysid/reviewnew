@@ -14,7 +14,7 @@ class Web::UsersController < ApplicationController
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
-    @reviews = Review.all
+    @reviews = Review.first(4)
 
 
     @rec = {}
