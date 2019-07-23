@@ -23,13 +23,13 @@
            <span class="johny"><%= @a&.name%></span>
            <p><%= user_reviews&.product&.category&.category_name%></p>
            <br>
-           <span><%user_reviews.created_at.strftime("%B %d, %Y")%></span>
+           <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
           <br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
           <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
 
-         <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
+         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
          <div class="thumb-img">
                   <img src="/assets/Facebook_like_thumb.png" alt="">
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">

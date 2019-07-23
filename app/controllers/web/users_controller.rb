@@ -6,15 +6,16 @@ class Web::UsersController < ApplicationController
         redirect_to admin_home_index_path(current_user)
   	end
     @category = Category.all
-    @movies = Product.where(category_name: "Movies").first(2)
-    @games = Product.where(category_name: "Games").first(2) 
-    @tvs = Product.where(category_name: "TV").first(2)
+    @publishs = Product.all.where(current: "publish")
+    # @movies = Product.where(category_name: "Movies").first(2)
+    # @games = Product.where(category_name: "Games").first(2) 
+    # @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
     @users = User.where(user_type: "Normal User")
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
-    @reviews = Review.first(4)
+    @reviews = Review.last(4)
 
 
     @rec = {}
@@ -95,7 +96,7 @@ class Web::UsersController < ApplicationController
   
   def categorywise
      # binding.pry
-     @reviews = Category.find(params[:id]).product.first.reviews
+     @reviews = Category.find(params[:id]).product.first.reviews.last(4)
   end
 
   def abc

@@ -87,7 +87,7 @@ class Admin::ProductsController < ApplicationController
     end
  
    def publish
-    # binding.pry
+    binding.pry
     Product.find_by(id: params[:id]).update(current: "unpublish")
     redirect_to admin_products_path
       flash[:notice] = "Unpublish mode Successfully"

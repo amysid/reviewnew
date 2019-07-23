@@ -191,7 +191,7 @@
                     <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
                     <div class="reviewe-widget-content">
                       <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
-                      <p><%=truncate(review&.comment, :length => 72)%> </p>
+                      <p><%=truncate(review&.comment, :length => 100)%> </p>
                       <span><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></span>
                     </div>
                   </div>
@@ -549,7 +549,7 @@
 
 <div class="row">
 <div class="col-md-12">
-       <nav>
+        <nav>
             <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
               <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
               <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
@@ -571,7 +571,9 @@
 
 
   <!-- Home Slider Start -->
-    <div class="home-slider1" id="tab-3">
+  <div class="tab-content theatres-content" id="tabScore">
+            <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
+    <div class="home-slider1 tab-pane fade in show active" id="nav-name" role="tabpanel">
       <% @category_wise_review = 0 %>
       <% @reviews.each  do |user_reviews|%>
       <% if user_reviews.present?%>
@@ -585,16 +587,14 @@
             <img src="<%= @a&.image&.file_url%>">
             </div>
            <div class="col-md-7 col-sm-7 col-lg-7">
-           <span class="johny"><%= @a&.name%></span>
+           <span class="johny"><%= @a&.name%></span><br>
            <p><%= user_reviews&.product&.category&.category_name%></p>
-           <br>
-           <span><%user_reviews.created_at.strftime("%B %d, %Y")%></span>
-          <br>
+           <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
           <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
 
-         <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
+         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
          <div class="thumb-img">
                   <img src="/assets/Facebook_like_thumb.png" alt="">
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
@@ -684,7 +684,46 @@
       </div>
 
  -->
-    </div>
+    <!-- </div> -->
+  </div>
+
+  <!-- <div class="home-slider1 tab-pane fade in show active" id="tab-3" role="tabpanel">
+  </div> -->
+
+<div class="tab-pane fade home-slider1 tab-pane fade in show  " id="nav-metascore" role="tabpanel">
+              <% @category_wise_review = 0 %>
+      <% @reviews.each  do |user_reviews|%>
+      <% if user_reviews.present?%>
+       <%@a = User.find_by(id: user_reviews.user_id) %>
+       <% if @a.user_type == "Expert User" %>
+         <% if @category_wise_review < 12 %>
+      <%#binding.pry%>
+      <div class="slide-item">
+             <div class="row profile">
+            <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
+            <img src="<%= @a&.image&.file_url%>">
+            </div>
+           <div class="col-md-7 col-sm-7 col-lg-7">
+           <span class="johny"><%= @a&.name%></span><br>
+           <p><%= user_reviews&.product&.category&.category_name%></p>
+           <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
+           <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
+         </div>
+          <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
+
+         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
+         <div class="thumb-img">
+                  <img src="/assets/Facebook_like_thumb.png" alt="">
+                  <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
+                </div>
+        </div>
+      </div>
+      <%end%>
+      <%end%>
+      <%end%>
+      <%end%>
+            </div>
+          </div>
     <!-- Home Slider Close -->
           
 
@@ -746,9 +785,9 @@
       $('#1').click();
       $('.user_type1').click(function(){
         debugger;
-        var id=this.value;
+        var id=this.id;
       $.ajax({
-         url: '/web/users/index',
+         url: '/web/users',
          type: 'get',
          data: {
           id: id

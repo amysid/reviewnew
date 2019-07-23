@@ -1,6 +1,7 @@
 <div class="home-slider">
-    <% trending.each do |trend|%>
+    <%# trending.each do |trend|%>
     <%#binding.pry%>
+    <% @publishs.each do |trend| %>
           <div class="slide">
             <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
               <div class="slide-content container">
