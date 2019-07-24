@@ -6,7 +6,7 @@
             <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
               <div class="slide-content container">
                   <div class="slide-text">
-                    <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.updated_at&.strftime("%B %d, %Y")%></p>
+                    <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.date&.strftime("%B %d, %Y")%></p>
                       <h1><%= trend.product_name%>: <span>Reviews</span></h1>
                       <div class="release-name">
                         <h4><%= trend.product_name%> (<%= trend.category_name%>,<%= trend&.updated_at&.strftime("%Y")%> )</h4>
