@@ -6,12 +6,26 @@
             <h4><%=current_user&.name %></h4>
           </div>
           <div class="user-detail">
+           <% @review_rating = Review.where(user_id: current_user.id) %>
             <div class="ratings">
-              <h3 class="">57</h3>
+              <%@count = 0 %>
+              <% @review_rating&.each do |x| %>
+                   <% if x.rating.present? %>
+                    <% @count = @count + x.rating %>
+                    <%end%>
+              <%end%>
+              <h3 class=""><%= @count %></h3>
               <span>Ratings</span>
             </div>
+             <% @review_rating = Review.where(user_id: current_user.id) %>
             <div class="reviews">
-              <h3 class="">57</h3>
+              <%@count = 0 %>
+              <% @review_rating&.each do |x| %>
+                   <% if x.comment.present? %>
+                    <% @count +=1 %>
+                    <%end%>
+              <%end%>
+              <h3 class=""><%= @count %></h3>
               <span>Reviews</span>
             </div>
             <div class="profil-btn">
@@ -24,7 +38,7 @@
           <h2 class="main-title">My Score</h2>
           <nav>
             <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
-              <% @categorys.each_with_index do |category, index|%>
+              <% @categorys&.each_with_index do |category, index|%>
               <%#binding.pry%>
               <%if index == 0 %>
               <a class="nav-item nav-link shubham active" data-toggle="pill" href="javascript:void(0);" role="tab" id="<%= category.id%>"><%= category.category_name%></a>
@@ -39,13 +53,13 @@
           <div class="tab-content" id="tabScore">
             <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
               <div class="row small">
-                <% @products.each do |product|%>
-                <% if product.category_name == "Movies"%>
+                <% @products&.each do |product|%>
+                <% if product&.category_name == "Movies"%>
                 <div class="col-md-4">
                   <div class="score-card">
                     <div class="score-card-top">
                       <div class="name-date">
-                        <h4><%= product.product_name%></h4>
+                        <h4><%= product&.product_name%></h4>
                         <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                       </div>
                       <div class="score-rating">08/10</div>

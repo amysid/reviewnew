@@ -65,14 +65,19 @@
 		                  <div class="images1">
 
 		                    <%if product.image.present?%>
+                        <%#binding.pry%>
 				                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
 
 		                     <div class="percent-section1">
-		                      <!-- <p class="paramusic">90%</p> -->
-		                    </div>
+                          <%@a = product.reviews&.all&.map {|x| x.rating}.sum%>
+                          <% @b = product.reviews&.all&.map&.with_index {|x,index| index }.count%>
+                          <% if @a > 0 %>
+		                      <p class="paramusic"><%= ((@a*100)/(@b*10)) %>%</p>
+		                     <%end%>
+                        </div>
 		                  </div>
 		                  <div class="content">
 		                    <h3><%=product&.product_name%></h3> 

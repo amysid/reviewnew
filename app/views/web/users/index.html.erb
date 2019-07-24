@@ -226,7 +226,7 @@
                 <div class="custom-content justify-content-end">
                   <h4 class="custom-title"><%= product&.product_name%></h4>
                   <p class="mb-2"><%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
-                  <!-- <a href="#" class="view-more align-self-end">View More</a> -->
+                  <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
                 </div>
                 <div class="prcnt-section">
                  <p><%= (@a*100)/(@b*10)  %>%</p>
@@ -421,46 +421,39 @@
               </div>
             </div> -->
           </div>
-        
         <div class="row hall-row">
           <div class="col-md-12">
             <h2 class="main-title">2019 HALL OF FAME</h2>
           </div>
           <div class="row small">
             <% @count_hall_frame = 0 %>
-            <% @products&.each_with_index do |product, index|%>
-            <%#binding.pry%>
+            <% @products&.each do |product |%>
             <% if product.reviews.present? %>
-             <% @a=product.reviews.map {|x| x.rating  }.sum %>
-                  <% @b=product.reviews.map.with_index {|x,index|  }.count %>
-                  <% if @a.present? %>
-                  <% if (@a*100)/(@b*10) >= 70 %>
-                   <%if @count_hall_frame < 6 %>
+            <% @a=product.reviews.map {|x| x.rating  }.sum %>
+            <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+            <% if @a > 0 %>
+            <% if ((@a*100)/(@b*10)) >=  ((@reviews_all*100)/(10*@reviews_count)) %>
+            <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
                 <div class="custom-img">
                   <img src="<%= product.image.first.file_url%>" class="img-fluid" alt="">
                 </div>
-                <div class="custom-content justify-content-end">
+              <div class="custom-content justify-content-end">
                   <h4 class="custom-title"><%= product&.product_name%></h4>
                   <p class="mb-2"><%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
                   <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                </div>
-                <div class="prcnt-section">
-                  <%# if product.reviews.present? %>
-                
-                   
-                 <p><%=(@a*100)/(@b*10)%>%</p>
-                 <%#end%>
-      
-                </div>
+              </div>
+              <div class="prcnt-section">
+                  <p><%=(@a*100)/(@b*10)%>%</p>
+              </div>
+                <% @count_hall_frame += 1%>
               </div>
             </div>
-            <% @count_hall_frame += 1%>
             <%end%>
             <%end%>
             <%end%>
-              <%end%>
+            <%end%>
             <%end%>
             <!-- <div class="col-md-4">
               <div class="custom-post">
@@ -573,32 +566,30 @@
   <!-- Home Slider Start -->
   <div class="tab-content theatres-content" id="tabScore">
             <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
-    <div class="home-slider1 tab-pane fade in show active" id="nav-name" role="tabpanel">
+    <div class="home-slider1 tab-pane fade in show active tab-3" id="nav-name" role="tabpanel">
       <% @category_wise_review = 0 %>
       <% @reviews.each  do |user_reviews|%>
       <% if user_reviews.present?%>
-       <%@a = User.find_by(id: user_reviews.user_id) %>
-       <% if @a.user_type == "Normal User" %>
-         <% if @category_wise_review < 12 %>
-      <%#binding.pry%>
+      <%@a = User.find_by(id: user_reviews.user_id) %>
+      <% if @a.user_type == "Normal User" %>
+      <% if @category_wise_review < 12 %>
       <div class="slide-item">
-             <div class="row profile">
-            <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
+        <div class="row profile">
+          <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="<%= @a&.image&.file_url%>">
-            </div>
-           <div class="col-md-7 col-sm-7 col-lg-7">
+          </div>
+          <div class="col-md-7 col-sm-7 col-lg-7">
            <span class="johny"><%= @a&.name%></span><br>
-           <p><%= user_reviews&.product&.category&.category_name%></p>
+           <!-- <p><%#= user_reviews&.product&.category&.category_name%></p> -->
            <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
           <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
-
-         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
+          <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
          <div class="thumb-img">
                   <img src="/assets/Facebook_like_thumb.png" alt="">
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
-                </div>
+          </div>
         </div>
       </div>
       <%end%>
@@ -690,8 +681,10 @@
   <!-- <div class="home-slider1 tab-pane fade in show active" id="tab-3" role="tabpanel">
   </div> -->
 
-<div class="tab-pane fade home-slider1 tab-pane fade in show  " id="nav-metascore" role="tabpanel">
-              <% @category_wise_review = 0 %>
+<div class="tab-pane fade home-slider1 tab-pane fade in show tab-3 " id="nav-metascore" role="tabpanel">
+  <p>No record</p>
+  <!-- <p>No Data Founds</p> -->
+      <% @category_wise_review = 0 %>
       <% @reviews.each  do |user_reviews|%>
       <% if user_reviews.present?%>
        <%@a = User.find_by(id: user_reviews.user_id) %>
@@ -705,13 +698,13 @@
             </div>
            <div class="col-md-7 col-sm-7 col-lg-7">
            <span class="johny"><%= @a&.name%></span><br>
-           <p><%= user_reviews&.product&.category&.category_name%></p>
+           <!-- <p><%#= user_reviews&.product&.category&.category_name%></p> -->
            <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
           <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
 
-         <a href="JavaScript:Void(0);" class="read">Read Full Review</a>
+         <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
          <div class="thumb-img">
                   <img src="/assets/Facebook_like_thumb.png" alt="">
                   <img src="/assets/facebook_not_like_thumbs_down.png" alt="">

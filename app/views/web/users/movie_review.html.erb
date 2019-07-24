@@ -129,7 +129,7 @@
                   <div class="imgshadow">
                    <div class="imagecontent">
                     <div class="d-flex image-text">
-                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 91px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
+                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%= user_image(review&.user_id).present? ? "height: 91px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
                       <div class="margintxt">
                         <h4 class="topheading12"><%=user_name(review&.user_id)%></h4>
                         <p class="paradetail1 line1"><%= review&.created_at&.strftime("%B %d, %Y")%></p>

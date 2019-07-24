@@ -30,12 +30,12 @@
                   <div class="score-card" id="tab1">
                     <div class="score-card-top">
                       <div class="name-date">
-                        <h4><%= product.product_name%></h4>
+                        <h4><%= product&.product_name%></h4>
                         <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                       </div>
                       <div class="score-rating">08/10</div>
                     </div>
-                    <p><%= sanitize(product&.description)%></p>
+                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
                         <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>

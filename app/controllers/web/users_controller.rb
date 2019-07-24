@@ -7,6 +7,8 @@ class Web::UsersController < ApplicationController
   	end
     @category = Category.all
     @publishs = Product.all.where(current: "publish")
+    @reviews_count = Product.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
+    @reviews_all = Product.all.map {|x| x.reviews.map {|b| b.rating}.sum}.sum
     # @movies = Product.where(category_name: "Movies").first(2)
     # @games = Product.where(category_name: "Games").first(2) 
     # @tvs = Product.where(category_name: "TV").first(2)
@@ -16,6 +18,7 @@ class Web::UsersController < ApplicationController
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
     @reviews = Review.last(4)
+    # @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
 
 
     @rec = {}
@@ -100,7 +103,9 @@ class Web::UsersController < ApplicationController
   end
 
   def abc
+    # binding.pry
     @products = Product.where(category_id: params[:id])
+   @reviews_data = Review.find_by(user_id: current_user.id)
   end
 
   def check_email
@@ -156,5 +161,7 @@ class Web::UsersController < ApplicationController
   def profile
     # binding.pry
   end
+
+  
   
 end
