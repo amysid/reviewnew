@@ -64,23 +64,84 @@
 
 
        <div class="row rowreviews">
+        <% @positive_normal = 0 %>
+          <% @negative_normal = 0 %>
+          <% @medium_normal = 0 %>
+            <%  @user_reviews.each do |abc|%>
+            <%#binding.pry%>
+              <% if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
+                   <% @positive_normal += 1 %>
+              <% elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
+                   <% @medium_normal += 1 %>
+              <%# elsif  (abc.rating)*100/10 >= 0 && (abc.rating)*100/10 <= 30 %>
+                <%else%>
+                <% @negative_normal += 1 %>
+
+            <%end%>
+            <%end%>
         <div class=" col-md-6 ">
           <div class="col-md-3 buttonsreviews">
             <p class="button12"><span class="blueuser">Userscore</span><br>
               <span class="button1" id="button65reviews"><%=@user_reviews.count%></span></p>
             </div>
             <div class="col-md-9 buttonsreviews">
-              <img src="/assets/review.jpg" class="reviewimg1">
+               <div class="progress">
+                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @positive_normal %>%"><%= @positive_normal %></div>
+
+              </div>
+              Positive <%= @positive_normal %> %
+              <br>
+               <div class="progress">
+                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @medium_normal %>%"><%= @medium_normal %></div>
+               </div>
+               Medium <%= @medium_normal %>%
+                 <br>
+              <div class="progress">
+                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @negative_normal %>%"><%= @negative_normal %></div>
+              </div>
+              Negative <%= @negative_normal %>%
+              <!-- <img src="/assets/review.jpg" class="reviewimg1"> -->
             </div>
           </div>
-
+          <%# @meta_user_count = 0 %>
+          <% @positive_expert = 0 %>
+          <% @negative_expert = 0 %>
+          <% @medium_expert = 0 %>
+            <% @meta_reviews.each do |abc|%>
+            <%# if User.find_by(id: abc.user_id).user_type == "Expert User"%>
+            <%# @meta_user_count += 1%>
+              <% if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
+                   <% @positive_expert += 1%>
+              <% elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
+                   <% @medium_expert += 1 %>
+              <%else%>
+                <% @negative_expert += 1 %>
+              <%#end%>
+            <%end%>
+            <%end%>
+            <%#binding.pry%>
           <div class=" col-md-6 ">
             <div class="col-md-3 buttonsreviews">
               <p class="button12"><span class="blueuser">Metascore</span><br>
                 <span class="button1" id="button65reviews"><%=@meta_reviews.count%></span></p>
+                <%#binding.pry%>
               </div>
               <div class="col-md-9 buttonsreviews">
-                <img src="/assets/review.jpg" class="reviewimg1">
+                <div class="progress">
+                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @positive_expert%>%"><%= @positive_expert%></div>
+                 </div>
+              Positive <%= @positive_expert%>%
+              <br>
+               <div class="progress">
+                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @medium_expert%>%"><%= @medium_expert%></div>
+               </div>
+               Medium <%= @medium_expert%>%
+                 <br>
+              <div class="progress">
+                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @negative_expert%>%"><%= @negative_expert%></div>
+              </div>
+              Negative <%= @negative_expert%>%
+                <!-- <img src="/assets/review.jpg" class="reviewimg1"> -->
               </div>
             </div>
           </div>
@@ -161,7 +222,7 @@
                   <div class="imgshadow">
                    <div class="imagecontent">
                     <div class="d-flex image-text">
-                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 151px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
+                      <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 91px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
                       <div class="margintxt">
                         <h4 class="topheading12"><%=user_name(review&.user_id)%></h4>
                         <p class="paradetail1 line1"><%= review&.created_at&.strftime("%B %d, %Y")%></p>

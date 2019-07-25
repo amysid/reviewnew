@@ -13,6 +13,7 @@
               <div class="posts">
                 <% @count_trending = 0 %>
                 <% @products&.each_with_index do |product, index|%>
+                <% if product.trending == true %>
                  <% if @count_trending < 4%>
                 <div class="post-item">
                   <div class="row no-gutters align-items-stretch">
@@ -44,6 +45,7 @@
                  <%end%>
                 </div>
                  <% @count_trending += 1 %>
+                 <%end%>
                     <%end%>
                     <%end%>
                 <!-- <div class="post-item">
@@ -682,7 +684,6 @@
   </div> -->
 
 <div class="tab-pane fade home-slider1 tab-pane fade in show tab-3 " id="nav-metascore" role="tabpanel">
-  <p>No record</p>
   <!-- <p>No Data Founds</p> -->
       <% @category_wise_review = 0 %>
       <% @reviews.each  do |user_reviews|%>
@@ -690,7 +691,6 @@
        <%@a = User.find_by(id: user_reviews.user_id) %>
        <% if @a.user_type == "Expert User" %>
          <% if @category_wise_review < 12 %>
-      <%#binding.pry%>
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
