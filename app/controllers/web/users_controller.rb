@@ -45,6 +45,7 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category
+
     # @category = Category.all
     # @trending = Product.where(trending: true)
     @sub_category = SubCategory.find_by(id: params[:id])
@@ -58,7 +59,8 @@ class Web::UsersController < ApplicationController
     @products = @sub_category.products
   end
 
-  def movie_detail    
+  def movie_detail
+  # binding.pry    
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}

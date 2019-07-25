@@ -51,6 +51,12 @@
                <p class="paradetail2 line1">Wide Release Date : <%=@product&.date&.strftime("%b %d, %Y")%></p>
                <button class="reviews"><a href="/web/users/<%=@product.id%>/movie_review" style="color: white;">Reviews</a></button>
              </div>
+             <%#@expert_user_review = 0%>
+             <%# Review.all&.each do |x|%>
+             <%#if User.find_by(id: x.user_id).user_type == "Expert User"%>
+               <%# @expert_user_review += 1 %>
+              <%#end%>
+              <%#end%>
              <div class=" col-md-6 rightsec">
               <div class="buttons">
                 <p class="button12"><span class="button1" id="button65"><%=@user_reviews.count%></span>userscore</p>
