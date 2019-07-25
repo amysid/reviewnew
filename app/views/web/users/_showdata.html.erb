@@ -34,7 +34,12 @@
                         <h4><%= product&.product_name%></h4>
                         <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                       </div>
-                      <div class="score-rating">08/10</div>
+                      <%#binding.pry%>
+                      <%if product.reviews.pluck("rating").present?%>
+                      <div class="score-rating"><%=product.reviews.pluck(:rating).sum/product.reviews.pluck(:rating).count%>/10</div>
+                      <%else%>
+                      <div class="score-rating">0/10</div>
+                      <%end%>
                     </div>
                     <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">
