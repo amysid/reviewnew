@@ -36,7 +36,6 @@ after_create :set_account
       Client.personal_import_raw_key(key.private_hex,data)
       self.account_password = Encrypt_me.call(self.id,self.created_at,data)
       self.account_address = self.role_before_type_cast == 0 ? Client.personal_list_accounts["result"][0] : key.address #get_new_address(data)
-      binding.pry
       self.save
     end
   end
