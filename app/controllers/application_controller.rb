@@ -1,9 +1,13 @@
 class ApplicationController < ActionController::Base
 	include CommonConcern
+  include AuthUserConcern
     protect_from_forgery with: :exception
     before_action :banned?
     before_action :configure_permitted_parameters, if: :devise_controller?
     around_action :convert_flash, if: :check_flash
+    before_action :unlock_account
+
+
 
 
      
@@ -16,7 +20,8 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_out_path_for(resource)
-         return new_user_session_path
+      cookies.signed[:expire_in] = nil
+      return new_user_session_path
     end 
 
  
@@ -27,6 +32,7 @@ class ApplicationController < ActionController::Base
 
     def after_sign_in_path_for(resource)
       # binding.pry
+      cookies.signed[:expire_in] = 3.minutes.from_now
        if(resource.role == "admin")
         return  admin_homes_index_path
        else  
@@ -53,4 +59,15 @@ class ApplicationController < ActionController::Base
         root_path
       end
     end
+
+  def unlock_account
+    if current_user
+      unlock_employee_account unless current_user.role == "admin"
+    end
+  end
+
+  private 
+  def unlock_employee_account
+    Class.new.send(:include,AccountConcern).new.unlock_account(current_user.account_address,Decrypt_me.call(current_user.key,current_user.salt,current_user.account_password)) if cookies.signed[:expire_in] && 1.minutes.from_now > DateTime.parse(cookies.signed[:expire_in]) && cookies.signed[:expire_in] = 3.minutes.from_now
+  end
 end

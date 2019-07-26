@@ -31,8 +31,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'omniauth-facebook'
 # Development ENV Variables
 gem 'figaro'
-
+gem 'ethereum.rb'
+gem 'eth'
 gem 'pry'
+gem 'web3-eth', '~> 0.2.16'
 gem 'ckeditor', '~> 5.0'
 gem 'paperclip', '~> 6.1'
 gem 'mini_magick', '~> 4.9', '>= 4.9.3'
