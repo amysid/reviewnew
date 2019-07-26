@@ -1,14 +1,45 @@
 class User < ApplicationRecord
+  include AccountConcern
+  include AuthUserConcern
+  attr_accessor :key,:salt
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :omniauthable, omniauth_providers: [:facebook]
   enum role: ["admin","user","expert"]
   has_one :image,class_name: 'Image', as: :imageable, autosave: true, dependent: :destroy
   accepts_nested_attributes_for :image
- validates :mobile_no, uniqueness: true,  on: :update
+ # validates :mobile_no, uniqueness: true,  on: :update
  validates :name, length: { minimum: 2, maximum: 20}
  validates :name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
- validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
- validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
+ # validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
+ # validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
+
+after_create :set_account 
+
+  after_find ->{
+    self.key = self.id
+    self.salt = self.created_at
+  }
+# set ethereum account of users
+  # def set_account 
+  #   binding.pry
+  #   data = self.u_role_before_type_cast == 0 ? "Mobiloitte1" : SecureRandom.alphanumeric(8)
+  #   self.account_password = Encrypt_me.call(self.employee_login_id,self.created_at,data)
+  #   self.account_address = self.u_role_before_type_cast == 0 ? Client.personal_list_accounts["result"][0] : User.get_new_address(data)
+  # end
+
+  def set_account
+    unless self.role_before_type_cast == 0
+      key = Eth::Key.new
+      data = SecureRandom.alphanumeric(8)
+      unique_id = self.id.to_s
+      # default_auth_contract_instance.transact.setuser_private_key(unique_id, key.address)
+      Client.personal_import_raw_key(key.private_hex,data)
+      self.account_password = Encrypt_me.call(self.id,self.created_at,data)
+      self.account_address = self.role_before_type_cast == 0 ? Client.personal_list_accounts["result"][0] : key.address #get_new_address(data)
+      binding.pry
+      self.save
+    end
+  end
 
 
   def self.to_csv(options = {})

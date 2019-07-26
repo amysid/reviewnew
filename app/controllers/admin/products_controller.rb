@@ -32,7 +32,6 @@ class Admin::ProductsController < ApplicationController
     end
 
     def create
-      # binding.pry
       @products = Product.new(product_params)
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
@@ -43,6 +42,7 @@ class Admin::ProductsController < ApplicationController
       @products.date = params[:product][:date]
       end
       if @products.save
+        contract_instance.transact_and_wait.add_product(@products.product_name)
          redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"
        else
