@@ -689,7 +689,7 @@
       <% @reviews_expert&.each  do |user_reviews|%>
       <% if user_reviews.present?%>
        <% if User.find_by(id: user_reviews.user_id).user_type == "Expert User" %>
-      <%#binding.pry%>
+      <%#binding.pry%>  
          <% if @category_wise_review < 12 %>
       <div class="slide-item">
              <div class="row profile">
