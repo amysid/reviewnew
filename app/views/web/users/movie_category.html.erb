@@ -241,9 +241,10 @@
           <h2 class="titile-light">You may also like:</h2>
         </div>
         
-        <div class="custom-slider slidw">
+   <div class="custom-slider slidw">
         
               <% @products&.each_with_index do |product_name,index|%>
+              <%if index==0%>
           <div class="custom-post custom-slide">
             <div class="custom-img">
               <%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>
@@ -263,7 +264,7 @@
             <%end%>
             </div>
           </div>
-          
+          <%elsif index == 1 %>
           <div class="custom-post custom-slide">
             <div class="custom-img">
               <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
@@ -281,6 +282,7 @@
             <%end%>
             </div>
           </div>
+          <%elsif index== 2%>
           <div class="custom-post custom-slide">
             <div class="custom-img">
               <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
@@ -298,6 +300,7 @@
              <%end%>
             </div>
           </div>
+          <% elsif index == 3%>
           <div class="custom-post custom-slide">
             <div class="custom-img">
               <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
@@ -315,6 +318,7 @@
              <%end%>
             </div>
           </div>
+          <% end %>
           <%end%>
         </div>
       </div>

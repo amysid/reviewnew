@@ -81,6 +81,7 @@ class Web::UsersController < ApplicationController
   def user_profile
     @categorys = Category.all
     @products = Product.all
+    @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
   end
 
   def holl_of_fame_details
@@ -106,8 +107,8 @@ class Web::UsersController < ApplicationController
   end
 
   def abc
+    #binding.pry
    @products = Product.where(category_id: params[:id])
-    # binding.pry
    @reviews_data = Review.find_by(user_id: current_user.id)
    @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
 
