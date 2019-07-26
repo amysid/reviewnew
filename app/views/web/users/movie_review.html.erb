@@ -60,12 +60,12 @@
           </div>
           <%#binding.pry%>
           <%if @product.reviews.where(user_id: current_user.id).present? %>
-           <div class="col-md-4 text-right btn btn-theme"><a href="#" data-toggle="modal"  disabled>
-         Review Posted</a>
+           <div class="col-md-4 text-right "><a href="#" data-toggle="modal"  disabled>
+         Review Already Posted</a>
        </div>
          
           <%else%>
-            <div class="col-md-4 text-right btn btn-theme"><a href="#" data-toggle="modal" data-target="#reviewModal">
+            <div class="col-md-4 text-right"><a href="#" data-toggle="modal" data-target="#reviewModal">
          Write a review</a>
                    
                    </div>
@@ -386,7 +386,7 @@
             
 		<%= form_tag get_reviews_web_reviews_path(id: @product.id) do %>
             <%@review_parts.each do |criteria|%>
-            <%binding.pry%>
+            <%#binding.pry%>
               <div class="rating-wrap">
                 <span class="ratetitle"><%= criteria&.criteria&.titleize%></span>
                 <div class="rate">

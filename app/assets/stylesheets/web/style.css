@@ -769,6 +769,7 @@ position: relative;
 }
 .slide-text p {
     font-size: 18px;
+    word-wrap: break-word;
 }
 .release-date span {
     font-size: 20px;
@@ -859,6 +860,7 @@ position: relative;
 .post-details p, .big-post p {
     font-size: 16px;
     line-height: 22px;
+    word-wrap: break-word;
 }
 .post-meta {
     display: flex;
@@ -1486,7 +1488,9 @@ address i {
     color: #fff;
     background-color: #fd770c;
 }
-
+p {
+    word-wrap: break-word;
+}
 
 
 /* Responsive Css */

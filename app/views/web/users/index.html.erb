@@ -41,7 +41,7 @@
                   </div>
                  
                 <% if @count_trending == 3 %>
-                <a href="/web/users/trending" class="readmore pull-right" class= "btn btn-theme">Read More></a>
+                <a href="/web/users/trending" class="readmore pull-right btn btn-theme">Read More></a>
                  <%end%>
                 </div>
                  <% @count_trending += 1 %>
@@ -143,7 +143,7 @@
                 <%end%>
                 <%end%>
                 <%end%>
-                 <a href="/web/users/upcomeing" class="readmore pull-right">Read More></a>
+                 <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">Read More></a>
                 <!-- <div class="custom-post">
                   <div class="custom-img">
                     <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
@@ -534,7 +534,7 @@
             </div> -->
           </div>
         </div>
-        <a href="/web/users/holl_of_fame_details" class="readmore pull-right">Read More></a>
+        <a href="/web/users/holl_of_fame_details" class="readmore pull-right btn btn-theme">Read More></a>
 
  <div class="row">
           <div class="col-md-12">
@@ -689,7 +689,7 @@
       <% @reviews_expert&.each  do |user_reviews|%>
       <% if user_reviews.present?%>
        <% if User.find_by(id: user_reviews.user_id).user_type == "Expert User" %>
-      <%binding.pry%>
+      <%#binding.pry%>
          <% if @category_wise_review < 12 %>
       <div class="slide-item">
              <div class="row profile">

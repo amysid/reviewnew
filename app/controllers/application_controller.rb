@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     before_action :banned?
     before_action :configure_permitted_parameters, if: :devise_controller?
     around_action :convert_flash, if: :check_flash
-    before_action :unlock_account
+    #before_action :unlock_account
 
 
 
