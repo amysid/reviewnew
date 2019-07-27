@@ -27,6 +27,7 @@
                  <% i = 0 %>
                 <% @total_products.each do |product|%>
                 <%#binding.pry%>
+                 <%next unless product.reviews.pluck(:user_id).include?(current_user.id)%>
                 <div class="col-md-4">
                   <div class="score-card" id="tab1">
                     <div class="score-card-top">
@@ -44,11 +45,12 @@
                       <%end%>
 
                     </div>
-                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
+                    <p><%= truncate(strip_tags(product&.reviews&.where(user_id: current_user.id)&.first&.comment), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                         <span><img style="width:25px" src='<%= review_vote_status(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_like_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
+
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
                       </div>
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                     </div>

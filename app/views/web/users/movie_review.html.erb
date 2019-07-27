@@ -212,8 +212,11 @@
                   <div class="d-flex justify-content-between">
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                        <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
+                        
+                        <span><img style="width:25px" src='<%= review_vote_status(review.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=review.id%>" alt="" onclick="voting(this)"><%= voting_like_count(review)%></span>
+
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(review.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=review.id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(review)%></span>
+
                       </div>
                     </div>
                 </div>
@@ -244,8 +247,9 @@
                   <div class="d-flex justify-content-between">
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                        <div class="like-dislike likem">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""></span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""></span>
+                        <span><img style="width:25px" src='<%= review_vote_status(review.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=review.id%>" alt="" onclick="voting(this)"><%= voting_like_count(review)%></span>
+
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(review.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=review.id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(review)%></span>
                       </div>
                     </div>
                 </div>
@@ -500,3 +504,37 @@
 	      this.nextSibling.classList.add("active");
 	    });
 	</script>
+
+
+
+  <script type="text/javascript">
+      function voting(a){
+        var current_object = a;
+        var data =a.id.split("_");
+        var review_status = data[0];
+        var review_id = data[1];
+
+        $.ajax({
+             url: '/web/reviews/get_vote_for_review',
+             type: 'post',
+             data: {
+              id: review_id,
+              status: review_status
+             },
+
+             success: function(result){
+              // alert(result);
+              // alert(current_object);
+              var parent = current_object.parentElement;
+              if (result.status == true){
+              parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/like_active.png" class="vote_ajax" id="like_'+ review_id +'" alt="" onclick="voting(this)" >'+result.like_count+'</span> <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" class="vote_ajax" id="dislike_'+ review_id +'" alt="" onclick="voting(this)" >'+result.dislike_count+'</span>'
+              }else{
+              parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/Facebook_like_thumb.png" class="vote_ajax" id="like_'+ review_id +'" alt="" onclick="voting(this)" >'+result.like_count+'</span> <span><img style="width:25px" src="/assets/dislike_active.png" class="vote_ajax" id="dislike_'+ review_id +'" alt="" onclick="voting(this)">'+result.dislike_count+'</span>'
+              }
+            }
+            
+          });
+    }
+
+
+  </script>

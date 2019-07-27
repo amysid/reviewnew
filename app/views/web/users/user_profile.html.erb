@@ -56,6 +56,7 @@
                 <%  @products&.each do |product|%>
                 <%#binding.pry%>
                 <%#binding.pry%>
+                <%next unless product.reviews.pluck(:user_id).include?(current_user.id)%>
                 <% if product.reviews.find_by(user_id: current_user.id).present? %>
                 <% if product&.category_name == "Movies"%>
                 <div class="col-md-4">
@@ -68,11 +69,13 @@
                       </div>
                       <div class="score-rating"><%=product.reviews.pluck(:rating).sum/product.reviews.pluck(:rating).count%>/10</div>
                     </div>
-                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
+                    <p><%= truncate(strip_tags(product&.reviews&.where(user_id: current_user.id)&.first&.comment), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
-                        <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span>
+                         <span><img style="width:25px" src='<%= review_vote_status(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_like_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
+
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
+
                       </div>
                       <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
                     </div>
@@ -380,3 +383,35 @@
     });
  });
 </script>
+
+  <script type="text/javascript">
+      function voting(a){
+        var current_object = a;
+        var data =a.id.split("_");
+        var review_status = data[0];
+        var review_id = data[1];
+
+        $.ajax({
+             url: '/web/reviews/get_vote_for_review',
+             type: 'post',
+             data: {
+              id: review_id,
+              status: review_status
+             },
+
+             success: function(result){
+              // alert(result);
+              // alert(current_object);
+              var parent = current_object.parentElement;
+              if (result.status == true){
+              parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/like_active.png" class="vote_ajax" id="like_'+ review_id +'" alt="" onclick="voting(this)" >'+result.like_count+'</span> <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" class="vote_ajax" id="dislike_'+ review_id +'" alt="" onclick="voting(this)" >'+result.dislike_count+'</span>'
+              }else{
+              parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/Facebook_like_thumb.png" class="vote_ajax" id="like_'+ review_id +'" alt="" onclick="voting(this)" >'+result.like_count+'</span> <span><img style="width:25px" src="/assets/dislike_active.png" class="vote_ajax" id="dislike_'+ review_id +'" alt="" onclick="voting(this)">'+result.dislike_count+'</span>'
+              }
+            }
+            
+          });
+    }
+
+
+  </script>
