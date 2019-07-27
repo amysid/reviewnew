@@ -7,7 +7,7 @@
     <div class="box box-info" style=" ">
     <br>
     <div class="row">
-            <%= form_with url:admin_feedbacks_path, method: :get  , local: true do |f| %>
+            <%= form_with url:admin_feedbacks_path, method: :get  , local: true, id: "admin_feedback" do |f| %>
             <div class="col-sm-3">
             <div class="form-group">
               <label>Search by date:</label>
@@ -20,7 +20,7 @@
                 <!-- <div class="row"> -->
             <div class="col-sm-3 filter-field">
                   <div class="form-group serach-date">    
-                     <%= f.search_field :created_at, data:{ provide:'datepicker' }, class: "form-control fa fa-calendar", placeholder: "Search Feedbacks by Date", id: 'datetimepicker', value: @date %>                        
+                     <%= f.search_field :created_at, data:{ provide:'datepicker' }, class: "form-control fa fa-calendar", placeholder: "Search Feedbacks by Date", id: 'datetimepicke', value: @date %>                        
                   </div>
             </div>
             <div class="col-sm-3">
@@ -53,7 +53,7 @@
              <table id="example2" class="table table-bordered table-hover">
                <thead>
                  <tr style="background-color: #D9D7D7;">
-                  <th>Sr No.</th>
+                  <th>Sr_No.</th>
                   <th>Feedback </th>
                   <th>Date</th>
            				<th>Action</th>
@@ -90,4 +90,3 @@
    </section>
 
  
-      

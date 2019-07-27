@@ -3,7 +3,7 @@
    <section class="content-header">
       <div class="clearfix">
         <div class="global-heading user-head">Product Management</div>
-        <div class="aduser-btn"><a href="/admin/products/new" class="btn btn-add" title="Add Product"><i class="fa fa-plus"></i>Add Product</a></div>
+        <div class="aduser-btn"><a href="/admin/products/new" class="btn btn-add" title="Add Product"><i class="fa fa-plus"></i> Add product</a></div>
       </div>
       <div class="clearfix box box-primary">
         <fieldset class="global-fieldset">
@@ -39,7 +39,7 @@
              <table id="example2" class="table table-bordered table-hover ">
                <thead>
                  <tr style="background-color: #D9D7D7;">
-                <th>Sr No.</th>
+                <th>Sr_No.</th>
            		  <th>Product Name</th>
                 <th>Category Name</th>
            		  <th>SubCategory Name</th>
@@ -68,7 +68,7 @@
                          <a href="/admin/products/<%= product.id %>" class="btn btn-success"><em class="fa fa-eye" aria-hidden="true" title="View"></em></a> 
            							<a href="/admin/products/<%= product.id%>/edit" class="btn btn-primary"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></a>
            							<a>
-           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure to delete this Product?' }%></a>
+           							<%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe,  admin_product_path(product.id), method: :delete,:class=>"btn btn-danger",title: "Delete", data: {confirm: 'Are you sure want to delete this Product?' }%></a>
                         <% if product.current == "publish" %>
                        <%= link_to 'Publish'.html_safe, publish_admin_product_path(product), method: :patch, class: "btn btn-warning", title: "Publish Mode", data: {confirm: "Are you sure want to be change the Unpublish mode"} %>
                        <%else%>

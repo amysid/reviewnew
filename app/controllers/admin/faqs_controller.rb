@@ -9,13 +9,14 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
         end
 
         def create
-        	# binding.pry
+        	 binding.pry
         	@faqs = Faq.new(faq_params)
         	if @faqs.save
         		redirect_to admin_faqs_path
         		flash[:notice] = "Faq create succesfully"
         	else
         		redirect_to new_admin_faq_path
+            flash[:alert] = @faqs.errors.full_messages
         		flash[:notice] = "Faq is not create"
         	end
         end

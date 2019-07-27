@@ -72,8 +72,8 @@ class Admin::UsersController < Admin::AdminApplicationController
           end
         else
            flash[:alert] = @user.errors.full_messages
-           redirect_to admin_users_path
            flash[:notice] = "User Profile Not Update."
+           redirect_to admin_users_path
         end
     end
   

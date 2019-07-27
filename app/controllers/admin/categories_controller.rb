@@ -92,22 +92,20 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def create_post_review
-    # binding.pry
+    
      @review_parts = ReviewPart.find_by(criteria: params[:review_parts][:criteria], category_id: params[:review_parts][:category_id])
      if @review_parts.present?
         flash[:notice] = "Review part criteria already exists"
-        redirect_to admin_categories_path
       else
      @category=Category.find(params[:review_parts][:category_id])
     if @category.review_parts.create(review_part_params)
       flash[:notice] = "Review Parts create successfullly"
-      redirect_to admin_categories_path
-    else
+   else
       flash[:alert] = @category.errors.full_messages
-      redirect_to new_admin_category_path
       flash[:notice] = "Unable to create review parts"
     end
   end
+  redirect_to edit_admin_category_path( params[:review_parts][:category_id])
   end
 
   def update_review_part
@@ -117,23 +115,21 @@ class Admin::CategoriesController < ApplicationController
     @review_parts = ReviewPart.find_by(id: params[:criteria_id])
     if review_part.present?
       flash[:notice] = "criteria name is already exists"
-      redirect_to admin_categories_path 
     else
       if @review_parts.update(review_part_params)
          flash[:notice] = "criteria update successfullly"
-         redirect_to admin_categories_path
       else
        flash[:alert] = @review_parts.errors.full_messages 
        flash[:notice] = "criteria is not update"
-       redirect_to admin_categories_path
      end
     end
+    redirect_to edit_admin_category_path( params[:review_parts][:category_id])
   end
 
   def destroy_review_part
     # binding.pry
   @review_parts =  ReviewPart.find_by(id: params[:id])
-  @review_parts.destroy
+  @review_parts&.destroy
   redirect_to admin_categories_path, notice: "Criteria deleted successfully"
   end
  
@@ -142,23 +138,19 @@ class Admin::CategoriesController < ApplicationController
   @review_parts = ReviewPart.find_by(id: params[:id])
  end
   def create_sub_category
-    # binding.pry
     sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
     @category = Category.find( params[:sub_categories][:category_id])
-     
-    if sub_category.present?
+    if sub_category&.present?
       flash[:notice] = "sub category already exists."
-      redirect_to admin_categories_path
     else
       if @category.sub_categories.create(sub_category_params)
         flash[:notice] = "sub category created successfullly."
-        redirect_to admin_categories_path
-      else
+     else
         flash[:alert] = @category.errors.full_messages
-        redirect_to new_admin_category_path
         flash[:notice] = "Unable to create sub category."
       end
     end
+     redirect_to edit_admin_category_path(params[:sub_categories][:category_id])
   end
 
 
@@ -176,18 +168,15 @@ class Admin::CategoriesController < ApplicationController
      @sub = SubCategory.find_by(id: params[:subcat_id])
      if sub_category.present?
       flash[:notice] = "sub category already exists."
-      redirect_to admin_categories_path
     else
     if @sub.update(sub_category_params)
        flash[:notice] = "sub category update successfullly."
-        redirect_to admin_categories_path
       else
         flash[:alert] = @sub.errors.full_messages
-        redirect_to new_admin_category_path
         flash[:notice] = "sub category is not update"
       end
-
-  end
+    end
+    redirect_to edit_admin_category_path(params[:sub_categories][:category_id])
 end
   
   def destroy_sub_category
