@@ -74,8 +74,67 @@ class Web::UsersController < ApplicationController
     @all_sub_category = @product&.category&.sub_categories
     @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
     @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
-    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
+    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
+    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
+    
+    @user_reviews_hash = {}
+    @user_reviews_hash[:positive] = [] 
+    @user_reviews_hash[:negative] = []
+    @user_reviews_hash[:middle] = []
+
+
+    @user_reviews.each do |r|
+      if r&.spoiler == true
+        @user_reviews_hash[:negative] << r
+        next
+      end
+
+      if r&.rating >= 6
+        @user_reviews_hash[:positive] << r
+      elsif r&.rating < 6 && r&.rating > 3
+          @user_reviews_hash[:middle] << r
+        else
+          @user_reviews_hash[:negative] << r
+        end
+    end
+
+     @meta_reviews_hash = {}
+    @meta_reviews_hash[:positive] = [] 
+    @meta_reviews_hash[:negative] = []
+    @meta_reviews_hash[:middle] = []
+
+
+    @meta_reviews.each do |r|
+      if r&.spoiler == true
+        @meta_reviews_hash[:negative] << r
+        next
+      end
+
+      if r&.rating >= 6
+        @meta_reviews_hash[:positive] << r
+      elsif r&.rating < 6 && r&.rating > 3
+          @meta_reviews_hash[:middle] << r
+        else
+          @meta_reviews_hash[:negative] << r
+        end
+    end
+
+    @user_score = {}
+
+    @user_score[:positive] = ((@user_reviews_hash[:positive].count * 100)/@user_reviews.count) rescue 0
+    @user_score[:negative] = ((@user_reviews_hash[:negative].count * 100)/@user_reviews.count) rescue 0
+    @user_score[:middle] = ((@user_reviews_hash[:middle].count * 100)/@user_reviews.count) rescue 0
+
+
+    @meta_score = {}
+
+    @meta_score[:positive] = ((@meta_reviews_hash[:positive].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:negative] = ((@meta_reviews_hash[:negative].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:middle] = ((@meta_reviews_hash[:middle].count * 100)/@meta_reviews.count) rescue 0
+
+
+
+
   end
   
   def user_profile

@@ -96,20 +96,20 @@
             </div>
             <div class="col-md-9 buttonsreviews">
                <div class="progress">
-                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @positive_normal %>%"><%= @positive_normal %></div>
+                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @user_score[:positive] %>%"><%= @user_score[:positive] %></div>
 
               </div>
-              Positive <%= @positive_normal %> %
+              Positive <%= @user_score[:positive] %> %
               <br>
                <div class="progress">
-                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @medium_normal %>%"><%= @medium_normal %></div>
+                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @user_score[:middle] %>%"><%= @user_score[:middle] %></div>
                </div>
-               Medium <%= @medium_normal %>%
+               Medium <%= @user_score[:middle] %>%
                  <br>
               <div class="progress">
-                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @negative_normal %>%"><%= @negative_normal %></div>
+                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @user_score[:negative] %>%"><%= @user_score[:negative] %></div>
               </div>
-              Negative <%= @negative_normal %>%
+              Negative <%= @user_score[:negative] %>%
               <!-- <img src="/assets/review.jpg" class="reviewimg1"> -->
             </div>
           </div>
@@ -138,19 +138,19 @@
               </div>
               <div class="col-md-9 buttonsreviews">
                 <div class="progress">
-                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @positive_expert%>%"><%= @positive_expert%></div>
+                   <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @meta_score[:positive]%>%"><%= @meta_score[:positive]%></div>
                  </div>
-              Positive <%= @positive_expert%>%
+              Positive <%= @meta_score[:positive]%>%
               <br>
                <div class="progress">
-                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @medium_expert%>%"><%= @medium_expert%></div>
+                      <div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" style="width:<%= @meta_score[:middle]%>%"><%= @meta_score[:middle]%></div>
                </div>
-               Medium <%= @medium_expert%>%
+               Medium <%= @meta_score[:middle]%>%
                  <br>
               <div class="progress">
-                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @negative_expert%>%"><%= @negative_expert%></div>
+                   <div class="progress-bar bg-danger progress-bar-striped progress-bar-animated" style="width:<%= @meta_score[:negative]%>%"><%= @meta_score[:negative]%></div>
               </div>
-              Negative <%= @negative_expert%>%
+              Negative <%= @meta_score[:negative]%>%
                 <!-- <img src="/assets/review.jpg" class="reviewimg1"> -->
               </div>
             </div>
