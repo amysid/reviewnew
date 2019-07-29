@@ -73,7 +73,7 @@
                         <%= f.file_field :video, id:"video_file", type:"file", accept:"video/*" %>
                         <%else%>
                         <video id="video_player" width="400" controls></video>
-                          <%= f.file_field :video, id:"video_file", type:"file", accept:"video/*" %>
+                          <%= f.file_field :video, id:"video_file", type:"file" ,value: @products.video_url.present? ? @products.video_url : "",  accept:"video/*" %>
                          <%end%>
                         </div>
                       </div>

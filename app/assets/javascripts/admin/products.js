@@ -1,37 +1,4 @@
-// $(document).ready(function(){
-jQuery.validator.addMethod("minlengthxo", function (value, element,param) {
-  originalVal = CKEDITOR.instances.editor1.getData().replace(/<[^>]*>/g, '');
-  var length = $.isArray( originalVal ) ? value.length : this.getLength( originalVal, element );
-  return length >= param;
-}, "default errorMessage");
-// $(document).ready(function(){
-$(document).on("turbolinks:load",function(){
 
-$("#admin_product").validate({
-  ignore: [],
-    rules: {
-      "product[product_name]":{
-        required: true,
-        minlength: 3,
-        maxlength: 64
-      },
-      "faqs[answer]":{
-        required: function() 
-        {
-          CKEditorUpdate();                        
-        }, 
-        minlength: 3,
-        maxlength: 100
-      },      
-    }
-  });
-  // });
-  function CKEditorUpdate(){
-    for(instance in CKEDITOR.instances){
-       CKEDITOR.instances[instance].updateElement();
- }
-}
-// });
 // $(document).ready(function(){
 $("#admin_new_product").validate({
        ignore: [],
@@ -81,3 +48,22 @@ $("#admin_new_product").validate({
    });
 });
 
+
+$(document).on("turbolinks:load",function(){
+$("input.datetimepicker_start").datepicker({
+   autoclose: true,
+   minDate: 0,
+
+});
+
+$(function() {
+ $("input.datetimepicker_start").on('change', function(){
+   debugger;
+        var date = Date.parse($(this).val());
+        if (date < Date.now()){
+            alert('Publish Date should be proper format and not of past');
+            $(this).val('');
+        }
+
+   });
+});
