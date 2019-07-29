@@ -1,5 +1,10 @@
 
 // $(document).ready(function(){
+jQuery.validator.addMethod("minlengthxo", function (value, element,param) {
+  originalVal = CKEDITOR.instances.editor1.getData().replace(/<[^>]*>/g, '');
+  var length = $.isArray( originalVal ) ? value.length : this.getLength( originalVal, element );
+  return length >= param;
+}, "default errorMessage");
 $(document).on("turbolinks:load",function(){
 $("#admin_new_product").validate({
        ignore: [],
@@ -24,6 +29,14 @@ $("#admin_new_product").validate({
        date: true
 
      },
+     "product[description]":{
+        required: function() 
+        {
+          CKEditorUpdate();                        
+        }, 
+        minlength: 20,
+        maxlength: 500
+      },      
 },
    messages: {
      "product[category_name]":{
@@ -47,6 +60,11 @@ $("#admin_new_product").validate({
      },
    },
    });
+function CKEditorUpdate(){
+    for(instance in CKEDITOR.instances){
+       CKEDITOR.instances[instance].updateElement();
+ }
+}
 });
 
 
