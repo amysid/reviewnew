@@ -1,6 +1,6 @@
 <div class="page-wrapper">
       <div class="container home-wrap">
-      	<%= form_with scope: :contact, url: homes_path, method: :post,  local: true do |f|%>
+      	<%= form_with scope: :contact, url: homes_path, method: :post,  local: true, html: {id: "user_feedback"} do |f|%>
         <div class="feedback-row">
           <h2 class="widget-title">GIVE US FEEDBACK</h2>
           <div class="form form-feedback">
@@ -122,3 +122,34 @@
     });
 
   </script>
+  <script type="text/javascript">
+    $(document).on("turbolinks:load",function(){
+$("#user_feedback").validate({
+    rules: {
+        "contact[user_feedback]": {
+            required: true,
+            minlength: 10,
+            maxlength: 50
+
+        },
+       
+    },
+    messages: {
+        "contact[user_feedback]": {
+            required: "Please Fill the Feedback field .",
+            minlength: "Minimum characters are 10",
+            maxlength: "Maximum characters are 50",
+        },
+        
+    }
+});
+});
+</script>
+<style type="text/css">
+  .msg-error{
+        color: #e80b0b;
+  }
+  .error{
+            color: #e80b0b;
+  }
+</style>

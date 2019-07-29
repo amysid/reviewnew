@@ -96,7 +96,7 @@ class Admin::CategoriesController < ApplicationController
 
   def create_post_review
     
-     @review_parts = ReviewPart.find_by(criteria: params[:review_parts][:criteria], category_id: params[:review_parts][:category_id])
+     @review_parts = ReviewPart.where(criteria: params[:review_parts][:criteria], category_id: params[:review_parts][:category_id])
      if @review_parts.present?
         flash[:notice] = "Review part criteria already exists"
       else

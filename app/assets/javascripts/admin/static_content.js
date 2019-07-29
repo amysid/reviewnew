@@ -12,7 +12,7 @@ $("#static_content_edit").validate({
     rules: {
       "static_content[title]":{
         required: true,
-        minlength: 10,
+        minlength: 5,
         maxlength: 64
       },
       "static_content[description]":{

@@ -32,6 +32,10 @@ class Admin::ProductsController < ApplicationController
     end
 
     def create
+      @products = Product.where(category_name: params[:product][:category_name], sub_category_name: params[:product][:sub_category_name], product_name: params[:product][:product_name])
+      if @products.present?
+         flash[:notice] = "Product name is all ready created for the same category and sub category name"
+      else
       @products = Product.new(product_params)
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
@@ -51,7 +55,8 @@ class Admin::ProductsController < ApplicationController
        	  flash[:notice] = "product not created" 
        end
      end
- 
+    end
+    
    def destroy
     # binding.pry
       if @products.destroy
@@ -62,7 +67,8 @@ class Admin::ProductsController < ApplicationController
    end
 
     def update
-      # binding.pry
+       # binding.pry
+      
       @products.update(category_id: Category.find_by(category_name: params[:product][:category_name]).id)
       @products.update(sub_category_id: SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id)
       if params[:product][:date].size == 10
@@ -80,6 +86,7 @@ class Admin::ProductsController < ApplicationController
                render 'edit'
           end
         end
+    
 
     def sub_categories_by_category 
      product =Category.find_by(category_name: params[:id]).sub_categories
