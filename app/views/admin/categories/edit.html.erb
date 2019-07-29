@@ -29,14 +29,14 @@
                                                             <button class="btn btn-primary btn-md pull-right" type="button" data-toggle="modal" data-target="#myModal1" id="states" style="margin-right: 1px;"><i class="fa fa-plus"></i> Add Review Part</button>
                                                             <br>
                                                             <br>
-                                                            <div class="clearfix box box-primary">
+                                                            <div class="clearfix box box-primary" style="margin-right: 2%; margin-left: 2%; width: 96%">
                                                                 <fieldset class="global-fieldset">
                                                                     <legend>Filter</legend>
-                                                                    <div class="filter-form">
+                                                                    <div class="filter-form" >
                                                                         <!-- <form action="/admin/users" method="get" accept-charset="UTF-8" enctype="multipart/form-data" id="web-user-val" class="form-common clearfix"> -->
                                                                         <%#binding.pry%>
-                                                                        <%= form_tag edit_admin_category_path(id: @category.id), method: :get,  class:"form-common clearfix" do  %>
-                                                                        <div class="col-sm-3">
+                                                                        <%= form_tag edit_admin_category_path(id: @category.id), method: :get,  class:"form-common clearfix" do     %>
+                                                                        <div class="col-sm-3" >
                                                                             <div class="form-group">
                                                                                 <label>NAME</label>
                                                                                 <!-- <input type="text" class="form-control custom-control " name="user_name"> -->
@@ -46,7 +46,7 @@
                                                                         <div class="col-sm-3">
                                                                             <div class="filter-btn">
                                                                                 <button class="btn btn-primary" title="Search"> <i class="fa fa-search"></i> Filter </button>
-                                                                                <a href="<%=edit_admin_category_path(id: @category.id)%>" class="btn btn-danger" title="Cancle">Cancle</a>
+                                                                                <a href="<%=edit_admin_category_path(id: @category.id)%>" class="btn btn-danger" title="Cancel">Cancel</a>
                                                                             </div>
                                                                         </div>
                                                                         <!-- </form> -->
@@ -55,12 +55,12 @@
                                                                 </fieldset>
                                                             </div>
                                                             <div class="table-responsive cus-table">
-                                                                <table class="table table-bordered table ">
+                                                                <table class="table table-bordered table " style="margin-left: 20%; margin-right: 20%; width: 60%">
                                                                     <thead>
                                                                         <%#binding.pry%>
                                                                         <tr>
                                                                             <th>S.No.</th>
-                                                                            <th>Sub Category</th>
+                                                                            <th>Cateria</th>
                                                                             <th colspan="3">Actions</th>
                                                                         </tr>
                                                                     </thead>
@@ -116,7 +116,7 @@
                                                                 <div class="col-sm-3">
                                                                     <div class="filter-btn">
                                                                         <button class="btn btn-primary" title="Search"> <i class="fa fa-search"></i> Filter </button>
-                                                                        <a href="<%=edit_admin_category_path(id: @category.id)%>" class="btn btn-danger" title="Cancle">Cancle</a>
+                                                                        <a href="<%=edit_admin_category_path(id: @category.id)%>" class="btn btn-danger" title="Cancel">Cancel</a>
                                                                     </div>
                                                                 </div>
                                                                 <!-- </form> -->

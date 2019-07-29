@@ -42,8 +42,8 @@ $("#user_admin_side").validate({
         "user[name]": {
             required: true,
             minlength: 2,
-            maxlength: 15,
-            lettersonly: true
+            maxlength: 15
+
         },
         "user[mobile_no]": {
             required: true,
@@ -68,9 +68,13 @@ $("#user_admin_side").validate({
 });
 // })
 });
-jQuery.validator.addMethod('lettersonly', function(value, element) {
-    return this.optional(element) || /^[a-z ]+$/i.test(value);
-}, 'letters only Please');
+// jQuery.validator.addMethod('lettersonly', function(value, element) {
+//     return this.optional(element) || /^[a-z ]+$/i.test(value);
+// }, 'letters only Please');
 jQuery.validator.addMethod('digitsonly', function(value, element) {
     return this.optional(element) || /^[0-9]+$/i.test(value);
 }, 'letters only Please');
+
+
+
+

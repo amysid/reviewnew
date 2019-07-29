@@ -13,7 +13,7 @@
           </div>
           <div class="p-blocks">
             <label class="view-a left-a">Answer: </label>
-            <span class="view-a right-a"><%= sanitize(@user.description)%></span>
+            <span class="view-a right-a"><%= strip_tags(@user.description)%></span>
           </div>
         </div>
       </div>

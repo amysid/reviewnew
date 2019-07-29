@@ -5,7 +5,7 @@
    </center>
 </section>
 <section class="content">
-  <%= form_with(model: @user, url:  update_admin_profile_admin_user_path, method: :patch, local: true) do |f| %>
+  <%= form_with(model: @user, url:  update_admin_profile_admin_user_path, method: :patch, local: true, id: "user_admin_side") do |f| %>
   <div class="row">
      <div class="col-md-3">
      </div>
@@ -31,31 +31,50 @@
                  <%#= @user.role.capitalize %>
            </p>
            <ul class="list-group list-group-unbordered">
-               <li class="list-group-item">
+            <li class="list-group-item">
+                     <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+
+                  <div class="col-sm-10">
+                        <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                  </div>
+                </div>
+               </li>
+               <!-- <li class="list-group-item">
                   <b>Name</b>
                      <p class="pull-right">
-                      <%= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                      <%#= f.text_field :name, class: 'form-control', autofocus: true, placeholder: "Name" %>
                      </p>
-               </li>
+               </li> -->
+
                <li class="list-group-item">
-                   <b>Role</b>
-                   <p class="pull-right" style="margin-right: -152px;">
-                        <%= @user&.role%>
-                   </p>
+                     <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Role</label>
+
+                  <div class="col-sm-10">
+                        <%= f.text_field :role, class: 'form-control', autofocus: true, placeholder: "Name" , readonly: true %>
+                  </div>
+                </div>
                </li>
+             
                <li class="list-group-item">
-                    <b>Email Id</b>
-                     <p class="pull-right">
-                       <%= @user&.email%>
-                     </p>
+                     <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 control-label">E-mail</label>
+
+                  <div class="col-sm-10">
+                        <%= f.text_field :email, class: 'form-control', autofocus: true, placeholder: "Name" , readonly: true %>
+                  </div>
+                </div>
                </li>
                
-               <li class="list-group-item">
-                   <b>Mobile No.</b>
-                   <p class="pull-right">
-                   <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "mobile_no" %>
-                      <%#= @transaction&.created_at.strftime("%d/%m/%Y")%>
-                   </p>
+                <li class="list-group-item">
+                     <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Mobile No.</label>
+
+                  <div class="col-sm-10">
+                        <%= f.text_field :mobile_no, class: 'form-control', autofocus: true, placeholder: "Name" %>
+                  </div>
+                </div>
                </li>
             </ul>
             <div class="form-group has-feedback">

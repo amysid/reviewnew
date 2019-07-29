@@ -12,7 +12,7 @@ $("#static_content_edit").validate({
     rules: {
       "static_content[title]":{
         required: true,
-        minlength: 20,
+        minlength: 10,
         maxlength: 64
       },
       "static_content[description]":{
@@ -21,7 +21,7 @@ $("#static_content_edit").validate({
           CKEditorUpdate();                        
         }, 
         minlength: 20,
-        maxlength: 500
+        maxlength: 1000
       },      
     }
   });

@@ -18,8 +18,8 @@ $("#admin_new_product").validate({
      },
      "product[product_name]": {
        required: true,
-       minlength: 3,
-       maxlength: 35,
+       minlength: 2,
+       maxlength: 20,
      },
      "product[video]": {
        required: true,
