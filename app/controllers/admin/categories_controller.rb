@@ -82,6 +82,9 @@ class Admin::CategoriesController < ApplicationController
   
 
   def update
+    if Product.where(category_id: params[:id]).present?
+    Product.where(category_id: params[:id]).update(category_name: params[:category][:category_name])
+  end
     if @category.update_attributes(category_params)
        redirect_to admin_categories_path, notice: 'Category updated Successfully.'
     else
@@ -169,6 +172,9 @@ class Admin::CategoriesController < ApplicationController
      if sub_category.present?
       flash[:notice] = "sub category already exists."
     else
+      if Product.where(sub_category_id: params[:subcat_id]).present?
+        Product.find_by(sub_category_id: params[:subcat_id]).update(sub_category_name: params[:sub_categories][:sub_category_name])  
+     end
     if @sub.update(sub_category_params)
        flash[:notice] = "sub category update successfullly."
       else
