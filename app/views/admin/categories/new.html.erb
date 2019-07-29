@@ -51,40 +51,40 @@
 
 
 <script>
-$(document).ready(function() {
-     $("#admin_category").validate({
-    rules: {
-      "category[category_name]": {
-        required: true
+// $(document).ready(function() {
+//      $("#admin_category").validate({
+//     rules: {
+//       "category[category_name]": {
+//         required: true
         
-      }
+//       }
  
 
 
-    },
-    messages: {
-      "category[category_name]":{
-        required: "Please select the category name.",
-        maxlength: "Maximum characters are 35."
-      }
-    },
-    submitHandler: function(form) {
-      form.submit();
-    }
-   });
+//     },
+//     messages: {
+//       "category[category_name]":{
+//         required: "Please select the category name.",
+//         maxlength: "Maximum characters are 35."
+//       }
+//     },
+//     submitHandler: function(form) {
+//       form.submit();
+//     }
+//    });
    
-   $.validator.addMethod("regxfloat", function(value, element, regexpr) {          
-    return regexpr.test(value);
-}, "Invalid Format");
+//    $.validator.addMethod("regxfloat", function(value, element, regexpr) {          
+//     return regexpr.test(value);
+// }, "Invalid Format");
 
-   $.validator.addMethod('lessThanEqual', function(value, element, param) {
-    if (this.optional(element)) return true;
-    var i = parseInt(value);
-    // var j = parseInt($(param).val());
-    return i <= 100;
-}, "The value must be less than or equal to {100}.");
+//    $.validator.addMethod('lessThanEqual', function(value, element, param) {
+//     if (this.optional(element)) return true;
+//     var i = parseInt(value);
+//     // var j = parseInt($(param).val());
+//     return i <= 100;
+// }, "The value must be less than or equal to {100}.");
 
-});
+// });
 
 </script>
 
@@ -118,7 +118,33 @@ $(document).ready(function() {
    
             
       });
-   
+   </script>
+   <script>
+     
+  $(document).ready(function() {
+    $("#admin_category").validate({
+   rules: {
+     // "category[category_name]": {
+       "category[category_name]": {
+       required: true,
+       maxlength: 15,
+       minlength: 2,
+       lettersonly: true
+     },
+   },
+   messages: {
+     // "category[category_name]":{
+       "category[category_name]": {
+       required: "Please select the category name.",
+       maxlength: "Maximum  characters are 15.",
+       minlength: "Minimum characters are 2",
+     },
+   },
+  });
 
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+ return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letters only please"); 
+  });
 
 </script>

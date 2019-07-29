@@ -7,7 +7,7 @@
       <div class="tab-content">
   				<div class="tab-pane fade active in" id="default-tab-1">
   					<div class="tab-pane">
-  							<%= nested_form_for @products, url: admin_products_path, method: :post, html:  {id: "admin_product"}  do |f| %>
+  							<%= nested_form_for @products, url: admin_products_path, method: :post, html:  {id: "admin_new_product"}  do |f| %>
   								<div class="detail-form m-t-40 m-b-40">
                     <div class="form-group">
   										<div class="row">
@@ -77,7 +77,8 @@
                         <div class="input-group-addon">
                         <em class="fa fa-calendar"></em>
                         </div>
-                      <%= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date",data: { provide: 'datepicker',:required => true} %>
+                      <%#= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date",data: { provide: 'datepicker',:required => true} %>
+                      <%= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Select Date", id: "start_date" %>
                         </div>
   											</div>
   										</div>
@@ -182,3 +183,22 @@ reader.readAsDataURL(input.files[0]); }
     video_player.play();
 };
 </script>
+<!-- <script type="text/javascript">
+  $(".datetimepicker_start").datepicker({
+   autoclose: true,
+   minDate: 0,
+
+});
+
+$(function() {
+ $(".datetimepicker_start").on('change', function(){
+        var date = Date.parse($(this).val());
+        if (date < Date.now()){
+            alert('Publish Date should be proper format and not of past');
+            $(this).val('');
+        }
+
+
+   });
+});
+</script> -->

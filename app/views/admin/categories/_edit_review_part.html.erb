@@ -5,7 +5,7 @@
         </div>
         <div class="modal-body">
           <div class="addbody text-left">
-           <%= form_for :review_parts, url:  update_review_part_admin_categories_path  do |f| %>
+           <%= form_for :review_parts, url:  update_review_part_admin_categories_path, html: {id: "edit_review"}  do |f| %>
 
 
                  <div class="form-group">
@@ -24,3 +24,32 @@
         <%end%>
          </div>
       </div>
+
+      
+       <script type="text/javascript">
+       $(document).ready(function(){
+
+       $("#edit_review").validate({
+     rules: {
+       "review_parts[criteria]": {
+         required: true,
+         maxlength: 10,
+         minlength: 2,
+         lettersonly: true
+
+       },
+     },
+     messages: {
+       "review_parts[criteria]":{
+         required: "Please select the category name.",
+         maxlength: "Maximum  characters are 10.",
+         minlength: "Minimum characters are 2",
+       },
+     },
+    });
+
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+ return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letters only please"); 
+  });
+     </script>

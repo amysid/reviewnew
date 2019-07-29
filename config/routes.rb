@@ -74,8 +74,8 @@ Rails.application.routes.draw do
     resources :static_content
     resources :categories do
       collection do
-        post :edit_sub_category
-        post :edit_review_part
+        get :edit_sub_category
+        get :edit_review_part
        delete :destroy_sub_category
        delete :destroy_review_part
         post :create_sub_category

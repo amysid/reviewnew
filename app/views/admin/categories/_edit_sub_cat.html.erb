@@ -5,7 +5,7 @@
         </div>
         <div class="modal-body">
           <div class="addbody text-left">
-           <%= form_for :sub_categories, url:  update_sub_category_admin_categories_path  do |f| %>
+           <%= form_for :sub_categories, url:  update_sub_category_admin_categories_path, html: {id: "edit_sub_categories"}  do |f| %>
 
 
                  <div class="form-group">
@@ -24,3 +24,32 @@
         <%end%>
          </div>
       </div>
+
+
+
+      <script type="text/javascript">
+   $(document).ready(function(){
+     $("#edit_sub_categories").validate({
+     rules: {
+       "sub_categories[sub_category_name]": {
+         required: true,
+         maxlength: 20,
+         minlength: 2,
+         lettersonly: true
+
+       },
+     },
+     messages: {
+       "sub_categories[sub_category_name]":{
+         required: "Please select the category name.",
+         maxlength: "Maximum  characters are 20.",
+         minlength: "Minimum characters are 2",
+       },
+     },
+    });
+
+jQuery.validator.addMethod("lettersonly", function(value, element) {
+ return this.optional(element) || /^[a-z ]+$/i.test(value);
+}, "Letters only please"); 
+  });
+  </script>

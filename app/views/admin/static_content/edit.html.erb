@@ -7,7 +7,7 @@
       <div class="tab-content">
   				<div class="tab-pane fade active in" id="default-tab-1">
   					<div class="tab-pane">
-  							<%= form_with(model: @user, url:  admin_static_content_path, method: :patch, local: true) do |f|%>
+  							<%= form_with(model: @user, url:  admin_static_content_path, method: :patch, local: true, id: "static_content_edit") do |f|%>
   								<div class="detail-form m-t-40 m-b-40">
 
   									<div class="form-group">
