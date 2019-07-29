@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :reviews do
       collection do
         post :get_reviews
+        post :get_vote_for_review
       end
     end
     resources :users do

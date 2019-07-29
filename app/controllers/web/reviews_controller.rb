@@ -18,4 +18,18 @@ class Web::ReviewsController < ApplicationController
 		redirect_to request.referer, notice: "Review Posted."
 		# @product.create_review()
 	end
+
+	def get_vote_for_review
+		# binding.pry
+		review = Review.find_by(id: params[:id])
+		vote = Vote.find_or_create_by(user_id: current_user.id, review_id: params[:id])
+		vote.update(vote_status: params[:status] == "like" ? true : false)
+
+		if params[:status] == "like"
+			render json: {status: true, like_count: review.votes.where(vote_status: true).count,dislike_count: review.votes.where(vote_status: false).count}
+		else
+			render json: {status: false, like_count: review.votes.where(vote_status: true).count,dislike_count: review.votes.where(vote_status: false).count}
+		end
+
+	end
 end
