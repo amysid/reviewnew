@@ -39,13 +39,15 @@
         <h2 class="widget-title">METACRITIC REPORTS</h2>
         <div class="row theatres-row">
           <div class="col-md-8">
+            <% @product_report = 0 %>
             <% @products&.each do |product|%>
             <% if product.reviews.present? %>
+            <% if @product_report < 10 %>
             <div class="row no-gutters reports-row">
 
              <div class="col-md-3">
               <div class="imgsection">
-                <img src="<%= product&.image&.first&.file_url%>" class="img-fluid">
+                <img src="<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid">
               </div>
             </div>
             <div class="col-md-9">
@@ -57,10 +59,13 @@
               </div>
             </div>
           </div>
-          <%end%>
-          <%end%>
+          <% if @product_report == 9 %>
           <a href="/web/users/report_details" class="readmore align-self-end pull-right btn btn-theme">View More</a><br><br>
-    
+          <%end%>
+          <% @product_report += 1 %>
+          <%end%>
+          <%end%>
+          <%end%>
            <!-- <div class="row no-gutters reports-row">
              <div class="col-md-3">
               <div class="imgsection">

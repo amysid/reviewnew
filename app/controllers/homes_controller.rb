@@ -4,12 +4,11 @@ class HomesController < ApplicationController
     end
 
     def faq
-    	# binding.pry
-    	@faqs = Faq.all
+       @faqs = Faq.all
     end
     def contact_us
-        # binding.pry
          @contact = StaticContent.find_by(title: "Contact us")
+         @products = Product.where(trending: true).last(4)
     end
 
     def privacy_policy
@@ -30,6 +29,11 @@ class HomesController < ApplicationController
             redirect_to feedback_homes_path
             flash[:notice] = "Feedback not submitted"
         end
+    end
+
+    def feedback
+        binding.pry
+        @products =  Product.where('date > ?', Date.today).last(4)
     end
 
     def feedback_params

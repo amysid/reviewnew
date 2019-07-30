@@ -232,15 +232,17 @@ class Web::UsersController < ApplicationController
   end
   
   def report
-    @products = Product.all
+    @products = Product.last(10)
   end
   def report_details
-    @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+    @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
   end
   def profile
     # binding.pry
   end
 
-  
+  def rating_calculate
+    # binding.paramsry
+  end
   
 end

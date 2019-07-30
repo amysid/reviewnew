@@ -41,6 +41,7 @@ Rails.application.routes.draw do
       get :upcomeing
       get :holl_of_fame_details
       get :categorywise
+      get :rating_calculate
     end
     member do
       get :user_profile
