@@ -53,7 +53,10 @@
           <div class="tab-content" id="tabScore">
             <div class="tab-pane fade show active" id="tab-1" role="tabpanel">
               <div class="row small">
-                <% @products&.each do |product|%>
+                <%  @products&.each do |product|%>
+                <%#binding.pry%>
+                <%#binding.pry%>
+                <% if product.reviews.find_by(user_id: current_user.id).present? %>
                 <% if product&.category_name == "Movies"%>
                 <div class="col-md-4">
                   <div class="score-card">
@@ -63,9 +66,9 @@
                         <h4><%= product&.product_name%></h4>
                         <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                       </div>
-                      <div class="score-rating">08/10</div>
+                      <div class="score-rating"><%=product.reviews.pluck(:rating).sum/product.reviews.pluck(:rating).count%>/10</div>
                     </div>
-                    <p><%= sanitize(product&.description)%></p>
+                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
                         <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
@@ -75,6 +78,7 @@
                     </div>
                   </div>
                 </div>
+                <%end%>
                 <%end%>
                 <%end%>
                <!--  <div class="col-md-4">

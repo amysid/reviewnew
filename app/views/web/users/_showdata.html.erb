@@ -2,13 +2,13 @@
             <div class="tab-pane fade show active" id="nav-movies" role="tabpanel">
               <div class="row small">
 
-              	<%if @products.blank?%>
+              	<%if @total_products.blank?%>
               	     <!-- <h3>No Record Founds</h3> -->
                       <div class="col-md-4">
                   <div class="score-card" id="tab1">
                     <div class="score-card-top">
                       <div class="name-date">
-                        <h4>No Record Founds</h4>
+                        <h4>No Score Founds</h4>
                         <span><%#= product&.updated_at&.strftime("%d/%m/%Y")%></span>
                       </div>
                       <!-- <div class="score-rating">08/10</div> -->
@@ -24,17 +24,25 @@
                   </div>
                 </div>
               	 <%else%>
-                <% @products.each do |product|%>
-                
+                 <% i = 0 %>
+                <% @total_products.each do |product|%>
+                <%#binding.pry%>
                 <div class="col-md-4">
                   <div class="score-card" id="tab1">
                     <div class="score-card-top">
                       <div class="name-date">
                         <%# product&.category_name %>
                         <h4><%= product&.product_name%></h4>
-                        <span><%= product&.updated_at&.strftime("%d/%m/%Y")%></span>
+                        <span><%= product&.date&.strftime("%d/%m/%Y")%></span>
                       </div>
-                      <div class="score-rating">08/10</div>
+                      <%#binding.pry%>
+                      <%if product.reviews.pluck("rating").present?%>
+                      <div class="score-rating"><%=product.reviews[i].rating%>/10</div>
+                      <% i += 1 %>
+                      <%else%>
+                      <div class="score-rating">0/10</div>
+                      <%end%>
+
                     </div>
                     <p><%= truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
                     <div class="d-flex justify-content-between">

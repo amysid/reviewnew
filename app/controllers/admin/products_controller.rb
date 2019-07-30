@@ -43,6 +43,7 @@ class Admin::ProductsController < ApplicationController
       end
       if @products.save!
         productCount = 0
+       binding.pry
         contract_instance.transact_and_wait.add_product(@products.product_name)
         @products.update!(product_blockchain_id: productCount)
         productCount +=1
@@ -90,7 +91,6 @@ class Admin::ProductsController < ApplicationController
     end
  
    def publish
-    binding.pry
     Product.find_by(id: params[:id]).update(current: "unpublish")
     redirect_to admin_products_path
       flash[:notice] = "Unpublish mode Successfully"

@@ -17,7 +17,8 @@ class Web::UsersController < ApplicationController
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
-    @reviews = Review.last(4)
+    @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
+    @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     # @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
 
 
@@ -45,9 +46,11 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category
-
+# binding.pry
     # @category = Category.all
     # @trending = Product.where(trending: true)
+    @products =  Product.find_by(sub_category_id: params[:id])
+
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
@@ -59,8 +62,7 @@ class Web::UsersController < ApplicationController
     @products = @sub_category.products
   end
 
-  def movie_detail
-  # binding.pry    
+  def movie_detail   
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
@@ -79,6 +81,7 @@ class Web::UsersController < ApplicationController
   def user_profile
     @categorys = Category.all
     @products = Product.all
+    @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
   end
 
   def holl_of_fame_details
@@ -100,14 +103,15 @@ class Web::UsersController < ApplicationController
   end
   
   def categorywise
-     # binding.pry
      @reviews = Category.find(params[:id]).product.first.reviews.last(4)
   end
 
   def abc
-    # binding.pry
-    @products = Product.where(category_id: params[:id])
+    #binding.pry
+   @products = Product.where(category_id: params[:id])
    @reviews_data = Review.find_by(user_id: current_user.id)
+   @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
+
   end
 
   def check_email
