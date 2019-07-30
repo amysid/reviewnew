@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       get :check_email_login
       post :image_update
       get :report
+      get :report_details
       get :abc
       get :hollframe
       get :user_type

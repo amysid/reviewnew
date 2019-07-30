@@ -159,7 +159,7 @@
 
       <div class="row parar rowreviews">
         <h3>Description</h3>
-        <p class="reviewpara"> 
+        <p class="reviewpara word-break-all"> 
         	<%=ActionView::Base.full_sanitizer.sanitize(@product&.description)%> </p>
       </div>
 
@@ -538,3 +538,9 @@
 
 
   </script>
+  <style type="text/css">
+    .word-break-all{
+  word-break: break-all;
+}
+
+  </style>

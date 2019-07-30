@@ -17,10 +17,21 @@ class Web::UsersController < ApplicationController
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
-    @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
-    @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
-    # @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-
+    @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
+    
+     #binding.pry
+    if params[:id].present? && Category.find_by(id: params[:id]).present? # && params["id"].split('/')[1] == "nav-name"
+        category1 = Category.find_by(id: params[:id])
+        @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
+        @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
+   # elsif params[:id].present? && Category.find_by(id: params[:id]&.split('/')[0]).present? && params["id"].split('/')[1] == "nav-metascore"
+   #     category1 = Category.find_by(id: params[:id]&.split('/')[0])
+   #     @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
+    else
+       @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
+       @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
+   end
+    
 
     @rec = {}
     Category.all.each do |cat|
@@ -221,8 +232,11 @@ class Web::UsersController < ApplicationController
   end
   
   def report
+    @products = Product.all
   end
-
+  def report_details
+    @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+  end
   def profile
     # binding.pry
   end

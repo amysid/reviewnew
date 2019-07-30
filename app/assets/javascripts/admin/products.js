@@ -21,9 +21,9 @@ $("#admin_new_product").validate({
        minlength: 2,
        maxlength: 20,
      },
-     "product[video]": {
-       required: true,
-     },
+     // "product[video]": {
+     //   required: true,
+     // },
      "product[date]": {
        required: true,
        date: true
@@ -50,9 +50,9 @@ $("#admin_new_product").validate({
        minlength: "Minimum characters are 2.",
        maxlength: "Maximum characters are 35.",
      },
-      "product[video]": {
-       required: "Please Select a Video",
-     },
+     //  "product[video]": {
+     //   required: "Please Select a Video",
+     // },
       "product[date]": {
        required: "Please Select a Date",
        date: "Only digits are allowed"

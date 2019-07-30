@@ -551,14 +551,12 @@
               <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
             </div>
           </nav>
-        <!-- <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a> -->
-        <select class="category data_category">
+           <select class="category data_category">
             <option value="category">Select Category</option>
-            <% @category&.each do |category| %>
+            <%@category&.each do |category| %>
             <option class="category_wise" value="<%= category.id %>"><%= category&.category_name%></option>
-            <!-- <option value="opel">Opel</option> -->
             <%end%>
-           </select>
+           </select> 
 </div>
 </div>
        
@@ -568,34 +566,44 @@
 
   <!-- Home Slider Start -->
   <div class="tab-content theatres-content" id="tabScore">
+    
             <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
-    <div class="home-slider1 tab-pane fade in show active tab-3" id="nav-name" role="tabpanel">
-      <% @category_wise_review = 0 %>
-      <% @reviews_normal&.each  do |user_reviews|%>
+    <div class="home-slider1  tab-pane fade in show active tab-3" id="nav-name" role="tabpanel">
+      <!-- <select class="category data_category">
+            <option value="category">Select Category</option>
+            <%#@category&.each do |category| %>
+            <option class="category_wise" value="<%#= category.id %>/nav-name"><%#= category&.category_name%></option>
+            <%#end%>
+    </select>  -->
+    <% if @reviews_normal.blank? %>
+    <p>No Record Found</p>
+    <%else%>  
+      <%# @category_wise_review = 0 %>
+      <%  @reviews_normal&.each  do |user_reviews|%>
+      <%#binding.pry%>
       <% if user_reviews.present?%>
       <%@a = User.find_by(id: user_reviews.user_id) %>
-      <% if @a.user_type == "Normal User" %>
-      <% if @category_wise_review < 12 %>
+      <%# if @category_wise_review < 12 %>
       <div class="slide-item">
         <div class="row profile">
           <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-            <img src="<%= @a&.image&.file_url%>">
+            <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/Hadie-profile-pic-circle-1.png"%>">
           </div>
           <div class="col-md-7 col-sm-7 col-lg-7">
            <span class="johny"><%= @a&.name%></span><br>
-           <!-- <p><%#= user_reviews&.product&.category&.category_name%></p> -->
+           <p><%= user_reviews&.product&.category&.category_name%></p>
            <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
           <p class="user-view"><%=truncate(user_reviews&.comment, :length => 245)%></p>
           <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
          <div class="thumb-img">
-                  <img src="/assets/Facebook_like_thumb.png" alt = "" >
-                  <img src="/assets/facebook_not_like_thumbs_down.png" alt = "" >
+                  <!-- <img src="/assets/Facebook_like_thumb.png" alt = "" > -->
+                  <!-- <img src="/assets/facebook_not_like_thumbs_down.png" alt = "" > -->
           </div>
         </div>
       </div>
-      <%end%>
+      <%#end%>
       <%end%>
       <%end%>
       <%end%>
@@ -684,22 +692,30 @@
   <!-- <div class="home-slider1 tab-pane fade in show active" id="tab-3" role="tabpanel">
   </div> -->
 
-<div class="tab-pane fade home-slider1 tab-pane fade in show tab-3 " id="nav-metascore" role="tabpanel">
-  <!-- <p>No Data Founds</p> -->
-      <% @category_wise_review = 0 %>
-      <% @reviews_expert&.each  do |user_reviews|%>
-      <% if user_reviews.present?%>
-       <% if User.find_by(id: user_reviews.user_id).user_type == "Expert User" %>
+<div class="home-slider1 tab-pane fade  tab-pane fade in show tab-3 " id="nav-metascore" role="tabpanel">
+<!--   <select class="category data_category">
+            <option value="category">Select Category</option>
+            <%#@category&.each do |category| %>
+            <%#binding.pry%>
+
+            <option class="category_wise" value="<%#= category.id %>/nav-metascore"><%#= category&.category_name%></option>
+            <%#end%>
+           </select>  -->
+<% if @review_expert.blank? %>
+  <p>No Record Found</p>
+  <%else%>
+      <% @review_expert&.each  do |user_reviews|%>
       <%#binding.pry%>  
-         <% if @category_wise_review < 12 %>
+      <% if user_reviews.present?%>
+      <% @a = User.find_by(id: user_reviews.user_id) %>
       <div class="slide-item">
              <div class="row profile">
             <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-            <img src="<%= @a&.image&.file_url%>">
+            <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/Hadie-profile-pic-circle-1.png"%>">
             </div>
            <div class="col-md-7 col-sm-7 col-lg-7">
-           <span class="johny"><%= @a&.name%></span><br>
-           <!-- <p><%#= user_reviews&.product&.category&.category_name%></p> -->
+           <span class="johny"><%= User.find_by(id: user_reviews.user_id).name%></span><br>
+           <p><%= user_reviews&.product&.category&.category_name%></p>
            <span><%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
            <span class="date1"><%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
          </div>
@@ -707,12 +723,12 @@
 
          <!-- <a href="JavaScript:Void(0);" class="read">Read Full Review</a> -->
          <div class="thumb-img">
-                  <img src="/assets/Facebook_like_thumb.png" alt="">
-                  <img src="/assets/facebook_not_like_thumbs_down.png" alt="">
+                  <!-- <img src="/assets/Facebook_like_thumb.png" alt=""> -->
+                  <!-- <img src="/assets/facebook_not_like_thumbs_down.png" alt=""> -->
                 </div>
         </div>
       </div>
-      <%end%>
+    
       <%end%>
       <%end%>
       <%end%>
@@ -797,7 +813,7 @@
       $('.data_category').change(function(){
         var id=this.value;
       $.ajax({
-         url: '/web/users/categorywise',
+         url: '/web/users',
          type: 'get',
          data: {
           id: id

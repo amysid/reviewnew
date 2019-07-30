@@ -1,0 +1,36 @@
+<%if current_user.present? %>
+<%= render partial: 'web/users/head'%>
+<%end%>
+<div class="container home-wrap">
+        <h2 class="widget-title">METACRITIC REPORTS</h2>
+        <div class="row theatres-row">
+          <div class="col-md-8">
+            <% @products&.each do |product|%>
+            <% if product.reviews.present? %>
+            <div class="row no-gutters reports-row">
+
+             <div class="col-md-3">
+              <div class="imgsection">
+                <img src="<%= product&.image&.first&.file_url%>" class="img-fluid">
+              </div>
+            </div>
+            <div class="col-md-9">
+              <div class="contentsection">
+                <p class="pa"><%= product&.date&.strftime("%B %d, %Y")%>, <%= product&.category_name %></p>
+                <h5><%= product&.product_name%></h5>
+                <p class="paracol8"><%= truncate(strip_tags(product&.description), omision: "...", length: 600).html_safe%></p>
+                <!-- <a href="javascript:void(0)" class="readmore align-self-end">View More</a> -->
+              </div>
+            </div>
+          </div>
+          <%end%>
+          <%end%>
+      </div>
+  </div>
+</div>
+ <div class="box-footer">
+        <div class="digg_pagination pull-right">
+                <%= will_paginate @products%>
+        </div>
+ </div>
+          <!-- <a href="/web/users/report_details" class="readmore align-self-end pull-right btn btn-theme">View More</a> -->
