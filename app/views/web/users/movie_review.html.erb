@@ -389,24 +389,26 @@
 
             
 		<%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
+      <div class="count_child">
             <%@review_parts.each do |criteria|%>
             <%#binding.pry%>
               <div class="rating-wrap">
                 <span class="ratetitle"><%= criteria&.criteria&.titleize%></span>
                 <div class="rate">
-                  <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating<%= criteria&.criteria%>" value="5" />
+                  <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
                   <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating<%= criteria&.criteria%>" value="4" />
+                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
                   <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating<%= criteria&.criteria%>" value="3" />
+                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
                   <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating<%= criteria&.criteria%>" value="2" />
+                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
                   <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating<%= criteria&.criteria%>" value="1" />
+                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
                   <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
                 </div>
               </div>
             <%end%>
+            </div>
             </div>
           </div>
 
@@ -544,7 +546,7 @@
 }
 </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
   debugger;
   var rad = document.count_rating_dynamic.myRadios;
 var prev = null;
@@ -557,7 +559,7 @@ for (var i = 0; i < rad.length; i++) {
         console.log(this.value)
     });
 }
-</script>
+</script> -->
 <script type="text/javascript">
   $(document).on("turbolinks:load",function(){
 $("#count_rating_dynamic").validate({
@@ -580,26 +582,44 @@ $("#count_rating_dynamic").validate({
 
 <script type="text/javascript">
   
-$('input[name=ratingRating]').on('click', function(){
-  var total = 0;
-  var rating = 0;
-  var rp = [];
-  var i=0;
-    <%@review_parts.each do |criteria|%>
+$('.count_child').on('click', function(){
 
-        rp.push("<%=criteria.criteria%>");
-        i++;
-      <% end %>
+  // var total = 0;
+  // var rating = 0;
+  // var rp = [];
+  // var i=0;
+  //   <%@review_parts.each do |criteria|%>
 
-      for(j=0;j<i-1;j++){
-        rating = $('input[name=rating'+rp[j]+']:checked').val();
-        if(rating != 'undefined'){
-          total = parseInt(total) + parseInt(rating);
-        }
-      }
-      // debugger;
-      total = total/i;
+  //       rp.push("<%=criteria.criteria%>");
+  //       i++;
+  //     <% end %>
 
-    $('#numeric_rating'+parseInt(total)).siblings('span').addClass('active');
+  //     for(j=0;j<i-1;j++){
+  //       rating = $('input[name=rating'+rp[j]+']:checked').val();
+  //       if(rating != 'undefined'){
+  //         total = parseInt(total) + parseInt(rating);
+  //       }
+  //     }
+  //     // debugger;
+  //     total = total/i;
+
+  //   $('#numeric_rating'+parseInt(total)).siblings('span').addClass('active');
+  var avereage = 0
+  objects = $('.count_child').find('input:checked')
+  objects.each(function(){
+    avereage = avereage + parseInt(this.value)
+    // debugger;
+      // if($(this).find('checkbox').is(':checked'))
+      // { 
+          // len++;
+      // }    
+
+});
+if (avereage > 0){
+  avereage = avereage / $('.count_child').find('input').length
+  avereage = Math.round(avereage*10);
+  console.log(avereage)
+  $('.ten-rate')[(avereage-1)].click()
+}
 });
 </script>

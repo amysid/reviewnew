@@ -24,6 +24,7 @@ class Web::UsersController < ApplicationController
         category1 = Category.find_by(id: params[:id])
         @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
         @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
+        # binding.pry
    # elsif params[:id].present? && Category.find_by(id: params[:id]&.split('/')[0]).present? && params["id"].split('/')[1] == "nav-metascore"
    #     category1 = Category.find_by(id: params[:id]&.split('/')[0])
    #     @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
@@ -51,7 +52,10 @@ class Web::UsersController < ApplicationController
   # @percentage.push(@per)
   #  # p @per
   #  end
-
+    respond_to do |format|
+      format.html
+      format.js
+    end
 
 
   end

@@ -5,6 +5,9 @@ class Web::ReviewsController < ApplicationController
 
 		rating = params[:numeric_rating].to_i
 		comment = params[:description]
+		# @x = 0
+		# params.each {|x| p @x += x[1].to_i if x[0].include?("rating")}
+		# params_data_data = @x-params[:numeric_rating].to_i
 		params_data_data = params[:rating][0]
         spoiler = params[:spoiler].present? ? true : false
 		criteria = {}

@@ -20,7 +20,8 @@
                 <!-- <div class="row"> -->
             <div class="col-sm-3 filter-field">
                   <div class="form-group serach-date">    
-                     <%= f.search_field :created_at, data:{ provide:'datepicker' }, class: "form-control fa fa-calendar", placeholder: "Search Feedbacks by Date", id: 'datetimepicke', value: @date %>                        
+                     <%#= f.search_field :created_at, data:{ provide:'datepicker' }, class: "form-control fa fa-calendar", placeholder: "Search Feedbacks by Date", id: 'datetimepicke', value: @date %>                        
+                   <%= f.text_field :date ,class: "form-control datetimepicker_start",placeholder:"Search by Date", id: "start_date" %>
                   </div>
             </div>
             <div class="col-sm-3">
@@ -88,5 +89,11 @@
                 <%= will_paginate @feedbacks %>
            </div>  
    </section>
+<script type="text/javascript">
+  $(".datetimepicker_start").datepicker({
+   autoclose: true,
+   minDate: 0,
 
+});
+</script>
  

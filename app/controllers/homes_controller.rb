@@ -20,7 +20,6 @@ class HomesController < ApplicationController
     end
 
     def create
-        # binding.pry
         @feedback = Contact.new(feedback_params)
         if @feedback.save
             redirect_to feedback_homes_path
@@ -32,7 +31,6 @@ class HomesController < ApplicationController
     end
 
     def feedback
-        binding.pry
         @products =  Product.where('date > ?', Date.today).last(4)
     end
 
