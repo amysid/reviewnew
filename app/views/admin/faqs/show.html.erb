@@ -9,11 +9,11 @@
         <div class="user-detail-block">
           <div class="p-blocks">
             <label class="view-a left-a">Question: </label>
-            <span class="view-a right-a"><%= sanitize(@faqs.question)%></span>
+            <span class="view-a right-a word-break-all"><%= sanitize(@faqs.question)%></span>
           </div>
           <div class="p-blocks">
             <label class="view-a left-a">Answer: </label>
-            <span class="view-a right-a"><%= strip_tags(@faqs.answer)%></span>
+            <span class="view-a right-a word-break-all"><%= strip_tags(@faqs.answer)%></span>
           </div>
         </div>
       </div>
@@ -24,3 +24,8 @@
   </div>
 </div>
 </section>
+<style type="text/css">
+  .word-break-all{
+  word-break: break-all;
+}
+</style>
