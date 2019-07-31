@@ -392,9 +392,9 @@ a, img {
 }
 
 .footer {
-background: #2866f1;
-color: #fff;
-padding: 40px 0px 20px 0px;
+    background: #2866f1;
+    color: #fff;
+    padding: 40px 0px 0px 0px;
 }
 .footer a {
     color: #fff;

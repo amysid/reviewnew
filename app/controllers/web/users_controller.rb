@@ -156,6 +156,7 @@ class Web::UsersController < ApplicationController
   end
   
   def user_profile
+    # binding.pry
     @categorys = Category.all
     @products = Product.all
     @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
