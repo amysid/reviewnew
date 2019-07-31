@@ -216,12 +216,12 @@
           </div>
           <div class="row small">
             <% @count_hall_frame = 0 %>
-            <% @products&.each_with_index do |product, index|%>
+            <% @latest_stories&.each_with_index do |product, index|%>
             <% if product.reviews.present?%>
             <% @a=product.reviews.map {|x| x.rating  }.sum %>
             <% @b=product.reviews.map.with_index {|x,index|  }.count %>
             <% if @a.present? %>
-            <%# if (@a*100)/(@b*10) >= 75%>
+            <% if (@a*100)/(@b*10) >= 75%>
                    <%if @count_hall_frame < 6 %>
             <div class="col-md-4">
               <div class="custom-post">
@@ -239,7 +239,7 @@
               </div>
             </div>
             <% @count_hall_frame += 1%>
-            <%#end%>
+            <%end%>
             <%end%>
             <%end%>
              <%end%>

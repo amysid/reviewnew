@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       post :image_update
       get :report
       get :report_details
-      get :abc
+      get :user_score
       get :hollframe
       get :user_type
       get :trending

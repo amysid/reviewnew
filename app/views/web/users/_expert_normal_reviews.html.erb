@@ -1,15 +1,15 @@
-    <div class="home-slider1  tab-pane fade in show active tab-3" id="nav-name" role="tabpanel">
+    <div class="tab-pane fade in show active tab-3" id="nav-name" role="tabpanel">
 
     <% if @reviews_normal.blank? %>
     <p>No Record Found</p>
     <%else%>  
-
+       <div class="home-slider1">
       <%  @reviews_normal&.each  do |user_reviews|%>
 
       <% if user_reviews.present?%>
       <%@a = User.find_by(id: user_reviews.user_id) %>
 
-      <div class="slide-item">
+      <div class="slide-item ">
         <div class="row profile">
           <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
             <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/Hadie-profile-pic-circle-1.png"%>">
@@ -30,7 +30,7 @@
       <%end%>
       <%end%>
       <%end%>
-
+</div>
   </div>
 
 <div class="home-slider1 tab-pane fade  tab-pane fade in show tab-3 " id="nav-metascore" role="tabpanel">

@@ -13,6 +13,7 @@ class Web::UsersController < ApplicationController
     # @games = Product.where(category_name: "Games").first(2) 
     # @tvs = Product.where(category_name: "TV").first(2)
     @products = Product.all
+    @latest_stories = Product.all.order("created_at desc")
     @users = User.where(user_type: "Normal User")
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
@@ -182,8 +183,7 @@ class Web::UsersController < ApplicationController
      @reviews = Category.find(params[:id]).product.first.reviews.last(4)
   end
 
-  def abc
-    #binding.pry
+  def user_score
    @products = Product.where(category_id: params[:id])
    @reviews_data = Review.find_by(user_id: current_user.id)
    @total_products = Product.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)

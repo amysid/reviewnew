@@ -46,7 +46,7 @@ class Admin::ProductsController < ApplicationController
       @products.date = params[:product][:date]
       end
       if @products.save
-        contract_instance.transact_and_wait.add_product(@products.product_name)
+        contract_instance.transact_and_wait.add_product(@products.product_name) rescue ""
          redirect_to admin_products_path(@products)
          flash[:notice] = "product created succesfull"
        else
