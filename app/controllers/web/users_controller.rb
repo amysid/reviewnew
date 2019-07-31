@@ -72,9 +72,11 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category_detail
+    # binding.pry
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
+     @productss = Product.last(4)
   end
 
   def movie_detail   

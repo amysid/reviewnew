@@ -836,6 +836,7 @@ position: relative;
     right: 0px;
     bottom: 0px;
     height: 100%;
+    width: 100%;
 }
 .post-details {
     padding: 30px 25px 30px 25px;
@@ -1361,7 +1362,7 @@ address i {
 .titile-light {
     font-size: 30px;
     font-weight: 400;
-    margin-bottom: 30px;
+    margin: 30px 0px;
 }
 .reviewModal {
     font-family: 'Poppins', sans-serif;
@@ -1693,10 +1694,10 @@ p {
     .home-slider.slick-initialized .slick-slide {
         padding: 20px 0px;
     }
-    .slick-dotted.slick-slider {
+    /*.slick-dotted.slick-slider {
         margin-bottom: 0;
     }
-    .widget-title, .main-title {
+*/    .widget-title, .main-title {
         margin-top: 20px;
         font-size: 25px;
     }
@@ -1723,6 +1724,9 @@ p {
 .images1 img {
     width: 100%;
     height: 300px;
+}
+.images1{
+    position: relative;
 }
 /*.imgshadow {
     padding-left: 0px;
@@ -2030,6 +2034,13 @@ font-weight: 600;
 /*charu music category css*/
 .percent-section1 {
     position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0px 15px;
+    color: #c5c4c4c9;
+    font-size: 50px;
+    font-weight: 600;
+   /* position: absolute;
     display: flex;
     justify-content: left;
     bottom: 202px;
@@ -2037,7 +2048,7 @@ font-weight: 600;
     padding: 15px;
     color: #c5c4c4c9;
     font-size: 50px;
-    font-weight: 600;
+    font-weight: 600;*/
 }
 span.expand {
     margin-left: 136px;
@@ -2061,9 +2072,9 @@ p.paramusic {
 }
 
 /*charu game details css*/
-.page-wrapper {
+/*.page-wrapper {
     padding: 40px 0px;
-}
+}*/
 
 /*charu Game category css*/
 h3.h3-game {
@@ -2518,7 +2529,7 @@ a.nav-item.nav-link.fonts.trailer-nav {
         padding: 20px 0px;
     }
     .slick-dotted.slick-slider {
-        margin-bottom: 0;
+       height: 550px;
     }
     .widget-title, .main-title {
         margin-top: 20px;
@@ -2599,4 +2610,41 @@ a.nav-item.nav-link.fonts.trailer-nav {
     max-height: 294px;
     width: 100%;
     object-fit: cover;
+}
+img.img-fluid.game-img {
+    max-height: 208px;
+    width: 100%;
+}
+img.img-fluid {
+    height: 236px;
+    width: 100%;
+}
+img.screen-img {
+    /* max-height: 245px; */
+    height: 245px;
+}
+.reviews-col{
+        padding: 0px 3px;
+}
+.slick-dotted.slick-slider {
+    /* margin-bottom: 30px; */
+    height: 550px;
+    margin: 0px 0px;
+}
+.page-wrapper {
+    padding: 0px 0px;
+}
+.posted-btn{
+    width: 100%;
+    max-width: 111px;
+    height: 100%;
+    max-height: 31px;
+    font-size: 16px;
+    color: #fff;
+    background: #fc801d;
+    border: none;
+        padding: 10px;
+}
+.posted-btn, .posted-btn:hover, .posted-btn:focus{
+    color: #ffffff;
 }

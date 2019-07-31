@@ -60,12 +60,12 @@
           </div>
           <%#binding.pry%>
           <%if @product.reviews.where(user_id: current_user.id).present? %>
-           <div class="col-md-4 text-right "><a href="#" data-toggle="modal"  disabled>
+           <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal"  disabled>
          Review Already Posted</a>
        </div>
          
           <%else%>
-            <div class="col-md-4 text-right "><a href="#" data-toggle="modal" data-target="#reviewModal">
+            <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">
          Write a review</a>
                    
                    </div>
@@ -175,7 +175,7 @@
 			<%arr.each do |a|%>
             <div class="col-md-4 columnimage">
               <div class="imagecol3">
-             <img src="<%=a&.file&.url%>"> 
+             <img src="<%=a&.file&.url%>" class="screen-img"> 
               </div>
             </div>
             <%end%>
@@ -290,7 +290,7 @@
         </div>
         </div>
 
-
+ <div class="container">
           <div class="row rowreviews">
             <div class="heading">
               <h3 class="titile-light">You may also like:</h3>
@@ -367,6 +367,7 @@
               </div>
             </div>
           </div>
+        </div>
         </div>
 
 
