@@ -1,663 +1,327 @@
-<%if current_user.present? %>
+<%#if current_user.present? %>
 <%= render partial: 'web/users/head'%>
-<%end%>
+<%#end%>
 <%= render partial: 'web/users/trending'%>
-    <!-- Home Slider Close -->
-
-    <div class="page-wrapper">
-      <div class="container home-wrap">
+<!-- Home Slider Close -->
+<div class="page-wrapper">
+    <div class="container home-wrap">
         <div class="row">
-          <div class="col-md-8">
-            <div class="left-side">
-              <h3 class="widget-title">TRENDING NOW</h3>
-              <div class="posts">
-                <% @count_trending = 0 %>
-                <% @products&.each_with_index do |product, index|%>
-                <% if product.trending == true %>
-                 <% if @count_trending < 4%>
-                <div class="post-item">
-                  <div class="row no-gutters align-items-stretch">
-                    
-                    <%#binding.pry%>
-                  
-                    
-                    <div class="col-md-4">
-                      <div class="post-img">
-                        <img src="<%= product&.image&.take&.file_url%>" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="post-details">
-                        <p class="tag"><span><%= product&.category_name%> : </span></p>
-                        <h4 class="post-title"><%= product&.product_name%> : <%#= product.sub_category_name%></h4>
-                        <p><%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%></p>
-                        <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></span>
-                          <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
+            <div class="col-md-8">
+                <div class="left-side">
+                    <h3 class="widget-title">TRENDING NOW</h3>
+                    <div class="posts">
+                        <% @count_trending = 0 %>
+                        <% @trending_products&.each_with_index do |product, index|%>
+                        <%# if product.trending == true %>
+                        <% if @count_trending < 4%>
+                        <div class="post-item">
+                            <div class="row no-gutters align-items-stretch">
+                                <%#binding.pry%>
+                                <div class="col-md-4">
+                                    <div class="post-img">
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="post-details">
+                                        <p class="tag"><span>
+                                                <%= product&.category_name%> : </span></p>
+                                        <h4 class="post-title">
+                                            <%= product&.product_name%> :
+                                            <%#= product.sub_category_name%>
+                                        </h4>
+                                        <p>
+                                            <%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%>
+                                        </p>
+                                        <div class="post-meta">
+                                            <span><i class="fa fa-clock-o"></i>
+                                                <%= product&.date&.strftime("%B %d, %Y")%></span>
+                                            <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% if @count_trending == 3 %>
+                            <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">Read More></a>
+                            <%end%>
                         </div>
-                      </div>
+                        <% @count_trending += 1 %>
+                        <%#end%>
+                        <%end%>
+                        <%end%>
                     </div>
-                   
-                  </div>
-                 
-                <% if @count_trending == 3 %>
-                <a href="/web/users/trending" class="readmore pull-right btn btn-theme">Read More></a>
-                 <%end%>
                 </div>
-                 <% @count_trending += 1 %>
-                 <%end%>
-                    <%end%>
-                    <%end%>
-                <!-- <div class="post-item">
-                  <div class="row no-gutters align-items-stretch">
-                    <div class="col-md-4">
-                      <div class="post-img">
-                        <img src="/assets/post-img.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="post-details">
-                        <p class="tag"><span>Gaming : Review</span></p>
-                        <h4 class="post-title">Mass Effect Andromeda</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                          galley of type and scrambled it to make a type specimen book.</p>
-                        <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                          <a href="JavaScript:Void(0);" class="readmore">Read More></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-                <!-- <div class="post-item">
-                  <div class="row no-gutters align-items-stretch">
-                    <div class="col-md-4">
-                      <div class="post-img">
-                        <img src="/assets/post-img.jpg" alt="">
-                      </div>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="post-details">
-                        <p class="tag"><span>Movie : Review</span></p>
-                        <h4 class="post-title">Bharat : Journey of A Man & A Nation Together</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                          been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
-                          galley of type and scrambled it to make a type specimen book.</p>
-                        <div class="post-meta">
-                          <span><i class="fa fa-clock-o"></i> June 12, 2019</span>
-                          <a href="JavaScript:Void(0);" class="readmore">Read More></a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div> -->
-
-                <div class="custom-post big-post">
-                  <% @count_todays_review = 0%>
-                    <% @todays_review.each do |review|%>
-                    <% if @count_todays_review == 0 %>
-                  <div class="custom-img">
-                    <%#binding.pry%>
-                    <!-- <img src="/assets/big-banner.jpg" class="img-fluid" alt=""> -->
-                    <img src='<%= review&.product&.image.present? ? review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>' style='<%= review&.product&.image.present? ? "width: 100%;height: 100%;" : "" %>'>
-                  </div>
-                  <div class="custom-content align-center">
-                    <p class="custom-tag"><span><%=review&.product&.category&.category_name%> : Review</span></p>
-                    <h4 class="custom-title"><%=review&.product&.product_name%> Review</h4>
-                    <p><%=truncate(review&.comment, :length => 300)%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></p>
-                  </div>
-                  <%  @count_todays_review += 1 %>
-                  <%end%>
-                  <%end%>
-                </div>
-              </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="right-side">
-
-              <div class="widget">
-                <h3 class="widget-title">UPCOMING RELEASES</h3>
-                <% @count_upcomeing = 0%>
-                <% @products&.each_with_index do |product, index|%>
-                   <%#binding.pry%>
-                   
-                <% if product&.date&.present? %>  
-                <%if product&.date > DateTime.now.utc %>
-                <% if @count_upcomeing  <=  4 %>
-                <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="<%= product&.image&.take&.file_url%>" class="img-fluid game-img" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title"><%= product&.product_name%>: <%= product&.category_name%></h4>
-                      <h5><%#= product.sub_category_name%></h5>
-                    <p><%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%></p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> <%= product&.date&.strftime("%B %d, %Y")%></p>
-                  </div>
-                </div>
-                <% if @count_upcomeing == 3%>
-                 <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">Read More></a>
-                 <%end%>
-                <% @count_upcomeing += 1 %>
-                <%end%>
-                <%end%>
-                <%end%>
-                <%end%>
-                <!-- <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-                <!-- <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-               <!--  <div class="custom-post">
-                  <div class="custom-img">
-                    <img src="/assets/upcoming-img.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="custom-content">
-                    <h4 class="custom-title">Junglee Movie Review</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
-                      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
-                      type and scrambled it to make a type specimen book.</p>
-                    <p class="custom-date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                  </div>
-                </div> -->
-              </div>
-             <br>
-             <br><br><br><br><br>
-              <div class="widget reviewe-widget">
-                <h3 class="widget-title">Reviewed Today</h3>
-
-             <% @todays_review.each do |review|%>
-             <%#binding.pry%>
-                  <%# if review.created_at == DateTime.now%>
-                  <div class="d-flex align-items-start reviewe-widget-item mb-4">
-
-                    <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
-                    <div class="reviewe-widget-content">
-                      <h6><%= review&.product&.category&.category_name%> Reviews | <%=review&.product&.product_name%> Reviews</h6>
-                      <p><%=truncate(review&.comment, :length => 100)%> </p>
-                      <span><i class="fa fa-clock-o"></i> <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+            <div class="col-md-4">
+                <div class="right-side">
+                    <div class="widget">
+                        <h3 class="widget-title">UPCOMING RELEASES</h3>
+                        <% @count_upcomeing = 0%>
+                        <% @products&.each_with_index do |product, index|%>
+                        <%#binding.pry%>
+                        <% if product&.date&.present? %>
+                        <%if product&.date > DateTime.now.utc %>
+                        <% if @count_upcomeing  <=  4 %>
+                        <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
+                            <div class="custom-img">
+                                <img src="<%= product&.image&.take&.file_url%>" class="img-fluid game-img" alt="">
+                            </div>
+                            <div class="custom-content">
+                                <h4 class="custom-title">
+                                    <%= product&.product_name%>:
+                                    <%= product&.category_name%>
+                                </h4>
+                                <h5>
+                                    <%#= product.sub_category_name%>
+                                </h5>
+                                <p>
+                                    <%= truncate(strip_tags(product&.description), omision: "...", length: 200).html_safe%>
+                                </p>
+                                <p class="custom-date"><i class="fa fa-clock-o"></i>
+                                    <%= product&.date&.strftime("%B %d, %Y")%>
+                                </p>
+                            </div>
+                            </as>
+                            <% if @count_upcomeing == 3%>
+                            <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">Read More></a>
+                            <%end%>
+                            <% @count_upcomeing += 1 %>
+                            <%end%>
+                            <%end%>
+                            <%end%>
+                            <%end%>
                     </div>
-                  </div>
-
-                <%#end%>
-                <%end%>
-
-              </div>
-
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="row latest-row">
-          <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="left-side">
+                    <div class="posts">
+                        <div class="custom-post big-post">
+                            <% @count_todays_review = 0%>
+                            <% @todays_review.each do |review|%>
+                            <% if @count_todays_review == 0 %>
+                            <div class="custom-img">
+                                <%#binding.pry%>
+                                <!-- <img src="/assets/big-banner.jpg" class="img-fluid" alt=""> -->
+                                <img src='<%= review&.product&.image.present? ? review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>'>
+                            </div>
+                            <div class="custom-content align-center">
+                                <p class="custom-tag"><span>
+                                        <%=review&.product&.category&.category_name%> : Review</span></p>
+                                <h4 class="custom-title">
+                                    <%=review&.product&.product_name%> Review</h4>
+                                <p>
+                                    <%=truncate(review&.comment, :length => 300)%>
+                                </p>
+                                <p class="custom-date"><i class="fa fa-clock-o"></i>
+                                    <%= review&.created_at&.strftime("%B %d, %Y")%>
+                                </p>
+                            </div>
+                            <%  @count_todays_review += 1 %>
+                            <%end%>
+                            <%end%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="right-side">
+                    <div class="widget reviewe-widget">
+                        <h3 class="widget-title mt-0">Reviewed Today</h3>
+                        <% @todays_review.each do |review|%>
+                        <%#binding.pry%>
+                        <%# if review.created_at == DateTime.now%>
+                        <div class="d-flex align-items-start reviewe-widget-item mb-4">
+                            <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
+                            <div class="reviewe-widget-content">
+                                <h6>
+                                    <%= review&.product&.category&.category_name%> Reviews |
+                                    <%=review&.product&.product_name%> Reviews</h6>
+                                <p>
+                                    <%=truncate(review&.comment, :length => 100)%>
+                                </p>
+                                <span><i class="fa fa-clock-o"></i>
+                                    <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+                            </div>
+                        </div>
+                        <%#end%>
+                        <%end%>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="latest-row">
             <h2 class="main-title">LATEST STORIES</h2>
-          </div>
-          <div class="row small">
-            <% @count_hall_frame = 0 %>
-            <% @latest_stories&.each_with_index do |product, index|%>
-            <% if product.reviews.present?%>
-            <% @a=product.reviews.map {|x| x.rating  }.sum %>
-            <% @b=product.reviews.map.with_index {|x,index|  }.count %>
-            <% if @a.present? %>
-            <% if (@a*100)/(@b*10) >= 75%>
-                   <%if @count_hall_frame < 6 %>
-            <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="<%= product.image.last.file_url%>" class="img-fluid" alt="">
+            <div class="row small">
+                <% @count_hall_frame = 0 %>
+                <% @latest_stories&.each_with_index do |product, index|%>
+                <% if product.reviews.present?%>
+                <% @a=product.reviews.map {|x| x.rating  }.sum %>
+                <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+                <% if @a.present? %>
+                <% if (@a*100)/(@b*10) >= 75%>
+                <%if @count_hall_frame < 6 %>
+                <div class="col-md-4">
+                    <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
+                        <div class="custom-img">
+                            <img src="<%= product.image.last.file_url%>" class="img-fluid" alt="">
+                        </div>
+                        <div class="custom-content justify-content-end">
+                            <h4 class="custom-title">
+                                <%= product&.product_name%>
+                            </h4>
+                            <p class="mb-2">
+                                <%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%>
+                            </p>
+                            <!-- <a href="javascript:void(0)" class="view-more align-self-end">View More</a> -->
+                        </div>
+                        <div class="prcnt-section">
+                            <p>
+                                <%= (@a*100)/(@b*10)  %>%</p>
+                        </div>
+                    </a>
                 </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title"><%= product&.product_name%></h4>
-                  <p class="mb-2"><%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
-                  <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p><%= (@a*100)/(@b*10)  %>%</p>
-                </div>
-              </div>
-            </div>
-            <% @count_hall_frame += 1%>
-            <%end%>
-            <%end%>
-            <%end%>
-             <%end%>
-            <%end%>
-          </div>
-          <!-- <div class="row small">
-            <div class="col-md-7">
-              <div class="custom-post">
-                
-                <div class="custom-img">
-                  <img src="/assets/phanther.png" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">BLACK PHANTHER</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <img src="/assets/clock.png" class="img-clock1" alt="" ><p class="date"> June 12, 2019</p>
-                </div>
-                <div class="percent-PHANTHER-section">
-                 <p>94%</p>
-                </div>
-              </div>
-              <div class="row">
-              <div class="col-md-6">
-                  <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/arrow.png" class="img-arrow" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">ARROW</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                   <img src="/assets/clock.png" class="img-clock" alt="" ><p class="date"> June 12, 2019</p>
-                </div>
-                <div class="percent-ARROW-section">
-                 <p>75%</p>
-                </div>
-              </div>
-              </div>
-              <div class="col-md-6">
-                 <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/junglee.png" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">JUNGLEE</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <img src="/assets/clock.png" class="img-clock" alt="" ><p class="date"> June 12, 2019</p>
-                </div>
-                <div class="percent-JUNGLEE-section">
-                 <p>91%</p>
-                </div>
-              </div>
-              </div>
-              </div>
-            </div>
-            <div class="col-md-5">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/captain.png" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">CAPTAIN AMERICA</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                 <img src="/assets/clock.png" class="img-clock2" alt="" ><p class="date"> June 12, 2019</p>
-                </div>
-                <div class="percent-section">
-                 <p>76%</p>
-                </div>
-              </div>
-           
-               <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/aquaman.png" class="img-aquaman" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">AQUAMAN</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                <img src="/assets/clock.png" class="img-clock2" alt="" ><p class="date"> June 12, 2019</p>
-                </div>
-                <div class="percent-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div>
-          </div> -->
-        </div>
-
-
-        <div class="row review-row">
-          <div class="col-md-12">
-            <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
-          </div>
-          <div class="row">
-            <% @count_category_reviews = 0%>
-            <%@rec&.each do |category|%>
-            <%#binding.pry%>
-            <%# if @count_category_reviews < 8 %>
-            <div class="col-md-3 reviews-col">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <%if category[1].present? %>
-                 <img src="<%=category[1]%>" class="img-fluid" alt="">
-                 
-                  <%else%>
-                    <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                  <%end%>
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title"><%= category[0]%></h4>
-                </div>
-              </div>
-            </div>
-            <% @count_category_reviews +=1  %>
-            <%end%>
-            <%#end%>
-            <!-- <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Music</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Game</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Tv</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Books</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Laptops</h4>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Mobile Phone</h4>
-                </div>
-              </div> -->
-            </div>
-            <!-- <div class="col-md-3">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/category-img.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content align-center align-items-center">
-                  <h4 class="custom-title">Restaurants</h4>
-                </div>
-
-              </div>
-            </div> -->
-          </div>
-        <div class="row hall-row">
-          <div class="col-md-12">
-            <h2 class="main-title">2019 HALL OF FAME</h2>
-          </div>
-          <div class="row small">
-            <% @count_hall_frame = 0 %>
-            <% @products&.each do |product |%>
-            <% if product.reviews.present? %>
-            <% @a=product.reviews.map {|x| x.rating  }.sum %>
-            <% @b=product.reviews.map.with_index {|x,index|  }.count %>
-            <% if @a > 0 %>
-            <% if ((@a*100)/(@b*10)) >=  ((@reviews_all*100)/(10*@reviews_count)) %>
-            <%if @count_hall_frame < 6 %>
-            <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="<%= product.image.first.file_url%>" class="img-fluid" alt="">
-                </div>
-              <div class="custom-content justify-content-end">
-                  <h4 class="custom-title"><%= product&.product_name%></h4>
-                  <p class="mb-2"><%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%></p>
-                  <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-              </div>
-              <div class="prcnt-section">
-                  <p><%=(@a*100)/(@b*10)%>%</p>
-              </div>
                 <% @count_hall_frame += 1%>
-              </div>
+                <%end%>
+                <%end%>
+                <%end%>
+                <%end%>
+                <%end%>
             </div>
-            <%end%>
-            <%end%>
-            <%end%>
-            <%end%>
-            <%end%>
-            <!-- <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/hall-banner.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title">BHARAT</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <a href="#" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/hall-banner.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title">OVERLORD</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <a href="#" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div> -->
-           <!--  <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/hall-banner.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title">ITTEFAQ</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                  <a href="#" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/hall-banner.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title">THE DEAD FIGHTING</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <a href="#" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div> -->
-            <!-- <div class="col-md-4">
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/hall-banner.jpg" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                  <h4 class="custom-title">THE B</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <a href="#" class="view-more align-self-end">View More</a>
-                </div>
-                <div class="prcnt-section">
-                 <p>90%</p>
-                </div>
-              </div>
-            </div> -->
-          </div>
         </div>
-        <a href="/web/users/holl_of_fame_details" class="readmore pull-right btn btn-theme">Read More></a>
-
- <div class="row">
-          <div class="col-md-12">
-            <h2 class="main-title">LATEST REVIEWS</h2>
-          </div>
-</div>
-
-<div class="row">
-<div class="col-md-12">
-        <nav>
-            <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
-              <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
-              <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
+        <div class="review-row">
+            <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
+            <div class="row">
+                <% @count_category_reviews = 0%>
+                <%@rec&.each do |category|%>
+                <%#binding.pry%>
+                <%# if @count_category_reviews < 8 %>
+                <div class="col-md-3 reviews-col">
+                    <div class="custom-post">
+                        <div class="custom-img">
+                            <%if category[1].present? %>
+                            <img src="<%=category[1]%>" class="img-fluid" alt="">
+                            <%else%>
+                            <img src="/assets/category-img.jpg" class="img-fluid" alt="">
+                            <%end%>
+                        </div>
+                        <div class="custom-content align-center align-items-center">
+                            <h4 class="custom-title">
+                                <%= category[0]%>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <% @count_category_reviews +=1  %>
+                <%end%>
             </div>
-          </nav>
-           <select class="category data_category">
-            <option value="category">Select Category</option>
-            <%@category&.each do |category| %>
-            <option class="category_wise" value="<%= category.id %>"><%= category&.category_name%></option>
-            <%end%>
-           </select> 
-</div>
-</div>
-       
-
-
-
-
-  <!-- Home Slider Start -->
-  <div class="tab-content theatres-content" id="tabScore">
-    
-            <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
-        <%= render partial: "expert_normal_reviews" %>
-
-          </div>
-    <!-- Home Slider Close -->
-          
-
-        <!-- <div class="row">
-          <div class="col-md-12">
-            <h2 class="main-title">INDUSTRIAL HEADLINES</h2>
-          </div>
-          <div class="post-item">
-            <div class="row no-gutters align-items-stretch">
-              <div class="col-md-5">
-                <div class="post-img">
-                  <img src="/assets/big-img.jpg" alt="">
+        </div>
+        <div class="rhall-row">
+            <h2 class="main-title">2019 HALL OF FAME</h2>
+            <div class="row small">
+                <% @count_hall_frame = 0 %>
+                <% @products&.each do |product |%>
+                <% if product.reviews.present? %>
+                <% @a=product.reviews.map {|x| x.rating  }.sum %>
+                <% @b=product.reviews.map.with_index {|x,index|  }.count %>
+                <% if @a > 0 %>
+                <% if ((@a*100)/(@b*10)) >=  ((@reviews_all*100)/(10*@reviews_count)) %>
+                <%if @count_hall_frame < 6 %>
+                <div class="col-md-4">
+                    <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
+                        <div class="custom-img">
+                            <img src="<%= product.image.first.file_url%>" class="img-fluid" alt="">
+                        </div>
+                        <div class="custom-content justify-content-end">
+                            <h4 class="custom-title">
+                                <%= product&.product_name%>
+                            </h4>
+                            <p class="mb-2">
+                                <%=truncate(strip_tags(product&.description), omision: "...", length: 250).html_safe%>
+                            </p>
+                            <!-- <a href="#" class="view-more align-self-end">View More</a> -->
+                        </div>
+                        <div class="prcnt-section">
+                            <p>
+                                <%=(@a*100)/(@b*10)%>%</p>
+                        </div>
+                        <% @count_hall_frame += 1%>
+                    </a>
                 </div>
-              </div>
-              <div class="col-md-7">
-                <div class="post-details">
-                  <h4 class="post-title">China April industrial output cools, retail sales</h4>
-                  <p>By Suzie Ford | 23 May 2019</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <a href="JavaScript:Void(0);" class="readmore align-self-end">View More</a>
-                </div>
-              </div>
+                <%end%>
+                <%end%>
+                <%end%>
+                <%end%>
+                <%end%>
             </div>
-          </div>
-          <div class="post-item">
-            <div class="row no-gutters align-items-stretch flex-row-reverse">
-              <div class="col-md-5">
-                <div class="post-img">
-                  <img src="/assets/big-img.jpg" alt="">
-                </div>
-              </div>
-              <div class="col-md-7">
-                <div class="post-details">
-                  <h4 class="post-title">China April industrial output cools, retail sales</h4>
-                  <p>By Suzie Ford | 23 May 2019</p>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
-                    and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                    when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                  <a href="JavaScript:Void(0);" class="readmore align-self-end">View More</a>
-                </div>
-              </div>
+            <div class="text-right">
+                <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">Read More></a>
             </div>
-          </div>
-        </div> -->
-
-      </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="main-title">LATEST REVIEWS</h2>
+            </div>
+            <div class="col-md-8">
+                <nav>
+                    <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
+                        <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
+                        <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control category data_category">
+                    <option value="category">Select Category</option>
+                    <%@category&.each do |category| %>
+                    <option class="category_wise" value="<%= category.id %>">
+                        <%= category&.category_name%>
+                    </option>
+                    <%end%>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <!-- Home Slider Start -->
+                <div class="tab-content reviewTab theatres-content" id="tabScore">
+                    <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
+                    <%= render partial: "expert_normal_reviews" %>
+                </div>
+            </div>
+        </div>
     </div>
-    </div>
-  
+</div>
+</div>
 <script type="text/javascript">
-      $(document).ready(function(){
-      // debugger;
-      $('#1').click();
-      $('.user_type1').click(function(){
+$(document).ready(function() {
+    // debugger;
+    $('#1').click();
+    $('.user_type1').click(function() {
         debugger;
-        var id=this.id;
-      $.ajax({
-         url: '/web/users',
-         type: 'get',
-         data: {
-          id: id
-          }
-       });
+        var id = this.id;
+        $.ajax({
+            url: '/web/users',
+            type: 'get',
+            data: {
+                id: id
+            }
+        });
     });
- });
+});
 </script>
-
 <script type="text/javascript">
-  $(document).ready(function(){
-      $('#1').click();
-      $('.data_category').change(function(){
-        var id=this.value;
-      $.ajax({
-         url: '/web/users.js',
-         type: 'get',
-         data: {
-          id: id
-          }
-       });
+$(document).ready(function() {
+    $('#1').click();
+    $('.data_category').change(function() {
+        var id = this.value;
+        $.ajax({
+            url: '/web/users.js',
+            type: 'get',
+            data: {
+                id: id
+            }
+        });
     });
- });
+});
 </script>

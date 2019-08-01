@@ -1,39 +1,40 @@
-<%if current_user.present? %>
-<%= render partial: 'web/users/head'%>
-<%end%>
+
 <div class="page-wrapper">
-  <div class="container home-wrap">
-    <div class="row theatres-row upcomeing-row">
-      <div class="col-md-12">
-        <h2 class="widget-title">All UPCOMING RELEASES  </h2>
-        <div class="tab-content theatres-content" id="tabScore">
-          <div class="tab-pane fade show active" id="nav-movie" role="tabpanel">
-            <div class="row">
-              <% @upcomeing_products&.each_with_index do |product, index|%>
-               <% if product&.date&.present? %>
-              <div class="col-md-6">
-                <div class="youtube-image2">
-                  <img width="560" height="315" src="<%= product.image.take.file_url%>" />
+    <div class="container home-wrap">
+        <div class="row theatres-row upcomeing-row">
+            <div class="col-md-12">
+                <h2 class="widget-title mt-0">All UPCOMING RELEASES </h2>
+                <% @upcomeing_products&.each_with_index do |product, index|%>
+                <% if product&.date&.present? %>
+                <div class="row tranding-item-row no-gutters">
+                    <div class="col-md-6">
+                        <div class="youtube-image2">
+                            <a href="/web/users/<%=product.id%>/movie_detail"><img width="560" height="315" src="<%= product.image.take.file_url%>" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 youtube-content ">
+                        <figure class="para-Margin-top">
+                            <h4>
+                                <%= product&.product_name%>:
+                                <%= product&.category_name%>
+                            </h4>
+                            <p>
+                                <%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%>
+                            </p>
+                            <p><span></span>
+                                <%= product&.date&.strftime("%B %d, %Y")%>
+                            </p>
+                        </figure>
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-6 youtube-content ">
-                <figure class="para-Margin-top"> 
-                  <h4><%= product&.product_name%>: <%= product&.category_name%></h4>
-                  <p><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-                  <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
-                </figure>
-              </div>
-              <%end%>
-             <%end%>
-          </div>
+                <%end%>
+                <%end%>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</div>
 </div>
 <div class="box-footer">
-        <div class="digg_pagination pull-right">
-                <%= will_paginate @upcomeing_products %>
-        </div>
+    <div class="digg_pagination pull-right">
+        <%= will_paginate @upcomeing_products %>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 class Web::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:holl_of_fame_details, :movie_category, :movie_category_detail, :movie_detail, :movie_review,:user_profile, :hollframe, :trending, :upcomeing]
+  before_action :authenticate_user!, only: [:holl_of_fame_details, :movie_category_detail, :movie_review,:user_profile]
   def index
      # binding.pry
   	if (current_user.present? && current_user.role == "admin")
@@ -12,6 +12,7 @@ class Web::UsersController < ApplicationController
     # @movies = Product.where(category_name: "Movies").first(2)
     # @games = Product.where(category_name: "Games").first(2) 
     # @tvs = Product.where(category_name: "TV").first(2)
+    @trending_products = Product.where(trending: true)
     @products = Product.all
     @latest_stories = Product.all.order("created_at desc")
     @users = User.where(user_type: "Normal User")

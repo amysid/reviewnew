@@ -15,26 +15,14 @@
   </head>
 
   <body>
-      <!-- <p class="notice"><%#= notice %></p> -->
-      <!-- <p class="alert"><%#= alert %></p> -->
+      
+        <%= render 'layouts/messages' %>
+       <div class="wrapper">
        <%= render "layouts/web_header"%>
-       <br>
-       <div class="container">
-       <%= render 'layouts/messages' %>
-       </div>
+
        <%= yield %>
        <%= render "layouts/web_footer" %>
+</div>
+    
   </body>
 </html>
-<!-- <style type="text/css">
-  .conta {
-    width: 25%;
-    padding-right: 15px;
-    padding-left: 15px;
-    /* margin-right: auto; */
-    margin-left: auto;
-}
-</style>
-<script type="text/javascript">
-  $(".alert" ).fadeOut(3000);
-</script> -->

@@ -1,34 +1,29 @@
- <div class="tab-content theatres-content" id="tabScore">
-
-          <div class="tab-pane fade show active" id="nav-movie" role="tabpanel">
-            <div class="row">
-            	<% @products.each do |product| %>
-            	 <%# if product.category_name == "Movies"%>
-              <div class="col-md-6">
-                <div class="youtube-image2">
-                	<% if product.video.present? %>
-                  <%= video_tag product&.video_url, controls: true, autoplay: false, width: "560",height: "315"%> 
-                  <%else%>
-                   <iframe width="560" height="315" src="https://www.youtube.com/embed/Ea_GKoe81GY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                  <%end%>
-                </div>
-              </div>
-              <div class="col-md-6 youtube-content ">
-                <figure class="para-Margin-top"> 
-                  <h4><%= product.product_name %>: <%= product.category_name %></h4>
-                  <p><%= truncate(strip_tags(product.description), omision: "...", length: 400).html_safe%></p>
-                  <p><span></span><%= product&.date&.strftime("%B %d, %Y")%></p>
-                </figure>
-              </div>
-              
-            <%#end%>
+<% @products.each do |product| %>
+<div class="row tranding-item-row no-gutters">
+    <%# if product.category_name == "Movies"%>
+    <div class="col-md-6">
+        <div class="youtube-image2 mb-0">
+            <% if product.video.present? %>
+            <%= video_tag product&.video_url, controls: true, autoplay: false, width: "100%",height: "315"%>
+            <%else%>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/Ea_GKoe81GY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             <%end%>
-          </div>
         </div>
-
-
-
-        
-
-
+    </div>
+    <div class="col-md-6 youtube-content" style="margin-bottom: 7px;">
+        <figure class="para-Margin-top">
+            <h4>
+                <%= product.product_name %>:
+                <%= product.category_name %>
+            </h4>
+            <p>
+                <%= truncate(strip_tags(product.description), omision: "...", length: 400).html_safe%>
+            </p>
+            <p><span></span>
+                <%= product&.date&.strftime("%B %d, %Y")%>
+            </p>
+        </figure>
+    </div>
+    <%#end%>
 </div>
+<%end%>
