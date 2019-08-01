@@ -8,6 +8,7 @@
           <div class="user-detail">
            <% @review_rating = Review.where(user_id: current_user.id) %>
             <div class="ratings">
+              <%#binding.pry%>
               <%@count = 0 %>
               <% @review_rating&.each do |x| %>
                    <% if x.rating.present? %>

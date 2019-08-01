@@ -1,5 +1,6 @@
 class Web::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:holl_of_fame_details, :movie_category_detail, :movie_review,:user_profile]
+
   def index
      # binding.pry
   	if (current_user.present? && current_user.role == "admin")
@@ -15,7 +16,7 @@ class Web::UsersController < ApplicationController
     @trending_products = Product.where(trending: true)
     @products = Product.all
     @latest_stories = Product.all.order("created_at desc")
-    @users = User.where(user_type: "Normal User")
+    @users = User.where(user_type: "Normal User") 
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
     @latest_review = Review.last
