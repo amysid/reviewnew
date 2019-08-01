@@ -10,7 +10,7 @@
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-          <%= @products.each_with_index do |product,index|%>
+          <% @products.each_with_index do |product,index|%>
           <% if product.reviews.present? %>
           <% if index == 0 %>
           <div class="carousel-item active">
