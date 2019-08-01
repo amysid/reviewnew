@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
     before_action :banned?
     before_action :configure_permitted_parameters, if: :devise_controller?
     around_action :convert_flash, if: :check_flash
-    #before_action :unlock_account
+    before_action :unlock_account_check
+
 
 
 
@@ -32,6 +33,7 @@ class ApplicationController < ActionController::Base
 
     def after_sign_in_path_for(resource)
       # binding.pry
+      Class.new.send(:include,AccountConcern).new.unlock_account(current_user.account_address,Decrypt_me.call(current_user.key,current_user.salt,current_user.account_password)) rescue nil
       cookies.signed[:expire_in] = 3.minutes.from_now
        if(resource.role == "admin")
         return  admin_homes_index_path
@@ -60,7 +62,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-  def unlock_account
+  def unlock_account_check
     if current_user
       unlock_employee_account unless current_user.role == "admin"
     end

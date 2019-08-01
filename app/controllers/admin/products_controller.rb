@@ -45,10 +45,13 @@ class Admin::ProductsController < ApplicationController
       params[:product][:date][3,2]=x
       @products.date = params[:product][:date]
       end
-      if @products.save
-        contract_instance.transact_and_wait.add_product(@products.product_name) rescue ""
-         redirect_to admin_products_path(@products)
-         flash[:notice] = "product created succesfull"
+      if @products.save!
+        productCount = 0
+        contract_instance.transact_and_wait.add_product(@products.product_name) rescue nil
+        @products.update!(product_blockchain_id: productCount)
+        productCount +=1
+        redirect_to admin_products_path(@products)
+        flash[:notice] = "product created succesfull"
        else
           flash[:alert] = @products.errors.full_messages
        	  redirect_to new_admin_product_path

@@ -28,16 +28,17 @@ after_create :set_account
   # end
 
   def set_account
-    binding.pry
     unless self.role_before_type_cast == 0
       key = Eth::Key.new
       data = SecureRandom.alphanumeric(8)
       unique_id = self.id.to_s
+
       Client.personal_import_raw_key(key.private_hex,data) rescue nil 
       self.account_password = Encrypt_me.call(self.id,self.created_at,data) rescue nil
       self.account_address = self.role_before_type_cast == 0 ? Client.personal_list_accounts["result"][0] : key.address rescue nil #get_new_address(data) 
 
       self.save rescue nil
+
     end
   end
 
