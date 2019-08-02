@@ -56,8 +56,8 @@ class Admin::CategoriesController < ApplicationController
        @search = @category.sub_categories.where(sub_category_name: params[:search]).order("created_at desc").paginate(:page => params[:page], :per_page => 100)
        @search1 = @category.review_parts.where(criteria: params[:search]).order("created_at desc").paginate(:page => params[:page], :per_page => 100)
      else
-        @search = @category.sub_categories.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
-        @search1 = @category.review_parts.order("created_at desc").paginate(:page => params[:page], :per_page => 5)
+        @search = @category.sub_categories.order("created_at desc").paginate(:page => params[:page], :per_page => 12)
+        @search1 = @category.review_parts.order("created_at desc").paginate(:page => params[:page], :per_page => 12)
         
        # flash[:notice] = "Search not successfullly"
     end
