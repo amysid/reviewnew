@@ -8,7 +8,7 @@ class HomesController < ApplicationController
     end
     def contact_us
          @contact = StaticContent.find_by(title: "Contact us")
-         @products = Product.where(trending: true).last(4)
+         @trending = Product.where(trending: true).last(4)
     end
 
     def privacy_policy
@@ -31,7 +31,7 @@ class HomesController < ApplicationController
     end
 
     def feedback
-        @products =  Product.where('date > ?', Date.today).last(4)
+        @upcoming_release =  Product.where('date > ?', Date.today).last(4)
     end
 
     def feedback_params

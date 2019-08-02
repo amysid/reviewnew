@@ -210,8 +210,8 @@
         <h2 class="titile-light">You may also like:</h2>
       </div> -->
             <div class="custom-slider slidw">
-                <% @products&.each_with_index do |product_name,index|%>
-                <%if index==0%>
+                <% @products&.each do |product_name|%>
+               
                 <div class="custom-post custom-slide">
                     <div class="custom-img">
                         <%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>
@@ -236,76 +236,7 @@
                         <%end%>
                     </div>
                 </div>
-                <%elsif index == 1 %>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%= product_name&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(product_name&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <a href="#" class="view-more align-self-end">View More</a>
-                    </div>
-                    <div class="prcnt-section">
-                        <%if product_name.reviews.pluck("rating").sum > 0%>
-                        <p>
-                            <%= (product_name&.reviews&.pluck("rating")&.sum*100)/ (product_name&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <%end%>
-                    </div>
-                </div>
-                <%elsif index== 2%>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%= product_name&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(product_name&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <a href="#" class="view-more align-self-end">View More</a>
-                    </div>
-                    <div class="prcnt-section">
-                        <%if product_name.reviews.pluck("rating").sum > 0%>
-                        <p>
-                            <%= (product_name&.reviews&.pluck("rating")&.sum*100)/ (product_name&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <%end%>
-                    </div>
-                </div>
-                <% elsif index == 3%>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%= product_name&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(product_name&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <a href="#" class="view-more align-self-end">View More</a>
-                    </div>
-                    <div class="prcnt-section">
-                        <%if product_name.reviews.pluck("rating").sum > 0  %>
-                        <p>
-                            <%= (product_name&.reviews&.pluck("rating")&.sum*100)/ (product_name&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <%end%>
-                    </div>
-                </div>
-                <% end %>
+               
                 <%end%>
             </div>
         </div>

@@ -310,6 +310,11 @@
                             <p>
                                 <%=(@a*100)/(@b*10)%>%</p>
                         </div>
+                        <%if @count_hall_frame == 5 %>
+                        <div class="text-right">
+                             <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">Read More></a>
+                            </div>
+                        <%end%>
                         <% @count_hall_frame += 1%>
                     </a>
                 </div>
@@ -319,9 +324,7 @@
                 <%end%>
                 <%end%>
             </div>
-            <div class="text-right">
-                <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">Read More></a>
-            </div>
+            
         </div>
         <div class="row">
             <div class="col-md-12">

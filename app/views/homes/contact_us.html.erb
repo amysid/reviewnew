@@ -26,15 +26,14 @@
 
 <div class="row reports-row2">
 <div class="custom-slider slidw">
-  <% @products&.each_with_index do |product, index|%>
-  <%if index == 0 %>
+  <% @trending&.each do |product|%>
   <div class="custom-post custom-slide">
     <div class="custom-img">
       <img src="<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
     </div>
     <div class="custom-content justify-content-end">
       <h4 class="custom-title"><%= product&.product_name%></h4>
-      <p class="mb-2"><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
+      <p class="mb-2"><%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%></p>
       <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
     </div>
     <div class="prcnt-section">
@@ -45,61 +44,7 @@
     <%end%>
     </div>
   </div>
-  <%elsif index == 1%>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%= product&.product_name%></h4>
-      <p class="mb-2"><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-       <%if product.reviews.pluck("rating").sum > 0  %>
-      <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%else%>
-    <p>0%</p>
-    <%end%>
-    </div>
-  </div>
-  <%elsif index == 3%>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%= product&.product_name%></h4>
-      <p class="mb-2"><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-       <%if product.reviews.pluck("rating").sum > 0  %>
-      <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%else%>
-    <p>0%</p>
-    <%end%>
-    </div>
-  </div>
-  <%elsif index == 3%>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%= product&.product_name%></h4>
-      <p class="mb-2"><%= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-       <%if product.reviews.pluck("rating").sum > 0  %>
-      <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%else%>
-    <p>0%</p>
-    <%end%>
-    </div>
-  </div>
-  <%end%>
+ 
   <%end%>
 </div>
 </div>
