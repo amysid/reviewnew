@@ -3,7 +3,7 @@
       <div class="login-page">
         <div class="container">
           <div class="row">
-            <div class="col-md-12 col-lg-10 offset-lg-1">
+            <div class="col-md-12 col-lg-10 col-xl-8 offset-xl-2 offset-lg-2">
               <div class="login-box">
                 <div class="row no-gutters row-eq-height">
                   <div class="col-md-5 col-xl-5">
@@ -59,15 +59,15 @@
                               Use</a> and represent that you are at least 13 year of age.</p>
                         </div>
                         <div class="form-group text-center mb-0">
-                           <%= f.submit "Register", class: "btn btn-success" %>
+                           <%= f.submit "REGISTER", class: "btn btn-block btn-theme" %>
                           <!-- <a href="#" class="btn btn-success">Register</a> -->
                         </div>
                         <div class="orline">
                           <hr class="horizontal-line"><span>OR</span>
                         </div>
                         <div class="form-group text-center1 mb-0 mt30">
-                          <a href="#" class="btn btn-success blue"><img src="/assets/facebook.png">continue with
-                            facebook</a>
+                          <a href="#" class="btn btn-block btn-lg btn-fb"><img src="/assets/facebook.png">Continue with
+                            Facebook</a>
                         </div>
                         <p class="text-center mt20"> Already a member? <a class="yellow-text"><%=link_to "Login", new_session_path(resource_name)%></a></p>
                       <%end%>

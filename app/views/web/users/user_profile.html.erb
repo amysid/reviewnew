@@ -59,7 +59,7 @@
                 <%#binding.pry%>
                 <%next unless product.reviews.pluck(:user_id).include?(current_user.id)%>
                 <% if product.reviews.find_by(user_id: current_user.id).present? %>
-                <% if product&.category_name == "Movies"%>
+                <% if product&.category_name == @categorys&.first&.category_name%>
                 <div class="col-md-4">
                   <div class="score-card">
                     <div class="score-card-top">

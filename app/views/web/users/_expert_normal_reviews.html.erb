@@ -7,23 +7,31 @@
         <% if user_reviews.present?%>
         <%@a = User.find_by(id: user_reviews.user_id) %>
         <div class="slide-item ">
-            <div class="row profile">
-                <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-                    <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/Hadie-profile-pic-circle-1.png"%>"> </div> <div class="col-md-7 col-sm-7 col-lg-7">
-                    <span class="johny">
-                        <%= @a&.name%></span><br>
-                    <p>
-                        <%= user_reviews&.product&.category&.category_name%>
-                    </p>
-                    <span>
-                        <%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
-                    <span class="date1">
-                        <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
+            <div class="score-card">
+                <div class="score-card-top">
+                    <div class="rtUserImg">
+                        <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
+                        <div class="name-date">
+                            <h4>
+                                <%= @a&.name%>
+                            </h4>
+                            <span>
+                                <%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
+                        </div>
+                        <div class="score-rating">
+                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</div>
+                    </div>
                 </div>
-                <p class="user-view">
-                    <%=truncate(user_reviews&.comment, :length => 245)%>
-                </p>
-                <div class="thumb-img">
+                <div class="ratingText">
+                        <%#=truncate(user_reviews&.comment)%>
+                        <%= truncate(strip_tags(user_reviews&.comment), omision: "...", length: 150).html_safe%>
+                    <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="like-dislike">
+                        <!-- <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,23 +50,31 @@
         <% if user_reviews.present?%>
         <% @a = User.find_by(id: user_reviews.user_id) %>
         <div class="slide-item">
-            <div class="row profile">
-                <div class="col-md-5 col-sm-5 col-lg-5 user-icon">
-                    <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/Hadie-profile-pic-circle-1.png"%>"> </div> <div class="col-md-7 col-sm-7 col-lg-7">
-                    <span class="johny">
-                        <%= User.find_by(id: user_reviews.user_id).name%></span><br>
-                    <p>
-                        <%= user_reviews&.product&.category&.category_name%>
-                    </p>
-                    <span>
-                        <%=user_reviews.created_at.strftime("%B %d, %Y")%></span><br>
-                    <span class="date1">
-                        <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</span>
+            <div class="score-card">
+                <div class="score-card-top">
+                    <div class="rtUserImg">
+                        <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
+                        <div class="name-date">
+                            <h4>
+                                <%= User.find_by(id: user_reviews.user_id).name%>
+                            </h4>
+                            <span>
+                                <%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
+                        </div>
+                        <div class="score-rating">
+                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</div>
+                    </div>
                 </div>
-                <p class="user-view">
-                    <%=truncate(user_reviews&.comment, :length => 245)%>
-                </p>
-                <div class="thumb-img">
+                <div class="ratingText">
+                        <%#=truncate(user_reviews&.comment)%>
+                        <%= truncate(strip_tags(user_reviews&.comment), omision: "...", length: 150).html_safe%>
+                    <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="like-dislike">
+                        <!-- <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
+                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span> -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -67,3 +83,12 @@
         <%end%>
     </div>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".ratingText").shorten({
+        "showChars": 500,
+        "moreText": "Read Full Review",
+        "lessText": "Less",
+    });
+});
+</script>

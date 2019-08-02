@@ -15,7 +15,9 @@ class Web::UsersController < ApplicationController
     # @tvs = Product.where(category_name: "TV").first(2)
     @trending_products = Product.where(trending: true)
     @products = Product.all
-    @latest_stories = Product.all.order("created_at desc")
+    # @latest_stories = Product.all.order("created_at desc")
+    # binding.pry
+    @latest_stories =  Product.select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
     @users = User.where(user_type: "Normal User") 
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)

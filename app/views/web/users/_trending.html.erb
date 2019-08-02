@@ -2,59 +2,83 @@
     <%# trending.each do |trend|%>
     <%#binding.pry%>
     <% @publishs.each do |trend| %>
-          <div class="slide">
-            <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
-              <div class="slide-content container">
-                  <div class="slide-text">
-                    <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i> <%= trend&.date&.strftime("%B %d, %Y")%></p>
-                      <h1><%= trend.product_name%></h1>
-                      <div class="release-name">
-                        <h4><%= trend.product_name%> (<%= trend.category_name%>,<%= trend&.updated_at&.strftime("%Y")%> )</h4>
-                        <h5><%= trend.sub_category_name%></h5>
-                      </div>
-                    <p><%= truncate(strip_tags(trend.description), omision: "...", length: 600).html_safe%>
-                    </p>
-                  </div>
-              </div>
-          </div>
-        <%end%>
-      <!-- <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url(/assets/banner.jpg)"></div>
+    <div class="slide">
+        <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
         <div class="slide-content container">
-          <div class="slide-text">
-            <p class="release-date"><span>Release latest movie : Review</span> <i class="fa fa-clock-o"></i> AUGUST 22,
-              2019</p>
-            <h1>Avengers: <span>Reviews</span></h1>
-            <div class="release-name">
-              <h4>Endgame (Movie, 2019)</h4>
-              <h5>Release Date, Tickets, Trailers...</h5>
+            <div class="slide-text">
+                <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i>
+                    <%= trend&.date&.strftime("%B %d, %Y")%>
+                </p>
+                <h1>
+                    <%= trend.product_name%>
+                </h1>
+                <div class="release-name">
+                    <h4>
+                        <%= trend.product_name%> (
+                        <%= trend.category_name%>,
+                        <%= trend&.updated_at&.strftime("%Y")%> )</h4>
+                    <h5>
+                        <%= trend.sub_category_name%>
+                    </h5>
+                </div>
+                <p>
+                    <%= truncate(strip_tags(trend.description), omision: "...", length: 150).html_safe%>
+                </p>
             </div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br> tempor incididunt ut labore
-              et dolore magna aliqua.
-            </p>
-          </div>
         </div>
-      </div> -->
     </div>
+    <%end%>
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('.home-slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 300,
+        slidesToShow: 1,
+    });
 
-
-      <script type="text/javascript">
-      
-      jQuery(document).ready(function () {
-        jQuery('.home-slider').slick({
-          dots: true,
-          infinite: true,
-          speed: 300,
-          slidesToShow: 1,
-      });
-
-      jQuery('.home-slider1').slick({
-          dots: true,
-          infinite: true,
-          autoplay: true,
-          arrows : false,
-          speed: 300,
-          slidesToShow: 3,
-      });
-      });
-    </script>
+    $('.home-slider1').slick({
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        arrows: false,
+        speed: 300,
+        slidesToShow: 3,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+});
+</script>
