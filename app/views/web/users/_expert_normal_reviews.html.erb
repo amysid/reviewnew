@@ -5,6 +5,7 @@
     <div class="home-slider1">
         <%  @reviews_normal&.each  do |user_reviews|%>
         <% if user_reviews.present?%>
+        <%#binding.pry%>
         <%@a = User.find_by(id: user_reviews.user_id) %>
         <div class="slide-item ">
             <div class="score-card">
@@ -19,7 +20,9 @@
                                 <%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
                         </div>
                         <div class="score-rating">
-                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</div>
+                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
+                            <%#= user_reviews&.product&.category_name%>
+                        </div>
                     </div>
                 </div>
                 <div class="ratingText">

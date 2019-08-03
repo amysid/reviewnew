@@ -31,6 +31,7 @@
               <div class="row">
 
 		      <%@products.order("product_name ASC").each do |product|%>
+           <%#binding.pry%>
                 <div class="col-md-6">
 		            <div class="imgshadow">
 		                  <div class="images1">
@@ -40,17 +41,23 @@
 				            <%else%>
 				                <img src="images/Layer46.jpg">
 				            <%end%>
-
+                        
 		                     <div class="percent-section1">
-		                      <p class="paramusic">90%</p>
+		                       <%if product.reviews.pluck("rating").sum > 0%>
+                                 <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                           <%else%>
+                                  <p>0%</p>
+                            <%end%>
 		                    </div>
 		                  </div>
 		                  <div class="content">
 		                    <h3><%=product&.product_name%></h3> 
 		                    <P class="para">
-		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+		                      <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%>
+                          <!-- <span class="expand">Expand</span> -->
+                        </P>
 		                  </div>
                     </div>
                 </div>
@@ -76,15 +83,21 @@
 				            <%end%>
 
 		                     <div class="percent-section1">
-		                      <p class="paramusic">90%</p>
+		                      <%if product.reviews.pluck("rating").sum > 0%>
+                                 <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                           <%else%>
+                                  <p>0%</p>
+                            <%end%>
 		                    </div>
 		                  </div>
 		                  <div class="content">
 		                    <h3><%=product&.product_name%></h3> 
 		                    <P class="para">
-		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+		                      <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%>
+                          <!-- <span class="expand">Expand</span> -->
+                        </P>
 		                  </div>
                     </div>
                 </div>
@@ -111,15 +124,21 @@
 				            <%end%>
 
 		                     <div class="percent-section1">
-		                      <p class="paramusic">90%</p>
+		                       <%if product.reviews.pluck("rating").sum > 0%>
+                                 <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                           <%else%>
+                                  <p>0%</p>
+                            <%end%>
 		                    </div>
 		                  </div>
 		                  <div class="content">
 		                    <h3><%=product&.product_name%></h3> 
 		                    <P class="para">
-		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+		                     <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%>
+                          <!-- <span class="expand">Expand</span> -->
+                        </P>
 		                  </div>
                     </div>
                 </div>
@@ -148,15 +167,21 @@
 				            <%end%>
 
 		                     <div class="percent-section1">
-		                      <p class="paramusic">90%</p>
+		                       <%if product.reviews.pluck("rating").sum > 0%>
+                                 <p><%= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                           <%else%>
+                                  <p>0%</p>
+                            <%end%>
 		                    </div>
 		                  </div>
 		                  <div class="content">
 		                    <h3><%=product&.product_name%></h3> 
 		                    <P class="para">
-		                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
+		                     <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
 		                    </P>
-		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%><span class="expand">Expand</span></P>
+		                    <P>Wide Release Date : <%=product&.date&.strftime("%b %d, %Y")%>
+                          <!-- <span class="expand">Expand</span> -->
+                        </P>
 		                  </div>
                     </div>
                 </div>

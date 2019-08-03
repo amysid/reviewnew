@@ -40,7 +40,9 @@
 				                    <P class="para">
 				                      <%=ActionView::Base.full_sanitizer.sanitize(product&.description)%>
 				                    </P>
-				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%><span class="expand">Expand</span></P>
+				                    <P>Wide Release Date : <%=product&.date.strftime("%B %d, %Y")%>
+                            <span class="expand">Expand</span>
+                            </P>
 				                  </div>
 		                </div>
 	                </div>

@@ -1,5 +1,5 @@
 class Web::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:holl_of_fame_details, :movie_category_detail, :movie_review,:user_profile]
+  before_action :authenticate_user!, only: [:movie_category_detail, :movie_review,:user_profile]
 
   def index
      # binding.pry
@@ -25,7 +25,8 @@ class Web::UsersController < ApplicationController
     @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     
      #binding.pry
-    if params[:id].present? && Category.find_by(id: params[:id]).present? # && params["id"].split('/')[1] == "nav-name"
+    if params[:id].present? && Category.find_by(id: params[:id]).present?
+    #binding.pry # && params["id"].split('/')[1] == "nav-name"
         category1 = Category.find_by(id: params[:id])
         @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
         @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
@@ -43,7 +44,8 @@ class Web::UsersController < ApplicationController
     Category.all.each do |cat|
       cat.product.each do |pro|
        if pro.reviews.present?
-        @rec[cat&.category_name] = pro&.image&.first&.file&.url
+        # binding.pry
+        @rec[cat&.category_name] = [pro&.image&.first&.file&.url,pro.id]
         break
        end
       end

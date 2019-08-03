@@ -163,7 +163,7 @@
             <div class="col-md-7">
               <a href="/web/users/<%=first.id%>/movie_detail" class="custom-post">
                 <div class="custom-img big">
-                  <img src="<%= first.image.last.file_url%>" class="img-fluid" alt="">
+                  <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
                 </div>
                 <div class="custom-content-section justify-content-end">
                   <h4 class="title-section"><%= first&.product_name %></h4>
@@ -181,7 +181,7 @@
                 <div class="col-md-6">
                   <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
                     <div class="custom-img small">
-                      <img src="<%= y.image.last.file_url%>" class="img-fluid" alt="">
+                      <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
                     </div>
                     <div class="custom-content-section justify-content-end">
                       <h4 class="title-section"><%= y&.product_name %></h4>
@@ -218,7 +218,7 @@
 
               <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
                 <div class="custom-img mediam">
-                  <img src="<%= y.image.last.file_url%>" class="img-fluid" alt="">
+                  <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
                 </div>
                 <div class="custom-content-section justify-content-end">
                   <h4 class="title-section"><%= y&.product_name %></h4>
@@ -262,10 +262,10 @@
                 <%#binding.pry%>
                 <%# if @count_category_reviews < 8 %>
                 <div class="col-md-3 reviews-col">
-                    <div class="custom-post">
+                     <a href="/web/users/<%=category[1][1]%>/movie_detail" class="custom-post">
                         <div class="custom-img">
                             <%if category[1].present? %>
-                            <img src="<%=category[1]%>" class="img-fluid" alt="">
+                            <img src="<%=category[1][0]%>" class="img-fluid" alt="">
                             <%else%>
                             <img src="/assets/category-img.jpg" class="img-fluid" alt="">
                             <%end%>
@@ -275,7 +275,7 @@
                                 <%= category[0]%>
                             </h4>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <% @count_category_reviews +=1  %>
                 <%end%>
