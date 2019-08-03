@@ -16,7 +16,7 @@
             <center>
             <label for="file-upload" class="custom-file-upload ">
               
-               <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -25px; font-size: 24px;" ></i>
+               <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_default.jpeg" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=200px width=200px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -25px; font-size: 24px;" ></i>
 
               <%= f.file_field :image, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
               

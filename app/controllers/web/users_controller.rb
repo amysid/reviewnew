@@ -76,6 +76,7 @@ class Web::UsersController < ApplicationController
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
+    @products_movie_category = @sub_category.products.last(4)
   end
 
   def movie_category_detail
@@ -86,7 +87,11 @@ class Web::UsersController < ApplicationController
      @productss = Product.last(4)
   end
 
-  def movie_detail   
+  def movie_detail 
+    
+  @a = Product.find_by(id: params[:id])&.sub_category_id
+  @sub_categories = SubCategory.find_by(id: @a)
+  @products_movie_details = @sub_categories&.products&.last(4)
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
@@ -94,6 +99,9 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_review
+    @b = Product.find_by(id: params[:id]).sub_category_id
+    @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
+     @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @review_parts = Product.find_by(id: params[:id])&.category&.review_parts

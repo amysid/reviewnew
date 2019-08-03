@@ -32,9 +32,14 @@
         </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav align-items-center main-nav">
+                <%if @product.present?%>
+                <%xyz = @product&.category&.id%>
+                <%else%>
+                <%xyz = @sub_category&.category&.id%>
+                <%end%>
                 <% category.each do |category|%>
                 <li class="nav-item dropdown mega-dropdown">
-                    <a class="nav-link user_type dropdown-toggle"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);" id="<%= category.id%>">
+                    <a class="nav-link user_type dropdown-toggle shubham <%= xyz == category.id ? "active" : "" %>"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);" id="<%= category.id%>">
                         <%= category.category_name%></a>
                     <div class="dropdown-menu mega-menu">
                         <div class="row">
@@ -95,7 +100,11 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown mega-dropdown">
-                    <a class="nav-link" href="/web/users/report">Reports</a>
+                    <% if params[:action] == "report"%>
+                    <a class="nav-link shubham active" href="/web/users/report">Reports</a>
+                    <%else%>
+                    <a class="nav-link shubham" href="/web/users/report">Reports</a>
+                    <%end%>
                 </li>
             </ul>
         </div>
@@ -139,3 +148,9 @@
 //     }
 // });
 </script>
+<style type="text/css">
+    .shubham:hover{
+        color: #fe7100;
+        font-weight: bold;
+    }
+</style>

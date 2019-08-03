@@ -1,0 +1,12 @@
+<%arr = @product.image { |i| i&.file&.url}%>
+<%arr = arr[0..3]%>
+<div class="container">
+    <div class="row navtop">
+        <ul class="nav1">
+            <%@all_sub_category.each do |sub|%>
+            <li class="nav2"><a class='<%= params[:id] == sub.id ? "active" : "" %>' href="/web/users/<%=sub.id%>/movie_category">
+                    <%=sub&.sub_category_name%></a></li>
+            <%end%>
+        </ul>
+    </div>
+</div>

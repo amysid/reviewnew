@@ -1,15 +1,22 @@
+<style type="text/css">
+    .activea{
+        background: #D6D6D1!important;
+    }
+</style>
+
 <%arr = @product.image { |i| i&.file&.url}%>
 <%arr = arr[0..3]%>
 <div class="container">
     <div class="row navtop">
         <ul class="nav1">
             <%@all_sub_category.each do |sub|%>
-            <li class="nav2"><a class='<%= params[:id] == sub.id ? "active" : "" %>' href="/web/users/<%=sub.id%>/movie_category">
+            <li class="nav2"><a class='<%= @product.sub_category.id == sub.id ? "activea" : "" %>' href="/web/users/<%=sub.id%>/movie_category">
                     <%=sub&.sub_category_name%></a></li>
             <%end%>
         </ul>
     </div>
 </div>
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <%arr.each_with_index do |img,index|%>
@@ -207,7 +214,10 @@
                                         </div>
                                         <div class="pa">
                                             <p class="paracircle">
-                                                <%=truncate(review&.comment, :length => 245)%>
+                                                <%=truncate(review&.comment, :length => 130)%>
+                                                  <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                               <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                                  <%end%>
                                             </p>
                                         </div>
                                     </div>
@@ -246,7 +256,10 @@
                                         </div>
                                         <div class="pa">
                                             <p class="paracircle">
-                                                <%=truncate(review&.comment, :length => 245)%>
+                                                <%=truncate(review&.comment, :length => 130)%>
+                                                <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                               <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                                  <%end%>
                                             </p>
                                         </div>
                                     </div>
@@ -294,94 +307,32 @@
                 <h3 class="titile-light">You may also like:</h3>
             </div>
             <div class="custom-slider slidw">
-                <div class="custom-post custom-slide">
+                <%@product_moview_reviews&.each do |product|%>
+                <a href="/web/users/<%=product.id%>/movie_detail"  class="custom-post custom-slide">
                     <div class="custom-img">
-                        <img src='<%= @product&.image&.first&.file&.present? ? @product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
+                        <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
                     </div>
                     <div class="custom-content justify-content-end">
                         <h4 class="custom-title">
-                            <%=@product&.product_name%>
+                            <%=product&.product_name%>
                         </h4>
                         <p class="mb-2">
-                            <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
+                            <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
                         </p>
                         <!-- <a href="#" class="view-more align-self-end">View More</a> -->
                     </div>
                     <div class="prcnt-section">
-                        <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
+                        <%if product&.reviews&.pluck("rating")&.sum > 0 %>
                         <p>
-                            <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                            <%=(product&.reviews&.pluck("rating")&.sum*100)/(product&.reviews&.pluck("rating")&.count*10)%>%</p>
                         <%else%>
                         <p>0%</p>
                         <% end %>
                     </div>
-                </div>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= @product&.image[1]&.file&.present? ? @product&.image[1]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%=@product&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                    </div>
-                    <div class="prcnt-section">
-                        <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                        <p>
-                            <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= @product&.image[2]&.file&.present? ? @product&.image[2]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%=@product&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                    </div>
-                    <div class="prcnt-section">
-                        <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                        <p>
-                            <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <% end %>
-                    </div>
-                </div>
-                <div class="custom-post custom-slide">
-                    <div class="custom-img">
-                        <img src='<%= @product&.image[3]&.file&.present? ? @product&.image[3]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content justify-content-end">
-                        <h4 class="custom-title">
-                            <%=@product&.product_name%>
-                        </h4>
-                        <p class="mb-2">
-                            <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                        </p>
-                        <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                    </div>
-                    <div class="prcnt-section">
-                        <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                        <p>
-                            <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                        <%else%>
-                        <p>0%</p>
-                        <% end %>
-                    </div>
-                </div>
+                </a>
+               
+                
+                <%end%>
             </div>
         </div>
     </div>
@@ -428,8 +379,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group" id="holidays">
-                    <div class="overallRating">
+                <div class="form-group" id="holidays" >
+                    <div class="overallRating" style="display:none;">
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating1" name="numeric_rating" value="01" class="ten-rate" /><span class="sib_span">1</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating2" name="numeric_rating" value="02" class="ten-rate" /><span class="sib_span">2</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating3" name="numeric_rating" value="03" class="ten-rate" /><span class="sib_span">3</span></label>
@@ -441,6 +392,20 @@
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="09" class="ten-rate" /><span class="sib_span">9</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating10" name="numeric_rating" value="10" class="ten-rate" /><span class="sib_span">10</span></label>
                     </div>
+
+                             <div class="overallRating">
+                                    <span class="dume-circle ">1</span>
+                                    <span class="dume-circle ">2</span>
+                                    <span class="dume-circle">3</span>
+                                    <span class="dume-circle">4</span>
+                                    <span class="dume-circle">5</span>
+                                    <span class="dume-circle">6</span>
+                                    <span class="dume-circle">7</span>
+                                    <span class="dume-circle">8</span>
+                                    <span class="dume-circle">9</span>
+                                    <span class="dume-circle">10</span>
+           
+                              </div>
                 </div>
                 <div class="form-group mb-3">
                     <label>Review this movie now</label>
@@ -451,7 +416,8 @@
                     <label class="form-check-label" for="exampleCheck1">Check box if your review contains spoilers</label>
                 </div>
                 <div class="form-group text-center">
-                    <button style="color: #fff" type="submit" class="btn btn-theme">Submit</button>
+                    <button style="color: #fff" type="submit" class="btn btn-theme" id= "form_tag_review">Submit</button>
+                    <%#=submit_tag " Submit", id: "form_tag_review"%>
                 </div>
                 <% end %>
             </div>
@@ -459,6 +425,11 @@
     </div>
 </div>
 <script>
+
+$(document).ready(function() {
+  $('#form_tag_review').on('click', function() { $('#count_rating_dynamic').submit(); });
+});
+
 $('.custom-slider').slick({
     dots: false,
     infinite: true,
@@ -613,6 +584,14 @@ $('.count_child').on('click', function() {
         avereage = Math.round(avereage * 10);
         console.log(avereage)
         $('.ten-rate')[(avereage - 1)].click()
+        $(".dume-circle").removeClass("active");
+        $(".dume-circle")[(avereage - 1)].classList.add("active");//.addClass("active");
+
     }
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();   
 });
 </script>

@@ -998,6 +998,7 @@ a.custom-post {
 .reviewe-widget-item img {
     margin-right: 15px;
     width: 96px;
+    height: 90px;
 }
 .reviewe-widget-item p, .reviewe-widget-item span {
     font-size: 12px;

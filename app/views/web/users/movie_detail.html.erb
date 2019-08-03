@@ -1,15 +1,23 @@
+
+<style type="text/css">
+    .activea{
+        background: #D6D6D1!important;
+    }
+</style>
 <%arr = @product.image { |i| i&.file&.url}%>
 <%arr = arr[0..3]%>
 <div class="container">
     <div class="row navtop">
         <ul class="nav1">
             <%@all_sub_category.each do |sub|%>
-            <li class="nav2"><a class='<%= params[:id] == sub.id ? "active" : "" %>' href="/web/users/<%=sub.id%>/movie_category">
+            <li class="nav2"><a class='<%= @product.sub_category.id == sub.id ? "activea" : "" %>' href="/web/users/<%=sub.id%>/movie_category">
                     <%=sub&.sub_category_name%></a></li>
             <%end%>
         </ul>
     </div>
 </div>
+
+
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <%arr.each_with_index do |img,index|%>
@@ -81,96 +89,34 @@
             <h2 class="titile-light">You may also like:</h2>
         </div>
         <div class="custom-slider slidw">
+            <%@products_movie_details&.each do |product|%>
             <%#binding.pry%>
             <%#binding.pry%>
-            <div class="custom-post custom-slide">
+            <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
                 <div class="custom-img">
-                    <img src='<%= @product&.image&.first&.file&.present? ? @product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid " alt="">
+                    <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid " alt="">
                 </div>
                 <div class="custom-content justify-content-end">
                     <h4 class="custom-title">
-                        <%=@product&.product_name%>
+                        <%=product&.product_name%>
                     </h4>
                     <p class="mb-2">
-                        <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
+                        <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
                     </p>
                     <!-- <a href="#" class="view-more align-self-end">View More</a> -->
                 </div>
                 <div class="prcnt-section">
-                    <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
+                    <%if product&.reviews&.pluck("rating")&.sum > 0 %>
                     <p>
-                        <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                        <%=(product&.reviews&.pluck("rating")&.sum*100)/(product&.reviews&.pluck("rating")&.count*10)%>%</p>
                     <%else%>
                     <p>0%</p>
                     <% end %>
                 </div>
-            </div>
-            <div class="custom-post custom-slide">
-                <div class="custom-img">
-                    <img src='<%= @product&.image[1]&.file&.present? ? @product&.image[1]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                    <h4 class="custom-title">
-                        <%=@product&.product_name%>
-                    </h4>
-                    <p class="mb-2">
-                        <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                    </p>
-                    <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                </div>
-                <div class="prcnt-section">
-                    <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                    <p>
-                        <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                    <%else%>
-                    <p>0%</p>
-                    <% end %>
-                </div>
-            </div>
-            <div class="custom-post custom-slide">
-                <div class="custom-img">
-                    <img src='<%= @product&.image[2]&.file&.present? ? @product&.image[2]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                    <h4 class="custom-title">
-                        <%=@product&.product_name%>
-                    </h4>
-                    <p class="mb-2">
-                        <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                    </p>
-                    <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                </div>
-                <div class="prcnt-section">
-                    <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                    <p>
-                        <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                    <%else%>
-                    <p>0%</p>
-                    <% end %>
-                </div>
-            </div>
-            <div class="custom-post custom-slide">
-                <div class="custom-img">
-                    <img src='<%= @product&.image[3]&.file&.present? ? @product&.image[3]&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                    <h4 class="custom-title">
-                        <%=@product&.product_name%>
-                    </h4>
-                    <p class="mb-2">
-                        <%= truncate(strip_tags(@product&.description), omision: "...", length: 130).html_safe%>
-                    </p>
-                    <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                </div>
-                <div class="prcnt-section">
-                    <%if @product&.reviews&.pluck("rating")&.sum > 0 %>
-                    <p>
-                        <%=(@product&.reviews&.pluck("rating")&.sum*100)/(@product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                    <%else%>
-                    <p>0%</p>
-                    <% end %>
-                </div>
-            </div>
+            </a>
+            
+           
+           <%end%>
         </div>
     </div>
 </div>

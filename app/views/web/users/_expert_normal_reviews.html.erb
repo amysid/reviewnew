@@ -27,14 +27,22 @@
                 </div>
                 <div class="ratingText">
                         <%#=truncate(user_reviews&.comment)%>
-                        <%= truncate(strip_tags(user_reviews&.comment), omision: "...", length: 150).html_safe%>
-                    <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
+                    <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 130)&.html_safe%>
+                        <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
+                       <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 130 %>
+                        <a href="javascript:void(0);" data-toggle="popover" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                         <%end%>  
                 </div>
                 <div class="d-flex justify-content-end">
+                    <% if current_user&.present? %>
                     <div class="like-dislike">
-                        <!-- <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span> -->
+                     <span>
+                        <img style="width:25px" src='<%= review_vote_status(user_reviews.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                                                <%= voting_like_count(user_reviews)%></span>
+                                            <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                                                <%= voting_dislike_count(user_reviews)%></span>
                     </div>
+                    <%end%>
                 </div>
             </div>
         </div>
@@ -70,14 +78,21 @@
                 </div>
                 <div class="ratingText">
                         <%#=truncate(user_reviews&.comment)%>
-                        <%= truncate(strip_tags(user_reviews&.comment), omision: "...", length: 150).html_safe%>
-                    <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
+                        <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 130)&.html_safe%>
+                        <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe %>
+                      <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 130 %>
+                     <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                        <%end%>
                 </div>
                 <div class="d-flex justify-content-end">
+                    <%if current_user.present?%>
                     <div class="like-dislike">
-                        <!-- <span><img style="width:25px" src="/assets/Facebook_like_thumb.png" alt=""> 07</span>
-                        <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" alt=""> 07</span> -->
+                        <img style="width:25px" src='<%= review_vote_status(user_reviews.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                                                <%= voting_like_count(user_reviews)%></span>
+                                            <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                                                <%= voting_dislike_count(user_reviews)%></span>
                     </div>
+                    <%end%>
                 </div>
             </div>
         </div>
@@ -93,5 +108,41 @@ $(document).ready(function() {
         "moreText": "Read Full Review",
         "lessText": "Less",
     });
+});
+</script>
+
+
+<script type="text/javascript">
+function voting(a) {
+    var current_object = a;
+    var data = a.id.split("_");
+    var review_status = data[0];
+    var review_id = data[1];
+
+    $.ajax({
+        url: '/web/reviews/get_vote_for_review',
+        type: 'post',
+        data: {
+            id: review_id,
+            status: review_status
+        },
+
+        success: function(result) {
+            // alert(result);
+            // alert(current_object);
+            var parent = current_object.parentElement;
+            if (result.status == true) {
+                parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/like_active.png" class="vote_ajax" id="like_' + review_id + '" alt="" onclick="voting(this)" >' + result.like_count + '</span> <span><img style="width:25px" src="/assets/facebook_not_like_thumbs_down.png" class="vote_ajax" id="dislike_' + review_id + '" alt="" onclick="voting(this)" >' + result.dislike_count + '</span>'
+            } else {
+                parent.parentElement.innerHTML = '<span><img style="width:25px" src="/assets/Facebook_like_thumb.png" class="vote_ajax" id="like_' + review_id + '" alt="" onclick="voting(this)" >' + result.like_count + '</span> <span><img style="width:25px" src="/assets/dislike_active.png" class="vote_ajax" id="dislike_' + review_id + '" alt="" onclick="voting(this)">' + result.dislike_count + '</span>'
+            }
+        }
+
+    });
+}
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover();   
 });
 </script>
