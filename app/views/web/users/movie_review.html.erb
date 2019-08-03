@@ -393,6 +393,7 @@
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="09" class="ten-rate" /><span class="sib_span">9</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating10" name="numeric_rating" value="10" class="ten-rate" /><span class="sib_span">10</span></label>
                     </div>
+                         <input type="hidden" id="avg_review" name="avg_review" value="0">
 
                              <div class="overallRating">
                                     <span class="dume-circle ">1</span>
@@ -584,7 +585,8 @@ $('.count_child').on('click', function() {
         avereage = avereage / $('.count_child').find('input').length
         avereage = Math.round(avereage * 10);
         console.log(avereage)
-        $('.ten-rate')[(avereage - 1)].click()
+        $('.ten-rate')[(avereage - 1)].click();
+        $('#avg_review').val(avereage);
         $(".dume-circle").removeClass("active");
         $(".dume-circle")[(avereage - 1)].classList.add("active");//.addClass("active");
 
