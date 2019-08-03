@@ -251,6 +251,7 @@
                                                     <%= review&.created_at&.strftime("%B %d, %Y")%>
                                                 </p>
                                                 <p class="paradetail2 line10">
+                                                    <%#binding.pry%>
                                                     <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
                                             </div>
                                         </div>
