@@ -4,8 +4,8 @@ class Web::ReviewsController < ApplicationController
 
 		@product =  Product.find_by(id: params[:id])
 
-		# binding.pry
-		rating = params[:avg_review].to_i
+		
+		rating = params[:numeric_rating].to_i
 		comment = params[:description]
 		# @x = 0
 		# params.each {|x| p @x += x[1].to_i if x[0].include?("rating")}
