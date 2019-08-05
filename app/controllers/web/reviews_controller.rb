@@ -1,7 +1,7 @@
 class Web::ReviewsController < ApplicationController
 
 	def get_reviews
-
+        # binding.pry
 		@product =  Product.find_by(id: params[:id])
 
 		

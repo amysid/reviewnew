@@ -83,7 +83,8 @@
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Userscore</span><br>
                         <span class="button1" id="button65reviews">
-                            <%=@user_reviews.count%></span></p>
+                            
+                            <%=@user_reviewss.count%></span></p>
                 </div>
                 <div class="buttonsreviews">
                     <div class="progress">
@@ -133,7 +134,7 @@
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Metascore</span><br>
                         <span class="button1" id="button65reviews">
-                            <%=@meta_reviews.count%></span></p>
+                            <%=@meta_reviewss.count%></span></p>
                     <%#binding.pry%>
                 </div>
                 <div class="buttonsreviews">
@@ -208,8 +209,19 @@
                                                 <p class="paradetail1 line1">
                                                     <%= review&.created_at&.strftime("%B %d, %Y")%>
                                                 </p>
+                                                 <%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
+                                                <% eval(review.criteria).map do |key,value| %>
+                                <p><%=key%>:
+                              <% if value > 0 %>
+                                <% value.times do %>
+                                <span class="fa fa-star checked"></span>
+                                <% end %></p>
+                                <%else%>
+                               N/A
+                                <%end%>
+                                <% end %>
                                                 <p class="paradetail2 line10">
-                                                    <%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
+                                                    <!-- <%#= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> -->
                                             </div>
                                         </div>
                                         <div class="pa">
@@ -250,9 +262,20 @@
                                                 <p class="paradetail1 line1">
                                                     <%= review&.created_at&.strftime("%B %d, %Y")%>
                                                 </p>
+                                                <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> 
+                                                 <% eval(review.criteria).map do |key,value| %>
+                                <p><%=key%>
+                              <%if value > 0 %>
+                                <% value.times do %>
+                                <span class="fa fa-star checked"></span>
+                                <% end %></p>
+                                <%else%>
+                                <p>N/A</p>
+                                <%end%>
+                                <% end %>
                                                 <p class="paradetail2 line10">
                                                     <%#binding.pry%>
-                                                    <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
+                                                     <!-- <%#=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> -->
                                             </div>
                                         </div>
                                         <div class="pa">
@@ -283,7 +306,7 @@
             <div class="col-md-12 col-lg-4">
                 <div class="widget reviewe-widget">
                     <h3 class="widget-title">Reviewed Today</h3>
-                    <%@todays_review.each do |review|%>
+                    <%@todays_review[0..7].each do |review|%>
                     <div class="d-flex align-items-start reviewe-widget-item mb-4">
                         <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
                         <div class="reviewe-widget-content">
@@ -349,9 +372,9 @@
                 <div class="form-group">
                     <h4 class="text-center mb-0">Share Your Votes now</h4>
                 </div>
+                        <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
                 <div class="form-group">
                     <div class="rating-row">
-                        <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
                         <div class="count_child">
                             <%@review_parts.each do |criteria|%>
                             <%#binding.pry%>
@@ -359,21 +382,16 @@
                                 <span class="ratetitle">
                                     <%= criteria&.criteria&.titleize%></span>
                                 <div class="rate">
-                                    <input type="radio" id="<%= " star5" + criteria.id.to_s%>" name="rating[]
-                                    <%= criteria&.criteria%>" value="5" />
-                                    <label for="<%= " star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                                    <input type="radio" id="<%= " star4" + criteria.id.to_s%>" name="rating[]
-                                    <%= criteria&.criteria%>" value="4" />
-                                    <label for="<%= " star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                                    <input type="radio" id="<%= " star3" + criteria.id.to_s%>" name="rating[]
-                                    <%= criteria&.criteria%>" value="3" />
-                                    <label for="<%= " star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                                    <input type="radio" id="<%= " star2" + criteria.id.to_s%>" name="rating[]
-                                    <%= criteria&.criteria%>" value="2" />
-                                    <label for="<%= " star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                                    <input type="radio" id="<%= " star1" + criteria.id.to_s%>" name="rating[]
-                                    <%= criteria&.criteria%>" value="1" />
-                                    <label for="<%= " star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                     <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
+                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
+                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
+                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
+                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
+                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
                                 </div>
                             </div>
                             <%end%>
@@ -417,8 +435,8 @@
                     <label class="form-check-label" for="exampleCheck1">Check box if your review contains spoilers</label>
                 </div>
                 <div class="form-group text-center">
-                    <button style="color: #fff" type="submit" class="btn btn-theme" >Submit</button>
-                    <%#=submit_tag " Submit", id: "form_tag_review"%>
+                    <!-- <button style="color: #fff" type="submit" class="btn btn-theme" >Submit</button> -->
+                    <%=submit_tag " Submit", id: "form_tag_review",class: "btn btn-theme"%>
                 </div>
                 <% end %>
             </div>

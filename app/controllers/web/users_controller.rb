@@ -24,8 +24,9 @@ class Web::UsersController < ApplicationController
     @latest_review = Review.last
     @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     
-     #binding.pry
     if params[:id].present? && Category.find_by(id: params[:id]).present?
+     #binding.pry
+
     #binding.pry # && params["id"].split('/')[1] == "nav-name"
         category1 = Category.find_by(id: params[:id])
         @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
@@ -108,6 +109,8 @@ class Web::UsersController < ApplicationController
     @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
     @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
     @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
+     @user_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+    @meta_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
     
     @user_reviews_hash = {}
     @user_reviews_hash[:positive] = [] 

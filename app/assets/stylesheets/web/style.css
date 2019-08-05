@@ -1354,7 +1354,8 @@ select.category {
     color: #6e6e6e;
 }
 .score-card p {
-    font-size: 14px;
+   font-size: 12px;
+    margin-bottom: auto;
 }
 .score-rating {
     font-size: 25px;

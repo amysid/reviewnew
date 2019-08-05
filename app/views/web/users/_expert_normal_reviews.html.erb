@@ -21,16 +21,28 @@
                         </div>
                         <div class="score-rating">
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
+                            <% eval(user_reviews.criteria).map do |key,value| %>
+                                <p><%=key%>:
+                              <% if value > 0 %>
+                                <% value.times do %>
+                                <span class="fa fa-star checked"></span>
+                                <% end %></p>
+                                <%else%>
+                                N/A
+                                <%end%>
+                                <% end %>
+                            <%# end %>
+                            
                             <%#= user_reviews&.product&.category_name%>
                         </div>
                     </div>
                 </div>
                 <div class="ratingText">
                         <%#=truncate(user_reviews&.comment)%>
-                    <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 130)&.html_safe%>
+                    <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
                         <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
-                       <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 130 %>
-                        <a href="javascript:void(0);" data-toggle="popover" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                       <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
+                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
                          <%end%>  
                 </div>
                 <div class="d-flex justify-content-end">
@@ -73,14 +85,31 @@
                                 <%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
                         </div>
                         <div class="score-rating">
-                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10</div>
+                            <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
+                            <%#binding.pry%>
+                             <% eval(user_reviews.criteria).map do |key,value| %>
+                                <p><%=key%>:
+                              <% if value > 0 %>
+                                <% value.times do %>
+                                <span class="fa fa-star checked"></span>
+                                <% end %></p>
+                                <%else%>
+                                N/A
+                                <%end%>
+                                <%#end %>
+
+                            <% end %>
+                             <%#= user_reviews.criteria.split(",") %>
+                            
+                            
+                        </div>
                     </div>
                 </div>
                 <div class="ratingText">
                         <%#=truncate(user_reviews&.comment)%>
-                        <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 130)&.html_safe%>
+                        <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
                         <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe %>
-                      <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 130 %>
+                      <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
                      <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
                         <%end%>
                 </div>
@@ -146,3 +175,4 @@ $(document).ready(function(){
   $('[data-toggle="popover"]').popover();   
 });
 </script>
+
