@@ -1240,8 +1240,8 @@ select.category {
     margin-right: 15px;
 }
 .rtUserImg img {
-    width: 125px;
-    height: 125px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     border: 2px solid #d1cfd2;
 }
@@ -1341,7 +1341,7 @@ select.category {
 .score-card-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+/*    justify-content: space-between;*/
     margin-bottom: 18px;
 }
 .name-date h4 {

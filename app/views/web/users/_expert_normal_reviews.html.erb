@@ -21,38 +21,40 @@
                         </div>
                         <div class="score-rating">
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
+                            <% if user_reviews&.criteria.present?%>
                             <% eval(user_reviews.criteria).map do |key,value| %>
-                                <p><%=key%>:
-                              <% if value > 0 %>
+                            <p>
+                                <%=key%>:
+                                <% if value > 0 %>
                                 <% value.times do %>
                                 <span class="fa fa-star checked"></span>
-                                <% end %></p>
-                                <%else%>
-                                N/A
-                                <%end%>
                                 <% end %>
-                            <%# end %>
-                            
+                            </p>
+                            <%else%>
+                            N/A
+                            <%end%>
+                            <% end %>
+                            <% end %>
                             <%#= user_reviews&.product&.category_name%>
                         </div>
                     </div>
                 </div>
                 <div class="ratingText">
-                        <%#=truncate(user_reviews&.comment)%>
+                    <%#=truncate(user_reviews&.comment)%>
                     <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
-                        <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
-                       <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
-                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
-                         <%end%>  
+                    <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
+                    <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
+                    <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                    <%end%>
                 </div>
                 <div class="d-flex justify-content-end">
                     <% if current_user&.present? %>
                     <div class="like-dislike">
-                     <span>
-                        <img style="width:25px" src='<%= review_vote_status(user_reviews.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=user_reviews.id%>" alt="" onclick="voting(this)">
-                                                <%= voting_like_count(user_reviews)%></span>
-                                            <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
-                                                <%= voting_dislike_count(user_reviews)%></span>
+                        <span>
+                            <img style="width:25px" src='<%= review_vote_status(user_reviews.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                            <%= voting_like_count(user_reviews)%></span>
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                            <%= voting_dislike_count(user_reviews)%></span>
                     </div>
                     <%end%>
                 </div>
@@ -86,40 +88,39 @@
                         </div>
                         <div class="score-rating">
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
-                            <%#binding.pry%>
-                             <% eval(user_reviews.criteria).map do |key,value| %>
-                                <p><%=key%>:
-                              <% if value > 0 %>
+                            <% if user_reviews&.criteria.present?%>
+                            <% eval(user_reviews.criteria).map do |key,value| %>
+                            <p>
+                                <%=key%>:
+                                <% if value > 0 %>
                                 <% value.times do %>
                                 <span class="fa fa-star checked"></span>
-                                <% end %></p>
-                                <%else%>
-                                N/A
-                                <%end%>
-                                <%#end %>
-
+                                <% end %>
+                            </p>
+                            <%else%>
+                            N/A
+                            <%end%>
+                            <%end %>
                             <% end %>
-                             <%#= user_reviews.criteria.split(",") %>
-                            
-                            
+                            <%#= user_reviews.criteria.split(",") %>
                         </div>
                     </div>
                 </div>
                 <div class="ratingText">
-                        <%#=truncate(user_reviews&.comment)%>
-                        <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
-                        <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe %>
-                      <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
-                     <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
-                        <%end%>
+                    <%#=truncate(user_reviews&.comment)%>
+                    <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
+                    <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe %>
+                    <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
+                    <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                    <%end%>
                 </div>
                 <div class="d-flex justify-content-end">
                     <%if current_user.present?%>
                     <div class="like-dislike">
                         <img style="width:25px" src='<%= review_vote_status(user_reviews.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=user_reviews.id%>" alt="" onclick="voting(this)">
-                                                <%= voting_like_count(user_reviews)%></span>
-                                            <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
-                                                <%= voting_dislike_count(user_reviews)%></span>
+                        <%= voting_like_count(user_reviews)%></span>
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(user_reviews.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=user_reviews.id%>" alt="" onclick="voting(this)">
+                            <%= voting_dislike_count(user_reviews)%></span>
                     </div>
                     <%end%>
                 </div>
@@ -139,8 +140,6 @@ $(document).ready(function() {
     });
 });
 </script>
-
-
 <script type="text/javascript">
 function voting(a) {
     var current_object = a;
@@ -171,8 +170,7 @@ function voting(a) {
 }
 </script>
 <script>
-$(document).ready(function(){
-  $('[data-toggle="popover"]').popover();   
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
 });
 </script>
-

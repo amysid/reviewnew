@@ -1,9 +1,8 @@
 <style type="text/css">
-    .activea{
-        background: #D6D6D1!important;
-    }
+.activea {
+    background: #D6D6D1 !important;
+}
 </style>
-
 <%arr = @product.image { |i| i&.file&.url}%>
 <%arr = arr[0..3]%>
 <div class="container">
@@ -16,7 +15,6 @@
         </ul>
     </div>
 </div>
-
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <%arr.each_with_index do |img,index|%>
@@ -83,7 +81,6 @@
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Userscore</span><br>
                         <span class="button1" id="button65reviews">
-                            
                             <%=@user_reviewss.count%></span></p>
                 </div>
                 <div class="buttonsreviews">
@@ -198,44 +195,44 @@
                         <div class="row">
                             <%@user_reviews[0..3].each do |review|%>
                             <div class="col-md-6">
-                                <div class="imgshadow">
-                                    <div class="imagecontent">
-                                        <div class="d-flex image-text">
-                                            <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%= user_image(review&.user_id).present? ? "height: 91px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
-                                            <div class="margintxt">
-                                                <h4 class="topheading12">
+                                <div class="score-card">
+                                    <div class="score-card-top">
+                                        <div class="rtUserImg">
+                                            <img src="<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
+                                            <div class="name-date">
+                                                <h4>
                                                     <%=user_name(review&.user_id)%>
                                                 </h4>
-                                                <p class="paradetail1 line1">
-                                                    <%= review&.created_at&.strftime("%B %d, %Y")%>
-                                                </p>
-                                                 <%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p>
+                                                <span>
+                                                    <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+                                            </div>
+                                            <div class="score-rating">
+                                                <%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10
+                                                <%if review&.criteria.present? %>
                                                 <% eval(review.criteria).map do |key,value| %>
-                                <p><%=key%>:
-                              <% if value > 0 %>
-                                <% value.times do %>
-                                <span class="fa fa-star checked"></span>
-                                <% end %></p>
-                                <%else%>
-                               N/A
-                                <%end%>
-                                <% end %>
-                                                <p class="paradetail2 line10">
-                                                    <!-- <%#= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> -->
+                                                <p>
+                                                    <%=key%>:
+                                                    <% if value > 0 %>
+                                                    <% value.times do %>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <% end %>
+                                                </p>
+                                                <%else%>
+                                                N/A
+                                                <%end%>
+                                                <% end %>
+                                                <%end%>
                                             </div>
                                         </div>
-                                        <div class="pa">
-                                            <p class="paracircle">
-                                                <%=truncate(review&.comment, :length => 130)%>
-                                                  <%if review&.comment&.present? && review&.comment&.length > 130%>
-                                               <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
-                                                  <%end%>
-                                            </p>
-                                        </div>
+                                    </div>
+                                    <div class="ratingText">
+                                        <%=truncate(review&.comment, :length => 130)%>
+                                        <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                        <%end%>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
-                                        <div class="like-dislike likem">
+                                        <div class="like-dislike">
                                             <span><img style="width:25px" src='<%= review_vote_status(review.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=review.id%>" alt="" onclick="voting(this)">
                                                 <%= voting_like_count(review)%></span>
                                             <span><img style="width:25px" src='<%= review_vote_status_dislike(review.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=review.id%>" alt="" onclick="voting(this)">
@@ -251,45 +248,45 @@
                         <div class="row">
                             <%@meta_reviews[0..3].each do |review|%>
                             <div class="col-md-6">
-                                <div class="imgshadow">
-                                    <div class="imagecontent">
-                                        <div class="d-flex image-text">
-                                            <img src='<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/14-141138_facebook-teerasej-profile-ball-circle-sochiie-com-facebook.jpg"%>' style='<%=user_image(review&.user_id).present? ? "height: 91px;: 151px;border-radius: 50%" : "" %>' class="imgcircle">
-                                            <div class="margintxt">
-                                                <h4 class="topheading12">
+                                <div class="score-card">
+                                    <div class="score-card-top">
+                                        <div class="rtUserImg">
+                                            <img src="<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
+                                            <div class="name-date">
+                                                <h4>
                                                     <%=user_name(review&.user_id)%>
                                                 </h4>
-                                                <p class="paradetail1 line1">
-                                                    <%= review&.created_at&.strftime("%B %d, %Y")%>
+                                                <span>
+                                                    <%= review&.created_at&.strftime("%B %d, %Y")%></span>
+                                            </div>
+                                            <div class="score-rating">
+                                                <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10
+                                                <%#binding.pry%>
+                                                <% if review&.criteria.present?%>
+                                                <% eval(review.criteria)&.map do |key,value| %>
+                                                <p>
+                                                    <%=key%>
+                                                    <%if value > 0 %>
+                                                    <% value.times do %>
+                                                    <span class="fa fa-star checked"></span>
+                                                    <% end %>
                                                 </p>
-                                                <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> 
-                                                 <% eval(review.criteria).map do |key,value| %>
-                                <p><%=key%>
-                              <%if value > 0 %>
-                                <% value.times do %>
-                                <span class="fa fa-star checked"></span>
-                                <% end %></p>
-                                <%else%>
-                                <p>N/A</p>
-                                <%end%>
-                                <% end %>
-                                                <p class="paradetail2 line10">
-                                                    <%#binding.pry%>
-                                                     <!-- <%#=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10</p> -->
+                                                <%else%>
+                                                <p>N/A</p>
+                                                <%end%>
+                                                <% end %>
+                                                <%end%>
                                             </div>
                                         </div>
-                                        <div class="pa">
-                                            <p class="paracircle">
-                                                <%=truncate(review&.comment, :length => 130)%>
-                                                <%if review&.comment&.present? && review&.comment&.length > 130%>
-                                               <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
-                                                  <%end%>
-                                            </p>
-                                        </div>
+                                    </div>
+                                    <div class="ratingText">
+                                        <%=truncate(review&.comment, :length => 130)%>
+                                        <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                        <%end%>
                                     </div>
                                     <div class="d-flex justify-content-between">
-                                        <!-- <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a> -->
-                                        <div class="like-dislike likem">
+                                        <div class="like-dislike">
                                             <span><img style="width:25px" src='<%= review_vote_status(review.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=review.id%>" alt="" onclick="voting(this)">
                                                 <%= voting_like_count(review)%></span>
                                             <span><img style="width:25px" src='<%= review_vote_status_dislike(review.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=review.id%>" alt="" onclick="voting(this)">
@@ -306,7 +303,7 @@
             <div class="col-md-12 col-lg-4">
                 <div class="widget reviewe-widget">
                     <h3 class="widget-title">Reviewed Today</h3>
-                    <%@todays_review[0..7].each do |review|%>
+                    <%@todays_review[0..6].each do |review|%>
                     <div class="d-flex align-items-start reviewe-widget-item mb-4">
                         <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
                         <div class="reviewe-widget-content">
@@ -332,7 +329,7 @@
             </div>
             <div class="custom-slider slidw">
                 <%@product_moview_reviews&.each do |product|%>
-                <a href="/web/users/<%=product.id%>/movie_detail"  class="custom-post custom-slide">
+                <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
                     <div class="custom-img">
                         <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
                     </div>
@@ -354,8 +351,6 @@
                         <% end %>
                     </div>
                 </a>
-               
-                
                 <%end%>
             </div>
         </div>
@@ -372,7 +367,7 @@
                 <div class="form-group">
                     <h4 class="text-center mb-0">Share Your Votes now</h4>
                 </div>
-                        <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
+                <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
                 <div class="form-group">
                     <div class="rating-row">
                         <div class="count_child">
@@ -382,7 +377,7 @@
                                 <span class="ratetitle">
                                     <%= criteria&.criteria&.titleize%></span>
                                 <div class="rate">
-                                     <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
+                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
                   <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
                   <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
                   <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
@@ -392,13 +387,14 @@
                   <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
                   <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
                   <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                   
                                 </div>
                             </div>
                             <%end%>
                         </div>
                     </div>
                 </div>
-                <div class="form-group" id="holidays" >
+                <div class="form-group" id="holidays">
                     <div class="overallRating" style="display:none;">
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating1" name="numeric_rating" value="01" class="ten-rate" /><span class="sib_span">1</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating2" name="numeric_rating" value="02" class="ten-rate" /><span class="sib_span">2</span></label>
@@ -411,20 +407,18 @@
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="09" class="ten-rate" /><span class="sib_span">9</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating10" name="numeric_rating" value="10" class="ten-rate" /><span class="sib_span">10</span></label>
                     </div>
-
-                             <div class="overallRating">
-                                    <span class="dume-circle ">1</span>
-                                    <span class="dume-circle ">2</span>
-                                    <span class="dume-circle">3</span>
-                                    <span class="dume-circle">4</span>
-                                    <span class="dume-circle">5</span>
-                                    <span class="dume-circle">6</span>
-                                    <span class="dume-circle">7</span>
-                                    <span class="dume-circle">8</span>
-                                    <span class="dume-circle">9</span>
-                                    <span class="dume-circle">10</span>
-           
-                              </div>
+                    <div class="overallRating">
+                        <span class="dume-circle ">1</span>
+                        <span class="dume-circle ">2</span>
+                        <span class="dume-circle">3</span>
+                        <span class="dume-circle">4</span>
+                        <span class="dume-circle">5</span>
+                        <span class="dume-circle">6</span>
+                        <span class="dume-circle">7</span>
+                        <span class="dume-circle">8</span>
+                        <span class="dume-circle">9</span>
+                        <span class="dume-circle">10</span>
+                    </div>
                 </div>
                 <div class="form-group mb-3">
                     <label>Review this movie now</label>
@@ -444,9 +438,8 @@
     </div>
 </div>
 <script>
-
 $(document).ready(function() {
-  $('#form_tag_review').on('click', function() { $('#count_rating_dynamic').submit(); });
+    $('#form_tag_review').on('click', function() { $('#count_rating_dynamic').submit(); });
 });
 
 $('.custom-slider').slick({
@@ -604,13 +597,13 @@ $('.count_child').on('click', function() {
         console.log(avereage)
         $('.ten-rate')[(avereage - 1)].click();
         $(".dume-circle").removeClass("active");
-        $(".dume-circle")[(avereage - 1)].classList.add("active");//.addClass("active");
+        $(".dume-circle")[(avereage - 1)].classList.add("active"); //.addClass("active");
 
     }
 });
 </script>
 <script>
-$(document).ready(function(){
-  $('[data-toggle="popover"]').popover();   
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
 });
 </script>
