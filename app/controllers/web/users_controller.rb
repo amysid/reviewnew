@@ -10,13 +10,8 @@ class Web::UsersController < ApplicationController
     @publishs = Product.all.where(current: "publish")
     @reviews_count = Product.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
     @reviews_all = Product.all.map {|x| x.reviews.map {|b| b.rating}.sum}.sum
-    # @movies = Product.where(category_name: "Movies").first(2)
-    # @games = Product.where(category_name: "Games").first(2) 
-    # @tvs = Product.where(category_name: "TV").first(2)
     @trending_products = Product.where(trending: true)
     @products = Product.all
-    # @latest_stories = Product.all.order("created_at desc")
-    # binding.pry
     @latest_stories =  Product.select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
     @users = User.where(user_type: "Normal User") 
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
@@ -25,16 +20,9 @@ class Web::UsersController < ApplicationController
     @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     
     if params[:id].present? && Category.find_by(id: params[:id]).present?
-     #binding.pry
-
-    #binding.pry # && params["id"].split('/')[1] == "nav-name"
         category1 = Category.find_by(id: params[:id])
         @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
         @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
-        # binding.pry
-   # elsif params[:id].present? && Category.find_by(id: params[:id]&.split('/')[0]).present? && params["id"].split('/')[1] == "nav-metascore"
-   #     category1 = Category.find_by(id: params[:id]&.split('/')[0])
-   #     @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
     else
        @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
        @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
@@ -45,21 +33,11 @@ class Web::UsersController < ApplicationController
     Category.all.each do |cat|
       cat.product.each do |pro|
        if pro.reviews.present?
-        # binding.pry
         @rec[cat&.category_name] = [pro&.image&.first&.file&.url,pro.id]
         break
        end
       end
     end
-  # @percentage = []
-  # Review.all.each do |review|
-  # part = eval review&.criteria
-  # sum = part.values.map {|k| k.to_i}.sum
-  # total = part.values.count * 5
-  # @per = (sum*100)/total
-  # @percentage.push(@per)
-  #  # p @per
-  #  end
     respond_to do |format|
       format.html
       format.js
@@ -69,11 +47,7 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category
-# binding.pry
-    # @category = Category.all
-    # @trending = Product.where(trending: true)
     @products =  Product.find_by(sub_category_id: params[:id])
-
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
@@ -81,7 +55,6 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category_detail
-    # binding.pry
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
@@ -188,7 +161,6 @@ class Web::UsersController < ApplicationController
   end
  
   def trending
-    # binding.pry
      @trending_products = Product.where(trending: true).order("created_at desc").paginate(:page => params[:page], :per_page => 5)
   end
 
@@ -261,11 +233,11 @@ class Web::UsersController < ApplicationController
     @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
   end
   def profile
-    # binding.pry
+
   end
 
   def rating_calculate
-    # binding.paramsry
+   
   end
   
 end

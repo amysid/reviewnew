@@ -1,6 +1,6 @@
 module Admin::CategoriesHelper
 	def category
-		# binding.pry
+		
 		Category.all.pluck("category_name")
 	end
 

@@ -4,12 +4,6 @@ class Admin::UsersController < Admin::AdminApplicationController
  layout 'admin_lte_2'
  
     def index
-  	   # binding.pry
-       # if params[:search][:status].present?
-       #    @user = User.where(user_type: params[:search][:status])
-       #     redirect_to admin_users_path 
-       #     flash[:notice] = "User Type Search Successfull"
-       #  else
         @sr_no = 0
         @search = User.where(role: "user").order("created_at desc").paginate(:page => params[:page], :per_page => 5)
         @users_count = @search.count
@@ -20,15 +14,12 @@ class Admin::UsersController < Admin::AdminApplicationController
         end
 
         @users = @users.decorate
-        #@users = user_search if params[:search].present?
-      # end
     end
 
     
    
     def show
-  	   # binding.pry
-       # @users = User.find_by(id: params[:id])
+  	  
   	   @users = User.decorate
     end
 
@@ -38,7 +29,6 @@ class Admin::UsersController < Admin::AdminApplicationController
     end
 
     def type_user
-      #normal_user
       @normal_user = User.find_by(id: params[:id]).update(user_type: "Normal User")
       redirect_to admin_users_path
       flash[:notice] = "User Type (Normal User) Change Succesfully"

@@ -9,7 +9,7 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
         end
 
         def create
-        	 # binding.pry
+        	
         	@faqs = Faq.new(faq_params)
         	if @faqs.save
         		redirect_to admin_faqs_path
@@ -29,7 +29,7 @@ before_action :find_faqs, only: [:show,:edit,:update,:destroy]
        	 end
         
          def update
-          # binding.pry
+         
   			if @faqs.update_attributes(faq_params)
         		redirect_to admin_faqs_path, notice: 'faqs updated Successfully.'
       		else

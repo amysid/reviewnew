@@ -6,7 +6,6 @@ class Admin::ProductsController < ApplicationController
     def index
       @s_no = 0
       if params[:search].present?
-        # @products = Product.where(["product_name = ? OR category = ? OR sub_category = ?", params[:search], params[:search], params[:search]])
          @products = Product.where(["product_name = ? OR category_name = ? OR sub_category_name = ?", params[:search], params[:search], params[:search]])
          @products = @products.order("created_at desc").paginate(:page => params[:page], :per_page => 100)
       else
@@ -61,7 +60,6 @@ class Admin::ProductsController < ApplicationController
     end
     
    def destroy
-    # binding.pry
       if @products.destroy
              redirect_to admin_products_path
           else
@@ -70,8 +68,6 @@ class Admin::ProductsController < ApplicationController
    end
 
     def update
-       # binding.pry
-      
       @products.update(category_id: Category.find_by(category_name: params[:product][:category_name]).id)
       @products.update(sub_category_id: SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id)
       if params[:product][:date].size == 10
@@ -124,12 +120,9 @@ class Admin::ProductsController < ApplicationController
 
  private
  def product_params 
-  # params[:product][:date] = params[:product][:date]
  	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
  end
- # def update_product 
- #  params.require(:products).permit(:category, :sub_category, :product_name, :video, :description, image_attributes: [:id, :file, :_destroy])
- # end
+ 
  def find_products
     @products = Product.find_by(id: params[:id])
     redirect_to admin_products_path unless @products

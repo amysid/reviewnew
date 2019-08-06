@@ -35,7 +35,6 @@ class HomesController < ApplicationController
     end
 
     def feedback_params
-        # params[:user][:feedback] = params[:user][:feedback]
         params.require(:contact).permit(:user_feedback)
     end
 end

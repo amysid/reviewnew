@@ -8,12 +8,9 @@ class Admin::CategoriesController < ApplicationController
     if params[:search].present?
        @categories = Category.where(category_name: params[:search])
        @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 100)
-       # redirect_to admin_categories_path
-       # flash[:notice] = "Search Successfully"
     else
         @categories = Category.all
         @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 8)
-        #flash[:notice] = "Search not successfullly"
     end
   end
 
@@ -48,8 +45,7 @@ class Admin::CategoriesController < ApplicationController
   end   
 
   def edit
-    # binding.pry
-    # @category = Category.find_by(id: params[:id])
+   
     @s_no = 0
 
      if params[:search].present?
@@ -59,25 +55,14 @@ class Admin::CategoriesController < ApplicationController
         @search = @category.sub_categories.order("created_at desc").paginate(:page => params[:page], :per_page => 12)
         @search1 = @category.review_parts.order("created_at desc").paginate(:page => params[:page], :per_page => 12)
         
-       # flash[:notice] = "Search not successfullly"
+      
     end
     @sub_category = @search 
     @review_parts1 = @search1
 
   end
 
-  # def search_sub_categories
-  #   # binding.pry
-  #   if params[:search].present?
-  #    @sub_category = SubCategory.where(sub_category_name: params[:search])
-
-  #    # redirect_to edit_admin_category_path(@sub_category)
-  #  else
-  #     @sub_category = @category.sub_categories
-  #          # redirect_to edit_admin_category_path
-
-  #  end
-  # end
+ 
 
   
 
@@ -112,7 +97,7 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def update_review_part
-    # binding.pry
+   
     review_part = ReviewPart.where(criteria: params[:review_parts][:criteria], category_id: params[:review_parts][:category_id])
     @category = Category.find_by(id: params[:review_parts][:category_id])
     @review_parts = ReviewPart.find_by(id: params[:criteria_id])
@@ -130,14 +115,14 @@ class Admin::CategoriesController < ApplicationController
   end
 
   def destroy_review_part
-    # binding.pry
+    
   @review_parts =  ReviewPart.find_by(id: params[:id])
   @review_parts&.destroy
   redirect_to admin_categories_path, notice: "Criteria deleted successfully"
   end
  
  def edit_review_part
-  # binding.pry
+ 
   @review_parts = ReviewPart.find_by(id: params[:id])
  end
   def create_sub_category
@@ -158,14 +143,14 @@ class Admin::CategoriesController < ApplicationController
 
 
   def edit_sub_category
-     # binding.pry
+     
      @sub_categories = SubCategory.find_by(id: params[:id])
 
   end
 
 
   def update_sub_category
-    # binding.pry
+   
     sub_category = SubCategory.where(sub_category_name: params[:sub_categories][:sub_category_name], category_id: params[:sub_categories][:category_id])
     @category = Category.find( params[:sub_categories][:category_id])
      @sub = SubCategory.find_by(id: params[:subcat_id])
@@ -186,7 +171,7 @@ class Admin::CategoriesController < ApplicationController
 end
   
   def destroy_sub_category
-    # binding.pry
+   
    @sub_category = SubCategory.find(params[:id])
     @sub_category.destroy
    redirect_to admin_categories_path, notice: "Sub Category  deleted successfully"

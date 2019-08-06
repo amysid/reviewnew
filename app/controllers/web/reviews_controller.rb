@@ -1,15 +1,11 @@
 class Web::ReviewsController < ApplicationController
 
 	def get_reviews
-        #binding.pry
 		@product =  Product.find_by(id: params[:id])
 
 		
 		rating = params[:numeric_rating].to_i
 		comment = params[:description]
-		# @x = 0
-		# params.each {|x| p @x += x[1].to_i if x[0].include?("rating")}
-		# params_data_data = @x-params[:numeric_rating].to_i
 		params_data_data = params[:rating][0]
         spoiler = params[:spoiler].present? ? true : false
 		criteria = {}
@@ -24,11 +20,9 @@ class Web::ReviewsController < ApplicationController
         
         
 		redirect_to request.referer, notice: "Review Posted."
-		# @product.create_review()
 	end
 
 	def get_vote_for_review
-		# binding.pry
 		review = Review.find_by(id: params[:id])
 		vote = Vote.find_or_create_by(user_id: current_user.id, review_id: params[:id])
 		vote.update(vote_status: params[:status] == "like" ? true : false)
