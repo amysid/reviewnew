@@ -19,7 +19,8 @@ module MetacriticLike
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     config.autoload_paths += %w(#{config.root}/app/models/ckeditor)
-
+    
+    config.assets.initialize_on_precompile = false
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
     end
