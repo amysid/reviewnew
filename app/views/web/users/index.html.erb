@@ -27,7 +27,8 @@
                                         <p class="tag"><span>
                                                 <%= product&.category_name%> : </span></p>
                                         <h4 class="post-title">
-                                            <%= product&.product_name%> :
+                                            <%#= product&.product_name%>
+                                             <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a> :
                                             <%#= product.sub_category_name%>
                                         </h4>
                                         <p>
