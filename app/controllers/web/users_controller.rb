@@ -1,5 +1,5 @@
 class Web::UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:movie_category_detail, :movie_review,:user_profile]
+  before_action :authenticate_user!, only: [:movie_category_detail,:user_profile]
 
   def read_full_review
 
