@@ -228,7 +228,9 @@
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
                                         <%if review&.comment&.present? && review&.comment&.length > 130%>
-                                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                        <%#binding.pry%>
+
+                                       <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
                                     </div>
                                     <div class="d-flex justify-content-between">

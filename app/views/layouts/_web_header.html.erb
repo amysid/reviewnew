@@ -39,7 +39,7 @@
                 <%end%>
                 <% category.each do |category|%>
                 <li class="nav-item dropdown mega-dropdown">
-                    <a class="nav-link user_type dropdown-toggle shubham <%= xyz == category.id ? "active" : "" %>"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);" id="<%= category.id%>">
+                    <a class="nav-link user_type dropdown-toggle shubham change_data <%= xyz == category.id ? "active" : "" %>"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);" id="<%= category.id%>">
                         <%= category.category_name%></a>
                     <div class="dropdown-menu mega-menu">
                         <div class="row">
@@ -54,8 +54,8 @@
                                         <%end%>
                                     </div>
                                     <div class="custom-content justify-content-end">
-                                        <p class="mb-2">
-                                            <%= category.category_name%>
+                                        <p class="mb-2" >
+                                            <%= category.category_name %>
                                         </p>
                                         <%#= category&.sub_categories&.first&.product&.image&.first&.file&.url%>
                                     </div>
@@ -154,3 +154,20 @@
         font-weight: bold;
     }
 </style>
+<script type="text/javascript">
+     $(document).ready(function(){
+      $('#1').click();
+      $('.change_data').click(function(){
+        alert("hello");
+       debugger;
+        var id=$(this).attr("id");
+      $.ajax({
+         url: '/web/users',
+         type: 'get',
+         data: {
+          id: id
+          }
+       });
+    });
+ });
+</script>

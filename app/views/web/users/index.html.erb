@@ -166,17 +166,17 @@
           <%#binding.pry %>
           <div class="row small">
             <div class="col-md-7">
-              <a href="/web/users/<%=first.id%>/movie_detail" class="custom-post">
+              <a href="/web/users/<%=first&.id%>/movie_detail" class="custom-post">
                 <div class="custom-img big">
                   <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
                 </div>
                 <div class="custom-content-section justify-content-end">
                   <h4 class="title-section"><%= first&.product_name %></h4>
-                  <p class="mb-2"><%= truncate(strip_tags(first&.description), omision: "...", length: 200).html_safe %></p>
+                  <p class="mb-2"><%= truncate(strip_tags(first&.description), omision: "...", length: 200)&.html_safe %></p>
                   <p class="date"><i class="fa fa-clock-o"></i> <%= first&.date&.strftime("%B %d, %Y")%></p>
                 </div>
                 <div class="percent-section">
-                  <p><%= (first&.avg_rating&.to_f * 10).round(2) %>%</p>
+                  <p><%= (first&.avg_rating&.to_f * 10)&.round(2) rescue nil %>%</p>
                 </div>
               </a>
           <% @latest_stories.in_groups_of(2, false).each_with_index do |x,index| %>

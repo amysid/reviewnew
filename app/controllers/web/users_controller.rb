@@ -1,8 +1,16 @@
 class Web::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:movie_category_detail, :movie_review,:user_profile]
 
+  def read_full_review
+
+    @review = Review.find_by(id: params[:id])
+    # binding.pry
+  end
+  def full_review
+    @review = Review.find_by(id: params[:id])
+  end
   def index
-     # binding.pry
+     #binding.pry
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end

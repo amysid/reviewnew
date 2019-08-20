@@ -29,6 +29,7 @@ Rails.application.routes.draw do
     end
     resources :users do
     collection do
+      get :read_full_review
       get :check_email
       get :check_email_login
       post :image_update
@@ -49,6 +50,7 @@ Rails.application.routes.draw do
       get :movie_category_detail
       get :movie_detail
       get :movie_review
+      get :full_review
     end
    end 
   end

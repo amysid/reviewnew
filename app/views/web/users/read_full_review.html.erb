@@ -1,0 +1,75 @@
+ <%#  @reviews_normal&.each  do |@review|%>
+        <% if @review.present?%>
+        <%#binding.pry%>
+        <%@a = User.find_by(id: @review.user_id) %>
+        <!-- <div class="slide-item "> -->
+            <div class="score-card">
+                <div class="score-card-top" >
+                    <div class="rtUserImg">
+                        <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>">
+                    </div> 
+                        <div class="rtUserInfo">
+                            <div class="name-date">
+                                <h4>
+                                    <%= @a&.name%>
+                                </h4>
+                                <span>
+                                    <%=@review.created_at.strftime("%B %d, %Y")%>
+                                </span>
+                            </div>
+                            <div class="score-rating">
+                                <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10
+                                <% if @review&.criteria.present?%>
+                                <% eval(@review.criteria).map do |key,value| %>
+                                <p>
+                                    <%=key%>:
+                                    <% if value > 0 %>
+                                    <% value.times do %>
+                                    <span class="fa fa-star checked"></span>
+                                    <% end %>
+                                </p>
+                                <%else%>
+                                N/A
+                                <%end%>
+                                <% end %>
+                                <% end %>
+                                <%#= @review&.product&.category_name%>
+                            </div>
+                        </div>
+                </div>
+                <div class="ratingText">
+                    <%#=truncate(@review&.comment)%>
+                    <%=strip_tags(@review&.comment)%>
+                    <%#= truncate(strip_tags(@review&.comment), length: 130).html_safe%>
+                    <%#if @review&.comment.present? && @review&.comment&.length > 100 %>
+                    <!-- <a href="web/users/read_full_review?id=<%#= @review&.id %>">Read Full Review</a> -->
+                    <%#end%>
+                </div>
+                <!-- <div class="d-flex justify-content-end"> -->
+                    <%# if current_user&.present? %>
+                    <!-- <div class="like-dislike">
+                        <span>
+                            <img style="width:25px" src='<%#= review_vote_status(@review.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%#=#@review.id%>" alt="" onclick="voting(this)">
+                            <%#= voting_like_count(@review)%></span>
+                        <span><img style="width:25px" src='<%#= review_vote_status_dislike(@review.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%#=@review.id%>" alt="" onclick="voting(this)">
+                            <%#= voting_dislike_count(@review)%></span>
+                    </div> -->
+                    <%#end%>
+                <!-- </div> -->
+            </div>
+        <!-- </div> -->
+        <%end%>
+        <%#end%>
+<style type="text/css">
+    div.rtUserImg
+    {
+        margin: 15px;
+        width:50%;
+        text-align: right;
+    }
+    div.rtUserInfo
+    {
+        margin: 15px;
+        width: 50%;
+    }
+</style>
