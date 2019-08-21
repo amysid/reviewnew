@@ -52,9 +52,14 @@
                 <h3>Ratings Summary</h3>
             </div>
             <%#binding.pry%>
-            <%if @product.reviews.where(user_id: current_user.id).present? %>
+            <%#if @product.reviews.where(user_id: current_user.id).present? %>
+            <%if @product.reviews.where(user_id: current_user&.id).present? %>
             <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
                     Review Already Posted</a>
+            </div>
+            <%elsif !current_user.present?%>
+              <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
+                    Login for Write a review</a>
             </div>
             <%else%>
             <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">

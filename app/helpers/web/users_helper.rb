@@ -28,8 +28,9 @@ module Web::UsersHelper
 	def review_vote_status(id)
 		# binding.pry
 		review = Review.find_by(id: id)
-		this_vote = review&.votes.where(user_id: current_user.id)&.first
-
+		# this_vote = review&.votes.where(user_id: current_user.id)&.first
+		this_vote = review&.votes&.first#.where(user_id: current_user.id)&.first
+        
 		if this_vote.present?
 			return this_vote&.vote_status
 		else
@@ -41,8 +42,9 @@ module Web::UsersHelper
 	def review_vote_status_dislike(id)
 		# binding.pry
 		review = Review.find_by(id: id)
-		this_vote = review&.votes.where(user_id: current_user.id)&.first
-
+		# this_vote = review&.votes.where(user_id: current_user.id)&.first
+		this_vote = review&.votes&.first#.where(user_id: current_user.id)&.first
+        
 		if this_vote.present?
 			return this_vote&.vote_status
 		else
