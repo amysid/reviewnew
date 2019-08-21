@@ -176,6 +176,7 @@
           <div class="col-md-12">
             <h2 class="main-title">LATEST STORIES</h2>
           </div>
+          <% if @latest_stories.present? %>
           <% first = @latest_stories&.shift %>
           <%#binding.pry %>
           <div class="row small">
@@ -269,6 +270,9 @@
             <% end %>
 
           </div>
+          <% else %>
+          <p style="font-size: 15px;">Data not found.</p
+          <% end %>
         </div>
 
 
