@@ -1,6 +1,7 @@
 <%#if current_user.present? %>
 <%#= render partial: 'web/users/head'%>
 <%#end%>
+
 <%= render partial: 'web/users/trending'%>
 <!-- Home Slider Close -->
 <div class="page-wrapper">
@@ -9,9 +10,11 @@
             <div class="col-md-8">
                 <div class="left-side">
                     <h3 class="widget-title mt-0">TRENDING NOW</h3>
+                        <%if @trending_products.present?%>
                     <div class="posts">
                         <% @count_trending = 0 %>
                         <% @trending_products&.each_with_index do |product, index|%>
+                        <%#binding.pry%>
                         <%# if product.trending == true %>
                         <% if @count_trending < 4%>
                         <div class="post-item">
@@ -51,12 +54,19 @@
                         <%end%>
                         <%end%>
                     </div>
+                    <%else%>
+                    <div>
+                     <p>Data not Found.</p>     
+                   </div>
+                   <%end%>
+
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="right-side">
                     <div class="widget">
                         <h3 class="widget-title mt-0">UPCOMING RELEASES</h3>
+                         <%if @products.present?%>
                         <% @count_upcomeing = 0%>
                         <% @products&.each_with_index do |product, index|%>
                         <%#binding.pry%>
@@ -91,7 +101,10 @@
                             <%end%>
                             <%end%>
                             <%end%>
-                    </div>
+                        </div>
+                        <% else %>
+                        <p> Data not found.</p>
+                        <% end %>
                 </div>
             </div>
         </div>
@@ -102,6 +115,7 @@
                         <div class="custom-post big-post">
                             <% @count_todays_review = 0%>
                             <% @todays_review.each do |review|%>
+                            
                             <% if @count_todays_review == 0 %>
                             <a href="/web/users/<%=review&.product_id%>/movie_detail" class="">
                                 <img src='<%= review&.product&.image.present? ? review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>'>
@@ -162,7 +176,7 @@
           <div class="col-md-12">
             <h2 class="main-title">LATEST STORIES</h2>
           </div>
-          <% first = @latest_stories.shift %>
+          <% first = @latest_stories&.shift %>
           <%#binding.pry %>
           <div class="row small">
             <div class="col-md-7">
@@ -263,6 +277,7 @@
             <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
             <div class="row">
                 <% @count_category_reviews = 0%>
+                
                 <%@rec&.each do |category|%>
                 <%#binding.pry%>
                 <%# if @count_category_reviews < 8 %>

@@ -2,21 +2,21 @@
     <%# trending.each do |trend|%>
     <%#binding.pry%>
     <% @publishs.each do |trend| %>
-    <a href="/web/users/<%= trend.id %>/movie_detail">
+    <a href="/web/users/<%= trend&.id %>/movie_detail">
     <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url('<%= trend.image.last.file_url %>')"></div>
+        <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.last&.file_url %>')"></div>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
                 <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i>
                     <%= trend&.date&.strftime("%B %d, %Y")%>
                 </p>
                 <h1>
-                    <%= trend.product_name%>
+                    <%= trend&.product_name%>
                 </h1>
                 <div class="release-name">
                     <h4>
-                        <%= trend.product_name%> (
-                        <%= trend.category_name%>,
+                        <%= trend&.product_name%> (
+                        <%= trend&.category_name%>,
                         <%= trend&.updated_at&.strftime("%Y")%> )</h4>
                     <h5>
                         <%= trend.sub_category_name%>

@@ -155,18 +155,38 @@
     }
 </style>
 <script type="text/javascript">
-     $(document).ready(function(){
+ //     $(document).ready(function(){
+ //      $('#1').click();
+ //      $('.change_data').click(function(){
+ //        alert("hello click is working");
+ //       debugger;
+ //        var id=$(this).attr("id");
+ //      $.ajax({
+ //         url: '/web/users/test',
+ //         type: 'get',
+ //         data: {s
+ //          id: id
+ //          }
+ //       });
+ //    });
+ // });
+ // 
+$(document).ready(function(){
       $('#1').click();
       $('.change_data').click(function(){
-        alert("hello");
+        // alert("hello click is working");
        debugger;
         var id=$(this).attr("id");
       $.ajax({
-         url: '/web/users',
+         url: '/web/users/',
          type: 'get',
          data: {
           id: id
-          }
+          },
+          success: function(data){
+         // $(".abc").body(data)
+        $("body").html(data);
+      }
        });
     });
  });

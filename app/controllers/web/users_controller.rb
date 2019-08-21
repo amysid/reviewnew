@@ -10,7 +10,7 @@ class Web::UsersController < ApplicationController
     @review = Review.find_by(id: params[:id])
   end
   def index
-     #binding.pry
+     
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end
@@ -18,9 +18,18 @@ class Web::UsersController < ApplicationController
     @publishs = Product.all.where(current: "publish")
     @reviews_count = Product.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
     @reviews_all = Product.all.map {|x| x.reviews.map {|b| b.rating}.sum}.sum
-    @trending_products = Product.where(trending: true)
-    @products = Product.all
-    @latest_stories =  Product.select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+      #binding.pry
+    if params[:id].present?
+     @name1=Category.find(params[:id]).category_name
+      @trending_products = Product.where(trending: true,category_name: @name1)
+                
+      @products = Product.where(category_id: params[:id])
+      @latest_stories =  Product.where(category_id: params[:id]).select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+    else
+     @trending_products = Product.where(trending: true)
+     @products = Product.all
+     @latest_stories =  Product.select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+    end
     @users = User.where(user_type: "Normal User") 
     @recent_reviews = Review.all.order("created_at DESC").limit(4)
     @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
@@ -247,5 +256,6 @@ class Web::UsersController < ApplicationController
   def rating_calculate
    
   end
+  
   
 end
