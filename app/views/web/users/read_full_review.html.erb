@@ -15,7 +15,8 @@
                                 </h4>
                                 <span>
                                     <%=@review.created_at.strftime("%B %d, %Y")%>
-                                </span>
+                                </span><br>
+                                Product Name : <%=  Product.find(@review.product_id).product_name%>
                             </div>
                             <div class="score-rating">
                                 <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10

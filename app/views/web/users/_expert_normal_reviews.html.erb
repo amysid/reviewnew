@@ -17,10 +17,14 @@
                                 <%= @a&.name%>
                             </h4>
                             <span>
-                                <%=user_reviews.created_at.strftime("%B %d, %Y")%></span>
+                                <%=user_reviews.created_at.strftime("%B %d, %Y")%>
+                            </span><br>
+
+                            Product Name : <%=  Product.find(user_reviews.product_id).product_name%>
                         </div>
                         <div class="score-rating">
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
+                            
                             <% if user_reviews&.criteria.present?%>
                             <% eval(user_reviews.criteria).map do |key,value| %>
                             <p>
