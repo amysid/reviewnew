@@ -33,7 +33,8 @@
     <%end%>
 </div>
 <script type="text/javascript">
-jQuery(document).ready(function() {
+// jQuery(document).ready(function() {
+$(document).on("turbolinks:load",function(){
     jQuery('.home-slider').slick({
         dots: true,
         infinite: true,

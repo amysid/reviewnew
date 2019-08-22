@@ -175,7 +175,6 @@ $(document).ready(function(){
       $('#1').click();
       $('.change_data').click(function(){
 
-       debugger;
         var id=$(this).attr("id");
       $.ajax({
          url: '/web/users/',
@@ -184,8 +183,11 @@ $(document).ready(function(){
           id: id
           },
           success: function(data){
-         // $(".abc").body(data)
-        $("body").html(data);
+             var parser = new DOMParser();
+             var page = parser.parseFromString(data, 'text/html').querySelector('div .page-wrapper');
+             $('.page-wrapper').html(page);
+             // $('.main-nav .dropdown-toggle::after').hide();
+        
       }
        });
     });
