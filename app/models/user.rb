@@ -90,12 +90,16 @@ after_create :set_account
       user.uid = auth.uid
       user.name = auth.info.first_name || auth.info.name 
       # user.last_name = auth.info.last_name
+      if(auth.info.email != nil)
        user.email = auth.info.email
+       else
+       user.email="a@g.com" 
+     end
       # user.remote_avatar_url = auth.info.image
       # user.user_role.name = "User"
        user.password = SecureRandom.urlsafe_base64
        user.skip_confirmation!
-      user.save(validate: false)
+      user.save!(validate: false)
       user&.image&.destroy if user.image.present?
       image = user.create_image#Image.new(imageable_id: user.id,imageable_type: "User")
       image.remote_file_url = auth.info.image

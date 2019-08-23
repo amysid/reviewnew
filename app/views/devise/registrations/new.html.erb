@@ -66,8 +66,9 @@
                           <hr class="horizontal-line"><span>OR</span>
                         </div>
                         <div class="form-group text-center1 mb-0 mt30">
-                          <a href="#" class="btn btn-block btn-lg btn-fb"><img src="/assets/facebook.png">Continue with
-                            Facebook</a>
+                           <a href="/users/auth/facebook" class="btn btn-block btn-lg btn-fb"><img src="/assets/facebook.png">continue with facebook</a>
+                             <%#= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
+
                         </div>
                         <p class="text-center mt20"> Already a member? <a class="yellow-text"><%=link_to "Login", new_session_path(resource_name)%></a></p>
                       <%end%>
