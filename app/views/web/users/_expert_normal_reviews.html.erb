@@ -26,8 +26,11 @@
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
                             
                             <% if user_reviews&.criteria.present?%>
+                            <% i=0 %>
                             <% eval(user_reviews.criteria).map do |key,value| %>
-                            <p>
+                             <p>
+                                 <%if i <= 2 %>
+                                 <% i=i+1 %>
                                 <%=key%>:
                                 <% if value > 0 %>
                                 <% value.times do %>
@@ -40,6 +43,7 @@
                             <% end %>
                             <% end %>
                             <%#= user_reviews&.product&.category_name%>
+                           <%end %>
                         </div>
                     </div>
                 </div>
@@ -93,8 +97,11 @@
                         <div class="score-rating">
                             <%= user_reviews&.rating.to_i == 10 ? "10" : "0#{user_reviews&.rating}"%>/10
                             <% if user_reviews&.criteria.present?%>
+                            <% i=0 %>
                             <% eval(user_reviews.criteria).map do |key,value| %>
                             <p>
+                                <% if i<=2 %>
+                                <% i=i+1 %> 
                                 <%=key%>:
                                 <% if value > 0 %>
                                 <% value.times do %>
@@ -106,7 +113,8 @@
                             <%end%>
                             <%end %>
                             <% end %>
-                            <%#= user_reviews.criteria.split(",") %>
+                             <%#= user_reviews.criteria.split(",") %>
+                            <% end %>
                         </div>
                     </div>
                 </div>

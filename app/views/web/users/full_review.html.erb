@@ -23,6 +23,7 @@
                                 <% if @review&.criteria.present?%>
                                 <% eval(@review.criteria).map do |key,value| %>
                                 <p>
+                                    
                                     <%=key%>:
                                     <% if value > 0 %>
                                     <% value.times do %>
@@ -73,4 +74,18 @@
         margin: 15px;
         width: 50%;
     }
+    .score-card {
+    padding: 20px 15px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+    /* width: 433px; */
+    max-width: 524px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.score-card-top {
+    margin-right: 50px;
+}
 </style>

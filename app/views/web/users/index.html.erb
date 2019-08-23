@@ -357,8 +357,8 @@
             <div class="col-7">
                 <nav>
                     <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
-                        <a class="nav-item nav-link active fonts" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
-                        <a class="nav-item nav-link fonts" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
+                        <a class="nav-item nav-link active fonts underscore" data-toggle="pill" href="#nav-name" role="tab">Userscore </a>
+                        <a class="nav-item nav-link fonts metascore" data-toggle="pill" href="#nav-metascore" role="tab">Metascore</a>
                     </div>
                 </nav>
             </div>
@@ -384,7 +384,9 @@
 </div>
 </div>
 <script type="text/javascript">
-$(document).ready(function() {
+// $(document).ready(function() {
+$(document).on("turbolinks:load",function(){
+
     // debugger;
     $('#1').click();
     $('.user_type1').click(function() {
@@ -401,7 +403,9 @@ $(document).ready(function() {
 });
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
+// $(document).ready(function() {
+$(document).on("turbolinks:load",function(){
+
     $('#1').click();
     $('.data_category').change(function() {
         var id = this.value;
@@ -410,6 +414,10 @@ $(document).ready(function() {
             type: 'get',
             data: {
                 id: id
+            },
+            success: function(){
+                $('.metascore').removeClass('active');
+                $('.underscore').addClass('active');
             }
         });
     });

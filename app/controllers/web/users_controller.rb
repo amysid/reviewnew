@@ -37,9 +37,10 @@ class Web::UsersController < ApplicationController
     @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     
     if params[:id].present? && Category.find_by(id: params[:id]).present?
+        #binding.pry
         category1 = Category.find_by(id: params[:id])
-        @reviews_normal= Review.where(user_id: User.find_by(user_type: "Normal User").id, product_id: category1.product.ids).last(4)
-        @review_expert = Review.where(user_id: User.find_by(user_type: "Expert User").id, product_id: category1.product.ids).last(4)
+        @reviews_normal= Review.where(user_id: User.where(user_type: "Normal User").ids, product_id: category1.product.ids).last(4)
+        @review_expert = Review.where(user_id: User.where(user_type: "Expert User").ids, product_id: category1.product.ids).last(4)
     else
        @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
        @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
