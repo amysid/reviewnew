@@ -7,7 +7,7 @@
         <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.last&.file_url %>')"></div>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
-                <p class="release-date"><span>Release latest movie</span> <i class="fa fa-clock-o"></i>
+                <p class="release-date"><span>Release latest <%= trend&.category_name%></span> <i class="fa fa-clock-o"></i>
                     <%= trend&.date&.strftime("%B %d, %Y")%>
                 </p>
                 <h1>
@@ -38,6 +38,7 @@ $(document).on("turbolinks:load",function(){
     jQuery('.home-slider').slick({
         dots: true,
         infinite: true,
+        autoplay: true,
         speed: 300,
         slidesToShow: 1,
     });
