@@ -1,9 +1,31 @@
 <div class="home-slider">
     <%# trending.each do |trend|%>
-    <%#binding.pry%>
+    <% unless @publishs.present? %>
+          <a href="javascript:void(0)" class="slide custom-post">
+        <div class="slide-img setimg cover" style="background-image: url('/assets/_image1.png')"></div>
+        <div class="slide-content container">
+            <div class="slide-text" style="margin-left: 50px">
+                <!-- <p class="release-date"><span>Release latest <%#= trend&.category_name%></span> <i class="fa fa-clock-o"></i> -->
+                    <%#= trend&.date&.strftime("%B %d, %Y")%>
+                </p>
+                <h1>
+                    <%#= trend&.product_name%>
+                </h1>
+                <div class="reslease-name">
+                </div>
+                <p>
+                    <%#= truncate(strip_tags(trend.description), omision: "...", length: 150).html_safe%>
+                </p>
+            </div>
+        </div>
+        
+    
+    </a>  
+    <%end%>
+    
     <% @publishs.each do |trend| %>
-    <a href="/web/users/<%= trend&.id %>/movie_detail">
-    <div class="slide">
+    
+    <a href="/web/users/<%= trend&.id %>/movie_detail" class="slide custom-post">
         <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.last&.file_url %>')"></div>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
@@ -28,7 +50,7 @@
             </div>
         </div>
         
-    </div>
+    
     </a>
     <%end%>
 </div>

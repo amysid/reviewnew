@@ -3,31 +3,30 @@
 <%#end%>
 
 <div class="page-wrapper crousel-page">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <!-- <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-          <% @products.each_with_index do |product,index|%>
-          <% if product.reviews.present? %>
-          <%#binding.pry%>
-          <% if index == 0 %>
+          <%# @products.each_with_index do |product,index|%>
+          <%#if product.reviews.present? %>
+          <%# if index == 0 %>
           <div class="carousel-item active">
-            <img class="d-block w-100" src="<%= product&.image&.first&.file_url%>" alt="First slide" height="550px;" >
+            <img class="d-block w-100" src="<%#= product&.image&.first&.file_url%>" alt="First slide" height="550px;" >
           </div>
-          <%elsif index == 1 %>
+          <%#elsif index == 1 %>
           <div class="carousel-item">
-            <img class="d-block w-100" src="<%= product&.image&.first&.file_url%>" alt="Second slide" height="550px;">
+            <img class="d-block w-100" src="<%#= product&.image&.first&.file_url%>" alt="Second slide" height="550px;">
           </div>
-          <%elsif index == 2 %>
+          <%#elsif index == 2 %>
           <div class="carousel-item">
-            <img class="d-block w-100" src="<%= product&.image&.first&.file_url%>" alt="Third slide" height="550px;">
+            <img class="d-block w-100" src="<%#= product&.image&.first&.file_url%>" alt="Third slide" height="550px;">
           </div>
-          <%end%>
-          <%end%>
-          <%end%>
+          <%#end%>
+          <%#end%>
+          <%#end%>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 
@@ -35,7 +34,7 @@
         <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 
         </a>
-      </div>
+      </div> -->
       <div class="container home-wrap">
         <h2 class="widget-title">METACRITIC REPORTS</h2>
         <div class="row theatres-row">
@@ -67,158 +66,19 @@
           <%end%>
           <%end%>
           <%end%>
-           <!-- <div class="row no-gutters reports-row">
-             <div class="col-md-3">
-              <div class="imgsection">
-                <img src="/assets/Layer 47.png" class="img-fluid">
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="contentsection">
-                <p class="pa">Summer Preview 2019, Tv Preview</p>
-                <h5>Metacritic Reports</h5>
-                <p class="paracol8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <a href="javascript:void(0)" class="readmore align-self-end">View More</a>
-              </div>
-            </div>
-          </div> -->
-         
-          <!-- <div class="row no-gutters reports-row">
-             <div class="col-md-3">
-              <div class="imgsection">
-                <img src="/assets/Layer 47.png" class="img-fluid">
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="contentsection">
-                <p class="pa">Summer Preview 2019, Tv Preview</p>
-                <h5>Metacritic Reports</h5>
-                <p class="paracol8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <a href="javascript:void(0)" class="readmore align-self-end">View More</a>
-              </div>
-            </div>
-          </div> -->
-
-          <!-- <div class="row no-gutters reports-row">
-             <div class="col-md-3">
-              <div class="imgsection">
-                <img src="/assets/Layer 47.png" class="img-fluid">
-              </div>
-            </div>
-            <div class="col-md-9">
-              <div class="contentsection">
-                <p class="pa">Summer Preview 2019, Tv Preview</p>
-                <h5>Metacritic Reports</h5>
-                <p class="paracol8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                <a href="javascript:void(0)" class="readmore align-self-end">View More</a>
-              </div>
-            </div>
-          </div> -->
+           
         </div>
 
-
-      <!-- <div class="col-md-4" >
-        <div class="white-box papular-reports">
-          <p class="centerpara">Papular Reports</p>
-          <ul class="custom-list">
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Summer Preview</span> <span>Best of 2019</span></li>
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Avards Coverage</span> <span>Best of 2019</span></li>
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Streaming Guides</span> <span>Best of 2019</span></li>
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; DVD/Blu-Ray Release</span> <span>Best of 2019</span></li>
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; Film Festivals</span> <span>Best of 2019</span></li>
-          <li class="Font-sizeli"><span><i class="fa fa-caret-left"></i> &nbsp; New Movie Trailers</span> <span>Best of 2019</span></li>
-        </ul>
-        </div>
-      </div> -->
       
     </div>
 
-<!-- <div class="row reports-row1">
-  <h2 class="titile-light">You may also like:</h2>
-</div>
 
-<div class="row reports-row2">
-<div class="custom-slider slidw">
-  <%# @products.each_with_index do |product, index|%>
-    <%#if product.reviews.present?%>
-    <%# if index == 0 %>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%#= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%#= product&.product_name%></h4>
-      <p class="mb-2"><%#= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-       <%#if product.reviews.pluck("rating").sum > 0  %>
-      <p><%#= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%#else%>
-    <p>0%</p>
-    <%#end%>
-    </div>
-  </div>
-  <%#elsif index == 1 %>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%#= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%#= product&.product_name%></h4>
-      <p class="mb-2"><%#= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-      <%#if product.reviews.pluck("rating").sum > 0  %>
-      <p><%#= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%#else%>
-    <p>0%</p>
-    <%#end%>
-    </div>
-  </div>
-  <%# elsif index == 2 %>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%#= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%#= product&.product_name%></h4>
-      <p class="mb-2"><%#= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-      <%#if product.reviews.pluck("rating").sum > 0  %>
-      <p><%#= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%#else%>
-    <p>0%</p>
-    <%#end%>
-    </div>
-  </div>
-  <%# elsif index == 3 %>
-  <div class="custom-post custom-slide">
-    <div class="custom-img">
-      <img src="<%#= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>" class="img-fluid" alt="">
-    </div>
-    <div class="custom-content justify-content-end">
-      <h4 class="custom-title"><%#= product&.product_name%></h4>
-      <p class="mb-2"><%#= truncate(strip_tags(product&.description), omision: "...", length: 400).html_safe%></p>
-      <a href="javascript:void(0)" class="view-more align-self-end">View More</a>
-    </div>
-    <div class="prcnt-section">
-     <%#if product.reviews.pluck("rating").sum > 0  %>
-      <p><%#= (product&.reviews&.pluck("rating")&.sum*100)/ (product&.reviews&.pluck("rating")&.count*10)%>%</p>
-    <%#else%>
-    <p>0%</p>
-    <%# end%>
-    </div>
-  </div>
-  <%#end%>
-  <%#end%>
-  <%#end%>
 </div>
-</div> -->
 </div>
+<div class="box-footer">
+    <div class="digg_pagination pull-right">
+        <%#= will_paginate @products%>
+    </div>
 </div>
 <script>
     $('.custom-slider').slick({

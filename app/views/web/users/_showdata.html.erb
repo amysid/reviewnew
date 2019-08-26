@@ -1,4 +1,4 @@
-<div class="tab-content" id="tabScore">
+<!-- <div class="tab-content" id="tabScore"> -->
             <div class="tab-pane fade show active" id="nav-movies" role="tabpanel">
               <div class="row small">
 
@@ -26,8 +26,7 @@
               	 <%else%>
                  <% i = 0 %>
                 <% @total_products.each do |product|%>
-                <%#binding.pry%>
-                 <%next unless product.reviews.pluck(:user_id).include?(current_user.id)%>
+                 <%#next unless product.reviews.pluck(:user_id).include?(current_user.id)%>
                 <div class="col-md-4">
                   <div class="score-card" id="tab1">
                     <div class="score-card-top">
@@ -36,23 +35,30 @@
                         <h4><%= product&.product_name%></h4>
                         <span><%= product&.date&.strftime("%d/%m/%Y")%></span>
                       </div>
-                      <%#binding.pry%>
-                      <%if product.reviews.pluck("rating").present?%>
-                      <div class="score-rating"><%=product.reviews[i].rating%>/10</div>
-                      <% i += 1 %>
-                      <%else%>
-                      <div class="score-rating">0/10</div>
-                      <%end%>
+                      <%#if product.reviews.pluck("rating").present?%>
+                      <!-- <div class="score-rating"><%#=product.reviews[i].rating%>/10</div> -->
+                      <div class="score-rating pull"><%= product&.rating rescue 0 %>/10</div>
+                      <%# i += 1 %>
+                      <%#else%>
+                      <!-- <div class="score-rating">0/10</div> -->
+                      <%#end%>
 
                     </div>
-                    <p><%= truncate(strip_tags(product&.reviews&.where(user_id: current_user.id)&.first&.comment), omision: "...", length: 250).html_safe%></p>
+                    <!-- <p><%#= truncate(strip_tags(product&.reviews&.where(user_id: current_user.id)&.first&.comment), omision: "...", length: 250).html_safe%></p> -->
+                    
+                    <p><%= truncate(strip_tags(product.reviews_comments), omision: "...", length: 130).html_safe%></p>
+                    <% if product.reviews_comments.size >=  130 %>
+                     <a href="javascript:void(0);" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= product&.reviews_comments%>">Read Full Review</a>
+                     <%end%>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
-                         <span><img style="width:25px" src='<%= review_vote_status(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_like_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
 
-                        <span><img style="width:25px" src='<%= review_vote_status_dislike(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=product&.reviews&.where(user_id: current_user.id)&.first&.id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(product&.reviews&.where(user_id: current_user.id)&.first)%></span>
+                         <span><img style="width:25px" src='<%= review_vote_status(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/like_active.png" : "/assets/Facebook_like_thumb.png"%>' class="vote_ajax" id="like_<%=product&.review_id%>" alt="" onclick="voting(this)"><%= voting_like_count(product&.review_id)%></span>
+
+                        <span><img style="width:25px" src='<%= review_vote_status_dislike(product&.reviews&.where(user_id: current_user.id)&.first&.id)  ? "/assets/facebook_not_like_thumbs_down.png"  : "/assets/dislike_active.png" %>' class="vote_ajax" id="dislike_<%=product&.review_id%>" alt="" onclick="voting(this)"><%= voting_dislike_count(product&.review_id)%></span>
                       </div>
-                      <a href="javascript:void(0);" class="show_hide text-underline">Read Full Review</a>
+                     
+
                     </div>
                   </div>
                 </div>
@@ -60,4 +66,21 @@
                 <%end%>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
+<script>
+  $('[data-toggle="popover"]').popover();   
+// $(document).ready(function() {
+// $(document).on("turbolinks:load",function(){
+//     $('[data-toggle="popover"]').popover();
+// });
+</script>
+<style type="text/css">
+  .score-rating {
+    margin-left: 125px;
+    margin-top: 25px;
+}
+.score-card p {
+   
+    margin-bottom: 25px;
+}
+</style>

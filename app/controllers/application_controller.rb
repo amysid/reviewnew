@@ -32,7 +32,6 @@ class ApplicationController < ActionController::Base
     end
 
     def after_sign_in_path_for(resource)
-      # binding.pry
       Class.new.send(:include,AccountConcern).new.unlock_account(current_user.account_address,Decrypt_me.call(current_user.key,current_user.salt,current_user.account_password)) rescue nil
       cookies.signed[:expire_in] = 3.minutes.from_now
        if(resource.role == "admin")

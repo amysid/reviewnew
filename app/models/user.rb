@@ -21,7 +21,6 @@ after_create :set_account
   }
 # set ethereum account of users
   # def set_account 
-  #   binding.pry
   #   data = self.u_role_before_type_cast == 0 ? "Mobiloitte1" : SecureRandom.alphanumeric(8)
   #   self.account_password = Encrypt_me.call(self.employee_login_id,self.created_at,data)
   #   self.account_address = self.u_role_before_type_cast == 0 ? Client.personal_list_accounts["result"][0] : User.get_new_address(data)
@@ -108,7 +107,6 @@ after_create :set_account
   end
 
   # def update_with_password(params={})
-  #   binding.pry
   #       current_password = params.delete(:current_password)
 
   #       if params[:password].blank?

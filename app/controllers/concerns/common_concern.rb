@@ -21,9 +21,7 @@ module CommonConcern
   end
 
  def get_query
-  # binding.pry
     query= Set.new
-     # binding.pry
     @search_params = @search_params.collect{|k,v| [k.to_sym,v.strip] if v.present? }.compact.to_h
     @search_params[:search] = "%#{@search_params[:search]}%"
     # @search_params[:status] = (@search_params[:status] == "true") if @search_params[:status]

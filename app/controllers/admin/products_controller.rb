@@ -105,7 +105,6 @@ class Admin::ProductsController < ApplicationController
    end
 
    def trending
-   # binding.pry
    @trending=Product.find_by(id: params[:id]).trending
    if @trending == true
      Product.find_by(id: params[:id]).update(trending: false)

@@ -26,7 +26,6 @@ module Web::UsersHelper
 	end
 
 	def review_vote_status(id)
-		# binding.pry
 		review = Review.find_by(id: id)
 		# this_vote = review&.votes.where(user_id: current_user.id)&.first
 		this_vote = review&.votes&.first#.where(user_id: current_user.id)&.first
@@ -40,7 +39,6 @@ module Web::UsersHelper
 	end
 
 	def review_vote_status_dislike(id)
-		# binding.pry
 		review = Review.find_by(id: id)
 		# this_vote = review&.votes.where(user_id: current_user.id)&.first
 		this_vote = review&.votes&.first#.where(user_id: current_user.id)&.first
@@ -54,11 +52,13 @@ module Web::UsersHelper
 	end
 
 	def voting_like_count(review)
-		review.votes.where(vote_status: true).count
+		Review.find_by(id: review).votes.where(vote_status: true).count rescue 0
+		# review.votes.where(vote_status: true).count
 	end
 
 	def voting_dislike_count(review)
-		review.votes.where(vote_status: false).count
+		Review.find_by(id: review).votes.where(vote_status: false).count rescue 0
+		# review.votes.where(vote_status: false).count
 	end
 
 end

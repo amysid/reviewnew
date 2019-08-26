@@ -57,7 +57,6 @@
                                 <div class="imgshadow">
                                     <div class="images1">
                                         <%if product.image.present?%>
-                                        <%#binding.pry%>
                                         <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
                                         <%else%>
                                         <img src="images/Layer46.jpg">
@@ -260,7 +259,6 @@
                     <div class="custom-img">
                         <%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>
                         <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
-                        <%#binding.pry%>
                     </div>
                     <div class="custom-content justify-content-end">
                         <h4 class="custom-title">

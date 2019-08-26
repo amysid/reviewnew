@@ -1,6 +1,5 @@
  <%#  @reviews_normal&.each  do |@review|%>
         <% if @review.present?%>
-        <%#binding.pry%>
         <%@a = User.find_by(id: @review.user_id) %>
         <!-- <div class="slide-item "> -->
             <div class="score-card">

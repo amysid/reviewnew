@@ -7,7 +7,6 @@
             <div class="col-md-4 image-col">
                 <% @count_image = 0 %>
                 <% @products&.each do |product|%>
-                <%#binding.pry%>
                 <% if @count_image <= 2 %>
                 <div class="image1" style="background-image: url('<%= product.image.first.file_url%>');">
                     <!--  <img src="images/Layer 10.png"> -->
@@ -56,7 +55,6 @@
                 <div class="tab-content theatres-content" id="tabScore">
                   <div class="tab-pane fade show active" id="tab-2" role="tabpanel">
                     <% @products&.each do |product| %>
-                    <%#binding.pry%>
                     <% if product.category_name == @categorys&.first&.category_name %>
                     <div class="row tranding-item-row no-guttors">
                         <div class="col-md-6">

@@ -51,7 +51,6 @@
             <div class="col-md-8">
                 <h3>Ratings Summary</h3>
             </div>
-            <%#binding.pry%>
             <%#if @product.reviews.where(user_id: current_user.id).present? %>
             <%if @product.reviews.where(user_id: current_user&.id).present? %>
             <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
@@ -72,7 +71,6 @@
             <% @negative_normal = 0 %>
             <% @medium_normal = 0 %>
             <%  @user_reviews.each do |abc|%>
-            <%#binding.pry%>
             <% if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
             <% @positive_normal += 1 %>
             <% elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
@@ -131,13 +129,11 @@
             <%#end%>
             <%end%>
             <%end%>
-            <%#binding.pry%>
             <div class=" col-md-6 ">
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Metascore</span><br>
                         <span class="button1" id="button65reviews">
                             <%=@meta_reviewss.count%></span></p>
-                    <%#binding.pry%>
                 </div>
                 <div class="buttonsreviews">
                     <div class="progress">
@@ -233,8 +229,6 @@
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
                                         <%if review&.comment&.present? && review&.comment&.length > 130%>
-                                        <%#binding.pry%>
-
                                        <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
                                     </div>
@@ -252,6 +246,7 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
+                        
                         <div class="row">
                             <%@meta_reviews[0..3].each do |review|%>
                             <div class="col-md-6">
@@ -268,7 +263,6 @@
                                             </div>
                                             <div class="score-rating">
                                                 <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10
-                                                <%#binding.pry%>
                                                 <% if review&.criteria.present?%>
                                                 <% eval(review.criteria)&.map do |key,value| %>
                                                 <p>
@@ -379,7 +373,6 @@
                     <div class="rating-row">
                         <div class="count_child">
                             <%@review_parts.each do |criteria|%>
-                            <%#binding.pry%>
                             <div class="rating-wrap">
                                 <span class="ratetitle">
                                     <%= criteria&.criteria&.titleize%></span>

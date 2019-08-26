@@ -5,7 +5,6 @@
     <div class="home-slider1">
         <%  @reviews_normal&.each  do |user_reviews|%>
         <% if user_reviews.present?%>
-        <%#binding.pry%>
         <%@a = User.find_by(id: user_reviews.user_id) %>
         <div class="slide-item ">
             <div class="score-card">
@@ -52,7 +51,7 @@
                     <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
                     <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
                     <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
-                    <a href="web/users/read_full_review?id=<%= user_reviews&.id %>">Read Full Review</a>
+                    <a href="<%=read_full_review_web_users_path(id: user_reviews&.id)%>">Read Full Review</a>
                     <%end%>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -79,7 +78,6 @@
     <%else%>
     <div class="home-slider1">
         <% @review_expert&.each  do |user_reviews|%>
-        <%#binding.pry%>
         <% if user_reviews.present?%>
         <% @a = User.find_by(id: user_reviews.user_id) %>
         <div class="slide-item">
@@ -123,7 +121,7 @@
                     <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
                     <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe %>
                     <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
-                    <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= user_reviews&.comment%>">Read Full Review</a>
+                    <a href="<%=read_full_review_web_users_path(id: user_reviews&.id)%>">Read Full Review</a>
                     <%end%>
                 </div>
                 <div class="d-flex justify-content-end">
@@ -187,3 +185,321 @@ $(document).on("turbolinks:load",function(){
     $('[data-toggle="popover"]').popover();
 });
 </script>
+<style type="text/css">
+.reviewTab {
+    padding-top: 30px;
+}
+.reviewTab.tab-content>.tab-pane {
+    display: block;
+    overflow: hidden;
+}
+.reviewTab .tab-pane {
+    padding: 0px;
+}
+.slick-prev,
+.slick-next{
+    font-size: 0;
+    line-height: 0;
+    position: absolute;
+    top: 50%;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: transparent;
+    border: none;
+    outline: none;
+    background: transparent;
+    z-index: 9;
+}
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus{
+    color: transparent;
+    outline: none;
+    background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before{
+    opacity: .25;
+}
+
+.slick-prev:before,
+.slick-next:before{
+    font-family: 'slick';
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev{
+    left: 25px;
+}
+[dir='rtl'] .slick-prev{
+    right: 25px;
+    left: auto;
+}
+.slick-prev:before{
+    content: '←';
+}
+[dir='rtl'] .slick-prev:before{
+    content: '→';
+}
+
+.slick-next{
+    right: 25px;
+}
+[dir='rtl'] .slick-next{
+    right: auto;
+    left: 25px;
+}
+.slick-next:before{
+    content: '→';
+}
+[dir='rtl'] .slick-next:before{
+    content: '←';
+}
+
+/* Dots */
+.slick-dotted.slick-slider {
+    margin-bottom: 30px;
+}
+
+.slick-dots {
+    position: absolute;
+    bottom: 20px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+.slick-dots li {
+    position: relative;
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin: 0 5px;
+    padding: 0;
+    cursor: pointer;
+}
+.slick-dots li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 17px;
+    height: 17px;
+    padding: 5px;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.slick-dots li button:hover,
+.slick-dots li button:focus {
+    outline: none;
+}
+.slick-dots li.slick-active button {
+    background: #ff6b1b;
+    border-color: #ff6b1b;
+}
+ 
+.slick-dots1 li button {
+    font-size: 0;
+    line-height: 0;
+    display: block;
+    width: 17px;
+    height: 17px;
+    padding: 5px;
+    cursor: pointer;
+    color: transparent;
+    border: 0;
+    outline: none;
+    background: #ff6b1b;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+.home-slider1 .slide-item {
+    /*box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);*/
+    padding: 6px;
+}
+.home-slider1 .slide-item .score-card {
+    margin-bottom: 0px;
+    min-height: 333px;
+}
+.home-slider1 .slide-item .score-card-top {
+    justify-content: flex-start;
+}
+.ratingText {
+    min-height: 88px;
+    margin-bottom: 15px;
+}
+.rtUserImg {
+    overflow: hidden;
+    margin-right: 15px;
+}
+.rtUserImg img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #d1cfd2;
+}
+.date1{
+    color: #f17344;
+    font-size: 22px;
+    font-weight: 500;
+}
+.home-slider1 ul.slick-dots {
+    display: inline-block;
+    max-width: 130px;
+    right: 0px;
+    z-index: 9;
+    bottom: -60px;
+}
+.home-slider1 ul.slick-dots li {
+    border: 1px solid #868686;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+}
+
+.profil-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+.user-profile {
+    text-align: center;
+}
+.user-profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+.user-detail {
+    display: flex;
+    justify-content: space-between;
+    min-width: 70%;
+}
+.user-detail .btn {
+    margin-top: 20px;
+}
+.ratings, .reviews {
+    text-align: center;
+    width: 150px;
+}
+.ratings h3, .reviews h3 {
+    font-size: 50px;
+    color: #4d4d4d;
+    background: #f1f1f1;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ratings span, .reviews span {
+    font-size: 14px;
+    color: #3c4043;
+    text-align: center;
+}
+.myscore-row .main-title {
+    text-align: left;
+    font-size: 30px;
+}
+.myscore-row .main-title:after {
+    margin: 5px 0 0 0;
+}
+.tab-pane {
+    padding: 30px 0px 0px 0px;
+}
+.nav-tabs {
+    border-bottom: 0;
+}
+.nav-pills .nav-link {
+    border-radius: 0;
+    border: 0px;
+    background: #dbd6d6;
+    color: #424242;
+    margin-bottom: 0px;
+    -webkit-clip-path: polygon(2px 216px,336px 217px,278px -2px,0px 0px);
+    clip-path: polygon(2px 216px,336px 217px,278px -2px,0px 0px);
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #fe7100;
+}
+.score-card {
+    padding: 20px 15px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 30px;
+}
+.score-card-top {
+    display: flex;
+    align-items: center;
+/*    justify-content: space-between;*/
+    margin-bottom: 18px;
+}
+.name-date h4 {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.name-date span {
+    font-size: 12px;
+    color: #6e6e6e;
+}
+.score-card p {
+   font-size: 12px;
+    margin-bottom: auto;
+}
+.score-rating {
+    font-size: 25px;
+    font-weight: 600;
+    color: #fe7100;
+}
+.like-dislike {
+    display: flex;
+    align-items: center;
+}
+.like-dislike span {
+    font-size: 16px;
+    color: #6e6e6e;
+    margin-right: 10px;
+}
+.like-dislike span img{
+    margin-right: 5px;
+}
+.text-underline {
+    text-decoration: underline;
+}
+.more_text {
+    display: none;
+}
+.more_text.show {
+    display: inline;
+}
+</style>

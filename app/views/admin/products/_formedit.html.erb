@@ -25,7 +25,6 @@
                         <%#=sub_categories_by_category%>
                         <label class="col-sm-2 col-md-2 control-label">Sub_category</label>
                         <div class="col-sm-8 col-md-8">
-                          <%#binding.pry%>
                           <%#= f.select :state, options_for_select([],@user.state), {:include_blank => "Select State"}, {:id=>"web-user-city-select",:class => "form-control mt-10"} %>
                         <%= f.select :sub_category_name, options_for_select( @sub_categories,@products.sub_category_name), {:include_blank => "Select SubCategory Name"}, {:class => "form-control select-dropdown " ,id: "ror_shubham",:required => true} %>
                         </div>
@@ -48,7 +47,6 @@
                           <!-- <img src="/assets/photo_gallery.webp"  alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=100px width=200px /><i class="" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i> -->
                             <%#= m.file_field :file, onchange: "preview(this)" , accept: "image/*", id: "file-upload"%>
                             <div id="file1">
-                              <%#binding.pry%>
                                <%#= image_tag ((m.object.image.present? && m.object.image_url.present?) ? m.object.image_url : "/assets/photo_gallery.webp" ) %>
                                <img src='<%= m.object.file.present? ? m.object.file_url : "/assets/photo_gallery.webp" %>' height=100px width=200px alt="your image" class="img_prev"/>
                               <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>

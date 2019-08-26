@@ -15,7 +15,7 @@
                 <li class="nav-item user-item"><a class="" href="/web/users/<%= current_user.id %>/user_profile"><span>
                             <%= current_user&.name%></span> <img src="<%= current_user&.image&.file&.present? ? current_user&.image&.file&.try(:url) : "/assets/user_default.jpeg" %>" alt=""> </a></li>
                 <li><a class="nav-link btn btn-theme" href="#" data-toggle="modal" data-target="#logoutModal">Log Out</a>
-                    <!-- <a class="nav-link btn btn-outline-dark" href="<%#=destroy_user_session_path(current_user)%>">Log Out</a> -->
+               
                 </li>
                 <%else%>
                 <li>
@@ -39,8 +39,8 @@
                 <%end%>
                 <% category.each do |category|%>
                 <li class="nav-item dropdown mega-dropdown">
-                    <a class="nav-link user_type dropdown-toggle shubham change_data <%= xyz == category.id ? "active" : "" %>"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0);" id="<%= category.id%>">
-                        <%= category.category_name%></a>
+             
+<a class="nav-link user_type dropdown-toggle shubham <%= xyz == category.id ? "active" : "" %>" aria-haspopup="true" aria-expanded="false" href="<%= web_users_path(id: category.id)%>" id="<%= category.id%>"><%= category.category_name%></a>
                     <div class="dropdown-menu mega-menu">
                         <div class="row">
                             <div class="col-md-3">
@@ -57,7 +57,7 @@
                                         <p class="mb-2" >
                                             <%= category.category_name %>
                                         </p>
-                                        <%#= category&.sub_categories&.first&.product&.image&.first&.file&.url%>
+                                    
                                     </div>
                                 </div>
                             </div>
@@ -71,15 +71,15 @@
                                                 <a class="" role="button" href="/web/users/<%=sub.id%>/movie_category">
                                                     <%= sub&.sub_category_name%></a>
                                             </li>
-                                            <!-- <li><a href="#">Best of Netflix</a></li>
-                            <li><a href="#">New to DVD & Streaming</a></li> -->
+                        
                                         </ul>
                                     </div>
-                                    <!-- </div> -->
                                     <% elsif index <= 5%>
                                     <div class="col-md-3">
                                         <ul class="mega-menu-list">
-                                            <li><a href="/web/users/<%=sub.id%>/movie_category">
+                                            <li>
+                                                <a href="/web/users/<%=sub.id%>/movie_category" class="custom-post">
+                                              
                                                     <%= sub&.sub_category_name%></a></li>
                                         </ul>
                                     </div>
@@ -88,7 +88,6 @@
                                         <ul class="mega-menu-list">
                                             <li><a href="/web/users/<%=sub.id%>/movie_category">
                                                     <%= sub&.sub_category_name%></a></li>
-                                            <!-- <li><a href="#">Best movies of All Time</a></li> -->
                                         </ul>
                                     </div>
                                     <%end%>
@@ -115,9 +114,7 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <h5 class="modal-title">LOGOUT</h5>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button> -->
+                
             </div>
             <div class="modal-body">
                 <p class="mt-4 bigtitle">Are you sure you want to Logout?</p>
@@ -132,21 +129,7 @@
     </div>
 </div>
 <script type="text/javascript">
-// $(document).ready(function() {
-//     $('#header .navbar-nav > li > a').click(function() {
-//         $('li a').removeClass("active");
-//         $(this).addClass("active");
-//     });
-//     $('#header .mega-menu-list > li > a').click(function() {
-//         $('li a').removeClass("active");
-//         $(this).addClass("active");
-//     });
-// });
-// $("#header ul li a").each(function() {
-//     if ((window.location.pathname.indexOf($(this).attr('href'))) > -1) {
-//         $(this).addClass('activeMenuItem');
-//     }
-// });
+
 </script>
 <style type="text/css">
     .shubham:hover{
@@ -154,42 +137,25 @@
         font-weight: bold;
     }
 </style>
-<script type="text/javascript">
- //     $(document).ready(function(){
- //      $('#1').click();
- //      $('.change_data').click(function(){
- //        alert("hello click is working");
- //       debugger;
- //        var id=$(this).attr("id");
- //      $.ajax({
- //         url: '/web/users/test',
- //         type: 'get',
- //         data: {s
- //          id: id
- //          }
- //       });
- //    });
- // });
- // 
+<!-- <script type="text/javascript">
+
 $(document).ready(function(){
       $('#1').click();
       $('.change_data').click(function(){
 
         var id=$(this).attr("id");
       $.ajax({
-         url: '/web/users/',
+         url: '/web/users.js?only=page',
          type: 'get',
          data: {
           id: id
           },
           success: function(data){
-             var parser = new DOMParser();
-             var page = parser.parseFromString(data, 'text/html').querySelector('div .page-wrapper');
-             $('.page-wrapper').html(page);
-             // $('.main-nav .dropdown-toggle::after').hide();
-        
+            debugger;
+             var a = $(data);
+           
       }
        });
     });
  });
-</script>
+</script> -->
