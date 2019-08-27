@@ -186,7 +186,7 @@
                   <p class="date"><i class="fa fa-clock-o"></i> <%= first&.date&.strftime("%B %d, %Y")%></p>
                 </div>
                 <div class="percent-section">
-                  <p><%= (first&.avg_rating&.to_f * 10)&.round(2) rescue nil %>%</p>
+                  <p><%= (first&.avg_rating&.to_f )&.round(2) rescue nil %>%</p>
                 </div>
               </a>
           <% @latest_stories.in_groups_of(2, false).each_with_index do |x,index| %>
@@ -204,7 +204,7 @@
                       <p class="date"><i class="fa fa-clock-o"></i> <%= y&.date&.strftime("%B %d, %Y")%></p>
                     </div>
                     <div class="percent-section">
-                  <p><%= (y&.avg_rating&.to_f * 10).round(2) %>%</p>
+                  <p><%= (y&.avg_rating&.to_f ).round(2) %>%</p>
                     </div>
                   </a>
                 </div>
@@ -241,7 +241,7 @@
                   <p class="date"><i class="fa fa-clock-o"></i><%= y&.date&.strftime("%B %d, %Y")%></p>
                 </div>
                 <div class="percent-section">
-                  <p><%=  (y&.avg_rating&.to_f * 10).round(2)%>%</p>
+                  <p><%=  (y&.avg_rating&.to_f ).round(2)%>%</p>
                 </div>
               </a>
                 <% end %>

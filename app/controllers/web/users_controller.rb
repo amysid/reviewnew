@@ -31,7 +31,7 @@ class Web::UsersController < ApplicationController
       # @products = Product.where(category_id: params[:id])
       @products =Product.where(category_id: params[:id]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
       
-      @latest_stories =  Product.where(category_id: params[:id]).select('products.* ,product_name,description,date, avg(reviews.rating) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+      @latest_stories =  Product.where(category_id: params[:id]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
     else
      @trending_products = Product.where(trending: true)
      @products =Product.all.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
