@@ -1287,8 +1287,11 @@ select.category {
     margin-top: 20px;
 }
 .ratings, .reviews {
-    text-align: center;
-    width: 150px;
+    /*text-align: center;*/
+    /*width: 150px;*/
+    /*text-align: center; */
+    width: 100%;
+    margin: 20px 0px;
 }
 .ratings h3, .reviews h3 {
     font-size: 50px;
