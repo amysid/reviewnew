@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
     before_action :banned?
     before_action :configure_permitted_parameters, if: :devise_controller?
     around_action :convert_flash, if: :check_flash
-    #before_action :unlock_account_check
+    before_action :unlock_account_check
 
 
 
@@ -68,7 +68,7 @@ class ApplicationController < ActionController::Base
   end
 
   private 
-  # def unlock_employee_account
-  #   Class.new.send(:include,AccountConcern).new.unlock_account(current_user.account_address,Decrypt_me.call(current_user.key,current_user.salt,current_user.account_password)) if cookies.signed[:expire_in] && 1.minutes.from_now .0> DateTime.parse(cookies.signed[:expire_in]) && cookies.signed[:expire_in] = 3.minutes.from_now
-  # end
+  def unlock_employee_account
+    Class.new.send(:include,AccountConcern).new.unlock_account(current_user.account_address,Decrypt_me.call(current_user.key,current_user.salt,current_user.account_password)) if cookies.signed[:expire_in] && (1.minutes.from_now > DateTime.parse(cookies.signed[:expire_in])) && cookies.signed[:expire_in] = 3.minutes.from_now
+  end
 end

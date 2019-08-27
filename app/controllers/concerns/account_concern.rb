@@ -16,11 +16,11 @@ module AccountConcern
 
   def get_balance address
     balance = Client.get_balance(address) rescue nil
-    # if balance < 1000000000000000000 
-    #   @formatter = Ethereum::Formatter.new
-    #   value = Client.int_to_hex(@formatter.to_wei(1.0))
-    #   Client.eth_send_transaction({from: Client.personal_list_accounts["result"][0],to: address,value: value})
-    # end
+    if balance < 1000000000000000000 
+      @formatter = Ethereum::Formatter.new
+      value = Client.int_to_hex(@formatter.to_wei(1.0))
+      Client.eth_send_transaction({from: Client.personal_list_accounts["result"][0],to: address,value: value})
+    end
     balance
   end
 

@@ -439,7 +439,10 @@
 </div>
 <script>
 $(document).ready(function() {
-    $('#form_tag_review').on('click', function() { $('#count_rating_dynamic').submit(); });
+    $('#form_tag_review').on('click', function() { 
+        $(this).attr('disabled', 'disabled');
+        $('#count_rating_dynamic').submit(); 
+    });
 });
 
 $('.custom-slider').slick({
