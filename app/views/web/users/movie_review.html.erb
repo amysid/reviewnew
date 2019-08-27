@@ -53,12 +53,15 @@
             </div>
             <%#if @product.reviews.where(user_id: current_user.id).present? %>
             <%if @product.reviews.where(user_id: current_user&.id).present? %>
-            <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
+            <div class="col-md-4 text-right "><a href="<%=new_user_session_path%>" class="posted-btn" data-toggle="modal" disabled>
                     Review Already Posted</a>
             </div>
             <%elsif !current_user.present?%>
-              <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
-                    Login for Write a review</a>
+            <div class="col-md-4 text-right ">
+               <%= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
+              <!-- <div class="col-md-4 text-right ">
+                <a href="#" class="posted-btn" data-toggle="modal" disabled>
+                    Login for Write a review</a> -->
             </div>
             <%else%>
             <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">
@@ -193,6 +196,7 @@
                 </nav>
                 <div class="tab-content theatres-content" id="tabScore">
                     <div class="tab-pane fade in show active" id="nav-name" role="tabpanel">
+                        <% if @user_reviews.present?%>
                         <div class="row">
                             <%@user_reviews[0..3].each do |review|%>
                             <div class="col-md-6">
@@ -210,8 +214,11 @@
                                             <div class="score-rating">
                                                 <%= review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10
                                                 <%if review&.criteria.present? %>
+                                                <% z=0 %>
                                                 <% eval(review.criteria).map do |key,value| %>
                                                 <p>
+                                                    <% if z<=2 %>
+                                                    <%z=z+1%>
                                                     <%=key%>:
                                                     <% if value > 0 %>
                                                     <% value.times do %>
@@ -221,6 +228,7 @@
                                                 <%else%>
                                                 N/A
                                                 <%end%>
+                                                <%end%>
                                                 <% end %>
                                                 <%end%>
                                             </div>
@@ -228,7 +236,7 @@
                                     </div>
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
-                                        <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                        <%if review&.comment&.present? && review&.comment&.length > 130 || z>=3%>
                                        <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
                                     </div>
@@ -243,9 +251,13 @@
                                 </div>
                             </div>
                             <%end%>
+                            <%else%>
+                            <div><p>No Record Found</p></div>
+                            <%end%>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
+                      <%if @meta_reviews.present? %>
                         
                         <div class="row">
                             <%@meta_reviews[0..3].each do |review|%>
@@ -264,8 +276,11 @@
                                             <div class="score-rating">
                                                 <%=review&.rating.to_i == 10 ? "10" : "0#{review&.rating}"%>/10
                                                 <% if review&.criteria.present?%>
+                                                <%z=0%>
                                                 <% eval(review.criteria)&.map do |key,value| %>
                                                 <p>
+                                                    <%if z<=2%>
+                                                    <% z=z+1 %>
                                                     <%=key%>
                                                     <%if value > 0 %>
                                                     <% value.times do %>
@@ -277,12 +292,13 @@
                                                 <%end%>
                                                 <% end %>
                                                 <%end%>
+                                                <%end%>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
-                                        <%if review&.comment&.present? && review&.comment&.length > 130%>
+                                        <%if review&.comment&.present? && review&.comment&.length > 130 || z>=3%>
                                         <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
                                         <%end%>
                                     </div>
@@ -298,12 +314,17 @@
                             </div>
                             <%end%>
                         </div>
+                    <%else%>
+                    <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
+                        <p>No records found.</p>
                     </div>
+                   <%end%>
                 </div>
             </div>
             <div class="col-md-12 col-lg-4">
                 <div class="widget reviewe-widget">
                     <h3 class="widget-title">Reviewed Today</h3>
+                    <% if @todays_review.present?%>
                     <%@todays_review[0..6].each do |review|%>
                     <div class="d-flex align-items-start reviewe-widget-item mb-4">
                         <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
@@ -319,6 +340,11 @@
                         </div>
                     </div>
                     <%end%>
+                    <%else%>
+                    <div>
+                        <p>No record found.</p>
+                    </div>
+                    <%end%>
                 </div>
             </div>
         </div>
@@ -328,8 +354,10 @@
             <div class="heading">
                 <h3 class="titile-light">You may also like:</h3>
             </div>
-            <div class="custom-slider slidw">
+            <!-- <div class="custom-slider slidw"> -->
+                <div class="row">
                 <%@product_moview_reviews&.each do |product|%>
+                  <div class="col-sm-4 col-md-4 col-lg-4">
                 <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
                     <div class="custom-img">
                         <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
@@ -352,6 +380,7 @@
                         <% end %>
                     </div>
                 </a>
+                  </div>
                 <%end%>
             </div>
         </div>

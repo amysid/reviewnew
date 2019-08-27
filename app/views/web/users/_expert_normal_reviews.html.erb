@@ -1,3 +1,4 @@
+
 <div class="tab-pane fade show active tab-3" id="nav-name" role="tabpanel">
     <% if @reviews_normal.blank? %>
     <p>No Record Found</p>
@@ -50,7 +51,7 @@
                     <%#=truncate(user_reviews&.comment)%>
                     <%=truncate(strip_tags(user_reviews&.comment), omision: "...", length: 100)&.html_safe%>
                     <%#= truncate(strip_tags(user_reviews&.comment), length: 130).html_safe%>
-                    <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 %>
+                    <%if user_reviews&.comment.present? && user_reviews&.comment&.length > 100 || i >= 3 %>
                     <a href="<%=read_full_review_web_users_path(id: user_reviews&.id)%>">Read Full Review</a>
                     <%end%>
                 </div>

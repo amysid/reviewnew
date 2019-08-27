@@ -7,8 +7,12 @@ class Web::UsersController < ApplicationController
   def full_review
     @review = Review.find_by(id: params[:id])
   end
+   def header_search
+    binding.pry
+  end
+  
   def index
-     
+
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end
@@ -22,16 +26,18 @@ class Web::UsersController < ApplicationController
     @category = Category.all
     @reviews_count = Product.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
     @average_review = Review.average(:rating).to_f * 10
+
     # @reviews_all = Product.all.map {|x| x.reviews.map {|b| b.rating}.sum}.sum
-    if params[:id].present?
-     @name1=Category.find(params[:id]).category_name
+    if params[:name].present?
+     # @name1=Category.find(category_name:  params[:name])
+     @name1= params[:name]
       @trending_products = Product.where(trending: true,category_name: @name1)
-      @publishs = Product.where(category_id: params[:id]).where(current: "publish")
+      @publishs = Product.where(category_name:  params[:name]).where(current: "publish")
                 
       # @products = Product.where(category_id: params[:id])
-      @products =Product.where(category_id: params[:id]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
+      @products =Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
       
-      @latest_stories =  Product.where(category_id: params[:id]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+      @latest_stories =  Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
     else
      @trending_products = Product.where(trending: true)
      @products =Product.all.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
@@ -93,13 +99,80 @@ class Web::UsersController < ApplicationController
 
   def movie_detail 
     
-  @a = Product.find_by(id: params[:id])&.sub_category_id
-  @sub_categories = SubCategory.find_by(id: @a)
-  @products_movie_details = @sub_categories&.products&.last(4)
+   @a = Product.find_by(id: params[:id])&.sub_category_id
+    @sub_categories = SubCategory.find_by(id: @a)
+    @products_movie_details = @sub_categories&.products&.last(4)
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
     @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
+   @b = Product.find_by(id: params[:id]).sub_category_id
+    @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
+     @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
+    @product = Product.find_by(id: params[:id])
+    @all_sub_category = @product&.category&.sub_categories
+    @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
+    @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
+    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
+    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
+     @user_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+    @meta_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
+    
+    @user_reviews_hash = {}
+    @user_reviews_hash[:positive] = [] 
+    @user_reviews_hash[:negative] = []
+    @user_reviews_hash[:middle] = []
+
+
+    @user_reviews.each do |r|
+      if r&.spoiler == true
+        @user_reviews_hash[:negative] << r
+        next
+      end
+
+      if r&.rating >= 6
+        @user_reviews_hash[:positive] << r
+      elsif r&.rating < 6 && r&.rating > 3
+          @user_reviews_hash[:middle] << r
+        else
+          @user_reviews_hash[:negative] << r
+        end
+    end
+
+     @meta_reviews_hash = {}
+    @meta_reviews_hash[:positive] = [] 
+    @meta_reviews_hash[:negative] = []
+    @meta_reviews_hash[:middle] = []
+
+
+    @meta_reviews.each do |r|
+      if r&.spoiler == true
+        @meta_reviews_hash[:negative] << r
+        next
+      end
+
+      if r&.rating >= 6
+        @meta_reviews_hash[:positive] << r
+      elsif r&.rating < 6 && r&.rating > 3
+          @meta_reviews_hash[:middle] << r
+        else
+          @meta_reviews_hash[:negative] << r
+        end
+    end
+
+    @user_score = {}
+
+    @user_score[:positive] = ((@user_reviews_hash[:positive].count * 100)/@user_reviews.count) rescue 0
+    @user_score[:negative] = ((@user_reviews_hash[:negative].count * 100)/@user_reviews.count) rescue 0
+    @user_score[:middle] = ((@user_reviews_hash[:middle].count * 100)/@user_reviews.count) rescue 0
+
+
+    @meta_score = {}
+
+    @meta_score[:positive] = ((@meta_reviews_hash[:positive].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:negative] = ((@meta_reviews_hash[:negative].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:middle] = ((@meta_reviews_hash[:middle].count * 100)/@meta_reviews.count) rescue 0
+
   end
 
   def movie_review
@@ -169,9 +242,6 @@ class Web::UsersController < ApplicationController
     @meta_score[:positive] = ((@meta_reviews_hash[:positive].count * 100)/@meta_reviews.count) rescue 0
     @meta_score[:negative] = ((@meta_reviews_hash[:negative].count * 100)/@meta_reviews.count) rescue 0
     @meta_score[:middle] = ((@meta_reviews_hash[:middle].count * 100)/@meta_reviews.count) rescue 0
-
-
-
 
   end
   
@@ -278,5 +348,5 @@ class Web::UsersController < ApplicationController
    
   end
   
-  
+
 end

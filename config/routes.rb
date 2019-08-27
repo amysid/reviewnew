@@ -27,7 +27,8 @@ Rails.application.routes.draw do
         post :get_vote_for_review
       end
     end
-    resources :users do
+    get '/:name' , to: 'users#index' , as: 'users'
+    resources :users, except: [:index] do
     collection do
       get :read_full_review
       get :check_email
@@ -35,6 +36,7 @@ Rails.application.routes.draw do
       post :image_update
       get :report
       get :report_details
+      get :header_search
       get :user_score
       get :hollframe
       get :user_type

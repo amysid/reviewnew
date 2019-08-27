@@ -4,10 +4,12 @@
             <a class="navbar-brand" href="<%= root_path%>"><img src="/assets/LOGO.png"></a>
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item">
-                    <form class="header-search">
-                        <input type="search" name="" class="form-control" placeholder="Search">
+                      <form class="header-search">
+            <%#= form_tag "/web/users/header_search", method: :get,  class:"header-search" do  %>                     
+                    <input type="search" name="search" class="form-control" placeholder="Search Product">
                         <img src="/assets/search.png">
                     </form>
+                    <%#end%>
                 </li>
             </ul>
             <ul class="navbar-nav align-items-center">
@@ -40,7 +42,7 @@
                 <% category.each do |category|%>
                 <li class="nav-item dropdown mega-dropdown">
              
-<a class="nav-link user_type dropdown-toggle shubham <%= xyz == category.id ? "active" : "" %>" aria-haspopup="true" aria-expanded="false" href="<%= web_users_path(id: category.id)%>" id="<%= category.id%>"><%= category.category_name%></a>
+<a class="nav-link user_type dropdown-toggle shubham <%= xyz == category.id ? "active" : "" %>" aria-haspopup="true" aria-expanded="false" href="<%= web_users_path(category.category_name)%>" id="<%= category.id%>"><%= category.category_name%></a>
                     <div class="dropdown-menu mega-menu">
                         <div class="row">
                             <div class="col-md-3">
@@ -159,3 +161,6 @@ $(document).ready(function(){
     });
  });
 </script> -->
+
+
+
