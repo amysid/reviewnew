@@ -6,10 +6,10 @@
                     <h3 class="widget-title mt-0">Result</h3>
                         <%if @trending_products.present?%>
                     <div class="posts">
-                        <% @count_trending = 0 %>
+                        <%# @count_trending = 0 %>
                         <% @trending_products&.each_with_index do |product, index|%>
                         <%# if product.trending == true %>
-                        <% if @count_trending < 4%>
+                        <%# if @count_trending < 4%>
                         <div class="post-item">
                             <div class="row no-gutters align-items-stretch">
                                 <div class="col-md-4">
@@ -39,9 +39,9 @@
                             </div>
                             
                         </div>
-                        <% @count_trending += 1 %>
+                        <%# @count_trending += 1 %>
                         <%#end%>
-                        <%end%>
+                        <%#end%>
                         <%end%>
                     </div>
                     <%else%>
