@@ -4,12 +4,12 @@
             <a class="navbar-brand" href="<%= root_path%>"><img src="/assets/LOGO.png"></a>
             <ul class="navbar-nav align-items-center">
                 <li class="nav-item">
-                      <form class="header-search">
-            <%#= form_tag "/web/users/header_search", method: :get,  class:"header-search" do  %>                     
+                      <!-- <form class="header-search"> -->
+            <%=form_tag "/web/users/header_search", method: :get,  class:"header-search" do  %>                     
                     <input type="search" name="search" class="form-control" placeholder="Search Product">
                         <img src="/assets/search.png">
-                    </form>
-                    <%#end%>
+                    <%end%>
+                    <!-- </form> -->
                 </li>
             </ul>
             <ul class="navbar-nav align-items-center">

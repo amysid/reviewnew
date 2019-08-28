@@ -26,10 +26,10 @@
                                 <div class="col-md-8">
                                     <div class="post-details">
                                         <p class="tag"><span>
-                                                <%= product&.category_name%> : </span></p>
+                                                <%= product&.category_name%>  </span></p>
                                         <h4 class="post-title">
                                             <%#= product&.product_name%>
-                                             <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a> :
+                                             <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a> 
                                             <%#= product.sub_category_name%>
                                         </h4>
                                         <p>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <% if @count_trending == 3 %>
-                            <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">Read More></a>
+                            <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">View More></a>
                             <%end%>
                         </div>
                         <% @count_trending += 1 %>
@@ -91,7 +91,7 @@
                             </div>
                             </a>
                             <% if @count_upcomeing == 4%>
-                            <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">Read More></a>
+                            <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">View More></a>
                             <%end%>
                             <% @count_upcomeing += 1 %>
                             <%end%>
@@ -332,7 +332,7 @@
                         </div>
                         <%if @count_hall_frame == 5 %>
                         <div class="text-right">
-                             <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">Read More></a>
+                             <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">View More></a>
                             </div>
                         <%end%>
                         <% @count_hall_frame += 1%>

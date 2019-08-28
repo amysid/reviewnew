@@ -2,6 +2,7 @@
     <%# trending.each do |trend|%>
     <% unless @publishs.present? %>
           <a href="javascript:void(0)" class="slide custom-post">
+            <div class="slide">
         <div class="slide-img setimg cover" style="background-image: url('/assets/_image1.png')"></div>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
@@ -18,7 +19,7 @@
                 </p>
             </div>
         </div>
-        
+    </div>    
     
     </a>  
     <%end%>
@@ -26,6 +27,7 @@
     <% @publishs.each do |trend| %>
     
     <a href="/web/users/<%= trend&.id %>/movie_detail" class="slide custom-post">
+        <div class="slide">
         <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.last&.file_url %>')"></div>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
@@ -50,7 +52,7 @@
             </div>
         </div>
         
-    
+    </div>
     </a>
     <%end%>
 </div>
@@ -58,7 +60,7 @@
 // jQuery(document).ready(function() {
 $(document).on("turbolinks:load",function(){
     jQuery('.home-slider').slick({
-        dots: true,
+        dots: false,
         infinite: true,
         autoplay: true,
         speed: 300,
