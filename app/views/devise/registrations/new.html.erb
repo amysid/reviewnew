@@ -177,7 +177,7 @@ $("#registration_form").validate({
 
   $.validator.addMethod("user_nospace_regex", function(value, element) {
     return this.optional(element) || /^[^-\s][a-zA-Z0-9_\s-]+$/i.test(value);
-  }, "No space Required.");
+  }, "Character only. ");
 </script>
 
 <style type="text/css">
