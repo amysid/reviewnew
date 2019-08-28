@@ -2329,6 +2329,21 @@ li.Font-sizeli {
 li.Font-sizeli {
     font-size: 9px;
 }
+.rating-wrap .ratetitle {
+    margin-right: 10px;
+    font-size: 15px;
+    min-width: 50px;
+    white-space: nowrap;
+}
+.reviewModal .form-check-input {
+    left: 17px;
+}
+.overallRating span {
+    margin-bottom: 10px;
+}
+.rating-wrap {
+    margin-right: 10px;
+}
 }
 
 /*charu Trailer-Page Css*/ 

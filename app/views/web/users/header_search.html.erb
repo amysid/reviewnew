@@ -1,0 +1,63 @@
+<div class="page-wrapper">
+    <div class="container home-wrap">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="left-side">
+                    <h3 class="widget-title mt-0">Result</h3>
+                        <%if @trending_products.present?%>
+                    <div class="posts">
+                        <% @count_trending = 0 %>
+                        <% @trending_products&.each_with_index do |product, index|%>
+                        <%# if product.trending == true %>
+                        <% if @count_trending < 4%>
+                        <div class="post-item">
+                            <div class="row no-gutters align-items-stretch">
+                                <div class="col-md-4">
+                                    <div class="post-img">
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="post-details">
+                                        <p class="tag"><span>
+                                                <%= product&.category_name%>  </span></p>
+                                        <h4 class="post-title">
+                                            <%#= product&.product_name%>
+                                             <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a> 
+                                            <%#= product.sub_category_name%>
+                                        </h4>
+                                        <p>
+                                            <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
+                                        </p>
+                                        <div class="post-meta">
+                                            <span><i class="fa fa-clock-o"></i>
+                                                <%= product&.date&.strftime("%B %d, %Y")%></span>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <% @count_trending += 1 %>
+                        <%#end%>
+                        <%end%>
+                        <%end%>
+                    </div>
+                    <%else%>
+                    <div>
+                     <p>Search Data not Found.</p>     
+                   </div>
+                   <%end%>
+
+                </div>
+            </div>
+        </div>
+ </div>
+</div>
+<div class="box-footer">
+    <div class="digg_pagination pull-right">
+        <%= will_paginate @trending_products%>
+    </div>
+</div>
+<br>
