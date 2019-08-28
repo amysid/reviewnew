@@ -1,15 +1,19 @@
 class Web::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:movie_category_detail,:user_profile]
 
+ def header_search
+     # binding.pry
+   @trending_products =  Product.where("product_name ILIKE ?", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 10)
+
+  end
+
   def read_full_review
     @review = Review.find_by(id: params[:id])
   end
   def full_review
     @review = Review.find_by(id: params[:id])
   end
-   def header_search
-    binding.pry
-  end
+   
   
   def index
 
@@ -33,8 +37,9 @@ class Web::UsersController < ApplicationController
      @name1= params[:name]
       @trending_products = Product.where(trending: true,category_name: @name1)
       @publishs = Product.where(category_name:  params[:name]).where(current: "publish")
-                
-      # @products = Product.where(category_id: params[:id])
+           #@publishs = Product.all.where(current: "publish")
+           
+       @products = Product.where(category_id: params[:id])
       @products =Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
       
       @latest_stories =  Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a

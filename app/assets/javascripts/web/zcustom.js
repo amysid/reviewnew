@@ -11,7 +11,7 @@ jQuery(document).ready(function () {
 jQuery('.home-slider').slick({
     dots: true,
     infinite: true,
-    autoplay: true,
+    // autoplay: true,
     speed: 300,
     slidesToShow: 1,
 });
