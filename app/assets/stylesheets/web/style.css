@@ -1526,6 +1526,7 @@ address i {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    min-width: 263px;
 }
 .rating-wrap:nth-child(2n+2) {
     margin-right: 0px;
@@ -1535,11 +1536,13 @@ address i {
     font-size: 16px;
     color: #000;
     font-weight: 400;
+    white-space: nowrap
 }
 .rate {
     height: 46px;
     padding: 0 10px;
     white-space: nowrap;
+    min-width: 172px
 }
 .rate:not(:checked) > input {
     position:absolute;
