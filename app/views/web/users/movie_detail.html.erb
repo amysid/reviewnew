@@ -454,10 +454,17 @@
                     <h4 class="text-center mb-0">Share Your Votes now</h4>
                 </div>
                 <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
+
                 <div class="form-group">
                     <div class="rating-row">
                         <div class="count_child">
+                            <%i=0%>
+
                             <%@review_parts.each do |criteria|%>
+                            <% if i%2==0 %>
+                        
+                            <div class="left">
+                            
                             <div class="rating-wrap">
                                 <span class="ratetitle">
                                     <%= criteria&.criteria&.titleize%></span>
@@ -475,7 +482,32 @@
                                    
                                 </div>
                             </div>
+                            </div>
+                            <%i=i+1%>
+                        
+                            <%else%>
+                            <div class="right">
+                                      <div class="rating-wrap">
+                                <span class="ratetitle">
+                                    <%= criteria&.criteria&.titleize%></span>
+                                <div class="rate">
+                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
+                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
+                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
+                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
+                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
+                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                   
+                                </div>
+                            </div>
+                            <%i=i+1%>
+                        </div>
                             <%end%>
+                            <%end %>
                         </div>
                     </div>
                 </div>

@@ -47,3 +47,6 @@
     table .label {
   font-size: 92%;
 }
+.word-break-all{
+  word-break: break-all;
+}

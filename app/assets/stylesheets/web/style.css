@@ -1507,29 +1507,39 @@ address i {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    max-width: 580px;
-    margin: auto;
 }
-.rating-wrap {
-    /*width: 50%;*/
-    /*max-width: 250px;*/
+.rating-row .count_child {
     display: flex;
     align-items: center;
-    margin-right: 78px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.rating-row .count_child .left {
+    min-width: 50%;
+    max-width: 50%;
+}
+.rating-row .count_child .right {
+    min-width: 50%;
+    max-width: 50%;
+}
+.rating-row .count_child .rating-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .rating-wrap:nth-child(2n+2) {
     margin-right: 0px;
 }
 .rating-wrap .ratetitle {
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 16px;
     color: #000;
     font-weight: 400;
-    min-width: 63px;
 }
 .rate {
     height: 46px;
     padding: 0 10px;
+    white-space: nowrap;
 }
 .rate:not(:checked) > input {
     position:absolute;
