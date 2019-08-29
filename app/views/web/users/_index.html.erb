@@ -64,11 +64,14 @@
                 <div class="right-side">
                     <div class="widget">
                         <h3 class="widget-title mt-0">UPCOMING RELEASES</h3>
-                         <%if @products.present?%>
+                         <%if @upcomeing_products.present?%>
                         <% @count_upcomeing = 0%>
-                        <% @products&.each_with_index do |product, index|%>
+                        <% @upcomeing_products&.each_with_index do |product, index|%>
+
                         <% if product&.date&.present? %>
-                        <%if product&.date > DateTime.now.utc %>
+                        
+                        <%if product&.date > Time.now.utc %>
+                        <%#binding.pry%>
                         <% if @count_upcomeing  <=  4 %>
                         <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                             <div class="custom-img">

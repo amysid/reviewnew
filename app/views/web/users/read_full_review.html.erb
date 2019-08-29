@@ -3,8 +3,9 @@
         <%@a = User.find_by(id: @review.user_id) %>
         <!-- <div class="slide-item "> -->
             <div class="score-card">
-                <div class="score-card-top" >
+                <div class="score-card-top">
                     <div class="rtUserImg">
+                        
                         <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>">
                     </div> 
                         <div class="rtUserInfo">
@@ -16,6 +17,10 @@
                                     <%=@review.created_at.strftime("%B %d, %Y")%>
                                 </span><br>
                                 Product Name : <%=  Product.find(@review.product_id).product_name%>
+                                <% product=Product.find(@review.product_id)%>
+                                <div class="rtUserImg">
+                                <img src="<%= product&.image.first&.file&.present? ? product&.image.first&.file.try(:url) : "/assets/user_default.jpeg"%>">
+                                </div>
                             </div>
                             <div class="score-rating">
                                 <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10

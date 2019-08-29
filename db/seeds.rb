@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-@user = User.create(user_type: "admin",name: "admin", email: "admin@example.com", c_code: "+91", mobile_no: "11111111111", role: 0,password: "password",confirmed_at: (DateTime.now.utc),account_address: "0x365D28e0eE8B3d8e953cc30FF84355105936A813")
+@user = User.create(user_type: "admin",name: "admin", email: "admin@example.com", c_code: "+91", mobile_no: "11111111111", role: 0,password: "password",confirmed_at: (DateTime.now.utc),account_address: "0xce0dd9c7ef3a1b660b9a7fd21bf10c0e408fc3b7")
   if @user
     @user = User.find_by(id: @user.id)
     @to_enc = "Mobiloitte1"
