@@ -45,10 +45,11 @@ class Admin::ProductsController < ApplicationController
       @products.date = params[:product][:date]
       end
       if @products.save!
-        productCount = 0
+        # productCount = 0
         contract_instance.transact_and_wait.add_product(@products.product_name) rescue nil
+        productCount = Product.maximum(:product_blockchain_id) + 1 rescue 0
         @products.update!(product_blockchain_id: productCount)
-        productCount +=1
+        # productCount +=1
         redirect_to admin_products_path(@products)
         flash[:notice] = "product created succesfull"
        else
