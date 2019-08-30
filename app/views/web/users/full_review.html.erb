@@ -1,13 +1,11 @@
- <%#  @reviews_normal&.each  do |@review|%>
+  <%#  @reviews_normal&.each  do |@review|%>
         <% if @review.present?%>
         <%@a = User.find_by(id: @review.user_id) %>
         <!-- <div class="slide-item "> -->
             <div class="score-card">
-                <div class="score-card-top" >
-                    <div class="rtUserImg">
-                        <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>">
-                    </div> 
-                        <div class="rtUserInfo">
+                <div class="score-card-top">
+                    <div class="rtUserInfo">
+                        <div class="user-firstsec">
                             <div class="name-date">
                                 <h4>
                                     <%= @a&.name%>
@@ -15,18 +13,39 @@
                                 <span>
                                     <%=@review.created_at.strftime("%B %d, %Y")%>
                                 </span><br>
-                                Product Name : <%=  Product.find(@review.product_id).product_name%>
+                               
                             </div>
-                            <div class="score-rating">
-                                <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10
+                    <div class="rtUserImg">
+
+                        <img src="<%= @a&.image&.file&.present? ? @a&.image&.file.try(:url) : "/assets/user_default.jpeg"%>">
+                    </div> 
+                </div>
+                        
+                            <div class="user-firstsec">
+                                <div class="name-date">
+                                 <h4> Product Name : <%=  Product.find(@review.product_id).product_name%></h4>
+                                <% product=Product.find(@review.product_id)%>
+                            </div>
+                                <div class="rtUserImg">
+                                <img src="<%= product&.image.first&.file&.present? ? product&.image.first&.file.try(:url) : "/assets/user_default.jpeg"%>">
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                </div>
+                <div class="score-rating">
+                    <h2>Rating and Review</h2>
+                                <h5>
+                                <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10 </h5>
                                 <% if @review&.criteria.present?%>
+
                                 <% eval(@review.criteria).map do |key,value| %>
-                                <p>
-                                    
+                                <p class="star-para">
                                     <%=key%>:
                                     <% if value > 0 %>
                                     <% value.times do %>
-                                    <span class="fa fa-star checked"></span>
+                                    <label class="fa fa-star checked"></label> 
                                     <% end %>
                                 </p>
                                 <%else%>
@@ -36,8 +55,6 @@
                                 <% end %>
                                 <%#= @review&.product&.category_name%>
                             </div>
-                        </div>
-                </div>
                 <div class="ratingText">
                     <%#=truncate(@review&.comment)%>
                     <%=strip_tags(@review&.comment)%>
@@ -73,18 +90,49 @@
         margin: 15px;
         width: 50%;
     }
-    .score-card {
+  
+      .score-card {
     padding: 20px 15px;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
     font-family: 'Poppins', sans-serif;
     margin-bottom: 30px;
-    /* width: 433px; */
-    max-width: 524px;
+    width: 641px; 
+    max-width: 641px;
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 .score-card-top {
     margin-right: 50px;
+}
+.user-firstsec{
+    display: flex;
+    align-items: center;
+    width: 500px;
+    justify-content: space-between;
+}
+.product-name{
+    white-space: nowrap;
+}
+.name-date h4 {
+    white-space: nowrap;
+    font-size: 23px!important;
+}
+.score-card p {
+    text-align: center;
+}
+.score-rating h5 {
+    text-align: center;
+}
+.score-rating {
+    margin-bottom: 20px;
+}
+.score-rating h2 {
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+}
+.ratingText {
+    text-align: justify;
 }
 </style>
