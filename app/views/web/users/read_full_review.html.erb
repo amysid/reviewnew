@@ -27,7 +27,7 @@
                                 <% product=Product.find(@review.product_id)%>
                             </div>
                                 <div class="rtUserImg">
-                                <img src="<%= product&.image.first&.file&.present? ? product&.image.first&.file.try(:url) : "/assets/user_default.jpeg"%>">
+                                <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image.first&.file&.present? ? product&.image.first&.file.try(:url) : "/assets/user_default.jpeg"%>"></a>
                                 </div>
                             </div>
 
