@@ -49,6 +49,8 @@
                             <div id="file1">
                                <img class="img_prev" src="/assets/photo_gallery.webp" height=100px width=200px alt="your image" />
                               <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>
+
+                              <%= m.check_box :file_type %><b>Header Image</b>
                                  <!-- <input type='file' onchange="readURL(this);" />  -->
                           
                                </div>

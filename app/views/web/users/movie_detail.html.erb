@@ -4,8 +4,12 @@
         background: #D6D6D1!important;
     }
 </style>
-<%arr = @product.image { |i| i&.file&.url}%>
-<%arr = arr[0..3]%>
+<%#binding.pry%>
+<%arr = @product.image.map{ |i| i&.file&.url if i.file_type.eql?("1")}.compact%>
+<%#arr = arr[0..3]%>
+<% if arr.blank? %>
+<% arr = [@product.image.first.file.url] %>
+<%end%>
 <div class="container">
     <div class="row navtop">
         <ul class="nav1">
@@ -21,7 +25,9 @@
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
         <%arr.each_with_index do |img,index|%>
+        <% if arr.count>1%>
         <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class='<%= index == 0 ? "active" : "" %>'></li>
+        <%end%>
         <%end%>
         <!--  <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
@@ -30,7 +36,8 @@
     <div class="carousel-inner">
         <%arr.each_with_index do |img,index|%>
         <div class='carousel-item <%= index == 0 ? "active" : "" %>'>
-            <img class="d-block w-100" src="<%=img&.file&.url%>" alt="First slide" height="530px;">
+            <%# binding.pry %>
+            <img class="d-block w-100" src="<%=img%>" alt="First slide" height="530px;">
         </div>
         <%end%>
     </div>

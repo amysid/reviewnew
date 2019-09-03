@@ -16,7 +16,7 @@ class Web::UsersController < ApplicationController
    
   
   def index
-
+# binding.pry
   	if (current_user.present? && current_user.role == "admin")
         redirect_to admin_home_index_path(current_user)
   	end
@@ -275,11 +275,22 @@ class Web::UsersController < ApplicationController
   end
  
   def trending
+    #binding.pry
+    unless params[:format].present?
      @trending_products = Product.where(trending: true).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+    else
+   @trending_products = Product.where(trending: true,category_name: params[:format]).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+
+    end  
   end
 
   def upcomeing
+    #binding.pry
+    unless params[:format].present?
     @upcomeing_products = Product.where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+     else
+    @upcomeing_products = Product.where(category_name: params[:format]).where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+      end
   end
   
   def categorywise

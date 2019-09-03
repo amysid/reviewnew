@@ -39,12 +39,13 @@ class Admin::ProductsController < ApplicationController
       @products.category_id = Category.find_by(category_name: params[:product][:category_name]).id
       @products.sub_category_id = SubCategory.find_by(sub_category_name: params[:product][:sub_category_name]).id
       if params[:product][:date].present?
-      x=params[:product][:date][0,2]
-      params[:product][:date][0,2]= params[:product][:date][3,2]
-      params[:product][:date][3,2]=x
-      @products.date = params[:product][:date]
+        x=params[:product][:date][0,2]
+        params[:product][:date][0,2]= params[:product][:date][3,2]
+        params[:product][:date][3,2]=x
+        @products.date = params[:product][:date]
       end
       if @products.save!
+        
         # productCount = 0
         contract_instance.transact_and_wait.add_product(@products.product_name) rescue nil
         productCount = Product.maximum(:product_blockchain_id) + 1 rescue 0
@@ -120,7 +121,7 @@ class Admin::ProductsController < ApplicationController
 
  private
  def product_params 
- 	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy])
+ 	params.require(:product).permit(:category_name, :sub_category_name, :product_name, :video, :date, :description, image_attributes: [:id, :file, :_destroy, :file_type])
  end
  
  def find_products

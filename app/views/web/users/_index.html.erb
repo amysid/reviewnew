@@ -44,7 +44,12 @@
                                 </div>
                             </div>
                             <% if @count_trending == 3 %>
+                            <% unless params[:name].present?%>
                             <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">View More></a>
+                            <%else%>
+                            
+                        <a href="<%= trending_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme my-3">View More></a>
+                            <%end%>
                             <%end%>
                         </div>
                         <% @count_trending += 1 %>
@@ -94,7 +99,11 @@
                             </div>
                             </a>
                             <% if @count_upcomeing == 4%>
+                            <% unless params[:name].present?%>
                             <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">View More></a>
+                            <%else%>
+                            <a href="<%= upcomeing_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme">View More></a>
+                            <%end%>
                             <%end%>
                             <% @count_upcomeing += 1 %>
                             <%end%>
