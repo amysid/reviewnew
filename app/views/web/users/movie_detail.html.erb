@@ -369,7 +369,8 @@
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
                                         <%if review&.comment&.present? && review&.comment&.length > 130||z>=3%>
-                                        <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= sanitize(review&.comment)%>">Read Full Review</a>
+                                        <!-- <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%#= sanitize(review&.comment)%>">Read Full Review</a> -->
+                                        <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
                                     </div>
                                     <div class="d-flex justify-content-between">
@@ -570,7 +571,9 @@
 <script>
 
 $(document).ready(function() {
-    $('#form_tag_review').on('click', function() { $('#count_rating_dynamic').submit(); });
+    $('#form_tag_review').on('click', function() {
+        $(this).attr('disabled', 'disabled');
+     $('#count_rating_dynamic').submit(); });
 });
 
     $('.custom-slider').slick({
