@@ -9,6 +9,8 @@
                             <div class="name-date">
                                 <h4>
                                     <%= @a&.name%>
+                                    <h6> (<%= @a.user_type%>)
+                                </h6>
                                 </h4>
                                 <span>
                                     <%=@review.created_at.strftime("%B %d, %Y")%>
@@ -34,6 +36,12 @@
                             
                         </div>
                 </div>
+                                <div>
+                                    <center>
+                                    <h4>Product Description </h4>
+                                   </center>
+                                    <%=  sanitize(Product.find(@review.product_id).description) %>
+                               </div>
                 <div class="score-rating">
                     <h2>Rating and Review</h2>
                                 <h5>
@@ -148,8 +156,8 @@
     white-space: nowrap;
 }
 .name-date h4 {
-    white-space: nowrap;
-    font-size: 23px!important;
+    white-space: normal;
+    font-size: 23px;
 }
 .score-card p {
     text-align: center;

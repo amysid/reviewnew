@@ -8,8 +8,9 @@
                         <div class="user-firstsec">
                             <div class="name-date">
                                 <h4>
-                                    <%= @a&.name%>
-                                </h4>
+                                    <%= @a&.name%></h4>
+                                   <h6> (<%= @a.user_type%>)
+                                </h6>
                                 <span>
                                     <%=@review.created_at.strftime("%B %d, %Y")%>
                                 </span><br>
@@ -30,12 +31,16 @@
                                 <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image.first&.file&.present? ? product&.image.first&.file.try(:url) : "/assets/user_default.jpeg"%>"></a>
                                 </div>
                             </div>
-
-                            
-                        </div>
+                           </div>
                 </div>
+                                 <div class="product-decsec">
+                                    <center>
+                                    <h4>Product Description </h4>
+                                   </center>
+                                    <%= sanitize(Product.find(@review.product_id).description) %>
+                               </div>
                 <div class="score-rating">
-                    <h2>Rating and Review</h2>
+                    <br><h2>Rating and Review</h2>
                                 <h5>
                                 <%= @review&.rating.to_i == 10 ? "10" : "0#{@review&.rating}"%>/10 </h5>
                                 <% if @review&.criteria.present?%>
@@ -148,8 +153,8 @@
     white-space: nowrap;
 }
 .name-date h4 {
-    white-space: nowrap;
-    font-size: 23px!important;
+    white-space: normal;
+    font-size: 23px;
 }
 .score-card p {
     text-align: center;

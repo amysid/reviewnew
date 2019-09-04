@@ -2570,6 +2570,15 @@ a.nav-item.nav-link.fonts.trailer-nav {
 }
 
 @media (max-width: 767.98px) {
+    .score-card-top {
+    margin-right: 0px!important;
+}
+div.rtUserInfo {
+    margin: 0px!important;
+    min-width: 100%!important;
+    width: 100%!important;
+}
+
     select.category {
         width: 100%;
         padding: 5px;
@@ -2674,13 +2683,93 @@ a.nav-item.nav-link.fonts.trailer-nav {
     .home-slider1 .slide-item {
         margin-right: 0px;
     }
+    .score-card {
+    margin-top: 15px!important;
 }
+.user-firstsec {
+    width: 100%!important;
+    min-width: 100%!important;
+}
+.name-date h4 {
+    white-space: normal!important;
+}
+.score-card {
+    width: 100%;
+    max-width: 95%!important;
+}
+.product-decsec p {
+    text-align: justify;
+}
+.user-firstsec {
+    margin-bottom: 10px;
+}
+.abc1 .st {
+    min-width: 34%!important;
+    font-size: 12px!important;
+    margin-right: 13px!important;
+}
+.abc1 .star-para {
+    box-sizing: border-box!important;
+    font-size: 12px!important;
+    padding-left: 0px!important;
+}
+.abc1 {
+    flex-wrap: nowrap!important;
+}
+.score-card {
+    margin-bottom: 15px!important;
+}
+.rtUserImg img {
+    width: 80px!important;
+    height: 80px!important;
+}
+div.rtUserImg{
+    margin: 0px!important;
+    width: 30%!important;
+}
+.name-date{
+    width: 70%!important;
+}
+}
+/*@media (max-width: 375px){
+
+.score-card {
+    width: 100%;
+    max-width: 351px!important;
+}
+div.rtUserImg {
+    margin: 8px!important;
+    width: 50%!important;
+    text-align: center!important;
+}
+.name-date h4 {
+    font-size: 15px!important;
+}
+.rtUserImg img {
+    width: 65px!important;
+    height: 65px!important;
+}
+.score-card-top {
+    margin-right: 0px!important;
+}
+
+.name-date {
+    width: 70%;
+}
+}*/
 @media (max-width: 340px) {
     .navbar .btn {
         font-size: 10px;
         min-width: 64px;
     }
 }
+
+/*@media (max-width: 320px){
+.user-firstsec {
+    width: 100%!important;
+    min-width: 316px!important;
+}
+}*/
 /*flash*/
 .alert-error {
     background-color: #f2dede;
@@ -2797,6 +2886,7 @@ img.screen-img {
 .reviewTab .tab-pane {
     padding: 0px;
 }
+
 
 
 /* i did  change here*/
