@@ -71,13 +71,14 @@
                                     </div>
                                     <div class="content">
                                         <h3>
-                                            <%=product&.product_name%>
+                                            <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a><%#=product&.product_name%>
                                             
                                         </h3>
                                         <P class="para">
                                             <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
                                            <%if product&.description&.present? && product&.description&.length > 130%>
-                                            <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= (strip_tags(product&.description))%>">View More</a>
+                                            <!-- <a href="javascript:void(0);" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%#= (strip_tags(product&.description))%>">View More</a> -->
+                                            <a href="/web/users/<%=product.id%>/movie_detail">View More</a>
                                              <%end%>
                                         </P>
                                         <P>Wide Release Date :

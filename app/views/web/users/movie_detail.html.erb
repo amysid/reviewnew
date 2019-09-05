@@ -83,9 +83,9 @@
                     <div class=" col-md-6 rightsec">
                         <div class="buttons">
                             <p class="button12"><span class="button1" id="button65">
-                                    <%=@user_reviews.count%></span>Userscore</p>
+                                    <%=@user_reviews_avg%></span>Userscore</p>
                             <p class="button12"><span class="button1" id="button87">
-                                    <%=@meta_reviews.count%></span>Metascore</p>
+                                    <%=@meta_reviews_avg%></span>Metascore</p>
                         </div>
                     </div>
                 </div>
@@ -109,21 +109,7 @@
             <div class="col-md-8">
                 <h3>Ratings Summary</h3>
             </div>
-            <%#if @product.reviews.where(user_id: current_user.id).present? %>
-          <!--   <%#if @product.reviews.where(user_id: current_user&.id).present? %>
-            <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" disabled>
-                    Review Already Posted</a>
-            </div>
-            <%#elsif !current_user.present?%>
-             <div class="col-md-4 text-right ">
-             <%#= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
-             
-            </div>
-            <%#else%>
-            <div class="col-md-4 text-right "><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">
-                    Write a review</a>
-            </div>
-            <%#end%> -->
+           
         </div>
         <!-- end -->
 
@@ -146,7 +132,7 @@
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Userscore</span><br>
                         <span class="button1" id="button65reviews">
-                            <%=@user_reviewss.count%></span></p>
+                            <%=@user_reviews_avg%></span></p>
                 </div>
                 <div class="buttonsreviews">
                     <div class="progress">
@@ -195,7 +181,7 @@
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Metascore</span><br>
                         <span class="button1" id="button65reviews">
-                            <%=@meta_reviewss.count%></span></p>
+                            <%=@meta_reviews_avg%></span></p>
                 </div>
                 <div class="buttonsreviews">
                     <div class="progress">
