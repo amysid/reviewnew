@@ -43,7 +43,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <% if @count_trending == 3 %>
+                            
+                        </div>
+                        <% if @count_trending == 3 %>
                             <% unless params[:name].present?%>
                             <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">View More></a>
                             <%else%>
@@ -51,7 +53,6 @@
                         <a href="<%= trending_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme my-3">View More></a>
                             <%end%>
                             <%end%>
-                        </div>
                         <% @count_trending += 1 %>
                         <%#end%>
                         <%end%>
@@ -77,7 +78,7 @@
                         
                         <%if product&.date > Time.now.utc %>
                         <%#binding.pry%>
-                        <% if @count_upcomeing  <=  4 %>
+                        <% if @count_upcomeing  <=  3 %>
                         <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                             <div class="custom-img">
                                 <img src="<%= product&.image&.take&.file_url%>" class="img-fluid game-img" alt="">
@@ -98,7 +99,7 @@
                                 </p>
                             </div>
                             </a>
-                            <% if @count_upcomeing == 4%>
+                            <% if @count_upcomeing == 3%>
                             <% unless params[:name].present?%>
                             <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">View More></a>
                             <%else%>
@@ -156,8 +157,10 @@
                                 <p></p>
                           <%else%>      
                         <h3 class="widget-title mt-0">Reviewed Today</h3>
+                        <% i = 0%>
                         <% @todays_review.each do |review|%>
                         <%# if review.created_at == DateTime.now%>
+                        <% if i <3 %>
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
                             <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'></a>
                             <div class="reviewe-widget-content">
@@ -171,7 +174,8 @@
                                     <%= review&.created_at&.strftime("%B %d, %Y")%></span>
                             </div>
                         </div>
-                        <%#end%>
+                        <% i=i+1%>
+                        <%end%>
                         <%end%>
                         <%end%>
                     </div>

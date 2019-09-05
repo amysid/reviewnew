@@ -105,7 +105,7 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_detail 
-    
+  
    @a = Product.find_by(id: params[:id])&.sub_category_id
     @sub_categories = SubCategory.find_by(id: @a)
     @products_movie_details = @sub_categories&.products&.last(4)
@@ -266,12 +266,16 @@ class Web::UsersController < ApplicationController
   end
 
   def holl_of_fame_details
-    @products = Product.all
+    a=[]
+    Product.all.each{|x| a<<x.id if x.video.present?}
+    @products=Product.where(id: a)
     @categorys = Category.all
   end
 
   def hollframe
-     @products = Product.where(category_id: params[:id])
+    a=[]
+    Product.where(category_id: params[:id]).each{|x| a<<x.id if x.video.present?}
+    @products=Product.where(id: a)
   end
  
   def trending

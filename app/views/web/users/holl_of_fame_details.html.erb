@@ -1,46 +1,43 @@
 <div class="page-wrapper">
     <div class="container home-wrap">
-        <div class="row hall-heading">
+       <!--  <div class="row hall-heading">
             <h2 class="widget-title mt-0">HALL OF FAME</h2>
-        </div>
-        <div class="row">
+        </div> -->
+ <!--        <div class="row">
             <div class="col-md-4 image-col">
-                <% @count_image = 0 %>
-                <% @products&.each do |product|%>
-                <% if @count_image <= 2 %>
-                <div class="image1" style="background-image: url('<%= product.image.first.file_url%>');">
-                    <!--  <img src="images/Layer 10.png"> -->
+                <%# @count_image = 0 %>
+                <%# @products&.each do |product|%>
+                <%# if @count_image <= 2 %>
+                <div class="image1" style="background-image: url('<%#= product.image.first.file_url%>');">
                     <div class="percent-section2">
                         <p class="pheading">
-                            <%= product&.product_name%>
+                            <%#= product&.product_name%>
                         </p>
                         <p>
-                            <%= truncate(strip_tags(product.description), omision: "...", length: 130).html_safe %>
+                            <%#= truncate(strip_tags(product.description), omision: "...", length: 130).html_safe %>
                         </p>
                     </div>
                 </div>
-                <% @count_image += 1 %>
-                <%end%>
-                <%end%>
+                <%# @count_image += 1 %>
+                <%#end%>
+                <%#end%>
             </div>
             <div class="col-md-8 iframe-col">
-                <% @count_video = 0 %>
-                <% @products&.each_with_index do |product, index| %>
-                <% if index == 0%>
-                <% if product.video.present? %>
-                <%= video_tag product&.video_url, controls: true, autoplay: false, width: "660",height: "515"%>
-                <%else%>
+                <%# @count_video = 0 %>
+                <%# @products&.each_with_index do |product, index| %>
+                <%# if index == 0%>
+                <%# if product.video.present? %>
+                <%#= video_tag product&.video_url, controls: true, autoplay: false, width: "660",height: "515"%>
+                <%#else%>
                  <img width="560" height="315" src="/assets/dummy_video.jpg" />
-                <!-- <iframe class="youtube-icon" src="/assets/video-dummy.gif" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-                <%# @count_video += 1%>
-                <%end%>
-                <%end%>
-                <%end%>
+                <%#end%>
+                <%#end%>
+                <%#end%>
             </div>
-        </div>
+        </div> -->
         <div class="row theatres-row">
             <div class="col-md-12">
-                <h2 class="widget-title">TRAILOR</h2>
+                <h2 class="widget-title">VIDEO</h2>
                 <div class="nav nav-tabs nav-pills" id="nav-tabScore" role="tablist">
                     <% @categorys&.each_with_index do |category, index|%>
                     <% if index == 0 %>
