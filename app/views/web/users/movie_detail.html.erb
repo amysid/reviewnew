@@ -552,7 +552,7 @@
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label>Review this movie now</label>
+                    <label>Review this <%= Product.find(@product.id).category_name%> now</label>
                     <textarea style="resize: none" name="description" class="form-control" rows="5"></textarea>
                 </div>
                 <div class="form-group form-check">

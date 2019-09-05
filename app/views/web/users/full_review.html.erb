@@ -36,7 +36,7 @@
                             
                         </div>
                 </div>
-                                <div>
+                                <div class=ratingText>
                                     <center>
                                     <h4>Product Description </h4>
                                    </center>
@@ -98,7 +98,7 @@
                             </div>
                 <div class="ratingText">
                     <%#=truncate(@review&.comment)%>
-                    <%=strip_tags(@review&.comment)%>
+                    <%=simple_format(@review&.comment)%>
                     <%#= truncate(strip_tags(@review&.comment), length: 130).html_safe%>
                     <%#if @review&.comment.present? && @review&.comment&.length > 100 %>
                     <!-- <a href="web/users/read_full_review?id=<%#= @review&.id %>">Read Full Review</a> -->
@@ -173,9 +173,14 @@
     text-align: center;
     font-size: 20px;
 }
-.ratingText {
-    text-align: justify;
+
+    /*text-align: justify;*/
+   .ratingText p {
+    font-size: 15px!important;
+    margin-bottom: inherit!important;
+    text-align: unset!important;
 }
+
 .abc1 {
     display: flex;
     align-items: center;

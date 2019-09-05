@@ -353,10 +353,13 @@ class Web::UsersController < ApplicationController
   end
   
   def report
-    @products = Product.last(10)
+    @products = Product.all
   end
   def report_details
-    @products = Product.order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+  # binding.pry
+  product_ids=[]
+  Review.all.each{|x| product_ids<<x.product_id}
+    @products = Product.where(id: product_ids.uniq).paginate(:page => params[:page], :per_page => 10)
   end
   def profile
 
