@@ -48,7 +48,8 @@
                     
                     <p><%= truncate(strip_tags(product.reviews_comments), omision: "...", length: 130).html_safe%></p>
                     <% if product.reviews_comments.size >=  130 %>
-                     <a href="javascript:void(0);" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%= product&.reviews_comments%>">Read Full Review</a>
+                     <!-- <a href="javascript:void(0);" class="pull-right" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<%#= product&.reviews_comments%>">Read Full Review</a> -->
+                     <a href="/web/users/<%= product&.id %>/movie_detail">Read Product Detail</a>
                      <%end%>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">

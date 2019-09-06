@@ -247,16 +247,20 @@
                   <div class="col-md-4 columnimage">
                 <div class="imagecol3">
             <img src="<%=a.file&.url%>" class="screen-img myImg">
+            <button onclick="abc12()">next</button>
                    </div>
                </div>
                <%end%>
             <%end%>
         </div>
-             <div id="myModal" class="modal1">
-                      <span class="close1">&times;</span>
-                      <img class="modal-content1" id="img01">
-                      <div id="caption1"></div>
-                    </div>
+             
+        <div id="myModal" class="modal1">
+           <span class="close1">&times;</span>
+           <img class="modal-content1" id="img01">
+           <div id="caption1"></div>
+           <a class="prev" >&#10094;</a>
+           <a class="next" >&#10095;</a>
+       </div>
         <!-- end screenshot -->
         <!-- userscore && Metascore -->
                 <div class="row rowreviews">
@@ -733,6 +737,35 @@ $('.count_child').on('click', function() {
   text-decoration: none;
   cursor: pointer;
 }
+
+.prev, .next {
+ cursor: pointer;
+ position: absolute;
+ top: 50%;
+ width: auto;
+ background-color: #454a4e;
+ margin-top: -22px;
+ padding: 16px;
+ color: white;
+ font-weight: bold;
+ font-size: 18px;
+ transition: 0.6s ease;
+ border-radius: 0 3px 3px 0;
+ user-select: none;
+}
+
+a.next,a.prev {
+    color: white!important;
+}
+
+.next {
+ right: 0;
+
+ border-radius: 3px 0 0 3px;
+}
+.prev:hover, .next:hover {
+ background-color: rgba(2,2,2,0.8);
+}
 </style>
 <script type="text/javascript">
 $(".ten-rate").click(function() {
@@ -787,7 +820,6 @@ function voting(a) {
 
     function myfunction(item,index){
         item.onclick = function(){
-            debugger;
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
@@ -808,5 +840,35 @@ function voting(a) {
         $(this).attr('disabled', 'disabled');
         $('#count_rating_dynamic').submit(); 
     });
+
+    $('a.next').click(function next() {
+       var modal = $("img.modal-content1");
+       var img = document.getElementsByClassName("myImg");
+       index = getIndex(modal, img);
+
+       if (img[index+1] != undefined) {
+           modal.attr('src', img[index+1].src);
+       }
+   });
+
+   $('a.prev').click(function next() {
+       var modal = $("img.modal-content1");
+       var img = document.getElementsByClassName("myImg");
+       index = getIndex(modal, img);
+       
+       if (img[index-1] != undefined) {
+           modal.attr('src', img[index-1].src);
+       }
+   });
+   function getIndex(modal, img) {
+       var i;
+       url = modal.attr('src');
+       Array.prototype.slice.call(img).forEach(function(item, index){
+           if (item.src === url) {
+               i = index;
+           }
+       });
+       return i;
+   }
 });
 </script>
