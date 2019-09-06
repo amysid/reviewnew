@@ -113,15 +113,17 @@ class Web::UsersController < ApplicationController
     @all_sub_category = @product&.category&.sub_categories
     total_review = @product.reviews.pluck(:rating).sum 
     @user_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-   
+   # binding.pry
     @meta_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
-    if (@meta_review.count)>0
-    @meta_reviews_avg = total_review/@meta_review.count  
+    @user1=@user_review.pluck(:rating).sum
+    @meta1=@meta_review.pluck(:rating).sum
+    if (@meta_review.count)>0 && @meta_review.present?
+    @meta_reviews_avg = @meta1/@meta_review.count  
     else
     @meta_reviews_avg =0
     end
-    if (@user_review.count)>0
-      @user_reviews_avg = total_review/@user_review.count
+    if (@user_review.count)>0 && @user_review.present?
+      @user_reviews_avg = @user1/@user_review.count
     else
     @user_reviews_avg =0
     end

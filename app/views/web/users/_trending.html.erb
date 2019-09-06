@@ -28,7 +28,11 @@
     
     <a href="/web/users/<%= trend&.id %>/movie_detail" class="slide custom-post">
         <div class="slide">
-        <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.last&.file_url %>')"></div>
+            <% if trend&.image&.where(file_type: "1").present? %>
+        <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.where(file_type: "1").first&.file_url %>')"></div>
+        <%else%> 
+        <div class="slide-img setimg cover" style="background-image: url('<%= trend&.image&.first&.file_url %>')"></div>
+        <%end%>
         <div class="slide-content container">
             <div class="slide-text" style="margin-left: 50px">
                 <p class="release-date"><span>Release latest <%= trend&.category_name%></span> <i class="fa fa-clock-o"></i>
