@@ -252,10 +252,11 @@
             <!--  <div class="heading">
         <h2 class="titile-light">You may also like:</h2>
       </div> -->
-            <div class="custom-slider slidw">
+            <!-- <div class="custom-slider slidw"> -->
+                <div class="row">
                 <% @products_movie_category&.each do |product_name|%>
 
-               
+               <div class="col-md-4">
                  <a href="/web/users/<%=product_name.id%>/movie_detail" class="custom-post custom-slide">
                     <div class="custom-img">
                         <%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>
@@ -279,9 +280,10 @@
                         <%end%>
                     </div>
                 </a>
-               
+               </div>
                 <%end%>
             </div>
+        <!-- </div> -->
         </div>
     </div>
 </div>

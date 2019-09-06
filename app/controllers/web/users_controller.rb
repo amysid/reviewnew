@@ -113,9 +113,18 @@ class Web::UsersController < ApplicationController
     @all_sub_category = @product&.category&.sub_categories
     total_review = @product.reviews.pluck(:rating).sum 
     @user_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-    @user_reviews_avg = total_review/@user_review.count 
+   
     @meta_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
-    @meta_reviews_avg = total_review/@meta_review.count  rescue 0
+    if (@meta_review.count)>0
+    @meta_reviews_avg = total_review/@meta_review.count  
+    else
+    @meta_reviews_avg =0
+    end
+    if (@user_review.count)>0
+      @user_reviews_avg = total_review/@user_review.count
+    else
+    @user_reviews_avg =0
+    end
    @b = Product.find_by(id: params[:id]).sub_category_id
     @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
      @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
@@ -175,6 +184,7 @@ class Web::UsersController < ApplicationController
     @user_score[:positive] = ((@user_reviews_hash[:positive].count * 100)/@user_reviews.count) rescue 0
     @user_score[:negative] = ((@user_reviews_hash[:negative].count * 100)/@user_reviews.count) rescue 0
     @user_score[:middle] = ((@user_reviews_hash[:middle].count * 100)/@user_reviews.count) rescue 0
+
 
 
     @meta_score = {}

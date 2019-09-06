@@ -20,7 +20,11 @@
                             <div class="row no-gutters align-items-stretch">
                                 <div class="col-md-4">
                                     <div class="post-img">
-                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                        <% if product.image.where(avtar: true).present? %>
+                                         <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.where(avtar:true).take&.file_url%>" alt=""></a>
+                                         <%else%>
+                                         <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                         <%end%>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
