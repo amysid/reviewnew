@@ -63,7 +63,7 @@ class ApplicationController < ActionController::Base
 
   def unlock_account_check
     if current_user
-      unlock_employee_account unless current_user.role == "admin"
+      unlock_employee_account # unless current_user.role == "admin"
     end
   end
 

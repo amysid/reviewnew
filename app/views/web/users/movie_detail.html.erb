@@ -115,19 +115,19 @@
 
         <!-- summary -->
          <div class="row rowreviews">
-            <% @positive_normal = 0 %>
-            <% @negative_normal = 0 %>
-            <% @medium_normal = 0 %>
-            <%  @user_reviews.each do |abc|%>
-            <% if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
-            <% @positive_normal += 1 %>
-            <% elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
-            <% @medium_normal += 1 %>
-            <%# elsif  (abc.rating)*100/10 >= 0 && (abc.rating)*100/10 <= 30 %>
-            <%else%>
-            <% @negative_normal += 1 %>
-            <%end%>
-            <%end%>
+            <%# @positive_normal = 0 %>
+            <%# @negative_normal = 0 %>
+            <%# @medium_normal = 0 %>
+            <%#  @user_reviews.each do |abc|%>
+            <%# if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
+            <%# @positive_normal += 1 %>
+            <%# elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
+            <%# @medium_normal += 1 %>
+            <%## elsif  (abc.rating)*100/10 >= 0 && (abc.rating)*100/10 <= 30 %>
+            <%#else%>
+            <%# @negative_normal += 1 %>
+            <%#end%>
+            <%#end%>
             <div class=" col-md-6 ">
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Userscore</span><br>
@@ -162,21 +162,21 @@
                 </div>
             </div>
             <%# @meta_user_count = 0 %>
-            <% @positive_expert = 0 %>
-            <% @negative_expert = 0 %>
-            <% @medium_expert = 0 %>
-            <% @meta_reviews.each do |abc|%>
-            <%# if User.find_by(id: abc.user_id).user_type == "Expert User"%>
-            <%# @meta_user_count += 1%>
-            <% if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
-            <% @positive_expert += 1%>
-            <% elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
-            <% @medium_expert += 1 %>
-            <%else%>
-            <% @negative_expert += 1 %>
+            <%# @positive_expert = 0 %>
+            <%# @negative_expert = 0 %>
+            <%# @medium_expert = 0 %>
+            <%# @meta_reviews.each do |abc|%>
+            <%## if User.find_by(id: abc.user_id).user_type == "Expert User"%>
+            <%## @meta_user_count += 1%>
+            <%# if (abc.rating)*100/10 >= 60 && abc.spoiler == false %>
+            <%# @positive_expert += 1%>
+            <%# elsif  (abc.rating)*100/10 >= 31 && (abc.rating)*100/10 <= 59 && abc.spoiler == false %>
+            <%# @medium_expert += 1 %>
+            <%#else%>
+            <%# @negative_expert += 1 %>
+            <%##end%>
             <%#end%>
-            <%end%>
-            <%end%>
+            <%#end%>
             <div class=" col-md-6 ">
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Metascore</span><br>
@@ -283,7 +283,7 @@
                                             <img src="<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
                                             <div class="name-date">
                                                 <h4>
-                                                    <%=user_name(review&.user_id)%>
+                                                    <%=review&.name%>
                                                 </h4>
                                                 <span>
                                                     <%= review&.created_at&.strftime("%B %d, %Y")%></span>
@@ -344,7 +344,7 @@
                                             <img src="<%=user_image(review&.user_id).present? ? user_image(review&.user_id)&.file&.url : "/assets/user_default.jpeg"%>"> </div> <div class="rtUserInfo">
                                             <div class="name-date">
                                                 <h4>
-                                                    <%=user_name(review&.user_id)%>
+                                                    <%=(review&.name)%>
                                                 </h4>
                                                 <span>
                                                     <%= review&.created_at&.strftime("%B %d, %Y")%></span>
@@ -473,7 +473,8 @@
                 <div class="form-group">
                     <h4 class="text-center mb-0">Share Your Votes now</h4>
                 </div>
-                <%= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
+                <%#= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
+                <%= form_with url: get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic", local: true do |f| %>
 
                 <div class="form-group">
                     <div class="rating-row">
@@ -567,7 +568,7 @@
                 </div>
                 <div class="form-group text-center">
                     <!-- <button style="color: #fff" type="submit" class="btn btn-theme" >Submit</button> -->
-                    <%=submit_tag " Submit", id: "form_tag_review",class: "btn btn-theme"%>
+                    <%=f.submit " Submit", id: "form_tag_review",class: "btn btn-theme"%>
                 </div>
                 <% end %>
             </div>
@@ -576,11 +577,12 @@
 </div>
 <script>
 
-$(document).ready(function() {
-    $('#form_tag_review').on('click', function() {
-        $(this).attr('disabled', 'disabled');
-     $('#count_rating_dynamic').submit(); });
-});
+// $(document).ready(function() {
+//     $('#form_tag_review').on('click', function() {
+//         // console.log("First")
+//         $(this).attr('disabled', 'disabled');
+//      $('#count_rating_dynamic').submit(); });
+// });
 
     $('.custom-slider').slick({
     dots: false,
@@ -836,10 +838,11 @@ function voting(a) {
     
     //Modal JS
 
-    $('#form_tag_review').on('click', function() { 
-        $(this).attr('disabled', 'disabled');
-        $('#count_rating_dynamic').submit(); 
-    });
+    // $('#form_tag_review').on('click', function() { 
+    //     console.log("last")
+    //     $(this).attr('disabled', 'disabled');
+    //     $('#count_rating_dynamic').submit(); 
+    // });
 
     $('a.next').click(function next() {
        var modal = $("img.modal-content1");

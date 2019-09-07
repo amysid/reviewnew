@@ -19,6 +19,8 @@ module AccountConcern
     if balance < 1000000000000000000 
       @formatter = Ethereum::Formatter.new
       value = Client.int_to_hex(@formatter.to_wei(1.0))
+      user = User.find_by(user_type: "admin")
+      unlock_account(user.account_address , Decrypt_me.call(user.key,user.salt,user.account_password))
       Client.eth_send_transaction({from: Client.personal_list_accounts["result"][0],to: address,value: value})
     end
     balance

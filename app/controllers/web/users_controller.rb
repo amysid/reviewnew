@@ -109,91 +109,97 @@ class Web::UsersController < ApplicationController
    @a = Product.find_by(id: params[:id])&.sub_category_id
     @sub_categories = SubCategory.find_by(id: @a)
     @products_movie_details = @sub_categories&.products&.last(4)
-    @product = Product.find_by(id: params[:id])
-    @all_sub_category = @product&.category&.sub_categories
-    total_review = @product.reviews.pluck(:rating).sum 
-    @user_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-   # binding.pry
-    @meta_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
-    @user1=@user_review.pluck(:rating).sum
-    @meta1=@meta_review.pluck(:rating).sum
-    if (@meta_review.count)>0 && @meta_review.present?
-    @meta_reviews_avg = @meta1/@meta_review.count  
-    else
-    @meta_reviews_avg =0
-    end
-    if (@user_review.count)>0 && @user_review.present?
-      @user_reviews_avg = @user1/@user_review.count
-    else
-    @user_reviews_avg =0
-    end
-   @b = Product.find_by(id: params[:id]).sub_category_id
-    @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
-     @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
+   #  @product = Product.find_by(id: params[:id])
+   #  @all_sub_category = @product&.category&.sub_categories
+   #  total_review = @product.reviews.pluck(:rating).sum 
+   #  @user_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+   # # binding.pry
+   #  @meta_review = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
+   #  @user1=@user_review.pluck(:rating).sum
+   #  @meta1=@meta_review.pluck(:rating).sum
+   #  if (@meta_review.count)>0 && @meta_review.present?
+   #  @meta_reviews_avg = @meta1/@meta_review.count  
+   #  else
+   #  @meta_reviews_avg =0
+   #  end
+   #  if (@user_review.count)>0 && @user_review.present?
+   #    @user_reviews_avg = @user1/@user_review.count
+   #  else
+   #  @user_reviews_avg =0
+   #  end
+   # @b = Product.find_by(id: params[:id]).sub_category_id
+    # @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
+     # @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
+    
     @product = Product.find_by(id: params[:id])
     @all_sub_category = @product&.category&.sub_categories
     @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
     @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
-    @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
-    @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
-     @user_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
-    @meta_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
+
+    @reviews_with_users = Review.new.reviews_join_user_where_product_id_is @product.id
+    @user_reviewss = @reviews_with_users.where("users.user_type = ? ", "Normal User")
+    @meta_reviewss = @reviews_with_users.where("users.user_type = ? ", "Expert User")
+    @user_reviews = @user_reviewss.first(4)
+    @meta_reviews = @meta_reviewss.first(4)
+    @user_reviews_avg = @user_reviewss.average(:rating).to_f.round(2)
+    @meta_reviews_avg = @meta_reviewss.average(:rating).to_f.round(2)
+    # @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
+    # @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
+    #  @user_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
+    # @meta_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}
     
-    @user_reviews_hash = {}
-    @user_reviews_hash[:positive] = [] 
-    @user_reviews_hash[:negative] = []
-    @user_reviews_hash[:middle] = []
+    # @user_reviews_hash = {}
+    # @user_reviews_hash[:positive] = [] 
+    # @user_reviews_hash[:negative] = []
+    # @user_reviews_hash[:middle] = []
 
 
-    @user_reviews.each do |r|
-      if r&.spoiler == true
-        @user_reviews_hash[:negative] << r
-        next
-      end
+    # @user_reviews.each do |r|
+    #   if r&.spoiler == true
+    #     @user_reviews_hash[:negative] << r
+    #     next
+    #   end
 
-      if r&.rating >= 6
-        @user_reviews_hash[:positive] << r
-      elsif r&.rating < 6 && r&.rating > 3
-          @user_reviews_hash[:middle] << r
-        else
-          @user_reviews_hash[:negative] << r
-        end
-    end
+    #   if r&.rating >= 6
+    #     @user_reviews_hash[:positive] << r
+    #   elsif r&.rating < 6 && r&.rating > 3
+    #       @user_reviews_hash[:middle] << r
+    #     else
+    #       @user_reviews_hash[:negative] << r
+    #     end
+    # end
 
-     @meta_reviews_hash = {}
-    @meta_reviews_hash[:positive] = [] 
-    @meta_reviews_hash[:negative] = []
-    @meta_reviews_hash[:middle] = []
+    #  @meta_reviews_hash = {}
+    # @meta_reviews_hash[:positive] = [] 
+    # @meta_reviews_hash[:negative] = []
+    # @meta_reviews_hash[:middle] = []
 
 
-    @meta_reviews.each do |r|
-      if r&.spoiler == true
-        @meta_reviews_hash[:negative] << r
-        next
-      end
+    # @meta_reviews.each do |r|
+    #   if r&.spoiler == true
+    #     @meta_reviews_hash[:negative] << r
+    #     next
+    #   end
 
-      if r&.rating >= 6
-        @meta_reviews_hash[:positive] << r
-      elsif r&.rating < 6 && r&.rating > 3
-          @meta_reviews_hash[:middle] << r
-        else
-          @meta_reviews_hash[:negative] << r
-        end
-    end
+    #   if r&.rating >= 6
+    #     @meta_reviews_hash[:positive] << r
+    #   elsif r&.rating < 6 && r&.rating > 3
+    #       @meta_reviews_hash[:middle] << r
+    #     else
+    #       @meta_reviews_hash[:negative] << r
+    #     end
+    # end
 
     @user_score = {}
 
-    @user_score[:positive] = ((@user_reviews_hash[:positive].count * 100)/@user_reviews.count) rescue 0
-    @user_score[:negative] = ((@user_reviews_hash[:negative].count * 100)/@user_reviews.count) rescue 0
-    @user_score[:middle] = ((@user_reviews_hash[:middle].count * 100)/@user_reviews.count) rescue 0
-
-
+    @user_score[:positive] = @user_reviewss.positive_review #((@user_reviews_hash[:positive].count * 100)/@user_reviews.count) rescue 0  
+    @user_score[:negative] = @user_reviewss.negative_review # ((@user_reviews_hash[:negative].count * 100)/@user_reviews.count) rescue 0
+    @user_score[:middle] = @user_reviewss.middle_review #((@user_reviews_hash[:middle].count * 100)/@user_reviews.count) rescue 0
 
     @meta_score = {}
-
-    @meta_score[:positive] = ((@meta_reviews_hash[:positive].count * 100)/@meta_reviews.count) rescue 0
-    @meta_score[:negative] = ((@meta_reviews_hash[:negative].count * 100)/@meta_reviews.count) rescue 0
-    @meta_score[:middle] = ((@meta_reviews_hash[:middle].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:positive] = @meta_reviewss.positive_review #((@meta_reviews_hash[:positive].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:negative] = @meta_reviewss.negative_review #((@meta_reviews_hash[:negative].count * 100)/@meta_reviews.count) rescue 0
+    @meta_score[:middle] = @meta_reviewss.middle_review #((@meta_reviews_hash[:middle].count * 100)/@meta_reviews.count) rescue 0
 
   end
 
