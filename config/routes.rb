@@ -99,6 +99,7 @@ Rails.application.routes.draw do
       end
       member do 
         patch :publish
+        get :add_links
         patch :unpublish
         patch :trending
       end
