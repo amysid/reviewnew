@@ -94,7 +94,7 @@
                 </div>
                 <div>
                     <%if @product.video.present?%>
-                    <video controls="controls" width="400px" height="200px" id="video_player" src="<%=@product&.video&.url%>" autoplay="true" muted="false" class="video_product"></video>
+                    <video controls="controls" width="400px" height="200px" id="video_player" src="<%=@product&.video&.url%>" autoplay="true" muted="false" class="video_product",poster="<%=get_poster(@product&.video&.url)%>" preload="none"></video>
                     <%else%>
                     <!-- <img src="/assets/video-dummy.gif" class="youtubeimage"> -->
                     <%end%>
