@@ -57,7 +57,7 @@
                         <div class="col-md-6">
                             <div class="youtube-image2">
                                 <% if product.video.present? %>
-                                <%= video_tag product&.video_url, controls: true, autoplay: false, width: "560",height: "315"%>
+                                <%= video_tag product&.video_url, controls: true, autoplay: false, width: "560",height: "315",poster: get_poster(product&.video_url), preload: "none"%>
                                 <%else%>
                                 <img width="560" height="315" src="/assets/dummy_video.jpg" />
                                 <!-- <iframe class="youtube-icon" src="/assets/dummy_video.jpg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->

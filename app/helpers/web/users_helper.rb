@@ -61,4 +61,8 @@ module Web::UsersHelper
 		# review.votes.where(vote_status: false).count
 	end
 
+	def get_poster url
+		url.sub(/\.[^.]+\z/, '.png') if url.present?
+	end
+
 end
