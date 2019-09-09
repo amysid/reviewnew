@@ -100,6 +100,9 @@ Rails.application.routes.draw do
       member do 
         patch :publish
         get :add_links
+        get :new_addlinks
+        post :create_product_link
+        delete :product_link_delete
         patch :unpublish
         patch :trending
       end

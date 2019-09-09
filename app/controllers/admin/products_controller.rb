@@ -20,7 +20,15 @@ class Admin::ProductsController < ApplicationController
     end
 
     def add_links
-      binding.pry
+       @s_no = 0
+       # binding.pry
+    if params[:search].present?
+       @categories = Category.where(category_name: params[:search])
+       @categories = @categories.order("created_at desc").paginate(:page => params[:page], :per_page => 100)
+    else
+        @product_links = Product.find_by(id:params[:id]).product_links
+        @products_link = @product_links.order("created_at desc").paginate(:page => params[:page], :per_page => 8)
+    end
     end
 
     def show
@@ -122,6 +130,20 @@ class Admin::ProductsController < ApplicationController
      flash[:notice] = "Product is trending"
    end
  end
+ 
+ def new_addlinks
+ end
+
+ def create_product_link
+  @products=Product.find_by(id: params[:id])
+  @products.product_links.create(product_link)
+  redirect_to add_links_admin_product_path(params[:id])
+ end
+
+def product_link_delete
+  ProductLink.find_by(id: params[:id]).destroy
+  redirect_to admin_products_path
+   end
 
  private
  def product_params 
@@ -131,5 +153,8 @@ class Admin::ProductsController < ApplicationController
  def find_products
     @products = Product.find_by(id: params[:id])
     redirect_to admin_products_path unless @products
+ end
+ def product_link
+  params.require(:category).permit(:link,:url)
  end
 end

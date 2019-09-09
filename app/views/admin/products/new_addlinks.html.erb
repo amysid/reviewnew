@@ -1,0 +1,33 @@
+<div class="login-part">
+	<div class="clearfix">
+	  <div class="global-heading user-head">Product Title/Link Management</div>
+	  <div class="aduser-btn"><a href="/admin/products" class="btn btn-add"> << Back to list </a></div>
+	 </div>
+  <div class="login-detail createpro-detail1">
+    <!-- <form class="form-common"> -->
+    <%= form_for :category, url: create_product_link_admin_product_path(params[:id]), html:  {id: "admin_category"}  do |f| %>
+   
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="category_mng-form">
+            <div class="form-group">
+               <label for="">Title<span class="required">*</span> </label>
+               <%= f.text_field :link, class: "form-control custom-control",  placeholder: "Add Title"%>
+            </div>
+
+            <div class="form-group">
+               <label for="">Url<span class="required">*</span> </label>
+               <%= f.text_field :url, class: "form-control custom-control",  placeholder: "Add Url"%>
+            </div>
+            
+            <div class="form-group">
+            	
+              <div class="form-add">
+                <%= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
+                <a href="/admin/products" class="btn btn-add btn-danger btn-md ">Back</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>

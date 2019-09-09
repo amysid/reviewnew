@@ -101,6 +101,15 @@
                 </div>
             </div>
         </div>
+        <!--  i did change here Atul-->
+        <div class="pull-right">
+            <div class="product_link_box">
+           <% @product_links.each do |m|%>
+           <a href=<%=m.url%>><%= m.link%></a><br>
+           <% end %>
+           </div>
+        </div>
+        <!--  -->
         <!-- Rating summary -->
         <div class="row rowreviews align-items-center justify-content-between">
             <div class="col-md-8">
@@ -762,6 +771,15 @@ $('.count_child').on('click', function() {
     transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
+}
+
+.product_link_box{
+    padding: 20px 15px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
+    font-family: 'Poppins', sans-serif;
+    margin-top: -175px;
+    width: 300px;
+    height: 235px;
 }
 
 a.next,
