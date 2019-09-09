@@ -19,6 +19,10 @@ class Admin::ProductsController < ApplicationController
       @products.image&.build
     end
 
+    def add_links
+      binding.pry
+    end
+
     def show
      @images = @products.image.all
       @category=Category.find(@products.category_id)

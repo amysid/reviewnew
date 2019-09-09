@@ -74,7 +74,10 @@
                        <%else%>
                         <%= link_to "Unpublish".html_safe, unpublish_admin_product_path(product), method: :patch, class: "btn btn-success", id: 'btnsubmit', title: "Unpublish Mode", data: {confirm: "Are you sure want to be change the publish mode"} %>
                          <%end%>
-                       
+                       <!-- </td>
+                       <td> -->
+                         <%= link_to "Add Links".html_safe, add_links_admin_product_path(product), method: :get, class: "btn btn-success", id: 'btnsubmit' %>
+                       </td>
            					</tr>
            				</tbody>
            			<%end%>
