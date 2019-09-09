@@ -14,6 +14,19 @@ class Web::UsersController < ApplicationController
     @review = Review.find_by(id: params[:id])
   end
 
+  def rating_product
+    # binding.pry
+    @a = Product.find_by(id: params[:id])&.sub_category_id
+    @sub_categories = SubCategory.find_by(id: @a)
+    # @reviews=Product.find_by(id: params[:id]).reviews
+
+    @product = Product.find_by(id: params[:id])
+    @reviews_with_users = Review.new.reviews_join_user_where_product_id_is @product.id
+    @reviews_normal = @reviews_with_users.where("users.user_type = ? ", "Normal User").paginate(:page => params[:page], :per_page => 10)
+
+    @review_expert = @reviews_with_users.where("users.user_type = ? ", "Expert User").paginate(:page => params[:page], :per_page => 10)
+
+  end
 
   def index
     # binding.pry
@@ -99,11 +112,17 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_category
-    @products =  Product.find_by(sub_category_id: params[:id])
+    arr1=[]
+    arr2=[]
+    @products =  Product.where(sub_category_id: params[:id])
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
     @products_movie_category = @sub_category.products.last(4)
+    @products.each{|x| arr1<<x.image.headers_image }
+       @banners=arr1.flatten
+   # @products.each{|x| arr2<<x.image.headers_image }
+   #    @Avatars=arr2.flatten
   end
 
   def movie_category_detail

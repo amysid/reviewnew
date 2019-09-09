@@ -23,7 +23,7 @@
         <%end%>
     </ol>
     <div class="carousel-inner">
-        <%arr.each_with_index do |img,index|%>
+        <%@banners.each_with_index do |img,index|%>
         <div class='carousel-item <%= index == 0 ? "active" : "" %>'>
             <img class="d-block w-100" src="<%=img%>" alt="First slide" height="500px;">
         </div>
@@ -57,7 +57,8 @@
                                 <div class="imgshadow">
                                     <div class="images1">
                                         <%if product.image.present?%>
-                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=product&.image&.first&.file&.url%>"></a>
+                                        <% @Avatar=product.image.where(avtar: true).first %>
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%=@Avatar&.file&.url%>"></a>
                                         <%else%>
                                         <img src="images/Layer46.jpg">
                                         <%end%>

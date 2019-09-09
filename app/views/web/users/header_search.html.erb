@@ -14,7 +14,8 @@
                             <div class="row no-gutters align-items-stretch">
                                 <div class="col-md-4">
                                     <div class="post-img">
-                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                        
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image.where(avtar: true)&.first&.file&.url%>" alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-md-8">

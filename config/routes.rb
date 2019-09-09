@@ -38,6 +38,7 @@ Rails.application.routes.draw do
       get :report_details
       get :header_search
       get :user_score
+      get :rating_product
       get :hollframe
       get :user_type
       get :trending

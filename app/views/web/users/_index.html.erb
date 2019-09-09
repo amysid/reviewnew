@@ -85,7 +85,7 @@
                         <% if @count_upcomeing  <=  3 %>
                         <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                             <div class="custom-img">
-                                <img src="<%= product&.image&.take&.file_url%>" class="img-fluid game-img" alt="">
+                                <img src="<%= product&.image.where(avtar:true)&.first&.file_url%>" class="img-fluid game-img" alt="">
                             </div>
                             <div class="custom-content">
                                 <h4 class="custom-title">
@@ -132,8 +132,9 @@
                             
                             <% if @count_todays_review == 0 %>
                             <a href="/web/users/<%=review&.product_id%>/movie_detail" class="">
-                                <img src='<%= review&.product&.image.present? ? review&.product&.image&.last&.file&.url : "/assets/review-img.png" %>'>
-                            
+                                <img src='<%= review&.product&.image.present? ? review&.product&.image&.where(file_type: "1").first&.file&.url : "/assets/review-img.png" %>'>
+                        
+                           
                             <div class="custom-content align-center">
                                 <p class="custom-tag"><span>
                                         <%=review&.product&.category&.category_name%> : Review</span></p>
@@ -166,7 +167,9 @@
                         <%# if review.created_at == DateTime.now%>
                         <% if i <3 %>
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                            <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'></a>
+                            <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
+                            <% a= User.find(review.user_id) %>
+                             <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/review-img.png" %>'></a></span>
                             <div class="reviewe-widget-content">
                                 <h6>
                                     <%= review&.product&.category&.category_name%> Reviews |

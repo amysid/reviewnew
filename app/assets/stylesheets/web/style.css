@@ -2984,3 +2984,14 @@ div#nav-name .home-slider1.slick-initialized.slick-slider.slick-dotted .slick-li
 a.readmore.pull-right.btn.btn-theme.my-3 {
     margin-top: 0px!important;
 }
+.d-flex.align-items-start.reviewe-widget-item.mb-4 {
+    position: relative;
+}
+span.reviewd-user img {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    position: absolute;
+    top: 60px;
+    left: 67px;
+}
