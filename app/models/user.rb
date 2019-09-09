@@ -10,6 +10,9 @@ class User < ApplicationRecord
  # validates :mobile_no, uniqueness: true,  on: :update
  validates :name, length: { minimum: 2, maximum: 20}
  validates :name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
+
+ scope :expert_user, -> { where(user_type: "Expert User")}
+ scope :normal_user, -> { where(user_type: "Normal User")}
  # validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
  # validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
 

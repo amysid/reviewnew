@@ -1,15 +1,14 @@
-
 <style type="text/css">
-    .activea{
-        background: #D6D6D1!important;
-    }
+.activea {
+    background: #D6D6D1 !important;
+}
 </style>
 <%#binding.pry%>
-<%arr = @product.image.map{ |i| i&.file&.url if i.file_type.eql?("1")}.compact%>
+<%#arr = @product.image.map{ |i| i&.file&.url if i.file_type.eql?("1")}.compact%>
 <%#arr = arr[0..3]%>
-<% if arr.blank? %>
-<% arr = [@product.image.first.file.url] %>
-<%end%>
+<%# if arr.blank? %>
+<%# arr = [@product.image.first.file.url] %>
+<%#end%>
 <div class="container">
     <div class="row navtop">
         <ul class="nav1">
@@ -20,21 +19,21 @@
         </ul>
     </div>
 </div>
-
-
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">
-        <%arr.each_with_index do |img,index|%>
-        <% if arr.count>1%>
+        <% @banners =  @images if @banners.blank? %>
+        <% @banners.each_with_index do |img,index|%>
+        <%# if arr.count>1%>
         <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class='<%= index == 0 ? "active" : "" %>'></li>
-        <%end%>
+        <%#end%>
         <%end%>
         <!--  <li data-target="#carouselExamgpleIndicators" data-slide-to="1"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="3"></li> -->
     </ol>
     <div class="carousel-inner">
-        <%arr.each_with_index do |img,index|%>
+        <%# binding.pry %>
+        <%@banners.each_with_index do |img,index|%>
         <div class='carousel-item <%= index == 0 ? "active" : "" %>'>
             <%# binding.pry %>
             <img class="d-block w-100" src="<%=img%>" alt="First slide" height="530px;">
@@ -60,18 +59,17 @@
                         <p class="paradetail2 line1">Wide Release Date :
                             <%=@product&.date&.strftime("%b %d, %Y")%>
                         </p>
-                     <%if @product.reviews.where(user_id: current_user&.id).present? %>
-                         <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" disabled>Review Already Posted</a>
-                         </div>
-                    <%elsif !current_user.present?%>
-                        <div class="reviews">
-                         <%= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
-            
+                        <%if @product.reviews.where(user_id: current_user&.id).present? %>
+                        <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" disabled>Review Already Posted</a>
                         </div>
-                     <%else%>
-                       <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">Write a review</a>
-                       </div>
-                     <%end%>
+                        <%elsif !current_user.present?%>
+                        <div class="reviews">
+                            <%= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
+                        </div>
+                        <%else%>
+                        <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">Write a review</a>
+                        </div>
+                        <%end%>
                         <!-- <button class="reviews"><a href="/web/users/<%#=@product.id%>/movie_review" style="color: white;">Reviews</a></button> -->
                     </div>
                     <%#@expert_user_review = 0%>
@@ -102,19 +100,16 @@
                     <%end%>
                 </div>
             </div>
-          
         </div>
-                    <!-- Rating summary -->
-            <div class="row rowreviews align-items-center justify-content-between">
+        <!-- Rating summary -->
+        <div class="row rowreviews align-items-center justify-content-between">
             <div class="col-md-8">
                 <h3>Ratings Summary</h3>
             </div>
-           
         </div>
         <!-- end -->
-
         <!-- summary -->
-         <div class="row rowreviews">
+        <div class="row rowreviews">
             <%# @positive_normal = 0 %>
             <%# @negative_normal = 0 %>
             <%# @medium_normal = 0 %>
@@ -210,7 +205,7 @@
                     <!-- <img src="/assets/review.jpg" class="reviewimg1"> -->
                 </div>
             </div>
-        </div>  
+        </div>
         <!-- end summary -->
         <!-- Description  -->
         <div class="parar rowreviews">
@@ -219,51 +214,48 @@
                 <%=ActionView::Base.full_sanitizer.sanitize(@product&.description)%>
             </p>
         </div>
-       <!-- end Description -->
-       <!-- Screenshots -->
+        <!-- end Description -->
+        <!-- Screenshots -->
         <div class="rowreviews">
             <h3>Screenshots</h3>
         </div>
         <div class="row rowreviews">
             <%#arr = @product.image { |i| i&.file&.url}%>
-            <% arr=[]%>
+            <%# arr=[]%>
             <%# binding.pry%>
-         <% @product.image.each { |i|  arr<<i&.file&.url if i.file_type!="1"} %>
-         <% unless arr.blank? %>
-             <%arr = arr[0..2]%>
-            <%arr.each do |a|%>
+            <%# @product.image.each { |i|  arr<<i&.file&.url if i.file_type!="1"} %>
+            <% unless  @images.blank? %>
+            <%#arr = arr[0..2]%>
+            <% @images.each do |a|%>
             <div class="col-md-4 columnimage">
                 <div class="imagecol3">
                     <img src="<%=a%>" class="screen-img myImg">
-
                 </div>
             </div>
             <%end%>
-            
             <%else%>
-            <%arr = @product.image { |i| i&.file&.url}%>
-            <%arr = arr[0..2]%>
-            <%arr.each do |a|%>
-                  <div class="col-md-4 columnimage">
+            <%#arr = @product.image { |i| i&.file&.url}%>
+            <%#arr = arr[0..2]%>
+            <%@banners.each do |a|%>
+            <div class="col-md-4 columnimage">
                 <div class="imagecol3">
-            <img src="<%=a.file&.url%>" class="screen-img myImg">
-            <button onclick="abc12()">next</button>
-                   </div>
-               </div>
-               <%end%>
+                    <img src="<%=a%>" class="screen-img myImg">
+                    <button onclick="abc12()">next</button>
+                </div>
+            </div>
+            <%end%>
             <%end%>
         </div>
-             
         <div id="myModal" class="modal1">
-           <span class="close1">&times;</span>
-           <img class="modal-content1" id="img01">
-           <div id="caption1"></div>
-           <a class="prev" >&#10094;</a>
-           <a class="next" >&#10095;</a>
-       </div>
+            <span class="close1">&times;</span>
+            <img class="modal-content1" id="img01">
+            <div id="caption1"></div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+        </div>
         <!-- end screenshot -->
         <!-- userscore && Metascore -->
-                <div class="row rowreviews">
+        <div class="row rowreviews">
             <div class="col-md-12 col-lg-8">
                 <nav>
                     <div class="nav nav-tabs nav-pills tabline" id="nav-tabScore" role="tablist">
@@ -295,7 +287,7 @@
                                                 <% eval(review.criteria).map do |key,value| %>
                                                 <p>
                                                     <%if z <= 2 %>
-                                                     <% z=z+1 %>
+                                                    <% z=z+1 %>
                                                     <%=key%>:
                                                     <% if value > 0 %>
                                                     <% value.times do %>
@@ -314,7 +306,7 @@
                                     <div class="ratingText">
                                         <%=truncate(review&.comment, :length => 130)%>
                                         <%if review&.comment&.present? && review&.comment&.length > 130 || z>=3%>
-                                       <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
+                                        <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
                                     </div>
                                     <div class="d-flex justify-content-between">
@@ -329,9 +321,11 @@
                             </div>
                             <%end%>
                         </div>
-                            <%else%>
-                            <div ><p>No Record Found</p></div>
-                            <%end%>
+                        <%else%>
+                        <div>
+                            <p>No Record Found</p>
+                        </div>
+                        <%end%>
                     </div>
                     <div class="tab-pane fade" id="nav-metascore" role="tabpanel">
                         <% if @meta_reviews.present?%>
@@ -392,7 +386,9 @@
                             <%end%>
                         </div>
                         <%else%>
-                        <div><p>No Record Found.</p></div>
+                        <div>
+                            <p>No Record Found.</p>
+                        </div>
                         <%end%>
                     </div>
                 </div>
@@ -403,7 +399,7 @@
                     <% if @todays_review.present? %>
                     <%@todays_review[0..6].each do |review|%>
                     <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                        <img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'>
+                        <a href="/web/users/<%= review&.id%>/full_review"><img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'></a>
                         <div class="reviewe-widget-content">
                             <h6>
                                 <%= review&.product&.category&.category_name%> Reviews |
@@ -417,8 +413,10 @@
                     </div>
                     <%end%>
                     <%else%>
-                    <div><p> No record found</p></div>
-                       <%end%>
+                    <div>
+                        <p> No record found</p>
+                    </div>
+                    <%end%>
                 </div>
             </div>
         </div>
@@ -427,40 +425,38 @@
             <h2 class="titile-light">You may also like:</h2>
         </div>
         <!-- <div class="custom-slider slidw"> -->
-            <div class="row">
+        <div class="row">
             <%@products_movie_details&.each do |product|%>
             <%#binding.pry%>
             <%#binding.pry%>
             <div class="col-sm-4 col-md-4 col-lg-4">
-            <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
-                <div class="custom-img">
-                    <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid " alt="">
-                </div>
-                <div class="custom-content justify-content-end">
-                    <h4 class="custom-title">
-                        <%=product&.product_name%>
-                    </h4>
-                    <p class="mb-2">
-                        <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
-                    </p>
-                    <!-- <a href="#" class="view-more align-self-end">View More</a> -->
-                </div>
-                <div class="prcnt-section">
-                    <%if product&.reviews&.pluck("rating")&.sum > 0 %>
-                    <p>
-                        <%=(product&.reviews&.pluck("rating")&.sum*100)/(product&.reviews&.pluck("rating")&.count*10)%>%</p>
-                    <%else%>
-                    <p>0%</p>
-                    <% end %>
-                </div>
-
-            </a>
+                <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
+                    <div class="custom-img">
+                        <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid " alt="">
+                    </div>
+                    <div class="custom-content justify-content-end">
+                        <h4 class="custom-title">
+                            <%=product&.product_name%>
+                        </h4>
+                        <p class="mb-2">
+                            <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
+                        </p>
+                        <!-- <a href="#" class="view-more align-self-end">View More</a> -->
+                    </div>
+                    <div class="prcnt-section">
+                        <%if product&.reviews&.pluck("rating")&.sum > 0 %>
+                        <p>
+                            <%=(product&.reviews&.pluck("rating")&.sum*100)/(product&.reviews&.pluck("rating")&.count*10)%>%</p>
+                        <%else%>
+                        <p>0%</p>
+                        <% end %>
+                    </div>
+                </a>
             </div>
-           
-           <%end%>
-            </div>  
+            <%end%>
         </div>
     </div>
+</div>
 </div>
 </div>
 <div class="modal fade bd-example-modal-lg reviewModal" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -475,58 +471,61 @@
                 </div>
                 <%#= form_tag get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic" do %>
                 <%= form_with url: get_reviews_web_reviews_path(id: @product.id), id: "count_rating_dynamic", local: true do |f| %>
-
                 <div class="form-group">
                     <div class="rating-row">
                         <div class="count_child">
                             <%i=0%>
-
                             <%@review_parts.each do |criteria|%>
                             <% if i%2==0 %>
-                        
                             <div class="left">
-                            
-                            <div class="rating-wrap">
-                                <span class="ratetitle">
-                                    <%= criteria&.criteria&.titleize%></span>
-                                <div class="rate">
-                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
-                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
-                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
-                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
-                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
-                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
-                                   
+                                <div class="rating-wrap">
+                                    <span class="ratetitle">
+                                        <%= criteria&.criteria&.titleize%></span>
+                                    <div class="rate">
+                                        <input type="radio" id="<%= " star5" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="5" />
+                                        <label for="<%= " star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                                        <input type="radio" id="<%= " star4" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="4" />
+                                        <label for="<%= " star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                                        <input type="radio" id="<%= " star3" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="3" />
+                                        <label for="<%= " star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                                        <input type="radio" id="<%= " star2" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="2" />
+                                        <label for="<%= " star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                                        <input type="radio" id="<%= " star1" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="1" />
+                                        <label for="<%= " star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                             <%i=i+1%>
-                        
                             <%else%>
                             <div class="right">
-                                      <div class="rating-wrap">
-                                <span class="ratetitle">
-                                    <%= criteria&.criteria&.titleize%></span>
-                                <div class="rate">
-                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
-                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
-                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
-                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
-                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
-                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
-                                   
+                                <div class="rating-wrap">
+                                    <span class="ratetitle">
+                                        <%= criteria&.criteria&.titleize%></span>
+                                    <div class="rate">
+                                        <input type="radio" id="<%= " star5" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="5" />
+                                        <label for="<%= " star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                                        <input type="radio" id="<%= " star4" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="4" />
+                                        <label for="<%= " star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                                        <input type="radio" id="<%= " star3" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="3" />
+                                        <label for="<%= " star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                                        <input type="radio" id="<%= " star2" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="2" />
+                                        <label for="<%= " star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                                        <input type="radio" id="<%= " star1" + criteria.id.to_s%>" name="rating[]
+                                        <%= criteria&.criteria%>" value="1" />
+                                        <label for="<%= " star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                    </div>
                                 </div>
+                                <%i=i+1%>
                             </div>
-                            <%i=i+1%>
-                        </div>
                             <%end%>
                             <%end %>
                         </div>
@@ -559,7 +558,8 @@
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label>Review this <%= Product.find(@product.id).category_name%> now</label>
+                    <label>Review this
+                        <%= Product.find(@product.id).category_name%> now</label>
                     <textarea style="resize: none" name="description" class="form-control" rows="5"></textarea>
                 </div>
                 <div class="form-group form-check">
@@ -576,7 +576,6 @@
     </div>
 </div>
 <script>
-
 // $(document).ready(function() {
 //     $('#form_tag_review').on('click', function() {
 //         // console.log("First")
@@ -584,51 +583,49 @@
 //      $('#count_rating_dynamic').submit(); });
 // });
 
-    $('.custom-slider').slick({
+$('.custom-slider').slick({
     dots: false,
     infinite: true,
     autoplay: true,
     speed: 300,
     slidesToShow: 3,
-    responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        infinite: true,
-      }
-    },
-    {
-      breakpoint: 991,
-      settings: {
-        slidesToShow: 2,
-        slidesToScroll: 1,
-        infinite: true,
-      }
-    },
-    {
-      breakpoint: 767,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      }
-    }
+    responsive: [{
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                infinite: true,
+            }
+        },
+        {
+            breakpoint: 991,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+                infinite: true,
+            }
+        },
+        {
+            breakpoint: 767,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            }
+        }
         // You can unslick at a given breakpoint now by adding:
         // settings: "unslick"
         // instead of a settings object
-        ]
-      });
-
-    </script>
-    <script type="text/javascript">
+    ]
+});
+</script>
+<script type="text/javascript">
 $(document).on("turbolinks:load", function() {
     $("#count_rating_dynamic").validate({
         rules: {
@@ -649,7 +646,7 @@ $(document).on("turbolinks:load", function() {
 <script type="text/javascript">
 $('.count_child').on('click', function() {
 
-   
+
     var avereage = 0
     objects = $('.count_child').find('input:checked')
     objects.each(function() {
@@ -682,91 +679,105 @@ $('.count_child').on('click', function() {
 
 
 .modal1 {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  padding-top: 183px; /* Location of the box */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 183px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
 }
 
 /* Modal Content (image) */
 .modal-content1 {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
 }
 
 /* Caption of Modal Image */
 #caption1 {
-  margin: auto;
-  display: block;
-  width: 80%;
-  max-width: 700px;
-  text-align: center;
-  color: #ccc;
-  padding: 10px 0;
-  height: 150px;
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
 }
 
 /* Add Animation */
-.modal-content1, #caption1 {  
-  -webkit-animation-name: zoom;
-  -webkit-animation-duration: 0.6s;
-  animation-name: zoom;
-  animation-duration: 0.6s;
+.modal-content1,
+#caption1 {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
 }
 
 .close1 {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f1f1;
-  font-size: 40px;
-  font-weight: bold;
-  transition: 0.3s;
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
 .close1:hover,
 .close1:focus {
-  color: #bbb;
-  text-decoration: none;
-  cursor: pointer;
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-.prev, .next {
- cursor: pointer;
- position: absolute;
- top: 50%;
- width: auto;
- background-color: #454a4e;
- margin-top: -22px;
- padding: 16px;
- color: white;
- font-weight: bold;
- font-size: 18px;
- transition: 0.6s ease;
- border-radius: 0 3px 3px 0;
- user-select: none;
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    background-color: #454a4e;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-a.next,a.prev {
-    color: white!important;
+a.next,
+a.prev {
+    color: white !important;
 }
 
 .next {
- right: 0;
+    right: 0;
 
- border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
 }
-.prev:hover, .next:hover {
- background-color: rgba(2,2,2,0.8);
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(2, 2, 2, 0.8);
 }
 </style>
 <script type="text/javascript">
@@ -775,7 +786,6 @@ $(".ten-rate").click(function() {
     // this.siblings("span").addClass("active");
     this.nextSibling.classList.add("active");
 });
-
 </script>
 <script type="text/javascript">
 function voting(a) {
@@ -806,9 +816,8 @@ function voting(a) {
     });
 }
 </script>
-
 <script type="text/javascript">
-    $(document).ready(function() {
+$(document).ready(function() {
 
     // Get the modal
     var modal = document.getElementById("myModal");
@@ -820,8 +829,8 @@ function voting(a) {
     // debugger;
     Array.prototype.slice.call(img).forEach(myfunction);
 
-    function myfunction(item,index){
-        item.onclick = function(){
+    function myfunction(item, index) {
+        item.onclick = function() {
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
@@ -832,10 +841,10 @@ function voting(a) {
     var span = document.getElementsByClassName("close1")[0];
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() { 
-      modal.style.display = "none";
+    span.onclick = function() {
+        modal.style.display = "none";
     }
-    
+
     //Modal JS
 
     // $('#form_tag_review').on('click', function() { 
@@ -845,33 +854,34 @@ function voting(a) {
     // });
 
     $('a.next').click(function next() {
-       var modal = $("img.modal-content1");
-       var img = document.getElementsByClassName("myImg");
-       index = getIndex(modal, img);
+        var modal = $("img.modal-content1");
+        var img = document.getElementsByClassName("myImg");
+        index = getIndex(modal, img);
 
-       if (img[index+1] != undefined) {
-           modal.attr('src', img[index+1].src);
-       }
-   });
+        if (img[index + 1] != undefined) {
+            modal.attr('src', img[index + 1].src);
+        }
+    });
 
-   $('a.prev').click(function next() {
-       var modal = $("img.modal-content1");
-       var img = document.getElementsByClassName("myImg");
-       index = getIndex(modal, img);
-       
-       if (img[index-1] != undefined) {
-           modal.attr('src', img[index-1].src);
-       }
-   });
-   function getIndex(modal, img) {
-       var i;
-       url = modal.attr('src');
-       Array.prototype.slice.call(img).forEach(function(item, index){
-           if (item.src === url) {
-               i = index;
-           }
-       });
-       return i;
-   }
+    $('a.prev').click(function next() {
+        var modal = $("img.modal-content1");
+        var img = document.getElementsByClassName("myImg");
+        index = getIndex(modal, img);
+
+        if (img[index - 1] != undefined) {
+            modal.attr('src', img[index - 1].src);
+        }
+    });
+
+    function getIndex(modal, img) {
+        var i;
+        url = modal.attr('src');
+        Array.prototype.slice.call(img).forEach(function(item, index) {
+            if (item.src === url) {
+                i = index;
+            }
+        });
+        return i;
+    }
 });
 </script>

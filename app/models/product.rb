@@ -11,5 +11,7 @@ class Product < ApplicationRecord
     validates :product_name, length: { minimum: 3, maximum: 20}
     validates :product_name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
     validates :description, length: { minimum: 20, maximum: 500}
+
+    scope :published_products , -> { where(current: "publish").order("created_at DESC") }
     #validates :product_name, format: { with: /\A[a-zA-Z]+\z/, message: "%{value} not accecpt. Only allows letters" }
 	end

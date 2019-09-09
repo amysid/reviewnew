@@ -52,7 +52,7 @@
                                <img src='<%= m.object.file.present? ? m.object.file_url : "/assets/photo_gallery.webp" %>' height=100px width=200px alt="your image" class="img_prev"/>
                               <%= m.file_field :file, onchange:"readURL(this);", height: "100px;", width: "200px;", accept: "image/*", id: "file-upload", style: ""%>
                               <%= m.check_box :file_type %><b>Header Image</b>
-                              <%= m.check_box :avtar %><b>Avtar Image</b>
+                              <%= m.check_box :avtar %><b>Avatar Image</b>
                                  <!-- <input type='file' onchange="readURL(this);" />  -->
                           
                                </div>

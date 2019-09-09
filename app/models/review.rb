@@ -3,6 +3,9 @@ class Review < ApplicationRecord
   has_many :votes, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: :product_id , message: "review already exist." }
+  scope :expert_review , -> { where(user_id: User.expert_user).order("created_at desc") }
+  scope :normal_review , -> { where(user_id: User.normal_user).order("created_at desc") }
+
 
   def reviews_join_user_where_product_id_is product_id
   	Review.joins("INNER JOIN users on reviews.user_id = users.id").where(product_id: product_id).distinct.select("reviews.*,users.name, users.user_type").order("created_at desc")

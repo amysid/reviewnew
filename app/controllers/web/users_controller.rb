@@ -21,48 +21,55 @@ class Web::UsersController < ApplicationController
         redirect_to admin_home_index_path(current_user)
   	end
 
+    @reviews = Review.all
+    @products = Product.all
+
     if params[:only] == "data" && params[:id].present? && Category.find_by(id: params[:id]).present?
         category1 = Category.find_by(id: params[:id])
-        @reviews_normal= Review.where(user_id: User.where(user_type: "Normal User").ids, product_id: category1.product.ids).last(4)
-        @review_expert = Review.where(user_id: User.where(user_type: "Expert User").ids, product_id: category1.product.ids).last(4)
+        @reviews_normal=  @reviews.where(user_id: User.where(user_type: "Normal User").ids, product_id: category1.product.ids).last(4)
+        @review_expert =  @reviews.where(user_id: User.where(user_type: "Expert User").ids, product_id: category1.product.ids).last(4)
     else
 
     @category = Category.all
-    @reviews_count = Product.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
-    @average_review = Review.average(:rating).to_f * 10
+    @reviews_count = @products.all.map {|x| x.reviews.map.with_index {|b,index|}.count}.sum
+    @average_review =  @reviews.average(:rating).to_f * 10
 
     # @reviews_all = Product.all.map {|x| x.reviews.map {|b| b.rating}.sum}.sum
     if params[:name].present?
      # @name1=Category.find(category_name:  params[:name])
      @name1= params[:name]
-      @trending_products = Product.where(trending: true,category_name: @name1)
-      @publishs = Product.where(category_name:  params[:name]).where(current: "publish")
-      @upcomeing_products = Product.where(category_name: @name1)
+      @trending_products = @products.where(trending: true,category_name: @name1)
+      @publishs = @products.published_products.where(category_name:  params[:name]) #Product.where(category_name:  params[:name],current: "publish")
+      @upcomeing_products = @products.where(category_name: @name1)
            #@publishs = Product.all.where(current: "publish")
            
-      @products = Product.where(category_id: params[:id])
-      @products =Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
       
-      @latest_stories =  Product.where(category_name:  params[:name]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+      # @products = @products.where(category_id: params[:id])
+      @latest_stories =  @products.where(category_name:  params[:name]).select('products.* ,product_name,description,date, (avg(reviews.rating) *10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+      @products =@products.where(category_name:  params[:name]).select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
     else
-     @trending_products = Product.where(trending: true)
-     @upcomeing_products = Product.where(['date > ?', DateTime.now] )
-     @products =Product.all.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
-     @publishs = Product.all.where(current: "publish")
+     @trending_products = @products.where(trending: true)
+     @upcomeing_products = @products.where(['date > ?', DateTime.now] )
+     @publishs = @products.published_products #Product.all.where(current: "publish")
      
      # @products = Product.all
-     @latest_stories =  Product.select('products.* ,product_name,description,date, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+     @latest_stories =  @products.select('products.* ,product_name,description,date, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('avg(reviews.rating) desc').to_a
+     @products =Product.all.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews).order('products.updated_at desc').to_a
     end
-    @users = User.where(user_type: "Normal User") 
-    @recent_reviews = Review.all.order("created_at DESC").limit(4)
-    @todays_review = Review.all.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
-    @latest_review = Review.last
+    # @users = User.where(user_type: "Normal User") 
+    # binding.pry
+    @recent_reviews =  @reviews.order("created_at DESC").limit(4)
+    @todays_review =  @reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day).order("created_at DESC").limit(4)
+    @latest_review =  @reviews.last
     # @reviews_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
     
     # if 
     # else
-       @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
-       @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
+    # binding.pry
+    @reviews_normal = Review.normal_review.limit(4)
+    @review_expert = Review.expert_review.limit(4)
+       # @reviews_normal = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Normal User"}.last(4)
+       # @review_expert = Review.all.select{|x| x if User.find_by(id: x.user_id ).user_type == "Expert User"}.last(4)
    # end
     
     @rec = {}
@@ -132,6 +139,9 @@ class Web::UsersController < ApplicationController
      # @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
     
     @product = Product.find_by(id: params[:id])
+    # binding.pry
+    @banners = @product.image.headers_image
+    @images = @product.image.images
     @all_sub_category = @product&.category&.sub_categories
     @review_parts = Product.find_by(id: params[:id])&.category&.review_parts
     @todays_review = @product.reviews.where(created_at: DateTime.now.beginning_of_day..DateTime.now.end_of_day)
