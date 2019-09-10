@@ -24,3 +24,12 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+    ################ Guide For Char Data by reviews ##################
+    p= Product.find("f7010ec4-68ea-4215-8b92-35d1f22efbbb")
+    u_type = 'Normal User'
+    p.user_type = u_type 
+    p = p.as_json(methods: [:average_criteria_by_product, :average_criteria_by_category, :average_criteria_by_sub_cat])
+    p["user_type"] = u_type 
+    ###########################
