@@ -417,6 +417,8 @@
                     <%@todays_review[0..6].each do |review|%>
                     <div class="d-flex align-items-start reviewe-widget-item mb-4">
                         <a href="/web/users/<%= review&.id%>/full_review"><img src='<%= review&.product&.image.present? ? review&.product&.image&.first&.file&.url : "/assets/review-img.png" %>'></a>
+                        <% a= User.find(review.user_id) %>
+                             <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/circle.png" %>'></a></span>
                         <div class="reviewe-widget-content">
                             <h6>
                                 <%= review&.product&.category&.category_name%> Reviews |
@@ -449,7 +451,7 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
                 <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post custom-slide">
                     <div class="custom-img">
-                        <img src='<%= product&.image&.first&.file&.present? ? product&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid " alt="">
+                        <img src='<%= product&.image&.where(avtar: true).present? ? product&.image&.where(avtar: true).first&.file.try(:url) : "/assets/_image1.png" %>' class="img-fluid " alt="">
                     </div>
                     <div class="custom-content justify-content-end">
                         <h4 class="custom-title">
@@ -499,22 +501,18 @@
                                     <span class="ratetitle">
                                         <%= criteria&.criteria&.titleize%></span>
                                     <div class="rate">
-                                        <input type="radio" id="<%= " star5" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="5" />
-                                        <label for="<%= " star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                                        <input type="radio" id="<%= " star4" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="4" />
-                                        <label for="<%= " star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                                        <input type="radio" id="<%= " star3" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="3" />
-                                        <label for="<%= " star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                                        <input type="radio" id="<%= " star2" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="2" />
-                                        <label for="<%= " star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                                        <input type="radio" id="<%= " star1" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="1" />
-                                        <label for="<%= " star1" + criteria.id.to_s%>" title="text">1 star</label>
-                                    </div>
+                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
+                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
+                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
+                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
+                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
+                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                   
+                                </div>
                                 </div>
                             </div>
                             <%i=i+1%>
@@ -524,22 +522,18 @@
                                     <span class="ratetitle">
                                         <%= criteria&.criteria&.titleize%></span>
                                     <div class="rate">
-                                        <input type="radio" id="<%= " star5" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="5" />
-                                        <label for="<%= " star5" + criteria.id.to_s%>" title="text">5 stars</label>
-                                        <input type="radio" id="<%= " star4" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="4" />
-                                        <label for="<%= " star4" + criteria.id.to_s%>" title="text">4 stars</label>
-                                        <input type="radio" id="<%= " star3" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="3" />
-                                        <label for="<%= " star3" + criteria.id.to_s%>" title="text">3 stars</label>
-                                        <input type="radio" id="<%= " star2" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="2" />
-                                        <label for="<%= " star2" + criteria.id.to_s%>" title="text">2 stars</label>
-                                        <input type="radio" id="<%= " star1" + criteria.id.to_s%>" name="rating[]
-                                        <%= criteria&.criteria%>" value="1" />
-                                        <label for="<%= " star1" + criteria.id.to_s%>" title="text">1 star</label>
-                                    </div>
+                                      <input type="radio" id="<%= "star5" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="5" />
+                  <label for="<%= "star5" + criteria.id.to_s%>" title="text">5 stars</label>
+                  <input type="radio" id="<%= "star4" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="4" />
+                  <label for="<%= "star4" + criteria.id.to_s%>" title="text">4 stars</label>
+                  <input type="radio" id="<%= "star3" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="3" />
+                  <label for="<%= "star3" + criteria.id.to_s%>" title="text">3 stars</label>
+                  <input type="radio" id="<%= "star2" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="2" />
+                  <label for="<%= "star2" + criteria.id.to_s%>" title="text">2 stars</label>
+                  <input type="radio" id="<%= "star1" + criteria.id.to_s%>" name="rating[]<%= criteria&.criteria%>" value="1" />
+                  <label for="<%= "star1" + criteria.id.to_s%>" title="text">1 star</label>
+                                   
+                                </div>
                                 </div>
                                 <%i=i+1%>
                             </div>
@@ -561,7 +555,7 @@
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating9" name="numeric_rating" value="09" class="ten-rate" /><span class="sib_span">9</span></label>
                         <label class="radio-inline"><input style="display: none;" type="radio" id="numeric_rating10" name="numeric_rating" value="10" class="ten-rate" /><span class="sib_span">10</span></label>
                     </div>
-                    <div class="overallRating">
+                    <div class="overallRating" >
                         <span class="dume-circle ">1</span>
                         <span class="dume-circle ">2</span>
                         <span class="dume-circle">3</span>
@@ -577,7 +571,7 @@
                 <div class="form-group mb-3">
                     <label>Review this
                         <%= Product.find(@product.id).category_name%> now</label>
-                    <textarea style="resize: none" name="description" class="form-control" rows="5"></textarea>
+                    <textarea style="resize: none" name="description" class="form-control"  rows="5" required="true"></textarea>
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" name="spoiler" class="form-check-input" id="exampleCheck1">
@@ -586,7 +580,9 @@
                 <div class="form-group text-center">
                     <!-- <button style="color: #fff" type="submit" class="btn btn-theme" >Submit</button> -->
                     <%#=f.submit " Submit", id: "form_tag_review",class: "btn btn-theme"%>
-                    <%=f.submit " Submit", id: "form_tag_review",class: "btn btn-theme", data: {disable_with: "<i class: 'fa fa-spinner fa-spin' ></i> Saving..."}%>
+                    <%#=f.submit " Submit", id: "form_tag_review",class: "btn btn-theme", data: {disable_with: "<i class: 'fa fa-spinner fa-spin' ></i> Saving..."}%>
+                    <%= button_tag "Submit!", id: "form_tag_review", class: "btn btn-theme", 'data-disable-with' => "<i class='fa fa-spinner fa-spin'></i> Checking info".html_safe %> 
+
                 </div>
                 <% end %>
             </div>
@@ -643,24 +639,7 @@ $('.custom-slider').slick({
     ]
 });
 </script>
-<script type="text/javascript">
-$(document).on("turbolinks:load", function() {
-    $("#count_rating_dynamic").validate({
-        rules: {
-            "rating[]Action": {
-                required: true
-
-            }
-        },
-        messages: {
-            "rating[]Action": {
-                required: "Please Fill the name field ."
-            }
-        }
-    });
-    // })
-});
-</script>
+<!--  -->
 <script type="text/javascript">
 $('.count_child').on('click', function() {
 
@@ -911,4 +890,27 @@ $(document).ready(function() {
         return i;
     }
 });
+
+$('#form_tag_review').click(function(e){
+    var submit = rating();
+    // debugger;
+    if(submit === false){
+        alert('Please fill atleast on rating');
+        e.preventDefault();
+    }
+});
+
+function rating()
+{ 
+    a =false;
+    $(".dume-circle").each(function(){
+    if ($(this).hasClass('active')){
+        a = true;
+    }
+   });
+    return a;
+}
+
+
+
 </script>

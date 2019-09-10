@@ -77,24 +77,26 @@
  <div class="page-wrapper">
       <div class="container home-wrap">
         <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => "update_form" }) do |f| %>
-        <%= form_with url: image_update_web_users_path, html: {:id => "update_form" } do |f| %>
+        <%= form_with url: image_update_web_users_path, html: {:id => "update_form" },local:true do |f| %>
         <div class="profil-row">
           <div class="user-profile">
             <div class="img-container">
               <label for="file-upload" class="custom-file-upload ">
                    <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_default.jpeg" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 30px; margin-left: -25px; font-size: 24px;" ></i>
                  <%= f.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
+                 <%= f.submit "Update profile", class: "btn btn-theme btn-block"%>
+                 <%end%>
               </label>
             </div>
             <h4><%#= current_user.name   %></h4>
           </div>
           <div class="user-detail">
             <div class="ratings">
-              <h3 class="">57</h3>
+              <h3 class=""><%= Review.where(user_id:current_user.id).pluck(:rating).sum%></h3>
               <span>Ratings</span>
             </div>
             <div class="reviews">
-              <h3 class="">57</h3>
+              <h3 class=""><%= Review.where(user_id: current_user.id).count%></h3>
               <span>Reviews</span>
             </div>
             <div class="profil-btn">
@@ -107,7 +109,9 @@
         <div class="myscore-row">
           <h2 class="main-title">Change Password</h2>
           <div class="form form-changepassword">
+              <%= form_with url: image_update_web_users_path, html: {:id => "update_form" },local:true do |f| %>
             <div class="form-group">
+
               <!-- <input type="password" class="form-control" placeholder="Old Password"> -->
               <%= f.password_field :current_password, placeholder: "Old Password", class: "form-control" %>
             </div>

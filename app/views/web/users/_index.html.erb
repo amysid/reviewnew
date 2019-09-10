@@ -169,7 +169,7 @@
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
                             <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
                             <% a= User.find(review.user_id) %>
-                             <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/review-img.png" %>'></a></span>
+                             <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/circle.png" %>'></a></span>
                             <div class="reviewe-widget-content">
                                 <h6>
                                     <%= review&.product&.category&.category_name%> Reviews |

@@ -134,7 +134,6 @@ class Web::UsersController < ApplicationController
 
   def movie_detail
     # redirect_to root_path, notice: "Review Posted."
-    @product_links=ProductLink.all.last(3)
     @a = Product.find_by(id: params[:id])&.sub_category_id
     @sub_categories = SubCategory.find_by(id: @a)
     @products_movie_details = @sub_categories&.products&.last(4)
@@ -161,6 +160,7 @@ class Web::UsersController < ApplicationController
     # @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
 
     @product = Product.find_by(id: params[:id])
+    @product_links=@product.product_links
     # binding.pry
     @banners = @product.image.headers_image
     @images = @product.image.images

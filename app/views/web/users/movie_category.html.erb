@@ -261,7 +261,8 @@
                  <a href="/web/users/<%=product_name.id%>/movie_detail" class="custom-post custom-slide">
                     <div class="custom-img">
                         <%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>
-                        <img src='<%= product_name&.image&.first&.file&.present? ? product_name&.image&.first&.file.try(:url) : "/assets/tv58.png" %>' class="img-fluid" alt="">
+                    <img src='<%= product_name&.image&.where(avtar: true).present? ? product_name&.image&.where(avtar: true).first&.file.try(:url) : "/assets/_image1.png" %>' class="img-fluid " alt="">
+
                     </div>
                     <div class="custom-content justify-content-end">
                         <h4 class="custom-title">
