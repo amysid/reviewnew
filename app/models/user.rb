@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
  scope :expert_user, -> { where(user_type: "Expert User")}
  scope :normal_user, -> { where(user_type: "Normal User")}
+ has_many :reviews
  # validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
  # validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
 
