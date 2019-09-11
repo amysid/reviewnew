@@ -1,4 +1,4 @@
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
 <div class="page-wrapper">
     <div class="login-page">
         <div class="container">
@@ -70,30 +70,31 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $("#login_form").validate({
+              
+              errorPlacement: function (error, element) {
+               error.insertBefore(element);
+              },
         rules: {
             "user[email]": {
+                required: true,
                 remote: "/web/users/check_email_login"
             },
             "user[password]": {
-                // required: true,
+                required: true,
                 minlength: 8,
                 maxlength: 16
-            },
+            }
+        },
             messages: {
                 "user[email]": {
                     remote: "Email is not registered."
                 }
-            }
-            ,
+            },
 
-            submitHandler: function(form) {
-                form.submit();
-            }
-        }
     });
 });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $("form").submit(function(event) {
     var email = $("#user_email_id").val();
     var pass = $("#user_passwrd").val();
@@ -117,7 +118,7 @@ $("#user_email_id").change(function(event) {
 $("#user_passwrd").change(function(event) {
     $('.msg-error2').text("");
 });
-</script>
+</script> -->
 <style type="text/css">
 .msg-error {
     color: #e80b0b;

@@ -1,4 +1,4 @@
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<!-- <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script> -->
  <div class="page-wrapper">
       <div class="login-page">
         <div class="container">
@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $("form").submit(function(event) {
   var name = $("#user_name").val();
   var email = $("#user_email").val();
@@ -128,13 +128,17 @@ $("#g-recaptcha-response").change(function(event) {
   });
 
 </script>
-
+ -->
 <script type="text/javascript">
 $(document).ready(function(){
 $("#registration_form").validate({
+
+  errorPlacement: function (error, element) {
+               error.insertBefore(element);
+              },
     rules: {
       "user[name]":{
-        //required: true,
+        required: true,
         user_nospace_regex: true,
         userRegex: true,
         minlength: 2,
@@ -145,12 +149,12 @@ $("#registration_form").validate({
        remote: "/web/users/check_email"
       },
       "user[password]":{
-       // required: true,
+       required: true,
         minlength: 8,
         maxlength: 16
       },
       "user[password_confirmation]":{
-        //required: true,
+        required: true,
         equalTo: "#user_pass",
         minlength: 8,
         maxlength: 16
@@ -165,9 +169,7 @@ $("#registration_form").validate({
             }
         },
 		
-		submitHandler: function(form) {
-	      form.submit();
-	    }
+		
   });
   });
 
