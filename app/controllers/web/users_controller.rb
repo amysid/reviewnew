@@ -409,13 +409,13 @@ class Web::UsersController < ApplicationController
   end
 
   def report
-    @products = Product.all
+    @products = Product.published_products
   end
   def report_details
     # binding.pry
     product_ids=[]
     Review.all.each{|x| product_ids<<x.product_id}
-    @products = Product.where(id: product_ids.uniq).paginate(:page => params[:page], :per_page => 10)
+    @products = Product.published_products.where(id: product_ids.uniq).paginate(:page => params[:page], :per_page => 10)
   end
   def profile
 
