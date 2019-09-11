@@ -27,6 +27,13 @@ class Web::ReviewsController < ApplicationController
 	def review_chart
 		get_expert_average params[:product_id]
 		get_normal_average params[:product_id]
+    	
+    	p= Product.find(params[:product_id])
+	    u_type = 'Normal User'
+	    p.user_type = u_type
+	    p = p.as_json(methods: [:average_criteria_by_product, :average_criteria_by_category, :average_criteria_by_sub_cat])
+	    p["user_type"] = u_type
+	
 	end
 	private
 	def require_params
