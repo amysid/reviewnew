@@ -1,0 +1,276 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+<div class="row">
+	<div id="expert_chart" class="col-md-4"></div>
+	<div id="normal_chart" class="col-md-4"></div>
+</div>
+
+<div class="score-rating">
+	<h4>Normal Average Rating</h4>
+	<div class="rating-row">
+        <div class="count_child">
+			<% @normal_detail["average_criteria_by_sub_cat"].each do |key, value| %>
+			<div class="left">
+		        <div class="abc1">
+			        <div class="star-para">
+			            <%=key%>
+			        </div>
+			        <div class="st">
+			            <% if value > 0 %>
+				            <% value.times do %>
+				            	<label class="fa fa-star checked"></label> 
+			            	<% end %>
+				        <%else%>
+				        	N/A
+				        <%end%>
+				    </div>
+		        </div>
+		    </div>
+		    <% end %>
+		</div>
+	</div>
+
+
+	<h4>Expert Average Rating</h4>
+	<div class="rating-row">
+        <div class="count_child">
+			<% @expert_detail["average_criteria_by_sub_cat"].each do |key, value| %>
+			<div class="left">
+		        <div class="abc1">
+			        <div class="star-para">
+			            <%=key%>
+			        </div>
+			        <div class="st">
+			            <% if value > 0 %>
+				            <% value.times do %>
+				            	<label class="fa fa-star checked"></label> 
+			            	<% end %>
+				        <%else%>
+				        	N/A
+				        <%end%>
+				    </div>
+		        </div>
+		    </div>
+		    <% end %>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div id="expert_category" class="col-md-4"></div>
+	<div id="normal_category" class="col-md-4"></div>
+</div>
+
+
+<script type="text/javascript">
+
+// Create the chart
+var expert_categories = <%= raw(@expert_categories) %>;
+var normal_categories = <%= raw(@normal_categories) %>;
+
+Highcharts.chart('expert_chart', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+    	enabled: false
+	},
+    xAxis: [{
+      categories: expert_categories,
+      labels: {
+        enabled: false
+      },
+      title: {
+      	text: "<%= @product.product_name %> is ranked in the <%= @expert_data[@expert_index]%> Percentile of games scored on metacritic."
+      }
+    }],
+    yAxis: [{
+	  labels: {
+	    enabled: false
+	  },
+	  title: {
+	  	text: null
+	  }
+    }],
+    title: {
+        text: 'Experts Percentile Reviews'
+    },
+    series: [{
+    	showInLegend: false,             
+        data: <%= @expert_data %>
+    }],
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        pointPadding: 0.1,
+        borderWidth: 0,
+        color: '#dadada'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.point.category + '</b>' 
+        }
+    },
+});
+
+chart = $('#expert_chart').highcharts();
+<% if @expert_index.present? %>
+	chart.series[0].data[<%= @expert_index %>].update({color:'green'});
+<% end %>
+
+
+
+Highcharts.chart('normal_chart', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+    	enabled: false
+	},
+    xAxis: [{
+      categories: normal_categories,
+      labels: {
+        enabled: false
+      },
+      title: {
+      	text: "<%= @product.product_name %> is ranked in the <%= @normal_data[@normal_index]%> Percentile of games scored on metacritic."
+      }
+    }],
+    yAxis: [{
+	  labels: {
+	    enabled: false
+	  },
+	  title: {
+	  	text: null
+	  }
+    }],
+    title: {
+        text: 'Normal Percentile Reviews'
+    },
+    series: [{
+    	showInLegend: false,             
+        data: <%= @normal_data %>
+    }],
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        pointPadding: 0.1,
+        borderWidth: 0,
+        color: '#dadada'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.point.category + '</b>' 
+        }
+    },
+});
+
+chart = $('#normal_chart').highcharts();
+<% if @normal_index.present? %>
+	chart.series[0].data[<%= @normal_index %>].update({color:'green'});
+<% end %>
+</script>
+
+
+<script type="text/javascript">
+	Highcharts.chart('expert_category', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+    	enabled: false
+	},
+    title: {
+        text: 'Normal Review Bar Chart'
+    },
+    xAxis: {
+        categories: <%= raw(@normal_chart_cat) %>,
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: null
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} star</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    colors: ['#007bff', '#fd7e14', '#6c757d'],
+    series: <%= raw(@normal_chart_data.to_json) %>
+});
+
+
+
+Highcharts.chart('normal_category', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+    	enabled: false
+	},
+    title: {
+        text: 'Expert Review Bar Chart'
+    },
+    xAxis: {
+        categories: <%= raw(@expert_chart_cat) %>,
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: null
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} star</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    colors: ['#007bff', '#fd7e14', '#6c757d'],
+    series: <%= raw(@expert_chart_data.to_json) %>
+});
+</script>
+
+<style type="text/css">
+	.abc1 {
+	    display: flex;
+	    align-items: center;
+	    justify-content: space-between;
+	    flex-wrap: wrap;
+	}
+	.abc1 .star-para{
+	       box-sizing: border-box;
+	       font-size: 14px;
+	       padding-left: 15px;
+	}
+	.abc1 .st {
+	    min-width: 25%;
+	    font-size: 14px;
+	    margin-right: 18px;
+	}
+</style>

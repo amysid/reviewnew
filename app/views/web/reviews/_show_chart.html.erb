@@ -1,0 +1,57 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script type="text/javascript">
+  var categories = <%= raw(params[:categories]) %>;
+
+  Highcharts.chart('container', {
+      chart: {
+          type: 'column'
+      },
+      xAxis: [{
+        categories: categories,
+        labels: {
+          enabled: false
+        },
+        title: {
+        	text: null
+        }
+      }],
+      yAxis: [{
+  	  labels: {
+  	    enabled: false
+  	  },
+  	  title: {
+  	  	text: null
+  	  }
+      }],
+      title: {
+          text: 'Experts Percentile Reviews'
+      },
+      series: [{
+      	showInLegend: false,             
+          data: <%= params[:data] %>
+      }],
+      plotOptions: {
+        series: {
+          groupPadding: 0,
+          pointPadding: 0.1,
+          borderWidth: 0,
+          color: '#dadada'
+          }
+      },
+      tooltip: {
+          formatter: function () {
+              return '<b>' + this.point.category + '</b>' 
+          }
+      },
+  });
+
+  chart = $('#container').highcharts();
+
+  // chart.series[0].data[<%#= params[:index] %>].update({color:'green'});
+</script>

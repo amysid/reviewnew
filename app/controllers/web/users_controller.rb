@@ -173,8 +173,8 @@ class Web::UsersController < ApplicationController
     @meta_reviewss = @reviews_with_users.where("users.user_type = ? ", "Expert User")
     @user_reviews = @user_reviewss.first(4)
     @meta_reviews = @meta_reviewss.first(4)
-    @user_reviews_avg = @user_reviewss.average(:rating).to_f.round(2)
-    @meta_reviews_avg = @meta_reviewss.average(:rating).to_f.round(2)
+    @user_reviews_avg = @user_reviewss.average(:rating).to_f.round(0)
+    @meta_reviews_avg = @meta_reviewss.average(:rating).to_f.round(0)
     # @user_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}.last(4)
     # @meta_reviews = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Expert User"}.last(4)
     #  @user_reviewss = @product.reviews.select{|review| review if User.find_by(id: review&.user_id)&.user_type == "Normal User"}
