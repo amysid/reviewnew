@@ -133,7 +133,6 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_detail
-    binding.pry
     # redirect_to root_path, notice: "Review Posted."
     @product_links=ProductLink.all.last(3)
     @a = Product.find_by(id: params[:id])&.sub_category_id

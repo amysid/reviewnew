@@ -1,0 +1,112 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/drilldown.js"></script>
+
+<div class="row">
+<div id="expert_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="normal_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+<script type="text/javascript">
+	
+	// Create the chart
+var expert_categories = <%= raw(@expert_categories) %>;
+var normal_categories = <%= raw(@normal_categories) %>;
+
+Highcharts.chart('expert_chart', {
+    chart: {
+        type: 'column'
+    },
+    xAxis: [{
+      categories: expert_categories,
+      labels: {
+        enabled: false
+      },
+      title: {
+      	text: null
+      }
+    }],
+    yAxis: [{
+	  labels: {
+	    enabled: false
+	  },
+	  title: {
+	  	text: null
+	  }
+    }],
+    title: {
+        text: 'Experts Percentile Reviews'
+    },
+    series: [{
+    	showInLegend: false,             
+        data: <%= @expert_data %>
+    }],
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        pointPadding: 0.1,
+        borderWidth: 0,
+        color: '#dadada'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.point.category + '</b>' 
+        }
+    },
+});
+
+chart = $('#expert_chart').highcharts();
+
+chart.series[0].data[<%= @expert_index %>].update({color:'green'});
+
+
+
+
+Highcharts.chart('normal_chart', {
+    chart: {
+        type: 'column'
+    },
+    xAxis: [{
+      categories: normal_categories,
+      labels: {
+        enabled: false
+      },
+      title: {
+      	text: null
+      }
+    }],
+    yAxis: [{
+	  labels: {
+	    enabled: false
+	  },
+	  title: {
+	  	text: null
+	  }
+    }],
+    title: {
+        text: 'Normal Percentile Reviews'
+    },
+    series: [{
+    	showInLegend: false,             
+        data: <%= @normal_data %>
+    }],
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        pointPadding: 0.1,
+        borderWidth: 0,
+        color: '#dadada'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.point.category + '</b>' 
+        }
+    },
+});
+
+chart = $('#normal_chart').highcharts();
+
+chart.series[0].data[<%= @normal_index %>].update({color:'green'});
+</script>

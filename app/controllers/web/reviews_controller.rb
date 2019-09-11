@@ -1,5 +1,5 @@
 class Web::ReviewsController < ApplicationController
-
+	include CommonConcern
 	def get_reviews
 		@product =  Product.find_by(id: params[:id])
 		@review = @product.reviews.new(require_params)
@@ -22,6 +22,11 @@ class Web::ReviewsController < ApplicationController
 			render json: {status: false, like_count: review.votes.where(vote_status: true).count,dislike_count: review.votes.where(vote_status: false).count}
 		end
 
+	end
+
+	def review_chart
+		get_expert_average params[:product_id]
+		get_normal_average params[:product_id]
 	end
 	private
 	def require_params
