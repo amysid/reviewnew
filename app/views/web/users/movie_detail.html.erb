@@ -61,16 +61,16 @@
                         </p>
                         <%if @product.reviews.where(user_id: current_user&.id).present? %>
                         <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" disabled>Review Already Posted</a>
-                            <%= link_to "View Chart", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                            <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
                         </div>
                         <%elsif !current_user.present?%>
                         <div class="reviews">
                             <%= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
-                             <%= link_to "View Chart", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                             <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
                         </div>
                         <%else%>
                         <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">Write a review</a>
-                             <%= link_to "View Chart", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                             <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
                         </div>
                         <%end%>
                         <!-- <button class="reviews"><a href="/web/users/<%#=@product.id%>/movie_review" style="color: white;">Reviews</a></button> -->
