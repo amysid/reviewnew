@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     resources :reviews do
       collection do
         get :review_chart, to: 'reviews#review_chart', as: 'review_chart'
+        post :average_criteria
+        post :average_bar_graph_data
         post :get_reviews
         post :get_vote_for_review
       end

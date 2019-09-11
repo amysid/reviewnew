@@ -1,0 +1,40 @@
+<div id="<%=@user_type%>"></div>
+<script type="text/javascript">
+	Highcharts.chart('<%=@user_type%>', {
+    chart: {
+        type: 'column'
+    },
+    credits: {
+    	enabled: false
+	},
+    title: {
+        text: '<%=@user_type.eql?("Normal") ? "User" : "Expert"%> Chart Title'
+    },
+    xAxis: {
+        categories: <%= raw(@chart_cat) %>,
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: null
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} star</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    colors: ['#007bff', '#fd7e14', '#6c757d'],
+    series: <%= raw(@chart_data.to_json) %>
+});
+</script>

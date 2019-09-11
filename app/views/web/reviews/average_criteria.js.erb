@@ -1,0 +1,4 @@
+$('#<%=@user_type%>_criteria_star').html('');
+$('#<%=@user_type%>_criteria_star').append( "<%= escape_javascript( render(:partial => 'average_criteria_star') ) %>");
+$('#<%=@user_type%>_criteria_chart').html('');
+$('#<%=@user_type%>_criteria_chart').append( "<%= escape_javascript( render(:partial => 'average_criteria_chart') ) %>");

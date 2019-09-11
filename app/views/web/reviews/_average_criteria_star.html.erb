@@ -1,0 +1,25 @@
+<div class="score-rating">
+	<h4><%=@user_type.eql?("Normal") ? "User" : "Expert"%> Rating</h4>
+	<div class="rating-row">
+        <div class="count_child">
+			<% @detail["average_criteria_by_sub_cat"].each do |key, value| %>
+			<div class="left">
+		        <div class="abc1">
+			        <div class="star-para">
+			            <%=key%>
+			        </div>
+			        <div class="st">
+			            <% if value > 0 %>
+				            <% value.times do %>
+				            	<label class="fa fa-star checked"></label> 
+			            	<% end %>
+				        <%else%>
+				        	N/A
+				        <%end%>
+				    </div>
+		        </div>
+		    </div>
+		    <% end %>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,51 @@
+<div id="<%=@user_type%>_bar_graph" ></div>
+<script type="text/javascript">
+var categories = <%= raw(@categories) %>;
+
+Highcharts.chart('<%=@user_type%>_bar_graph', {
+    chart: {
+        type: 'column'
+    },
+    xAxis: [{
+      categories: categories,
+      labels: {
+        enabled: false
+      },
+      title: {
+        text: "<%= @product.product_name %> is ranked in the <%= @data[@index] rescue 0 %> Percentile of games scored on metacritic."
+      }
+    }],
+    yAxis: [{
+    labels: {
+      enabled: false
+    },
+    title: {
+      text: null
+    }
+    }],
+    title: {
+        text: '<%=@user_type.eql?("Normal") ? "User" : "Expert"%> Percentile Rank'
+    },
+    series: [{
+      showInLegend: false,             
+        data: <%= @data %>
+    }],
+    plotOptions: {
+      series: {
+        groupPadding: 0,
+        pointPadding: 0.1,
+        borderWidth: 0,
+        color: '#dadada'
+        }
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.point.category + '</b>' 
+        }
+    },
+});
+
+chart = $('#<%=@user_type%>_bar_graph').highcharts();
+<% if @index.present? %>
+  chart.series[0].data[<%= @index %>].update({color:'green'});
+<% end %>

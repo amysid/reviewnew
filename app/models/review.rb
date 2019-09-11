@@ -34,13 +34,7 @@ class Review < ApplicationRecord
     criteria = Review.find_product(product_id)
     sub_category_id = criteria.category_id 
     criteria = criteria.category.review_parts.pluck(:criteria)
-    # criteria = SubCategory.find(sub_category_id).review_parts.pluck(:criteria) rescue (raise "Unable to find sub category with this id.")
     products = Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.sub_category_id='#{sub_category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
-    # data = criteria.zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
-    # products.each_with_object(data) do |hash, data|
-    #   eval(hash.criteria).each { |key, value| data[key.to_s] += value }
-    # end
-    # data
     Review.create_hash_data_for_average_criteria(criteria,products)
   end
 
@@ -48,26 +42,14 @@ class Review < ApplicationRecord
     criteria = Review.find_product(product_id)
     category_id = criteria.category_id 
     criteria = criteria.category.review_parts.pluck(:criteria)
-    # criteria = Category.find(category_id).review_parts.pluck(:criteria) rescue (raise "Unable to find category with this id.")
     products = Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.category_id='#{category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
     Review.create_hash_data_for_average_criteria(criteria,products)
-   
-    # data = criteria.zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
-    # products.each_with_object(data) do |hash, data|
-    #   eval(hash.criteria).each { |key, value| data[key.to_s] += value }
-    # end
-    # data
   end
 
   def self.average_criteria_by_product product_id , user_type
     criteria = Review.find_product(product_id).category.review_parts.pluck(:criteria)
     products = Product.joins("INNER JOIN reviews ON products.id='#{product_id}' AND  products.id=reviews.product_id INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
     Review.create_hash_data_for_average_criteria(criteria,products)
-    # data = criteria.zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
-    # products.each_with_object(data) do |hash, data|
-    #   eval(hash.criteria).each { |key, value| data[key.to_s] += value }
-    # end
-    # data
   end
 
   def self.create_hash_data_for_average_criteria criteria , products
@@ -75,7 +57,8 @@ class Review < ApplicationRecord
     products.each_with_object(data) do |hash, data|
       eval(hash.criteria).each { |key, value| data[key.to_s] += value }
     end
-    data.map{|key,value| data[key] = data[key]/products.length rescue 0 }
+    data.map{|key,value| 
+      data[key] = (data[key]/products.length.to_f).round(0) rescue 0 }
     data
   end
 
