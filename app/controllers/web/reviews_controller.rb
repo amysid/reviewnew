@@ -28,12 +28,34 @@ class Web::ReviewsController < ApplicationController
 		get_expert_average params[:product_id]
 		get_normal_average params[:product_id]
     	
-    	p= Product.find(params[:product_id])
-	    u_type = 'Normal User'
-	    p.user_type = u_type
-	    p = p.as_json(methods: [:average_criteria_by_product, :average_criteria_by_category, :average_criteria_by_sub_cat])
-	    p["user_type"] = u_type
+    	#---------------- Star Rating -------------------
+    	@normal_detail = Product.find(params[:product_id])
+    	@expert_detail = Product.find(params[:product_id])
+	    normal_user = 'Normal User'
+	    expert_user = 'Expert User'
+	    @normal_detail.user_type = normal_user
+	    @expert_detail.user_type = expert_user
+	    @normal_detail = @normal_detail.as_json(methods: [:average_criteria_by_product, :average_criteria_by_category, :average_criteria_by_sub_cat])
+	    @expert_detail = @expert_detail.as_json(methods: [:average_criteria_by_product, :average_criteria_by_category, :average_criteria_by_sub_cat])
+	    @normal_detail["user_type"] = normal_user
+	    @expert_detail["user_type"] = expert_user
+    	#---------------- Star Rating -------------------
+		
+    	@normal_chart_data = []
+    	@normal_chart_cat = []
+
+    	@expert_chart_data = []
+    	@expert_chart_cat = []
+
+    	@normal_chart_cat = @normal_detail["average_criteria_by_category"].keys
+		@normal_chart_data =[{name: @normal_detail["product_name"], data: @normal_detail["average_criteria_by_product"].values}, 
+			{name: @normal_detail["sub_category_name"], data: @normal_detail["average_criteria_by_sub_cat"].values},
+			{name: @normal_detail["category_name"], data: @normal_detail["average_criteria_by_category"].values}]
 	
+		@expert_chart_cat = @expert_detail["average_criteria_by_category"].keys
+		@expert_chart_data =[{name: @expert_detail["product_name"], data: @expert_detail["average_criteria_by_product"].values}, 
+			{name: @expert_detail["sub_category_name"], data: @expert_detail["average_criteria_by_sub_cat"].values},
+			{name: @expert_detail["category_name"], data: @expert_detail["average_criteria_by_category"].values}]
 	end
 	private
 	def require_params

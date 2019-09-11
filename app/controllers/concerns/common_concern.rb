@@ -26,7 +26,8 @@ module CommonConcern
     expert_categories = []
     data = []
 
-    category_id = Product.find_by(id: id).category_id
+    @product = Product.find_by(id: id)
+    category_id = @product.category_id
     @expert_rating = Review.average_reviews(category_id, "Expert User")
     if @expert_rating.present?
       last = @expert_rating.last["average_reviews"]
@@ -62,7 +63,9 @@ module CommonConcern
     @normal_categories = []
     @normal_data = []
     normal_categories = []
-    category_id = Product.find_by(id: id).category_id
+
+    @product = Product.find_by(id: id)
+    category_id = @product.category_id
     @normal_rating = Review.average_reviews(category_id, "Normal User")
     data = []
     if @normal_rating.present?
