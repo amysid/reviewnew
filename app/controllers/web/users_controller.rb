@@ -2,8 +2,7 @@ class Web::UsersController < ApplicationController
   before_action :authenticate_user!, only: [:movie_category_detail,:user_profile]
 
   def header_search
-    # binding.pry
-    @trending_products =  Product.where("product_name ILIKE ?", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 10)
+    @trending_products =  Product.published_products.where("product_name ILIKE ?", "%#{params[:search]}%").paginate(:page => params[:page], :per_page => 10)
 
   end
 
@@ -29,13 +28,13 @@ class Web::UsersController < ApplicationController
   end
 
   def index
-    # binding.pry
+    
     if (current_user.present? && current_user.role == "admin")
       redirect_to admin_home_index_path(current_user)
     end
 
     @reviews = Review.all
-    @products = Product.all
+    @products = Product.published_products
 
     if params[:only] == "data" && params[:id].present? && Category.find_by(id: params[:id]).present?
       category1 = Category.find_by(id: params[:id])
@@ -52,7 +51,7 @@ class Web::UsersController < ApplicationController
         # @name1=Category.find(category_name:  params[:name])
         @name1= params[:name]
         @trending_products = @products.where(trending: true,category_name: @name1)
-        @publishs = @products.published_products.where(category_name:  params[:name]) #Product.where(category_name:  params[:name],current: "publish")
+        @publishs = @products.where(category_name:  params[:name]) #Product.where(category_name:  params[:name],current: "publish")
         @upcomeing_products = @products.where(category_name: @name1)
         #@publishs = Product.all.where(current: "publish")
 
@@ -63,7 +62,7 @@ class Web::UsersController < ApplicationController
       else
         @trending_products = @products.where(trending: true)
         @upcomeing_products = @products.where(['date > ?', DateTime.now] )
-        @publishs = @products.published_products #Product.all.where(current: "publish")
+        @publishs = @products #Product.all.where(current: "publish")
 
         # @products = Product.all
         @products = @products.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews)
@@ -114,11 +113,11 @@ class Web::UsersController < ApplicationController
   def movie_category
     arr1=[]
     arr2=[]
-    @products =  Product.where(sub_category_id: params[:id])
+    @products =  Product.published_products.where(sub_category_id: params[:id])
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
-    @products = @sub_category.products
-    @products_movie_category = @sub_category.products.last(4)
+    # @products = @sub_category.products
+    @products_movie_category = @products.last(4)
     @products.each{|x| arr1<<x.image.headers_image }
        @banners=arr1.flatten
    # @products.each{|x| arr2<<x.image.headers_image }
@@ -129,14 +128,14 @@ class Web::UsersController < ApplicationController
     @sub_category = SubCategory.find_by(id: params[:id])
     @all_sub_category = @sub_category&.category&.sub_categories
     @products = @sub_category.products
-    @productss = Product.last(4)
+    @productss = Product.published_products.last(4)
   end
 
   def movie_detail
     # redirect_to root_path, notice: "Review Posted."
     @a = Product.find_by(id: params[:id])&.sub_category_id
     @sub_categories = SubCategory.find_by(id: @a)
-    @products_movie_details = @sub_categories&.products&.last(4)
+    @products_movie_details = @sub_categories&.products&.published_products&.last(4)
     #  @product = Product.find_by(id: params[:id])
     #  @all_sub_category = @product&.category&.sub_categories
     #  total_review = @product.reviews.pluck(:rating).sum
@@ -320,14 +319,14 @@ class Web::UsersController < ApplicationController
 
   def holl_of_fame_details
     a=[]
-    Product.all.each{|x| a<<x.id if x.video.present?}
-    @products=Product.where(id: a)
+    Product.published_products.all.each{|x| a<<x.id if x.video.present?}
+    @products=Product.published_products.where(id: a)
     @categorys = Category.all
   end
 
   def hollframe
     a=[]
-    Product.where(category_id: params[:id]).each{|x| a<<x.id if x.video.present?}
+    Product.published_products.where(category_id: params[:id]).each{|x| a<<x.id if x.video.present?}
     @products=Product.where(id: a)
   end
 
@@ -344,9 +343,9 @@ class Web::UsersController < ApplicationController
   def upcomeing
     #binding.pry
     unless params[:format].present?
-      @upcomeing_products = Product.where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+      @upcomeing_products = Product.published_products.where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
     else
-      @upcomeing_products = Product.where(category_name: params[:format]).where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
+      @upcomeing_products = Product.published_products.where(category_name: params[:format]).where(['date > ?', DateTime.now] ).order("created_at desc").paginate(:page => params[:page], :per_page => 10)
     end
   end
 

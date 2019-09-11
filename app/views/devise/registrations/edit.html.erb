@@ -91,11 +91,11 @@
             <h4><%#= current_user.name   %></h4>
           </div>
           <div class="user-detail">
-            <div class="ratings">
-              <h3 class=""><%= Review.where(user_id:current_user.id).pluck(:rating).sum%></h3>
+         <!--    <div class="ratings">
+              <h3 class=""><%#= Review.where(user_id:current_user.id).pluck(:rating).sum%></h3>
               <span>Ratings</span>
             </div>
-            <div class="reviews">
+ -->            <div class="reviews">
               <h3 class=""><%= Review.where(user_id: current_user.id).count%></h3>
               <span>Reviews</span>
             </div>

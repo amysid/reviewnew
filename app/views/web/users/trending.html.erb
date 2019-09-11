@@ -8,7 +8,9 @@
                 <div class="row tranding-item-row no-gutters">
                     <div class="col-md-6">
                         <div class="youtube-image2">
-                            <a href="/web/users/<%=product.id%>/movie_detail"><img width="560" height="315" src="<%= product.image.take.file_url%>" /></a>
+                            <a href="/web/users/<%=product.id%>/movie_detail">
+                            <!-- <img width="560" height="315" src="<%#= product.image.take.file_url%>" /></a> -->
+                        <img src='<%= product&.image.where(avtar:true).present? ? product&.image&.where(avtar:true).first&.file&.url : "/assets/_image1.png" %>'></a>
                         </div>
                     </div>
                     <div class="col-md-6 youtube-content ">

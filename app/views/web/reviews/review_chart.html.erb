@@ -63,7 +63,7 @@
 	<div id="normal_category" class="col-md-4"></div>
 </div>
 
-
+<%binding.pry%>
 <script type="text/javascript">
 
 // Create the chart
@@ -83,7 +83,7 @@ Highcharts.chart('expert_chart', {
         enabled: false
       },
       title: {
-      	text: "<%= @product.product_name %> is ranked in the <%= @expert_data[@expert_index]%> Percentile of games scored on metacritic."
+      	text: "<%= @product&.product_name %> is ranked in the <%= @expert_data[@expert_index]%> Percentile of games scored on review cretic."
       }
     }],
     yAxis: [{

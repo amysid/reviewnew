@@ -167,7 +167,8 @@
                         <%# if review.created_at == DateTime.now%>
                         <% if i <3 %>
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                            <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
+                            <a href="/web/users/<%=review&.product_id%>/movie_detail">
+                              <img src='<%= review&.product&.image.where(avtar: true).present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
                             <% a= User.find(review.user_id) %>
                              <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/circle.png" %>'></a></span>
                             <div class="reviewe-widget-content">
@@ -201,7 +202,8 @@
             <div class="col-md-7">
               <a href="/web/users/<%=first&.id%>/movie_detail" class="custom-post">
                 <div class="custom-img big">
-                  <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
+                  <img src="<%= first.image.where(file_type: "1").present? ? first.image.where(file_type: "1").first.file.url : first.image.last.file.url %>" class="img-fluid" alt="">
+                  <!-- <img src="<%#= first&.image&.last&.file_url%>" class="img-fluid" alt=""> -->
                 </div>
                 <div class="custom-content-section justify-content-end">
                   <h4 class="title-section"><%= first&.product_name %></h4>
@@ -219,7 +221,9 @@
                 <div class="col-md-6">
                   <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
                     <div class="custom-img small">
-                      <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
+                      <img src="<%= y.image.where(avtar: true).present? ? y.image.where(avtar:true).first.file.url : y.image.first.file.url %>" class="img-fluid" alt="">
+
+                      <!-- <img src="<%#= y&.image&.last&.file_url%>" class="img-fluid" alt=""> -->
                     </div>
                     <div class="custom-content-section justify-content-end">
                       <h4 class="title-section"><%= y&.product_name %></h4>
@@ -338,7 +342,7 @@
                 <div class="col-md-4">
                     <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                         <div class="custom-img">
-                            <img src="<%= product.image.first.file_url%>" class="img-fluid" alt="">
+                <img src="<%= product.image.where(avtar: true).present? ? product.image.where(avtar:true).first.file.url : product.image.first.file.url %>" class="img-fluid" alt="">
                         </div>
                         <div class="custom-content justify-content-end">
                             <h4 class="custom-title">

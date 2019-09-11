@@ -89,7 +89,7 @@
                 </div>
                 <div>
                     <p class="mainpara">
-                        <%=ActionView::Base.full_sanitizer.sanitize(@product&.description)%>
+                        <%= sanitize(@product&.description)%>
                     </p>
                 </div>
                 <div>
@@ -236,7 +236,7 @@
             <%# @product.image.each { |i|  arr<<i&.file&.url if i.file_type!="1"} %>
             <% unless  @images.blank? %>
             <%#arr = arr[0..2]%>
-            <% @images.each do |a|%>
+            <% @images[0..2].each do |a|%>
             <div class="col-md-4 columnimage">
                 <div class="imagecol3">
                     <img src="<%=a%>" class="screen-img myImg">
@@ -860,36 +860,36 @@ $(document).ready(function() {
     //     $('#count_rating_dynamic').submit(); 
     // });
 
-    $('a.next').click(function next() {
-        var modal = $("img.modal-content1");
-        var img = document.getElementsByClassName("myImg");
-        index = getIndex(modal, img);
+ $('a.next').click(function next() {
+       var modal = $("img.modal-content1");
+       var img = <%= raw(@images) %>;
+       index = getIndex(modal, img);
 
-        if (img[index + 1] != undefined) {
-            modal.attr('src', img[index + 1].src);
-        }
-    });
+       if (img[index + 1] != undefined) {
+           modal.attr('src', img[index + 1]);
+       }
+   });
 
-    $('a.prev').click(function next() {
-        var modal = $("img.modal-content1");
-        var img = document.getElementsByClassName("myImg");
-        index = getIndex(modal, img);
+   $('a.prev').click(function next() {
+       var modal = $("img.modal-content1");
+       var img = <%= raw(@images) %>;
+       index = getIndex(modal, img);
 
-        if (img[index - 1] != undefined) {
-            modal.attr('src', img[index - 1].src);
-        }
-    });
+       if (img[index - 1] != undefined) {
+           modal.attr('src', img[index - 1]);
+       }
+   });
 
-    function getIndex(modal, img) {
-        var i;
-        url = modal.attr('src');
-        Array.prototype.slice.call(img).forEach(function(item, index) {
-            if (item.src === url) {
-                i = index;
-            }
-        });
-        return i;
-    }
+   function getIndex(modal, img) {
+       var i;
+       url = modal.attr('src');
+       img.forEach(function(item, index) {
+           if (item === url) {
+               i = index;
+           }
+       });
+       return i;
+   }
 });
 
 $('#form_tag_review').click(function(e){

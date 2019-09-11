@@ -35,7 +35,7 @@ $("#admin_new_product").validate({
           CKEditorUpdate();                        
         }, 
         minlength: 20,
-        maxlength: 500
+        maxlength: 2000
       },      
 },
    messages: {
