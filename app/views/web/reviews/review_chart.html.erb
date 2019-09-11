@@ -3,8 +3,8 @@
 <script src="https://code.highcharts.com/modules/drilldown.js"></script>
 
 <div class="row">
-<div id="expert_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<div id="normal_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="expert_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="normal_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 </div>
 
 <script type="text/javascript">
@@ -57,9 +57,9 @@ Highcharts.chart('expert_chart', {
 });
 
 chart = $('#expert_chart').highcharts();
-
-chart.series[0].data[<%= @expert_index %>].update({color:'green'});
-
+<% if @expert_index.present? %>
+	chart.series[0].data[<%= @expert_index %>].update({color:'green'});
+<% end %>
 
 
 
@@ -107,6 +107,7 @@ Highcharts.chart('normal_chart', {
 });
 
 chart = $('#normal_chart').highcharts();
-
-chart.series[0].data[<%= @normal_index %>].update({color:'green'});
+<% if @normal_index.present? %>
+	chart.series[0].data[<%= @normal_index %>].update({color:'green'});
+<% end %>
 </script>

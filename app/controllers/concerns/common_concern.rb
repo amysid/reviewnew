@@ -24,32 +24,38 @@ module CommonConcern
     @expert_categories = []
     @expert_data = []
     expert_categories = []
-
     data = []
+
     category_id = Product.find_by(id: id).category_id
     @expert_rating = Review.average_reviews(category_id, "Expert User")
-    last = @expert_rating.last["average_reviews"]
-    first = @expert_rating.first["average_reviews"]
-    ranges = (last - first)/3 + 1
-    i = first
-    (1..ranges).each do
-      expert_categories << [i..i+2]
-      i+=3
-    end
-    expert_categories.each {|c| 
-      @expert_rating.each {|r|
-        data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
+    if @expert_rating.present?
+      last = @expert_rating.last["average_reviews"]
+      first = @expert_rating.first["average_reviews"]
+      ranges = (last - first)/3 + 1
+      if ranges.eql?(0)
+        expert_categories = [first..first+2]
+      else
+        i = first
+        (1..ranges).each do
+          expert_categories << [i..i+2]
+          i+=3
+        end
+      end
+      expert_categories.each {|c| 
+        @expert_rating.each {|r|
+          data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
+        }
       }
-    }
-    i=0
-    expert_categories.each {|c|
-      if c[0].include?(data[i]) && !@expert_data.include?(data[i])
-        @expert_data << data[i]
-        @expert_categories <<  c.join("").gsub!('..', '-')
-        i+=1
-      end  
-    }
-    @expert_index = @expert_data.index(@expert_rating.find(params[:product_id]).as_json["average_reviews"])    
+      i=0
+      expert_categories.each {|c|
+        if c[0].include?(data[i]) && !@expert_data.include?(data[i])
+          @expert_data << data[i]
+          @expert_categories <<  c.join("").gsub!('..', '-')
+          i+=1
+        end  
+      }
+      @expert_index = @expert_data.index(@expert_rating.find(params[:product_id]).as_json["average_reviews"]) rescue nil
+    end  
   end
 
   def get_normal_average id
@@ -58,30 +64,35 @@ module CommonConcern
     normal_categories = []
     category_id = Product.find_by(id: id).category_id
     @normal_rating = Review.average_reviews(category_id, "Normal User")
-
     data = []
-    last = @normal_rating.last["average_reviews"]
-    first = @normal_rating.first["average_reviews"]
-    ranges = (last - first)/3 + 1
-    i = first
-    (1..ranges).each do
-      normal_categories << [i..i+2]
-      i+=3
-    end
-    normal_categories.each {|c| 
-      @normal_rating.each {|r|
-        data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
-      }
-    }
-    i=0
-    normal_categories.each {|c|
-      if c[0].include?(data[i]) && !@normal_data.include?(data[i])
-        @normal_data << data[i]
-        @normal_categories << c.join("").gsub!('..', '-')
-        i+=1
+    if @normal_rating.present?
+      last = @normal_rating.last["average_reviews"]
+      first = @normal_rating.first["average_reviews"]
+      ranges = (last - first)/3 + 1
+      if ranges.eql?(0)
+        normal_categories = [first..first+2] 
+      else
+        i = first
+        (1..ranges).each do
+          normal_categories << [i..i+2]
+          i+=3
+        end
       end
-    }
-    @normal_index = @normal_data.index(@normal_rating.find(params[:product_id]).as_json["average_reviews"]) rescue nil
+      normal_categories.each {|c| 
+        @normal_rating.each {|r|
+          data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
+        }
+      }
+      i=0
+      normal_categories.each {|c|
+        if c[0].include?(data[i]) && !@normal_data.include?(data[i])
+          @normal_data << data[i]
+          @normal_categories << c.join("").gsub!('..', '-')
+          i+=1
+        end
+      }
+      @normal_index = @normal_data.index(@normal_rating.find(params[:product_id]).as_json["average_reviews"]) rescue nil
+    end
   end
 
  def get_query
