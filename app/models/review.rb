@@ -29,6 +29,46 @@ class Review < ApplicationRecord
     # Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.category_id='#{category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.group("products.id").select("products.id, (avg(reviews.rating)*10) as average_reviews").order("average_reviews ASC")
     Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.category_id='#{category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").group("products.id").distinct.select("products.id, CAST((avg(reviews.rating)*10) AS INTEGER) AS average_reviews").order("average_reviews ASC")
   end
+
+  def self.average_criteria_by_sub_cat product_id , user_type
+    criteria = Review.find_product(product_id)
+    sub_category_id = criteria.category_id 
+    criteria = criteria.category.review_parts.pluck(:criteria)
+    # criteria = SubCategory.find(sub_category_id).review_parts.pluck(:criteria) rescue (raise "Unable to find sub category with this id.")
+    products = Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.sub_category_id='#{sub_category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
+    data = criteria.map(&:to_sym).zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
+    products.each_with_object(data) do |hash, data|
+      eval(hash.criteria).each { |key, value| data[key] += value }
+    end
+    data
+  end
+
+  def self.average_criteria_by_category product_id , user_type
+    criteria = Review.find_product(product_id)
+    category_id = criteria.category_id 
+    criteria = criteria.category.review_parts.pluck(:criteria)
+    # criteria = Category.find(category_id).review_parts.pluck(:criteria) rescue (raise "Unable to find category with this id.")
+    products = Product.joins("INNER JOIN reviews ON products.id=reviews.product_id AND products.category_id='#{category_id}' INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
+    data = criteria.map(&:to_sym).zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
+    products.each_with_object(data) do |hash, data|
+      eval(hash.criteria).each { |key, value| data[key] += value }
+    end
+    data
+  end
+
+  def self.average_criteria_by_product product_id , user_type
+    criteria = Review.find_product(product_id).category.review_parts.pluck(:criteria)
+    products = Product.joins("INNER JOIN reviews ON products.id='#{product_id}' AND  products.id=reviews.product_id INNER JOIN users ON users.id=reviews.user_id AND users.user_type='#{user_type}'").distinct.select("products.id,criteria")
+    data = criteria.map(&:to_sym).zip(Array.new(criteria.length,0)).to_h rescue Hash.new(0)
+    products.each_with_object(data) do |hash, data|
+      eval(hash.criteria).each { |key, value| data[key] += value }
+    end
+    data
+  end
+
+  def self.find_product product_id
+    Product.find(product_id) rescue (raise "Unable to find product with this id.")
+  end
   # def optimize_percentage number
   # 	number == NAN ? 0.0 : number
   # end
