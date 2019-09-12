@@ -132,7 +132,6 @@ class Web::UsersController < ApplicationController
   end
 
   def movie_detail
-    # redirect_to root_path, notice: "Review Posted."
     @a = Product.find_by(id: params[:id])&.sub_category_id
     @sub_categories = SubCategory.find_by(id: @a)
     @products_movie_details = @sub_categories&.products&.published_products&.take(3)
