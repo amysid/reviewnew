@@ -261,7 +261,8 @@ a, img {
     margin: 0px;
 }
 .main-nav > li {
-    width: 12%;
+    /*width: 12%;*/
+    width: 100%
 }
 .main-nav > li > a {
     padding: 14px 10px !important;

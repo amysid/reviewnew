@@ -103,15 +103,19 @@
                     <%end%>
                 </div>
             </div>
-        </div>
-        <!--  i did change here Atul-->
-        <div class="pull-right">
+            <div class="col-md-3">
+                 <div class="">
             <div class="product_link_box">
            <% @product_links.each do |m|%>
            <a href=<%=m.url%>><%= m.link%></a><br>
            <% end %>
            </div>
         </div>
+
+            </div>
+        </div>
+        <!--  i did change here Atul-->
+       
         <!--  -->
         <!-- Rating summary -->
         <div class="row rowreviews align-items-center justify-content-between">
@@ -769,7 +773,7 @@ $('.count_child').on('click', function() {
     padding: 20px 15px;
     box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
     font-family: 'Poppins', sans-serif;
-    margin-top: -175px;
+    /*margin-top: -175px;*/
     width: 300px;
     height: 235px;
 }
