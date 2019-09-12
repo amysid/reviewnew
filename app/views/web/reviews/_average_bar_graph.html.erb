@@ -44,8 +44,9 @@ Highcharts.chart('<%=@user_type%>_bar_graph', {
         }
     },
 });
-
+// debugger;
 chart = $('#<%=@user_type%>_bar_graph').highcharts();
 <% if @index.present? %>
   chart.series[0].data[<%= @index %>].update({color:'green'});
 <% end %>
+</script>
