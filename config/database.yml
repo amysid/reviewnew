@@ -2,8 +2,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= Rails.application.credentials.RAILS_DB_MAX_THREADS { 5 } %>
-  # host: <%= Rails.application.credentials.RAILS_DB_HOST %>
-  host: 172.16.16.242
+  host: <%= Rails.application.credentials.RAILS_DB_HOST %>
+  # host: 172.16.16.242
 
 development:
   <<: *default

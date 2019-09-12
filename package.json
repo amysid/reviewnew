@@ -1,5 +1,9 @@
 {
   "name": "Metacritic-like",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^4.39.3",
+    "webpack-dev-server": "^3.8.0"
+  }
 }
