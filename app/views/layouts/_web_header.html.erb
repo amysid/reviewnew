@@ -48,7 +48,7 @@
                             <div class="col-md-3">
                                 <div class="custom-post m-0">
                                     <div class="custom-img">
-                                        <% arr = category.sub_categories.map{ |s_c| s_c.products.map { |p| p&.image&.first&.file&.url}}.flatten.compact%>
+                                        <% arr = category.sub_categories.includes(:products).map{ |s_c| s_c.products.map { |p| p&.image&.first&.file&.url}}.flatten.compact%>
                                         <%if arr.present? %>
                                         <img src="<%=arr[0]%>" class="img-fluid" alt="">
                                         <%else%>
@@ -95,12 +95,12 @@
                                     </div>
                                     <%end%>
                                     <% end %>
-                                    <%end%>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </li>
+                <%end%>
                 <li class="nav-item dropdown mega-dropdown">
                     <% if params[:action] == "report"%>
                     <a class="nav-link shubham active" href="/web/users/report">Reports</a>

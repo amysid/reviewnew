@@ -87,7 +87,7 @@ class Web::UsersController < ApplicationController
       # end
 
       @rec = {}
-      Category.all.each do |cat|
+      Category.all.includes(:product).each do |cat|
         cat.product.each do |pro|
           if pro.reviews.present?
             @rec[cat&.category_name] = [pro&.image&.first&.file&.url,pro.id]
