@@ -12,7 +12,7 @@ Highcharts.chart('<%=@user_type%>_bar_graph', {
         enabled: false
       },
       title: {
-        text: "<%= @product.product_name %> is ranked in the <%= @data[@index] rescue 0 %> Percentile of <%=@product&.category&.category_name%> scored on metacritic."
+        text: "<%= @product.product_name %> is ranked in the <%= @data[@index] rescue 0 %> Percentile of <%=@product&.category&.category_name%> scored on review cmex network."
       }
     }],
     yAxis: [{
