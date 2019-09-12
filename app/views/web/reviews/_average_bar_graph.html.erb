@@ -24,7 +24,7 @@ Highcharts.chart('<%=@user_type%>_bar_graph', {
     }
     }],
     title: {
-        text: '<%=@user_type%> Percentile Reviews'
+        text: '<%=@user_type.eql?("Normal") ? "User" : "Expert"%> Percentile Rank'
     },
     series: [{
       showInLegend: false,             

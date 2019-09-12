@@ -6,10 +6,10 @@
             <h4><%=current_user&.name %></h4>
           </div>
           <div class="user-detail">
-            <div class="ratings">
-              <h3 class=""><%= @all_reviews.pluck(:rating).sum %></h3>
+<!--             <div class="ratings">
+              <h3 class=""><%#= @all_reviews.pluck(:rating).sum %></h3>
               <span>Ratings</span>
-            </div>
+            </div> -->
             <div class="reviews">
               <h3 class=""><%= @all_reviews.length %></h3>
               <span>Reviews</span>

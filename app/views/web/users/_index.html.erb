@@ -149,9 +149,10 @@
                         <% @todays_review.each do |review|%>
                         <% if i <3 %>
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
-                            <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
+                            <a href="/web/users/<%=review&.product_id%>/movie_detail">
+                                <img src='<%= review&.product&.image.where(avtar: true).present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
                             <% a= User.find(review.user_id) %>
-                            <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/review-img.png" %>'></a></span>
+                            <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/circle.png" %>'></a></span>
                             <div class="reviewe-widget-content">
                                 <h6>
                                     <%= review&.product&.category&.category_name%> Reviews |
@@ -181,7 +182,8 @@
                 <div class="col-md-7">
                     <a href="/web/users/<%=first&.id%>/movie_detail" class="custom-post">
                         <div class="custom-img big">
-                            <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
+                            <!-- <img src="<%#= first&.image&.last&.file_url%>" class="img-fluid" alt=""> -->
+                            <img src="<%= first.image.where(file_type: " 1").present? ? first.image.where(file_type: "1" ).first.file.url : first.image.last.file.url %>" class="img-fluid" alt="">
                         </div>
                         <div class="custom-content-section justify-content-end">
                             <h4 class="title-section">
@@ -206,7 +208,8 @@
                         <div class="col-md-6">
                             <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
                                 <div class="custom-img small">
-                                    <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
+                                    <img src="<%= y.image.where(avtar: true).present? ? y.image.where(avtar:true).first.file.url : y.image.first.file.url %>" class="img-fluid" alt="">
+                                    <!-- <img src="<%#= y&.image&.last&.file_url%>" class="img-fluid" alt=""> -->
                                 </div>
                                 <div class="custom-content-section justify-content-end">
                                     <h4 class="title-section">
@@ -296,7 +299,7 @@
                 <div class="col-md-4">
                     <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                         <div class="custom-img">
-                            <img src="<%= product.image.first.file_url%>" class="img-fluid" alt="">
+                            <img src="<%= product.image.where(avtar: true).present? ? product.image.where(avtar:true).first.file.url : product.image.first.file.url %>" class="img-fluid" alt="">
                         </div>
                         <div class="custom-content justify-content-end">
                             <h4 class="custom-title">
@@ -310,18 +313,17 @@
                             <p>
                                 <%= product&.avg_rating.to_f.round(2) %>%</p>
                         </div>
-
                         <% @count_hall_frame += 1%>
                     </a>
                 </div>
                 <%end%>
                 <%end%>
                 <%end%>
-                                        <%if @count_hall_frame >= 5 %>
-                        <div class="text-right">
-                            <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">View More></a>
-                        </div>
-                        <%end%>
+                <%if @count_hall_frame >= 5 %>
+                <div class="text-right">
+                    <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">View More></a>
+                </div>
+                <%end%>
             </div>
         </div>
         <div class="row">
@@ -354,11 +356,9 @@
         </div>
     </div>
 </div>
-
-
 <script type="text/javascript">
 // $(document).ready(function() {
-$(document).on("turbolinks:load",function(){
+$(document).on("turbolinks:load", function() {
 
     // debugger;
     $('#1').click();
@@ -377,7 +377,7 @@ $(document).on("turbolinks:load",function(){
 
 
 // $(document).ready(function() {
-$(document).on("turbolinks:load",function(){
+$(document).on("turbolinks:load", function() {
 
     $('#1').click();
     $('.data_category').change(function() {
@@ -389,7 +389,7 @@ $(document).on("turbolinks:load",function(){
                 id: id,
                 only: "data"
             },
-            success: function(){
+            success: function() {
                 $('.metascore').removeClass('active');
                 $('.underscore').addClass('active');
             }

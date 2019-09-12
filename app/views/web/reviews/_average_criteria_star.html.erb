@@ -1,5 +1,5 @@
 <div class="score-rating">
-	<h4><%=@user_type%> Average Rating</h4>
+	<h4><%=@user_type.eql?("Normal") ? "User" : "Expert"%> Rating</h4>
 	<div class="rating-row">
         <div class="count_child">
 			<% @detail["average_criteria_by_sub_cat"].each do |key, value| %>

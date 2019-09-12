@@ -8,7 +8,7 @@
     	enabled: false
 	},
     title: {
-        text: '<%=@user_type%> Review Bar Chart'
+        text: '<%=@user_type.eql?("Normal") ? "User" : "Expert"%> Chart Title'
     },
     xAxis: {
         categories: <%= raw(@chart_cat) %>,
