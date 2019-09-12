@@ -25,36 +25,66 @@ module CommonConcern
     @data = []
     categories = []
     data = []
+    @index = 0
     @product = Product.find_by(id: id)
     category_id = @product.category_id
     @rating = Review.average_reviews(category_id, type)
     if @rating.present?
-      last = @rating.last["average_reviews"]
-      first = @rating.first["average_reviews"]
-      ranges = (last - first)/3 + 1
-      if ranges.eql?(0)
-        categories = [first..first+2]
+      # last = @rating.last["average_reviews"]
+      # first = @rating.first["average_reviews"]
+      # ranges = (last - first)/3 + 1
+      # if ranges.eql?(0)
+      #   categories = [first..first+2]
+      # else
+      #   i = first
+      #   (1..ranges).each do
+      #     categories << [i..i+2]
+      #     i+=3
+      #   end
+      # end
+
+      # categories.each {|c| 
+      #   @rating.each {|r|
+      #     data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
+      #   }
+      # }
+      data = ActiveSupport::JSON.decode(@rating.to_json).pluck("id","average_reviews").uniq rescue []
+      if data.blank?
+        start_point = data.min 
+        end_pont =  data.max
+        diffrence = start_point % 3
+        start_point = start_point - diffrence unless diffrence == 0
+        end_pont = end_pont + diffrence unless diffrence == 0
       else
-        i = first
-        (1..ranges).each do
-          categories << [i..i+2]
-          i+=3
-        end
+        start_point = data.min 
+        end_pont =  data.max
       end
-      categories.each {|c| 
-        @rating.each {|r|
-          data << r["average_reviews"] if c[0].include?(r["average_reviews"]) && !data.include?(r["average_reviews"])
-        }
+
+      data.each{|rating| 
+        start_point = rating[1]
+        diffrence = start_point % 3
+        start_point = start_point - diffrence unless diffrence == 0
+        created_string = "#{start_point}-#{((start_point+2) > 100) ? 100 : (start_point+2) }"
+        unless @categories.include?(created_string)
+          @categories << created_string
+          @data << rating[1]
+          @index =  @categories.index(created_string) if rating[0] == id
+        else
+          @index =  @categories.index(created_string) if rating[0] == id
+        end 
       }
-      i=0
-      categories.each {|c|
-        if c[0].include?(data[i]) && !@data.include?(data[i])
-          @data << data[i]
-          @categories <<  c.join("").gsub!('..', '-')
-          i+=1
-        end  
-      }
-      @index = @data.index(@rating.find(params[:product_id]).as_json["average_reviews"]) rescue nil
+      # i=0
+      # categories.each {|c|
+      #     binding.pry
+      #   if c[0].include?(data[i]) && !@data.include?(data[i])
+      #     @data << data[i]
+      #     @categories <<  c.join("").gsub!('..', '-')
+      #   end  
+      #   i+=1
+      # }
+      # 
+      # binding.pry
+      # @index = @data.index(@rating.find(params[:product_id]).as_json["average_reviews"]) rescue nil
     end  
   end
 
