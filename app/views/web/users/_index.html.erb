@@ -1,40 +1,33 @@
-<%#if current_user.present? %>
-<%#= render partial: 'web/users/head'%>
-<%#end%>
-
 <%= render partial: 'web/users/trending'%>
-<!-- Home Slider Close -->
 <div class="page-wrapper">
     <div class="container home-wrap">
         <div class="row">
             <div class="col-md-8">
                 <div class="left-side">
                     <h3 class="widget-title mt-0">TRENDING NOW</h3>
-                        <%if @trending_products.present?%>
+                    <%if @trending_products.present?%>
                     <div class="posts">
                         <% @count_trending = 0 %>
                         <% @trending_products&.each_with_index do |product, index|%>
-                        <%# if product.trending == true %>
                         <% if @count_trending < 4%>
                         <div class="post-item">
                             <div class="row no-gutters align-items-stretch">
                                 <div class="col-md-4">
                                     <div class="post-img">
                                         <% if product.image.where(avtar: true).present? %>
-                                         <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.where(avtar:true).take&.file_url%>" alt=""></a>
-                                         <%else%>
-                                         <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
-                                         <%end%>
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.where(avtar:true).take&.file_url%>" alt=""></a>
+                                        <%else%>
+                                        <a href="/web/users/<%=product.id%>/movie_detail"><img src="<%= product&.image&.take&.file_url%>" alt=""></a>
+                                        <%end%>
                                     </div>
                                 </div>
                                 <div class="col-md-8">
                                     <div class="post-details">
                                         <p class="tag"><span>
-                                                <%= product&.category_name%>  </span></p>
+                                                <%= product&.category_name%> </span></p>
                                         <h4 class="post-title">
-                                            <%#= product&.product_name%>
-                                             <a href="/web/users/<%=product.id%>/movie_detail"><%= product&.product_name%></a> 
-                                            <%#= product.sub_category_name%>
+                                            <a href="/web/users/<%=product.id%>/movie_detail">
+                                                <%= product&.product_name%></a>
                                         </h4>
                                         <p>
                                             <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
@@ -42,21 +35,18 @@
                                         <div class="post-meta">
                                             <span><i class="fa fa-clock-o"></i>
                                                 <%= product&.date&.strftime("%B %d, %Y")%></span>
-                                            <!-- <a href="JavaScript:Void(0);" class="readmore">Read More></a> -->
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                         <% if @count_trending == 3 %>
-                            <% unless params[:name].present?%>
-                            <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">View More></a>
-                            <%else%>
-                            
+                        <% unless params[:name].present?%>
+                        <a href="/web/users/trending" class="readmore pull-right btn btn-theme my-3">View More></a>
+                        <%else%>
                         <a href="<%= trending_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme my-3">View More></a>
-                            <%end%>
-                            <%end%>
+                        <%end%>
+                        <%end%>
                         <% @count_trending += 1 %>
                         <%#end%>
                         <%end%>
@@ -64,22 +54,19 @@
                     </div>
                     <%else%>
                     <div>
-                     <p>Data not Found.</p>     
-                   </div>
-                   <%end%>
-
+                        <p>Data not Found.</p>
+                    </div>
+                    <%end%>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="right-side">
                     <div class="widget">
                         <h3 class="widget-title mt-0">UPCOMING RELEASES</h3>
-                         <%if @upcomeing_products.present?%>
+                        <%if @upcomeing_products.present?%>
                         <% @count_upcomeing = 0%>
                         <% @upcomeing_products&.each_with_index do |product, index|%>
-
                         <% if product&.date&.present? %>
-                        
                         <%if product&.date > Time.now.utc %>
                         <%#binding.pry%>
                         <% if @count_upcomeing  <=  3 %>
@@ -93,7 +80,6 @@
                                     <%= product&.category_name%>
                                 </h4>
                                 <h5>
-                                    <%#= product.sub_category_name%>
                                 </h5>
                                 <p>
                                     <%= truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
@@ -102,23 +88,23 @@
                                     <%= product&.date&.strftime("%B %d, %Y")%>
                                 </p>
                             </div>
-                            </a>
-                            <% if @count_upcomeing == 3%>
-                            <% unless params[:name].present?%>
-                            <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">View More></a>
-                            <%else%>
-                            <a href="<%= upcomeing_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme">View More></a>
-                            <%end%>
-                            <%end%>
-                            <% @count_upcomeing += 1 %>
-                            <%end%>
-                            <%end%>
-                            <%end%>
-                            <%end%>
-                        </div>
-                        <% else %>
-                        <p> Data not found.</p>
-                        <% end %>
+                        </a>
+                        <% if @count_upcomeing == 3%>
+                        <% unless params[:name].present?%>
+                        <a href="/web/users/upcomeing" class="readmore pull-right btn btn-theme">View More></a>
+                        <%else%>
+                        <a href="<%= upcomeing_web_users_path(params[:name])%>" class="readmore pull-right btn btn-theme">View More></a>
+                        <%end%>
+                        <%end%>
+                        <% @count_upcomeing += 1 %>
+                        <%end%>
+                        <%end%>
+                        <%end%>
+                        <%end%>
+                    </div>
+                    <% else %>
+                    <p> Data not found.</p>
+                    <% end %>
                 </div>
             </div>
         </div>
@@ -128,25 +114,22 @@
                     <div class="posts">
                         <div class="custom-post big-post">
                             <% @count_todays_review = 0%>
-                            <% @todays_review.each do |review|%>
-                            
+                            <% @todays_review.includes(:product).each do |review|%>
                             <% if @count_todays_review == 0 %>
                             <a href="/web/users/<%=review&.product_id%>/movie_detail" class="">
                                 <img src='<%= review&.product&.image.present? ? review&.product&.image&.where(file_type: "1").first&.file&.url : "/assets/review-img.png" %>'>
-                        
-                           
-                            <div class="custom-content align-center">
-                                <p class="custom-tag"><span>
-                                        <%=review&.product&.category&.category_name%> : Review</span></p>
-                                <h4 class="custom-title">
-                                    <%=review&.product&.product_name%> Review</h4>
-                                <p>
-                                    <%=truncate(review&.comment, :length => 170)%>
-                                </p>
-                                <p class="custom-date"><i class="fa fa-clock-o"></i>
-                                    <%= review&.created_at&.strftime("%B %d, %Y")%>
-                                </p>
-                            </div>
+                                <div class="custom-content align-center">
+                                    <p class="custom-tag"><span>
+                                            <%=review&.product&.category&.category_name%> : Review</span></p>
+                                    <h4 class="custom-title">
+                                        <%=review&.product&.product_name%> Review</h4>
+                                    <p>
+                                        <%=truncate(review&.comment, :length => 170)%>
+                                    </p>
+                                    <p class="custom-date"><i class="fa fa-clock-o"></i>
+                                        <%= review&.created_at&.strftime("%B %d, %Y")%>
+                                    </p>
+                                </div>
                             </a>
                             <%  @count_todays_review += 1 %>
                             <%end%>
@@ -159,17 +142,16 @@
                 <div class="right-side">
                     <div class="widget reviewe-widget">
                         <% if @todays_review.blank? %>
-                                <p></p>
-                          <%else%>      
+                        <p></p>
+                        <%else%>
                         <h3 class="widget-title mt-0">Reviewed Today</h3>
                         <% i = 0%>
                         <% @todays_review.each do |review|%>
-                        <%# if review.created_at == DateTime.now%>
                         <% if i <3 %>
                         <div class="d-flex align-items-start reviewe-widget-item mb-4">
                             <a href="/web/users/<%=review&.product_id%>/movie_detail"><img src='<%= review&.product&.image.present? ? review&.product&.image&.where(avtar:true).first&.file&.url : "/assets/review-img.png" %>'></a>
                             <% a= User.find(review.user_id) %>
-                             <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/review-img.png" %>'></a></span>
+                            <span class="reviewd-user"><a href="<%=read_full_review_web_users_path(id: review.id)%>"><img src='<%= a&.image.present? ? a&.image&.file&.url : "/assets/review-img.png" %>'></a></span>
                             <div class="reviewe-widget-content">
                                 <h6>
                                     <%= review&.product&.category&.category_name%> Reviews |
@@ -189,121 +171,102 @@
                 </div>
             </div>
         </div>
-
-          
         <div class="row small latest_stories">
-          <div class="col-md-12">
-            <h2 class="main-title">LATEST STORIES</h2>
-          </div>
-          <% if @latest_stories.present? %>
-          <% first = @latest_stories&.shift %>
-          <div class="row small">
-            <div class="col-md-7">
-              <a href="/web/users/<%=first&.id%>/movie_detail" class="custom-post">
-                <div class="custom-img big">
-                  <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section"><%= first&.product_name %></h4>
-                  <p class="mb-2"><%= truncate(strip_tags(first&.description), omision: "...", length: 200)&.html_safe %></p>
-                  <p class="date"><i class="fa fa-clock-o"></i> <%= first&.date&.strftime("%B %d, %Y")%></p>
-                </div>
-                <div class="percent-section">
-                  <p><%= (first&.avg_rating&.to_f )&.round(2) rescue nil %>%</p>
-                </div>
-              </a>
-          <% @latest_stories.in_groups_of(2, false).each_with_index do |x,index| %>
-            <%if index == 0 %>
-              <div class="row small">
-                <% x.each do |y|  %>
-                <div class="col-md-6">
-                  <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
-                    <div class="custom-img small">
-                      <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content-section justify-content-end">
-                      <h4 class="title-section"><%= y&.product_name %></h4>
-                      <p class="mb-2"><%=truncate(strip_tags(y&.description), omision: "...", length: 90).html_safe%> </p>
-                      <p class="date"><i class="fa fa-clock-o"></i> <%= y&.date&.strftime("%B %d, %Y")%></p>
-                    </div>
-                    <div class="percent-section">
-                  <p><%= (y&.avg_rating&.to_f ).round(2) %>%</p>
-                    </div>
-                  </a>
-                </div>
-                <% end %>
-<!--                 <div class="col-md-6">
-                  <div class="custom-post">
-                    <div class="custom-img">
-                      <img src="/assets/junglee.png" class="img-fluid" alt="">
-                    </div>
-                    <div class="custom-content-section justify-content-end">
-                      <h4 class="title-section">JUNGLEE</h4>
-                      <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                      <p class="date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                    </div>
-                    <div class="percent-section">
-                      <p>91%</p>
-                    </div>
-                  </div>
-                </div> -->
-              </div>
+            <div class="col-md-12">
+                <h2 class="main-title">LATEST STORIES</h2>
             </div>
-            <% elsif index == 1 %>
-                
-            <div class="col-md-5">
-                <% x.each do |y|  %>
-
-              <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
-                <div class="custom-img mediam">
-                  <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
+            <% if @latest_stories.present? %>
+            <% first = @latest_stories&.shift %>
+            <div class="row small">
+                <div class="col-md-7">
+                    <a href="/web/users/<%=first&.id%>/movie_detail" class="custom-post">
+                        <div class="custom-img big">
+                            <img src="<%= first&.image&.last&.file_url%>" class="img-fluid" alt="">
+                        </div>
+                        <div class="custom-content-section justify-content-end">
+                            <h4 class="title-section">
+                                <%= first&.product_name %>
+                            </h4>
+                            <p class="mb-2">
+                                <%= truncate(strip_tags(first&.description), omision: "...", length: 200)&.html_safe %>
+                            </p>
+                            <p class="date"><i class="fa fa-clock-o"></i>
+                                <%= first&.date&.strftime("%B %d, %Y")%>
+                            </p>
+                        </div>
+                        <div class="percent-section">
+                            <p>
+                                <%= (first&.avg_rating&.to_f )&.round(2) rescue nil %>%</p>
+                        </div>
+                    </a>
+                    <% @latest_stories.in_groups_of(2, false).each_with_index do |x,index| %>
+                    <%if index == 0 %>
+                    <div class="row small">
+                        <% x.each do |y|  %>
+                        <div class="col-md-6">
+                            <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
+                                <div class="custom-img small">
+                                    <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
+                                </div>
+                                <div class="custom-content-section justify-content-end">
+                                    <h4 class="title-section">
+                                        <%= y&.product_name %>
+                                    </h4>
+                                    <p class="mb-2">
+                                        <%=truncate(strip_tags(y&.description), omision: "...", length: 90).html_safe%>
+                                    </p>
+                                    <p class="date"><i class="fa fa-clock-o"></i>
+                                        <%= y&.date&.strftime("%B %d, %Y")%>
+                                    </p>
+                                </div>
+                                <div class="percent-section">
+                                    <p>
+                                        <%= (y&.avg_rating&.to_f ).round(2) %>%</p>
+                                </div>
+                            </a>
+                        </div>
+                        <% end %>
+                    </div>
                 </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section"><%= y&.product_name %></h4>
-                  <p class="mb-2"><%=truncate(strip_tags(y&.description), omision: "...", length: 140).html_safe %></p>
-                  <p class="date"><i class="fa fa-clock-o"></i><%= y&.date&.strftime("%B %d, %Y")%></p>
+                <% elsif index == 1 %>
+                <div class="col-md-5">
+                    <% x.each do |y|  %>
+                    <a href="/web/users/<%=y.id%>/movie_detail" class="custom-post">
+                        <div class="custom-img mediam">
+                            <img src="<%= y&.image&.last&.file_url%>" class="img-fluid" alt="">
+                        </div>
+                        <div class="custom-content-section justify-content-end">
+                            <h4 class="title-section">
+                                <%= y&.product_name %>
+                            </h4>
+                            <p class="mb-2">
+                                <%=truncate(strip_tags(y&.description), omision: "...", length: 140).html_safe %>
+                            </p>
+                            <p class="date"><i class="fa fa-clock-o"></i>
+                                <%= y&.date&.strftime("%B %d, %Y")%>
+                            </p>
+                        </div>
+                        <div class="percent-section">
+                            <p>
+                                <%=  (y&.avg_rating&.to_f ).round(2)%>%</p>
+                        </div>
+                    </a>
+                    <% end %>
                 </div>
-                <div class="percent-section">
-                  <p><%=  (y&.avg_rating&.to_f ).round(2)%>%</p>
-                </div>
-              </a>
                 <% end %>
-<!-- 
-              <div class="custom-post">
-                <div class="custom-img">
-                  <img src="/assets/aquaman.png" class="img-fluid" alt="">
-                </div>
-                <div class="custom-content-section justify-content-end">
-                  <h4 class="title-section">AQUAMAN</h4>
-                  <p class="mb-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                  <p class="date"><i class="fa fa-clock-o"></i> June 12, 2019</p>
-                </div>
-                <div class="percent-section">
-                  <p>90%</p>
-                </div>
-              </div> -->
-
+                <% end %>
             </div>
-                <% end %>
+            <% else %>
+            <p style="font-size: 15px;">Data not found.</p>
             <% end %>
-
-          </div>
-          <% else %>
-          <p style="font-size: 15px;">Data not found.</p>
-          <% end %>
         </div>
-
-
-       
         <div class="review-row revCategory">
             <h2 class="main-title">REVIEWS BY CATEGORIES</h2>
             <div class="row">
                 <% @count_category_reviews = 0%>
-                
                 <%@rec&.each do |category|%>
-                <%# if @count_category_reviews < 8 %>
                 <div class="col-md-3 reviews-col">
-                     <a href="/web/users/<%=category[1][1]%>/movie_detail" class="custom-post">
+                    <a href="/web/users/<%=category[1][1]%>/movie_detail" class="custom-post">
                         <div class="custom-img">
                             <%if category[1].present? %>
                             <img src="<%=category[1][0]%>" class="img-fluid" alt="">
@@ -323,16 +286,11 @@
             </div>
         </div>
         <div class="rhall-row">
-            <h2 class="main-title"><%=Time.now.year%> HALL OF FAME</h2>
+            <h2 class="main-title">
+                <%=Time.now.year%> HALL OF FAME</h2>
             <div class="row small">
                 <% @count_hall_frame = 0 %>
                 <% @products&.each do |product |%>
-                <%# if product.reviews.present? %>
-                <%# @a=product.reviews.map {|x| x.rating  }.sum %>
-                <%# @b=product.reviews.map.with_index {|x,index|  }.count %>
-                <%# if @a > 0 %>
-                <%# if ((@a*100)/(@b*10)) >=  ((@reviews_all*100)/(10*@reviews_count)) %>
-                <%# if ((@a*100)/(@b*10)) >=  @average_review %>
                 <% if product&.avg_rating.to_f >=  @average_review %>
                 <%if @count_hall_frame < 6 %>
                 <div class="col-md-4">
@@ -347,27 +305,24 @@
                             <p class="mb-2">
                                 <%=truncate(strip_tags(product&.description), omision: "...", length: 130).html_safe%>
                             </p>
-                            <!-- <a href="#" class="view-more align-self-end">View More</a> -->
                         </div>
                         <div class="prcnt-section">
-                            <p> <%= product&.avg_rating.to_f.round(2) %>
-                                <%#=(@a*100)/(@b*10)%>%</p>
+                            <p>
+                                <%= product&.avg_rating.to_f.round(2) %>%</p>
                         </div>
-                        <%if @count_hall_frame == 5 %>
-                        <div class="text-right">
-                             <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">View More></a>
-                            </div>
-                        <%end%>
+
                         <% @count_hall_frame += 1%>
                     </a>
                 </div>
                 <%end%>
-                <%#end%>
-                <%#end%>
                 <%end%>
                 <%end%>
+                                        <%if @count_hall_frame >= 5 %>
+                        <div class="text-right">
+                            <a href="/web/users/holl_of_fame_details" class="readmore btn btn-theme">View More></a>
+                        </div>
+                        <%end%>
             </div>
-            
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -392,16 +347,15 @@
                 </select>
             </div>
             <div class="col-md-12">
-                <!-- Home Slider Start -->
                 <div class="tab-content reviewTab theatres-content" id="tabScore">
-                    <!-- <div class="tab-pane fade in show active" id="nav-name" role="tabpanel"> -->
                     <%= render partial: "expert_normal_reviews" %>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
+
+
 <script type="text/javascript">
 // $(document).ready(function() {
 $(document).on("turbolinks:load",function(){
@@ -420,8 +374,8 @@ $(document).on("turbolinks:load",function(){
         });
     });
 });
-</script>
-<script type="text/javascript">
+
+
 // $(document).ready(function() {
 $(document).on("turbolinks:load",function(){
 
@@ -442,8 +396,7 @@ $(document).on("turbolinks:load",function(){
         });
     });
 });
-</script>
-<script type="text/javascript">
+
 $(document).ready(function() {
     $(".ratingText").shorten({
         "showChars": 500,
