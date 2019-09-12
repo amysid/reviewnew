@@ -25,7 +25,7 @@ module CommonConcern
     @data = []
     categories = []
     data = []
-    @index = 0
+    @index = nil
     @product = Product.find_by(id: id)
     category_id = @product.category_id
     @rating = Review.average_reviews(category_id, type)
