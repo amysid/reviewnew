@@ -49,16 +49,16 @@ module CommonConcern
       #   }
       # }
       data = ActiveSupport::JSON.decode(@rating.to_json).pluck("id","average_reviews").uniq rescue []
-      if data.blank?
-        start_point = data.min 
-        end_pont =  data.max
-        diffrence = start_point % 3
-        start_point = start_point - diffrence unless diffrence == 0
-        end_pont = end_pont + diffrence unless diffrence == 0
-      else
-        start_point = data.min 
-        end_pont =  data.max
-      end
+      # if data.blank?
+      #   start_point = data.min 
+      #   end_pont =  data.max
+      #   diffrence = start_point % 3
+      #   start_point = start_point - diffrence unless diffrence == 0
+      #   end_pont = end_pont + diffrence unless diffrence == 0
+      # else
+      #   start_point = data.min 
+      #   end_pont =  data.max
+      # end
 
       data.each{|rating| 
         start_point = rating[1]
