@@ -19,7 +19,7 @@ $("#admin_new_product").validate({
      "product[product_name]": {
        required: true,
        minlength: 2,
-       maxlength: 20,
+       maxlength: 100,
      },
      // "product[video]": {
      //   required: true,
@@ -48,7 +48,7 @@ $("#admin_new_product").validate({
       "product[product_name]": {
        required: "Please Write a Product Name",
        minlength: "Minimum characters are 2.",
-       maxlength: "Maximum characters are 35.",
+       maxlength: "Maximum characters are 100.",
      },
      //  "product[video]": {
      //   required: "Please Select a Video",
