@@ -237,14 +237,14 @@
         <div class="rowreviews">
             <h3>Screenshots</h3>
         </div>
-        <div class="row rowreviews">
+        <div class="home-slider2">
             <%#arr = @product.image { |i| i&.file&.url}%>
             <%# arr=[]%>
             <%# binding.pry%>
             <%# @product.image.each { |i|  arr<<i&.file&.url if i.file_type!="1"} %>
             <% unless  @images.blank? %>
             <%#arr = arr[0..2]%>
-            <% @images[0..2].each do |a|%>
+            <% @images.each do |a|%>
             <div class="col-md-4 columnimage">
                 <div class="imagecol3">
                     <img src="<%=a%>" class="screen-img myImg">
@@ -923,3 +923,85 @@ function rating()
 
 
 </script>
+
+<script type="text/javascript">
+// jQuery(document).ready(function() {
+$(document).on("turbolinks:load",function(){
+    jQuery('.home-slider').slick({
+        dots: false,
+        infinite: true,
+        autoplay: true,
+        speed: 300,
+        slidesToShow: 1,
+    });
+
+    $('.home-slider2').slick({
+        dots: true,
+        infinite: true,
+        autoplay: true,
+        arrows: false,
+        speed: 300,
+        slidesToShow: 3,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 991,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                }
+            },
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
+});
+</script>
+<!-- <style>
+.home-slider2 ul.slick-dots !important{
+    display: inline-block;
+    max-width: 50%;
+    /* right: 0px; */
+    z-index: 9;
+    bottom: -60px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+</style> -->
+
+<style type="text/css">
+    .home-slider2 ul.slick-dots {
+    display: inline-block;
+    max-width: 100%;
+    z-index: 1;
+    bottom: -35px;
+}
+.home-slider2 ul.slick-dots li {
+    border: 1px solid #868686;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+}
+</style>
