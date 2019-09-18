@@ -104,16 +104,17 @@
                     <%end%>
                 </div>
             </div>
+            <%if @product_links.present?%>
             <div class="col-md-3">
-                 <div class="">
-            <div class="product_link_box">
-           <% @product_links.each do |m|%>
-           <a href=<%=m.url%>><%= m.link%></a><br>
-           <% end %>
-           </div>
-        </div>
-
+             <div class="">
+                <div class="product_link_box">
+                   <% @product_links.each do |m|%>
+                   <a href=<%=m.url%>><%= m.link%></a><br>
+                   <% end %>
+               </div>
             </div>
+            </div>
+           <%end%>
         </div>
         <!--  i did change here Atul-->
        
@@ -142,11 +143,23 @@
             <%#end%>
             <%#end%>
             <div class=" col-md-6 ">
+                <div class="row">
+                    <div class="col-md-8">
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Userscore</span><br>
                         <span class="button1" id="button65reviews">
                             <%=@user_reviews_avg%></span></p>
                 </div>
+            </div>
+                <div class="col-md-4">
+                    <div class="buttonsreviews">
+                    <p class="button12"><span class="blueuser">Total Review</span><br>
+                        <span class="button1" id="button65reviews">
+                            <%=@user_reviews.count%></span></p>
+                </div>
+            </div>
+               </div>
+
                 <div class="buttonsreviews">
                     <div class="progress">
                         <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @user_score[:positive] %>%">
@@ -191,11 +204,22 @@
             <%#end%>
             <%#end%>
             <div class=" col-md-6 ">
+                   <div class="row">
+                    <div class="col-md-8">
                 <div class="buttonsreviews">
                     <p class="button12"><span class="blueuser">Metascore</span><br>
                         <span class="button1" id="button65reviews">
                             <%=@meta_reviews_avg%></span></p>
                 </div>
+            </div>
+                <div class="col-md-4">
+                    <div class="buttonsreviews">
+                    <p class="button12"><span class="blueuser">Total Review</span><br>
+                        <span class="button1" id="button65reviews">
+                            <%=@meta_reviews.count%></span></p>
+                </div>
+            </div>
+               </div>
                 <div class="buttonsreviews">
                     <div class="progress">
                         <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" style="width:<%= @meta_score[:positive]%>%">
