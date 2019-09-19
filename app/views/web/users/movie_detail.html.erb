@@ -62,15 +62,21 @@
                         <%if @product.reviews.where(user_id: current_user&.id).present? %>
                         <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" disabled>Review Already Posted</a>
                             <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                              <!-- <a href="#" class="posted-btn" data-toggle="modal" data-target="#rawdata">Raw data</a> -->
+
                         </div>
                         <%elsif !current_user.present?%>
                         <div class="reviews">
                             <%= link_to "Login for Write a review", new_user_session_path, :class => 'posted-btn'%>
                              <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                               <!-- <a href="#" class="posted-btn" data-toggle="modal" data-target="#rawdata">Raw data</a> -->
+
                         </div>
                         <%else%>
                         <div class="reviews"><a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">Write a review</a>
                              <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "posted-btn" %>
+                               <!-- <a href="#" class="posted-btn" data-toggle="modal" data-target="#rawdata">Raw data</a> -->
+
                         </div>
                         <%end%>
                         <!-- <button class="reviews"><a href="/web/users/<%#=@product.id%>/movie_review" style="color: white;">Reviews</a></button> -->
@@ -544,6 +550,29 @@
 </div>
 </div>
 </div>
+
+
+<!-- raw -->
+ <div class="modal fade bd-example-modal-lg reviewModal" id="rawdata" tabindex="-1" role="dialog" aria-hidden="true">
+   <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+       <div class="modal-content">
+           <div class="modal-body">
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+               <div class="form-group">
+                   <h4 class="text-center mb-0"><%=@raw_data%></h4>
+               </div>
+  
+               
+              
+           </div>
+       </div>
+   </div>
+</div>
+<!-- raw end -->
+
+
 <div class="modal fade bd-example-modal-lg reviewModal" id="reviewModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
