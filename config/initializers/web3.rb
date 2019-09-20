@@ -67,7 +67,7 @@ end
 Contract_instance = Proc.new{|address|
 	client = address.present? ? (get_client address) : Client
 	# Ethereum::Contract.create(name: "MyContract", address: "0xaaef4b800d7e67da0b45b0e1cd7af6c7e7f39a1e", abi: Abi,client: client)
-	Ethereum::Contract.create(name: "MyContract", address: "0xb10eb18bfe2e6db20cf43c6a032a9750ac885a97", abi: NewAbi,client: client)
+	Ethereum::Contract.create(name: "MyContract", address: "0x748d9c2d182d32cd9ddf9fd47a74e5ba950aad77", abi: NewAbi,client: client)
     
 }
 Get_client = Proc.new{|address|
