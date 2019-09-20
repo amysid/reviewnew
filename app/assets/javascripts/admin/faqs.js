@@ -13,16 +13,16 @@ $("#admin_faq").validate({
     rules: {
       "faqs[question]":{
         required: true,
-        minlength: 20,
-        maxlength: 100
+        minlength: 10,
+        maxlength: 1000
       },
       "faqs[answer]":{
         required: function() 
         {
           CKEditorUpdate();                        
         }, 
-        minlength: 20,
-        maxlength: 500
+        minlength: 20
+        // maxlength: 5000
       },      
     }
   });

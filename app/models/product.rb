@@ -10,8 +10,8 @@ class Product < ApplicationRecord
     accepts_nested_attributes_for :image, allow_destroy: true
     validates :product_name, presence: true
     validates :category_name, presence: true
-    validates :product_name, length: { minimum: 3, maximum: 20}
-    validates :product_name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
+    # validates :product_name, length: { minimum: 3, maximum: 20}
+    # validates :product_name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
     validates :description, length: { minimum: 20, maximum: 2000}
 
     scope :published_products , -> { where(current: "publish").order("created_at DESC") }

@@ -21,7 +21,7 @@ $("#static_content_edit").validate({
           CKEditorUpdate();                        
         }, 
         minlength: 20,
-        maxlength: 1000
+        maxlength: 1000000
       },      
     }
   });
