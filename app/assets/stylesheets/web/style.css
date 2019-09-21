@@ -228,7 +228,7 @@ a, img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 0px;
+    padding: 4px 0px;
 }
 .user-item {
     margin-right: 25px;
@@ -593,7 +593,7 @@ a.font-awsomeicon i.fa {
     border-radius: 50%;
 }
 p.fotter-para {
-    margin-top: 30px;
+    margin-top: 15px;
     text-align: left;
     font-size: 16px;
     line-height: 22px;
