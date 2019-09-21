@@ -36,7 +36,7 @@
                     <p class="mb10">Wide Release Date : <%=@product&.date&.strftime("%b %d, %Y")%></p>
                     <div class="progress-bar-circle">
                         <div class="text-center mr15">
-                             <!-- <div class="progress green">
+                             <div class="progress green">
                                 <span class="progress-left">
                                     <span class="progress-bar"></span>
                                 </span>
@@ -44,12 +44,21 @@
                                     <span class="progress-bar"></span>
                                 </span>
                                 <div class="progress-value"><%=@user_reviews_avg%></div>
-                            </div> -->
-                            <div class="my-progress-bar"></div>
+                            </div>
+                            <!-- <div class="my-progress-bar"></div> -->
                              <p>Userscore</p>
                         </div>
                         <div class="text-center mr15">
-                             <div class="my-progress-bar"></div>
+                             <!-- <div class="my-progress-bar"></div> -->
+                             <div class="progress green">
+                                <span class="progress-left">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <span class="progress-right">
+                                    <span class="progress-bar"></span>
+                                </span>
+                                <div class="progress-value"><%=@meta_reviews_avg%></div>
+                            </div>
                             <p>Metascore</p>
                         </div>
                     </div>
