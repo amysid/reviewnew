@@ -67,7 +67,7 @@
                         <!-- <a class="btn btn-review-outline">Login for Review</a> -->
                         <%if @product.reviews.where(user_id: current_user&.id).present? %>
                         
-                            <a href="#" class="posted-btn" data-toggle="modal" disabled>Review Already Posted</a>
+                            <a href="#" class=" btn btn-review" data-toggle="modal" disabled>Review Already Posted</a>
                             <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "btn btn-review" %>
                               <!-- <a href="#" class="posted-btn" data-toggle="modal" data-target="#rawdata">Raw data</a> -->
 
@@ -80,7 +80,7 @@
 
                         
                         <%else%>
-                        <a href="#" class="posted-btn" data-toggle="modal" data-target="#reviewModal">Write a review</a>
+                        <a href="#" class="btn btn-review" data-toggle="modal" data-target="#reviewModal">Write a review</a>
                              <%= link_to "Review Critics", review_chart_web_reviews_path(product_id: params[:id]),class: "btn btn-review" %>
                                <!-- <a href="#" class="posted-btn" data-toggle="modal" data-target="#rawdata">Raw data</a> -->
 
