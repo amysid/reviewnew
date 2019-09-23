@@ -159,9 +159,9 @@ class Web::UsersController < ApplicationController
     # @sub_categories_movies_reviews = SubCategory.find_by(id: @b)
     # @product_moview_reviews = @sub_categories_movies_reviews.products.last(4)
     
-   contract = Contract_instance.call("0xf4a107b44e86fb155632b035375232e341639bea")
-   @raw_data_product_id =  Product.find_by(id: params[:id]).product_blockchain_id
-   @raw_data = contract.call.get_all_ratings(@raw_data_product_id)
+   #contract = Contract_instance.call("0xf4a107b44e86fb155632b035375232e341639bea")
+   #@raw_data_product_id =  Product.find_by(id: params[:id]).product_blockchain_id
+   #@raw_data = contract.call.get_all_ratings(@raw_data_product_id)
 
     @product = Product.find_by(id: params[:id])
     @product_links=@product.product_links
