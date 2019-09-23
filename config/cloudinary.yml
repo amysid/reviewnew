@@ -2,17 +2,20 @@ development:
  cloud_name: dckbxjtbv
  api_key: '734741644451358'
  api_secret: 3Kp4fOJxGh8dj1LBYsGqNSM7kUA
+ secure: true
  enhance_image_tag: true
  static_file_support: false
 production:
  cloud_name: dckbxjtbv
  api_key: '734741644451358'
  api_secret: 3Kp4fOJxGh8dj1LBYsGqNSM7kUA
+ secure: true
  enhance_image_tag: true
  static_file_support: true
 test:
  cloud_name: dckbxjtbv
  api_key: '734741644451358'
  api_secret: 3Kp4fOJxGh8dj1LBYsGqNSM7kUA
+ secure: true
  enhance_image_tag: true
  static_file_support: false
