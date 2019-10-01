@@ -112,6 +112,19 @@ class Admin::ProductsController < ApplicationController
     redirect_to admin_products_path
       flash[:notice] = "Unpublish mode Successfully"
    end
+   
+   def show_in_banner
+     @show_in_banner=Product.find_by(id: params[:id]).show_in_banner
+   if @show_in_banner == true
+     Product.find_by(id: params[:id]).update(show_in_banner: false)
+      redirect_to admin_products_path
+     flash[:notice] = "Product will not show in banner"
+    else
+     Product.find_by(id: params[:id]).update(show_in_banner: true)
+      redirect_to admin_products_path
+     flash[:notice] = "Product will show in banner"
+   end
+   end
 
    def unpublish
     Product.find_by(id: params[:id]).update(current: "publish")

@@ -103,6 +103,7 @@ Rails.application.routes.draw do
       end
       member do 
         patch :publish
+        patch :show_in_banner
         get :add_links
         get :new_addlinks
         post :create_product_link

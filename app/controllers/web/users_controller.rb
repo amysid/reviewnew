@@ -62,7 +62,7 @@ class Web::UsersController < ApplicationController
       else
         @trending_products = @products.where(trending: true)
         @upcomeing_products = @products.where(['date > ?', DateTime.now] )
-        @publishs = @products #Product.all.where(current: "publish")
+        @publishs = @products.where(show_in_banner: true) #Product.all.where(current: "publish")
 
         # @products = Product.all
         @products = @products.select('products.* ,product_name,description,date,products.updated_at, (avg(reviews.rating) * 10) as avg_rating').group('id').joins(:reviews)
