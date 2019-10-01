@@ -13,7 +13,7 @@ class Review < ApplicationRecord
   end
 
   def self.positive_review
-  	@optimize_percentage.call (where("rating >= ? AND spoiler =? ",6, false).length.to_f / all.length).round(2)*100 rescue 0
+  	@optimize_percentage.call (where("rating >= ? AND spoiler =? ",7, false).length.to_f / all.length).round(2)*100 rescue 0
 
   end
 
@@ -22,7 +22,7 @@ class Review < ApplicationRecord
   end
 
   def self.middle_review
-  	@optimize_percentage.call (where("rating BETWEEN ? and ? AND spoiler =? ",4,5 , false).length.to_f / all.length).round(2)*100 rescue 0
+  	@optimize_percentage.call (where("rating BETWEEN ? and ? AND spoiler =? ",4,6 , false).length.to_f / all.length).round(2)*100 rescue 0
   end
 
   def self.average_reviews category_id , user_type
