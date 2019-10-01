@@ -29,7 +29,6 @@ class HomesController < ApplicationController
             flash[:notice] = "Feedback not submitted"
         end
     end
-
     def feedback
         @upcoming_release =  Product.where('date > ?', Date.today).last(4)
     end
