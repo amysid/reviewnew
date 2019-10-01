@@ -18,11 +18,11 @@ class Review < ApplicationRecord
   end
 
   def self.negative_review
-  	@optimize_percentage.call (where("rating < ? OR spoiler =?",4 , true).length.to_f / all.length).round(2)*100 rescue 0
+  	@optimize_percentage.call (where("rating =< ? OR spoiler =?",4 , true).length.to_f / all.length).round(2)*100 rescue 0
   end
 
   def self.middle_review
-  	@optimize_percentage.call (where("rating BETWEEN ? and ? AND spoiler =? ",4,6 , false).length.to_f / all.length).round(2)*100 rescue 0
+  	@optimize_percentage.call (where("rating BETWEEN ? and ? AND spoiler =? ",5,6 , false).length.to_f / all.length).round(2)*100 rescue 0
   end
 
   def self.average_reviews category_id , user_type
