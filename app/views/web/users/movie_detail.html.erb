@@ -697,7 +697,9 @@
                 <div class="form-group mb-3">
                     <label>Review this
                         <%= Product.find(@product.id).category_name%> now</label>
-                    <textarea style="resize: none" name="description" class="form-control"  rows="5" required="true"></textarea>
+                    <!-- <textarea style="resize: none" name="description" class="form-control"  rows="5" required="true"></textarea> -->
+                    <%= f.cktext_area :description, class: "form-control", placeholder: "" %>
+
                 </div>
                 <div class="form-group form-check">
                     <input type="checkbox" name="spoiler" class="form-check-input" id="exampleCheck1">
