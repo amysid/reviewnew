@@ -78,9 +78,9 @@
                        <td> -->
                          <%= link_to "Add Title/Links".html_safe, add_links_admin_product_path(product), method: :get, class: "btn btn-success", id: 'btnsubmit' %>
                          <% if product.show_in_banner == true %>
-                       <%= link_to 'Show in Banner'.html_safe, show_in_banner_admin_product_path(product), method: :patch, class: "btn btn-warning", title: "Show in Banner  Mode", data: {confirm: "Are you sure want to be change the Don't Show in Banner mode"} %>
+                       <%= link_to 'Show in Banner'.html_safe, show_in_banner_admin_product_path(product), method: :patch, class: "btn btn-warning", title: "Show in Banner  Mode", data: {confirm: "Are you sure you Don't want to  Show in Banner."} %>
                        <%else%>
-                        <%= link_to "Don't Show in Banner".html_safe, show_in_banner_admin_product_path(product), method: :patch, class: "btn btn-success", id: 'btnsubmit', title: "Don't Show in Banner  Mode", data: {confirm: "Are you sure want to be change the Show in Banner  mode"} %>
+                        <%= link_to "Don't Show in Banner".html_safe, show_in_banner_admin_product_path(product), method: :patch, class: "btn btn-success", id: 'btnsubmit', title: "Don't Show in Banner  Mode", data: {confirm: "Are you sure you want to  Show in Banner."} %>
                          <%end%>
                        </td>
            					</tr>

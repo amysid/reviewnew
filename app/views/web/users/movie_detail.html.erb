@@ -417,7 +417,8 @@
                                         </div>
                                     </div>
                                     <div class="ratingText">
-                                        <%=truncate(review&.comment, :length => 130)%>
+                                        <%#=truncate(review&.comment, :length => 130)%>
+                                        <%= truncate(sanitize(review&.comment, :tags => %w(br a)), :length => 130) %>
                                         <%if review&.comment&.present? && review&.comment&.length > 130 || z>=3%>
                                         <a href="/web/users/<%= review&.id%>/full_review">Read Full Review</a>
                                         <%end%>
