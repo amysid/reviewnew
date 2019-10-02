@@ -124,7 +124,9 @@
                                     <h4 class="custom-title">
                                         <%=review&.product&.product_name%> Review</h4>
                                     <p>
-                                        <%=truncate(review&.comment, :length => 170)%>
+                                        <%#=truncate(review&.comment, :length => 170)%>
+                                        <%= truncate(sanitize(review&.comment, :tags => %w(br a)), :length => 170) %>
+
                                     </p>
                                     <p class="custom-date"><i class="fa fa-clock-o"></i>
                                         <%= review&.created_at&.strftime("%B %d, %Y")%>
@@ -158,7 +160,9 @@
                                     <%= review&.product&.category&.category_name%> Reviews |
                                     <%=review&.product&.product_name%> Reviews</h6>
                                 <p>
-                                    <%=truncate(review&.comment, :length => 70)%>
+                                    <%#=truncate(review&.comment, :length => 70)%>
+                                    <%= truncate(sanitize(review&.comment, :tags => %w(br a)), :length => 70) %>
+
                                 </p>
                                 <span><i class="fa fa-clock-o"></i>
                                     <%= review&.created_at&.strftime("%B %d, %Y")%></span>
