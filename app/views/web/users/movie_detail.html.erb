@@ -529,8 +529,9 @@
                                 <%= review&.product&.category&.category_name%> Reviews |
                                 <%=review&.product&.product_name%> Reviews</h6>
                             <p>
-                                <%=truncate(review&.comment, :length => 72)%>
-                            </p>
+                                <%#=truncate(review&.comment, :length => 72)%>
+                            <%= truncate(sanitize(review&.comment, :tags => %w(br a)), :length => 72) %>
+                                                            </p>
                             <span><i class="fa fa-clock-o"></i>
                                 <%= review&.created_at&.strftime("%B %d, %Y")%></span>
                         </div>
