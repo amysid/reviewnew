@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   include AccountConcern
   include AuthUserConcern
+  # has_secure_password
+  
   attr_accessor :key,:salt
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :lockable, :trackable, :omniauthable, omniauth_providers: [:facebook]
@@ -10,10 +12,11 @@ class User < ApplicationRecord
  # validates :mobile_no, uniqueness: true,  on: :update
  validates :name, length: { minimum: 2, maximum: 20}
  validates :name, format: { with: /[a-zA-Z]/, message: "%{value} not accecpt. Only allows character" }
-
+ # has_secure_token :access_token
  scope :expert_user, -> { where(user_type: "Expert User")}
  scope :normal_user, -> { where(user_type: "Normal User")}
  has_many :reviews
+ has_many :devices, dependent: :destroy
  # validates :mobile_no, numericality: { message: "%{value} seems wrong. Accecpt only Integer" },  on: :update
  # validates :mobile_no, length: { minimum: 7, maximum: 14},  on: :update
 
@@ -45,7 +48,12 @@ after_create :set_account
     end
   end
 
-
+  def self.generate_token user
+   begin
+    access_token = SecureRandom.hex
+  end while User.where(access_token: access_token).exists?
+  end
+  
   def self.to_csv(options = {})
   CSV.generate(options) do |csv|
   	cols = ["id", "name", "email", "c_code", "mobile_no", "created_at"]
