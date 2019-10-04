@@ -56,6 +56,7 @@ class Admin::ProductsController < ApplicationController
         params[:product][:date][3,2]=x
         @products.date = params[:product][:date]
       end
+      binding.pry
       if @products.save!
         
         # productCount = 0
