@@ -1,6 +1,6 @@
 <!-- <div class="tab-content" id="tabScore"> -->
             <div class="tab-pane fade show active" id="nav-movies" role="tabpanel">
-              <div class="row small">
+              <div class="row">
 
               	<%if @total_products.blank?%>
               	     <!-- <h3>No Record Founds</h3> -->
@@ -76,12 +76,14 @@
 // });
 </script>
 <style type="text/css">
+  .score-card-top{
+    justify-content:space-between;
+  }
   .score-rating {
-    margin-left: 125px;
-    margin-top: 25px;
-}
+        min-width: 58px;
+  }
 .score-card p {
    
     margin-bottom: 25px;
-}
+  }
 </style>
