@@ -69,6 +69,7 @@
   											 <div class="col-sm-8 col-md-8">
                           <p><video id="video_player" width="400" controls></video></p>
   											  <%= f.file_field :video, id:"video_file", type:"file", accept:"video/*"  %>
+                          <a href="javascript:void(0)" class="rm_vid"><i class="fa fa-times fa-lg mt-10"></i></a>
                         </div> 
   										</div>
   									</div>
@@ -152,7 +153,10 @@ reader.readAsDataURL(input.files[0]); }
        $(document).ready(function(){
   //alert("hello bhai");
   $('#1').click();
-
+$('.rm_vid').click(function() {
+    $('#video_player').attr('src', '');
+    $('#video_file')[0].value = "";
+  })
  
   $('.shubham').change(function(){
     //debugger;

@@ -147,7 +147,7 @@
                         <%= sanitize(@product&.description)%>
                     </p>
                 </div>
-                <div>
+                 <div>
                     <%if @product.video.present?%>
                     <video controls="controls" width="400px" height="200px" id="video_player" src="<%=@product&.video&.url%>" autoplay="true" muted="false" class="video_product",poster="<%=get_poster(@product&.video&.url)%>" preload="none"></video>
                     <%else%>
@@ -357,15 +357,36 @@
         </div>
         <%end%>
 
+<div class="modal fade bd-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg" >
+    <div class="modal-content">
+      <div class="modal-body" style="padding: 0.2rem">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
+            <span class="close1 close" class="" data-dismiss="modal" aria-label="Close">&times;
 
+            </span>
+        <!-- </button> -->
+            <img class="modal-content" id="img01">
+      </div>
+            <a class="prev">&#10094;</a>
+            <a class="next">&#10095;</a>
+    </div>
+  </div>
+</div>
+<!-- <style type="text/css">
+    .flex_imag_tag{
+        max-width: 295px;
+        max-height: 295px;
+    }
+</style> -->
 
-        <div id="myModal" class="modal1">
+        <!-- <div id="myModal" class="modal1">
             <span class="close1">&times;</span>
             <img class="modal-content1" id="img01">
             <div id="caption1"></div>
             <a class="prev">&#10094;</a>
             <a class="next">&#10095;</a>
-        </div>
+        </div> -->
         <!-- end screenshot -->
         <!-- userscore && Metascore -->
         <div class="row rowreviews">
@@ -861,8 +882,9 @@ $('.count_child').on('click', function() {
 
 .close1 {
     position: absolute;
-    top: 15px;
+    top: 20px;
     right: 35px;
+    z-index: 1;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
@@ -966,14 +988,22 @@ $(document).ready(function() {
     var img = document.getElementsByClassName("myImg");
     var modalImg = document.getElementById("img01");
     var captionText = document.getElementById("caption1");
+
+    var dialog = $(".modal-dialog1");
+    var offset = ($(window).height() - dialog.height()) / 2;
+    // Center modal vertically in window
+    dialog.css("margin-top", offset);
     // debugger;
     Array.prototype.slice.call(img).forEach(myfunction);
 
     function myfunction(item, index) {
         item.onclick = function() {
+            // debugger
+            $('#myModal').modal('show');
             modal.style.display = "block";
             modalImg.src = this.src;
             captionText.innerHTML = this.alt;
+
         }
     }
 
@@ -994,7 +1024,7 @@ $(document).ready(function() {
     // });
 
  $('a.next').click(function next() {
-       var modal = $("img.modal-content1");
+       var modal = $("img.modal-content");
        var img = <%= raw(@images) %>;
        index = getIndex(modal, img);
 
@@ -1004,7 +1034,7 @@ $(document).ready(function() {
    });
 
    $('a.prev').click(function next() {
-       var modal = $("img.modal-content1");
+       var modal = $("img.modal-content");
        var img = <%= raw(@images) %>;
        index = getIndex(modal, img);
 
