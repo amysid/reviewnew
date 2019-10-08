@@ -5,6 +5,7 @@ class Web::ReviewsController < ApplicationController
 		@review = @product.reviews.new(require_params)
 		if @review.save
         	review = contract_instance.transact_and_wait.add_review(@product.product_blockchain_id,@review.rating) rescue nil
+			Blockchain.create!(mined: review.as_json["mined"], connection: review.as_json["connection"],blockchain_hash: review.as_json["id"],product_blockchain_id: review.as_json["input_parameters"][0],rating: review.as_json["input_parameters"][1], product_id: params[:id], user_id:  current_user.id)
 			redirect_to request.referer, notice: "Review Posted."
         else
 			redirect_to request.referer, alert: @review.errors.full_messages
