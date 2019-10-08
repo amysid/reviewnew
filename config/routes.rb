@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       get :rating_calculate
     end
     member do
+      get :blockchain_data
       get :user_profile
       get :movie_category
       get :movie_category_detail

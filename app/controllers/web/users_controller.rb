@@ -322,6 +322,10 @@ class Web::UsersController < ApplicationController
     # @total_products = @products.joins(:reviews).where("products.category_id = ? AND reviews.user_id = ? ", params[:id],current_user.id)
   end
 
+  def blockchain_data
+    @data = Blockchain.find_by(product_id: params["id"])
+  end
+
   def holl_of_fame_details
     a=[]
     Product.published_products.all.each{|x| a<<x.id if x.video.present?}
