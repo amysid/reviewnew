@@ -1,19 +1,62 @@
-<div>
-           <div class="score-card">
-                <div class="score-card-top">
-                    <div class="rtUserInfo">
-                        <div class="user-firstsec">
-                           <div class="name-date">
-<td><%=@data&.id%></td><br>
-<td><%=@data&.blockchain_hash%></td><br>
-<td><%=@data&.mined%></td><br>
-<td><%=@data&.connection%></td><br>
-<td><%=@data&.product_blockchain_id%></td><br>
-<td><%=@data&.rating%></td>
 
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+
+<h2>Blockchain Info.</h2>
+  <%if @data.present?%>
+<table>
+ 
+  <tr>
+    <td>id</td>
+    <td><%=@data&.id%></td>
+    
+  </tr>
+  <tr>
+    <td>blockchain hash</td>
+    <td><%=@data&.blockchain_hash%></td>
+    
+    
+  </tr>
+  <tr>
+    <td>Mined</td>
+    <td><%=@data&.mined%></td>
+    
+    
+  </tr>
+  <tr>
+    <td>Connection</td>
+    <td><%=@data&.connection%></td>
+
+  </tr>
+  <tr>
+    <td>product_blockchain_id</td>
+<td><%=@data&.product_blockchain_id%></td>
+
+  </tr>
+  <tr>
+    <td>rating</td>
+    <td><%=@data&.rating%></td>
+    
+  </tr>
+</table>
+<%end%>
+<p>Data not found.</p>
+
+
