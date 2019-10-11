@@ -21,37 +21,37 @@ tr:nth-child(even) {
 
 <h2>Blockchain Info.</h2>
   <%if @data.present?%>
-<table>
+<table class="table-responsive">
  
   <tr>
-    <td>id</td>
+    <td class="abc">id</td>
     <td><%=@data&.id%></td>
     
   </tr>
   <tr>
-    <td>blockchain hash</td>
+    <td class="abc">blockchain hash</td>
     <td><%=@data&.blockchain_hash%></td>
     
     
   </tr>
   <tr>
-    <td>Mined</td>
+    <td class="abc">Mined</td>
     <td><%=@data&.mined%></td>
     
     
   </tr>
   <tr>
-    <td>Connection</td>
+    <td class="abc">Connection</td>
     <td><%=@data&.connection%></td>
 
   </tr>
   <tr>
-    <td>product_blockchain_id</td>
+    <td class="abc">product_blockchain_id</td>
 <td><%=@data&.product_blockchain_id%></td>
 
   </tr>
   <tr>
-    <td>rating</td>
+    <td class="abc">rating</td>
     <td><%=@data&.rating%></td>
     
   </tr>
@@ -60,4 +60,15 @@ tr:nth-child(even) {
 <p>Data not found.</p>
 <%end%>
 
+<style type="text/css">
+  
+table.table-responsive {
+    max-width: 750px;
+    margin: 30px auto;
+}
+td.abc {
+    white-space: nowrap;
+}
+
+</style>
 

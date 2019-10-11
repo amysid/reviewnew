@@ -51,7 +51,7 @@
                     
                     <% if product.reviews_comments.size >=  130 %>
                      
-                     <div><a href="/web/users/<%= product&.id %>/movie_detail">Read Product Detail</a></div>
+                     <div class="xyz"><a href="/web/users/<%= product&.id %>/movie_detail">Read Product Detail</a></div>
                      <%end%>
                     <div class="d-flex justify-content-between">
                       <div class="like-dislike">
@@ -88,4 +88,8 @@
    
     margin-bottom: 25px;
   }
+  .xyz {
+    float: right;
+    clear: both;
+}
 </style>
