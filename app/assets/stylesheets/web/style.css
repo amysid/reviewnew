@@ -2999,3 +2999,97 @@ span.reviewd-user img {
     top: 60px;
     left: 67px;
 }
+@media(max-width: 767.98px) {
+    .slide-text h4 {
+    font-size: 15px;
+}
+.slide-text p {
+    font-size: 12px;
+    margin-bottom: 10px;
+    white-space: normal;
+    width: 82%;
+    text-align: left;
+}
+.slide-content{
+    padding: 0px!important;
+}
+.posts .post-item {
+    max-height: 100%;
+    min-height: 100%;
+}
+.post-item .post-img {
+    height: 100%!important;
+    width: 100%!important;
+}
+.post-img a img {
+    object-fit: cover;
+    width: 100%;
+}
+.post-img {
+    position: unset;
+    overflow: visible;
+    
+}
+.post-img img {
+    position: unset;
+
+}
+.my-cls {
+   
+    flex-wrap: unset;
+}
+.nav-tabs.tabline {
+    margin-top: 20px;
+}
+.custom-img {
+    margin-bottom: 20px;
+}
+.carousel.slide {
+    height: auto;
+}
+.carousel.slide .carousel-inner .carousel-item img {
+    object-fit: cover;
+    height: auto;
+}
+.rating-row .count_child .right {
+    min-width: 100%;
+    max-width: 100%;
+}
+.rating-row .count_child .left {
+    min-width: 100%;
+    max-width: 100%;
+}
+.reviews {
+    margin: 3px 0px;
+}
+.user-profile img {
+    width: 65px;
+    height: 65px;
+    margin-bottom: 15px;
+}
+.user-profile h4 {
+    font-size: 20px;
+}
+.profil-btn {
+    width: 100%;
+    max-width: 158px;
+    min-width: 127px;
+}
+.reviews h3 {
+    font-size: 30px;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.user-detail .btn {
+    margin-top: 0px;
+}
+}
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
