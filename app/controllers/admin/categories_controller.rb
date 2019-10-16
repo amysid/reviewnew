@@ -35,6 +35,7 @@ class Admin::CategoriesController < ApplicationController
        else
         @category = Category.create(category_params)
         if @category.save
+          contract_instance.transact_and_wait.add_category(@category.category_name,@category.id.to_i) rescue nil
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
         else
            flash[:alert] = @category.errors.full_messages
@@ -86,7 +87,8 @@ class Admin::CategoriesController < ApplicationController
         flash[:notice] = "Review part criteria already exists"
       else
      @category=Category.find(params[:review_parts][:category_id])
-    if @category.review_parts.create(review_part_params)
+    if a = @category.review_parts.create(review_part_params)
+      contract_instance.transact_and_wait.add_criteria(params[:review_parts][:category_id].to_i,params[:review_parts][:criteria],a.id.to_i)
       flash[:notice] = "Review Parts create successfullly"
    else
       flash[:alert] = @category.errors.full_messages
@@ -105,6 +107,7 @@ class Admin::CategoriesController < ApplicationController
       flash[:notice] = "criteria name is already exists"
     else
       if @review_parts.update(review_part_params)
+        binding.pry
          flash[:notice] = "criteria update successfullly"
       else
        flash[:alert] = @review_parts.errors.full_messages 

@@ -56,11 +56,10 @@ class Admin::ProductsController < ApplicationController
         params[:product][:date][3,2]=x
         @products.date = params[:product][:date]
       end
-      binding.pry
       if @products.save!
         
         # productCount = 0
-        contract_instance.transact_and_wait.add_product(@products.product_name) rescue nil
+        contract_instance.transact_and_wait.add_product(@products.product_name,@products.category_id.to_i) rescue nil
          count = contract_instance.call.product_count - 1 rescue 0
         # productCount = Product.maximum(:product_blockchain_id) + 1 rescue 0
         @products.update!(product_blockchain_id: count)
