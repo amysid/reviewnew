@@ -56,8 +56,7 @@ class Admin::ProductsController < ApplicationController
         params[:product][:date][3,2]=x
         @products.date = params[:product][:date]
       end
-      if @products.save!
-        
+      if @products.save!   
         # productCount = 0
         contract_instance.transact_and_wait.add_product(@products.product_name,@products.category_id) rescue nil
          count = contract_instance.call.product_count - 1 rescue 0
