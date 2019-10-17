@@ -36,7 +36,7 @@ class Admin::CategoriesController < ApplicationController
         @category = Category.create(category_params)
         if @category.save
          binding.pry
-          contract_instance.transact_and_wait.add_category(@category.category_name,@category.id) rescue nil
+          contract_instance.transact.add_category(@category.category_name,@category.id) rescue nil
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
         else
            flash[:alert] = @category.errors.full_messages
@@ -89,7 +89,7 @@ class Admin::CategoriesController < ApplicationController
       else
      @category=Category.find(params[:review_parts][:category_id])
     if a = @category.review_parts.create(review_part_params)
-      contract_instance.transact_and_wait.add_criteria(params[:review_parts][:category_id],params[:review_parts][:criteria],a.id)
+      contract_instance.transact.add_criteria(params[:review_parts][:category_id],params[:review_parts][:criteria],a.id)
       flash[:notice] = "Review Parts create successfullly"
    else
       flash[:alert] = @category.errors.full_messages
