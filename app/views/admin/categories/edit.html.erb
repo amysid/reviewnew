@@ -22,7 +22,8 @@
                                             <!--  <div class="form-add">
                     <%#= submit_tag 'Submit', :class => "btn btn-primary btn-md"%>
                   </div> -->
-                                            <div class=""><button class="btn btn-success" type="submit">Submit</button>
+                                            <div class="">
+                                            <!--    <button class="btn btn-success" type="submit">Submit</button> -->
                                                 <a href="/admin/categories" class="btn btn-add btn-danger btn-md ">
                                                     << Back to list </a> </div> </div> </div> </div> </div> <%end%>
                                                         <div id="parts" class="tab-pane in fade">
@@ -59,7 +60,7 @@
                                                                         <tr>
                                                                             <th>S.No.</th>
                                                                             <th>Cateria</th>
-                                                                            <th colspan="3">Actions</th>
+                                                                            <!-- <th colspan="3">Actions</th> -->
                                                                         </tr>
                                                                     </thead>
                                                                     <% @review_parts1&.each do |m| %>
@@ -72,11 +73,11 @@
                                                                                 <%= m.try(:criteria)%>
                                                                             </td>
                                                                             <!-- <td></td> -->
-                                                                            <td>
+                                                                           <!--  <td>
             <div class="form-add" style="display:inline-block;">
             <button class="btn btn-primary btn-md state111" type="button" data-toggle="modal" data-target="#editModal1" id="<%=m.id%>"><em class="fa fa-edit" aria-hidden="true" title="Edit"></em></button>
-            <%= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, destroy_review_part_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this criteria name ?"},:class=>"btn btn-danger", method: :delete, title: "Delete"%>
-            </td>
+            <%#= link_to '<em class="fa fa-trash" aria-hidden="true"></em>'.html_safe, destroy_review_part_admin_categories_path(id: m.id),:data => {:confirm => "Are you sure you want to delete this criteria name ?"},:class=>"btn btn-danger", method: :delete, title: "Delete"%>
+            </td> -->
         <%#=link_to  edit_state_admin_countries_path, :class=> "btn btn-primary btn-md", :id => "states1", target:"editModal", toggle: "modal" %>
                                                                             <!-- <div class="modal fade in add-modal" id="editModal" role="dialog">
     <div class="modal-dialog">

@@ -4,9 +4,9 @@ class Web::ReviewsController < ApplicationController
 		@product =  Product.find_by(id: params[:id])
 		@review = @product.reviews.new(require_params)
 		if @review.save
-        	binding.pry
-        	review = contract_instance.transact_and_wait.add_review(@product.product_blockchain_id,@review.rating) rescue nil
-			Blockchain.create!(mined: review.as_json["mined"], connection: review.as_json["connection"],blockchain_hash: review.as_json["id"],product_blockchain_id: review.as_json["input_parameters"][0],rating: review.as_json["input_parameters"][1], product_id: params[:id], user_id:  current_user.id)
+			criteria = JSON.parse(@product.reviews.first.criteria.gsub("=>",":")).values 
+        	review = contract_instance.transact_and_wait.add_review(@product.product_blockchain_id,criteria) rescue nil
+			Blockchain.create!(criteria: JSON.parse(@product.reviews.first.criteria.gsub("=>",":")), mined: review.as_json["mined"], connection: review.as_json["connection"],blockchain_hash: review.as_json["id"],product_blockchain_id: @product.product_blockchain_id,rating: @review.rating, product_id: params[:id], user_id:  current_user.id)
 			redirect_to request.referer, notice: "Review Posted."
         else
 			redirect_to request.referer, alert: @review.errors.full_messages
