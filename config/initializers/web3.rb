@@ -67,7 +67,6 @@ def get_client address
 	client.default_account = address
 	client
 end
-
 # address for server 0x171d653cbe909b5e9eb365c17bdbc19fdd26d443
 Contract_instance = Proc.new{|address|
 	client = address.present? ? (get_client address) : Client
