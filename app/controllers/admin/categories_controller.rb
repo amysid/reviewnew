@@ -35,7 +35,7 @@ class Admin::CategoriesController < ApplicationController
        else
         @category = Category.create(category_params)
         if @category.save
-         binding.pry
+         # binding.pry
           contract_instance.transact.add_category(@category.category_name,@category.id) rescue nil
            redirect_to admin_categories_path, notice: 'Category Created Successfully.'
         else
