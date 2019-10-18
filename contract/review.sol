@@ -142,7 +142,7 @@ contract Rating is Ownable {
     }
 
     function addCategory(string memory _title, string memory _categoryId) public onlyOwner {
-        require(stringpresent(categories[_categoryId].title) == false, "Category with this id already exists.");
+//require(stringpresent(categories[_categoryId].title) == false, "Category with this id already exists.");
         categories[_categoryId].title = _title;
         categoriesId.push(_categoryId);
         categoryCount++;
