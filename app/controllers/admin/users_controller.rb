@@ -19,8 +19,7 @@ class Admin::UsersController < Admin::AdminApplicationController
     
    
     def show
-  	  
-  	   @users = User.decorate
+  	     @users = User.decorate
     end
 
     
@@ -70,11 +69,11 @@ class Admin::UsersController < Admin::AdminApplicationController
    def destroy
     if @user.destroy
       redirect_to  admin_users_path
-      flash[:notice] = 'This User Deleted Successfully'
+      flash[:notice] = 'User Deleted Successfully'
     else
       flash[:error] = @user.errors.full_messages.first
       redirect_to  admin_users_path
-      flash[:notice] = 'This User Not Delete'
+      flash[:notice] = 'User Not Delete'
     end
    end
 
