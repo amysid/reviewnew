@@ -1,111 +1,71 @@
-<!-- <h2>Edit <%#= resource_name.to_s.humanize %></h2>
-
-<%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%#= render "devise/shared/error_messages", resource: resource %>
-
- <label for="file-upload" class="custom-file-upload ">
-
-  <%#= f.fields_for :image_attributes do |m| %>
-   <img src='<%#= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_no_image.png" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 47px; margin-left: -45px; font-size: 24px;" ></i>
-
-  <%#= m.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-  <%#end%>
-  </label>
-
- <div class="field">
-    <%#= f.label :name %><br />
-    <%#= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%#= f.label :email %><br />
-    <%#= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <%# if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%#= resource.unconfirmed_email %></div>
-  <%#end %>
-
-  <div class="field">
-    <%#= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%#= f.password_field :password, autocomplete: "new-password" %>
-    <%#if @minimum_password_length %>
-      <br />
-      <em><%#= @minimum_password_length %> characters minimum</em>
-    <%#end %>
-  </div>
-
-  <div class="field">
-    <%#= f.label :password_confirmation %><br />
-    <%#= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%#= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%#= f.submit "Update" %>
-  </div>
-<%# end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%#= link_to "Back", :back %>
-
-
-
-
-<script type="text/javascript">
-  function preview(input) {
-           if (input.files && input.files[0]) {
-               var reader = new FileReader();
-                 reader.onload = function (e) {
-                   $('#user_pic')
-                       .attr('src', e.target.result);
-               };
-
-               reader.readAsDataURL(input.files[0]);
-           }
-       }
-</script>
- -->
-
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
  <div class="page-wrapper">
       <div class="container home-wrap">
         <%#= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, :id => "update_form" }) do |f| %>
         <%= form_with url: image_update_web_users_path, html: {:id => "update_form" },local:true do |f| %>
-        <div class="profil-row">
-          <div class="user-profile">
-            <div class="img-container">
-              <label for="file-upload" class="custom-file-upload ">
-                   <img src='<%= current_user&.image&.file&.present? ? current_user&.image&.file.try(:url) : "/assets/user_default.jpeg" %>' class="img-circle" alt="Image Not Found" id="user_pic"  onchange = "preview(this)" height=150px width=150px /><i class="fa fa-camera" style="position: absolute; margin-top: 30px; margin-left: -25px; font-size: 24px;" ></i>
-                 <%= f.file_field :file, onchange: "preview(this)" , accept: "image/*" , style: "display:none" , id: "file-upload"%>
-                 <%= f.submit "Update profile", class: "btn btn-theme btn-block"%>
-                 <%end%>
-              </label>
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="usr-pro">
+              <div class="dummy-pic">
+             <img  class="profile-pic" src="/assets/user_no_image.png" alt="">
+             <i class="fa fa-camera fa-cmra" aria-hidden="true"></i>
+           </div>
+           <div class="upld-img">
+              <input type="file" name="pic" accept="image/*" placeholder="upload Image">
+              </div>
             </div>
-            <h4><%#= current_user.name   %></h4>
+              <form>
+               <div class="form-group row">
+                <label class="col-sm-4 fb-pd">Facebook</label>
+                 <div class="col-sm-8">
+                   <input type="email" class="form-control custm-control" placeholder="Facebook">
+                    </div>
+                     </div>
+                     <div class="form-group row">
+                <label class="col-sm-4 fb-pd">Instagram</label>
+                 <div class="col-sm-8">
+                   <input type="email" class="form-control custm-control" placeholder="Instagram">
+                    </div>
+                     </div>
+                     <div class="form-group row">
+                <label class="col-sm-4 fb-pd">twitter</label>
+                 <div class="col-sm-8">
+                   <input type="email" class="form-control custm-control" placeholder="twitter">
+                    </div>
+                     </div>
+                     <div class="form-group row">
+                <label class="col-sm-4 fb-pd">youtube</label>
+                 <div class="col-sm-8">
+                   <input type="email" class="form-control custm-control" placeholder="youtube">
+                    </div>
+                     </div>
+                      </form>
+                      </div>
+
+
+
+            <div class="col-lg-7">
+              <div class="">
+                <h3>Bio</h3>
+              </div>
+              
+                 <%= f.cktext_area :name, autocomplete: "new-password", class: "form-control" %>
+                    
+                    
+                     
+            </div>
+            <div class="last-btn">
+            <button type="button" class="btn btn-theme">submit</button>
+            <button type="button" class="btn btn-theme">Back</button>
           </div>
-          <div class="user-detail">
-         <!--    <div class="ratings">
-              <h3 class=""><%#= Review.where(user_id:current_user.id).pluck(:rating).sum%></h3>
-              <span>Ratings</span>
-            </div>
- -->            <div class="reviews">
-              <h3 class=""><%= Review.where(user_id: current_user.id).count%></h3>
-              <span>Reviews</span>
-            </div>
-            <div class="profil-btn">
-              <%= link_to "Back", user_profile_web_user_path(current_user), class: "btn btn-theme" %>
-              <!-- <button class="btn btn-theme">Account Settings</button> -->
-            </div>
           </div>
-        </div>
+          <%end%>
         
+
+
+
+
+
         <div class="myscore-row">
           <h2 class="main-title">Change Password</h2>
           <div class="form form-changepassword">
@@ -203,4 +163,41 @@ function preview(input) {
             color: #e80b0b;
 
   }
+  img.profile-pic {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    vertical-align: middle;
+    border-radius: 50%;
+    background: gray;
+}
+i.fa.fa-camera.fa-cmra {
+    font-size: 25px;
+    position: absolute;
+    top: 11px;
+    left: 93px;
+}
+.upld-img input[type="file"] {
+    background: orange;
+    width: 99px;
+}
+.upld-img {
+    margin-top: 15px;
+}
+.usr-pro {
+    margin-bottom: 24px;
+}
+.form-control.custm-control {
+    height: auto;
+}
+.fb-pd{
+  padding: 8px;
+}
+.cke_contents{
+    height: 244px!important;
+}
+.last-btn {
+    text-align: center;
+    width: 100%;
+}
 </style>

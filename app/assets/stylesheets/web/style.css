@@ -2999,12 +2999,15 @@ span.reviewd-user img {
     top: 60px;
     left: 67px;
 }
-@media(max-width: 767.98px) {
+@media(max-width: 767px) {
     .slide-text h4 {
     font-size: 15px;
 }
+.slide-text h1{
+    font-size: 15px;
+}
 .slide-text p {
-    font-size: 12px;
+    font-size: 12px!important;
     margin-bottom: 10px;
     white-space: normal;
     width: 82%;

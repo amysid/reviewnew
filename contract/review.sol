@@ -161,8 +161,8 @@ function categoryPresent(string memory _categoryId) internal view returns(bool) 
 }
 
     function addProduct(string memory _title , string memory _category_id) public onlyOwner {
-        require(keccak256(bytes(_title)) != keccak256(""), "The title property is required.");
-        require(categoryPresent(_category_id) == true, "No such category with given id is present.");
+        //require(keccak256(bytes(_title)) != keccak256(""), "The title property is required.");
+        //require(categoryPresent(_category_id) == true, "No such category with given id is present.");
         Product memory product = Product({
             id: productCount,
             category_id: _category_id,
