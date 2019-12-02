@@ -299,7 +299,7 @@
                 <% @count_hall_frame = 0 %>
                 <% @products&.each do |product |%>
                 <% if product&.avg_rating.to_f >=  @average_review %>
-                <%if @count_hall_frame < 6 %>
+                <%if @count_hall_frame < 3 %>
                 <div class="col-md-4">
                     <a href="/web/users/<%=product.id%>/movie_detail" class="custom-post">
                         <div class="custom-img">
