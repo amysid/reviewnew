@@ -1,6 +1,7 @@
 <%= render partial: 'web/users/trending'%>
-<div class="page-wrapper">
+<div class="page-wrapper page-new">
     <div class="container home-wrap">
+        <div class="clearfix">
         <div class="row">
             <div class="col-md-8">
                 <div class="left-side">
@@ -107,6 +108,7 @@
                     <% end %>
                 </div>
             </div>
+        </div>
         </div>
         <div class="row">
             <div class="col-md-8">
@@ -420,3 +422,6 @@ $(document).ready(function() {
     });
 });
 </script>
+<style type="text/css">
+    .page-wrapper.page-new{padding:0px;}
+</style>
