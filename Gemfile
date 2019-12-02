@@ -37,7 +37,7 @@ gem 'pry'
 gem 'web3-eth', '~> 0.2.16'
 gem 'ckeditor', '~> 5.0'
 gem 'paperclip', '~> 6.1'
-gem 'mini_magick', '~> 4.9', '>= 4.9.3'
+gem 'mini_magick', '~> 4.9'
 gem 'roo-xls'
 gem 'spreadsheet'
 gem "font-awesome-rails"
