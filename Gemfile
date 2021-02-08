@@ -48,7 +48,7 @@ gem "recaptcha"
 gem 'devise', '~> 4.6', '>= 4.6.2'
 gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'sweetalert-rails', '~> 1.1', '>= 1.1.3'
-gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'carrierwave', '~> 1.3'
 gem 'cloudinary', '~> 1.11', '>= 1.11.1'
 gem 'chartkick', '~> 3.0', '>= 3.0.2'
 # gem 'rails-alertify', '~> 0.3.2'
